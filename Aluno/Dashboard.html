@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="Dashboard.css">
+</head>
+<body>
+
+    <div id="TelaDashboard">
+        <div id="ScrollView">
+            <div id="Dashboard">
+                
+                <header id="Header">
+                    <button id="BtnMenu" class="icon-btn" type="button">
+                        <span class="icon-mask icon-menu"></span>
+                    </button>
+                    
+                    <h1 id="TituloDASH">Dashboard</h1>
+                    
+                    <button id="BtnSino" class="icon-btn" type="button">
+                        <span class="icon-mask icon-sino"></span>
+                    </button>
+                </header>
+
+                <section id="Saudacoes">
+                    <p id="OlaAluno">Olá, Aluno!</p>
+                    <p id="OlaOrientador">Orientador: Prof. Nome</p>
+                    <p id="OlaCoorientador">Coorientador: Prof. Nome</p>
+                </section>
+
+                <div id="CardTCC" class="card">
+                    <div class="HeaderGroup">
+                        <img src="../Icones/File-removebg-preview.png" alt="TCC" class="card-icon">
+                        <p id="Etapa" class="card-etapa">Etapa: Revisão Bibliográfica</p>
+                    </div>
+                    <div class="card-center-content">
+                        <p id="TituloTCC" class="text-center card-title">Sistema de Gerenciamento de TCC</p>
+                        <p id="UltimaAtualizacao" class="text-center card-subtext">Última atualização: 29/07/2026</p>
+                    </div>
+                </div>
+
+                <div id="CardAgenda" class="card">
+                    <div class="HeaderGroup">
+                        <img src="../Icones/Calendar-removebg-preview.png" alt="Agenda" class="card-icon">
+                        <p id="Prazo" class="card-etapa">Próximo prazo:</p>
+                    </div>
+                    <div class="card-center-content">
+                        <p id="Data" class="text-center card-title">30/07/2026</p>
+                        <p id="Evento" class="text-center card-subtext">Defesa TCC II</p>
+                    </div>
+                </div>
+
+                <div id="CardVersion" class="card">
+                    <div class="HeaderGroup">
+                        <img src="../Icones/Version-removebg-preview.png" alt="Versão" class="card-icon">
+                        <p id="VersaoTXT" class="card-etapa">Versão atual</p>
+                    </div>
+                    <div class="card-center-content">
+                        <p id="VersaoAtual" class="text-center card-title">Versão 4</p>
+                        <p id="UltimaAtualizacaoVersion" class="text-center card-subtext">Pendente de revisão</p>
+                    </div>
+                </div>
+
+                <div id="CardFeedback" class="card">
+                    <div class="HeaderGroup">
+                        <img src="../Icones/Comment-removebg-preview.png" alt="Feedback" class="card-icon">
+                        <p id="Notif" class="card-etapa">Comentários não lidos</p>
+                    </div>
+                    <div class="card-center-content">
+                        <p id="PendenciasAtuais" class="text-center card-title">2 Comentários não lidos</p>
+                        <p id="UltimoFeedback" class="text-center card-subtext">Último comentário em: 25/07/2026</p>
+                    </div>
+                    <button id="BtnSeta" class="btn-arrow-box" type="button">
+                        <span class="icon-mask icon-seta"></span>
+                    </button>
+                </div>
+
+            </div>
+        </div>
+
+        <nav id="BottomNav">
+            <button id="BtnInicio" class="nav-btn active" type="button">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </button>
+            <button id="BtnMeuTCC" class="nav-btn" type="button">
+                <span class="icon-mask icon-files"></span>
+                <span class="Texto">Meu TCC</span>
+            </button>
+            <button id="BtnAgenda" class="nav-btn" type="button">
+                <span class="icon-mask icon-calendar"></span>
+                <span class="Texto">Agenda</span>
+            </button>
+            <button id="BtnAcervo" class="nav-btn" type="button">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </button>
+            <button id="BtnPerfil" class="nav-btn" type="button">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </button>
+        </nav>
+
+    </div>
+
+</body>
+</html>

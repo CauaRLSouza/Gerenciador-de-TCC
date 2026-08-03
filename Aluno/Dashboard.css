@@ -1,0 +1,303 @@
+:root {
+    --primary: #7c3aed;
+    --primary-light: #ede6ff;
+    --background: #f8fafc;
+    --card-bg: #ffffff;
+    --text-main: #0f172a;
+    --text-muted: #64748b;
+    --blue-accent: #1d4ed8;
+    --blue-light: #dbeafe;
+    --yellow-accent: #d97706;
+    --yellow-light: #fef3c7;
+    --green-accent: #15803d;
+    --green-light: #dcfce7;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, -apple-system, sans-serif;
+    user-select: none;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text-main);
+}
+
+/* ==========================================
+   LAYOUT PRINCIPAL
+   ========================================== */
+
+#TelaDashboard {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+#ScrollView {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 80px;
+}
+
+#Dashboard {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    max-width: 480px;
+    margin: 0 auto;
+}
+
+/* ==========================================
+   HEADER
+   ========================================== */
+
+#Header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+}
+
+#TituloDASH {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+}
+
+/* ==========================================
+   SAUDAÇÕES
+   ========================================== */
+
+#Saudacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+#OlaAluno {
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+#OlaOrientador, #OlaCoorientador {
+    font-size: 0.875rem;
+    color: var(--text-muted);
+}
+
+/* ==========================================
+   CARDS & BADGES NO SUBTEXTO
+   ========================================== */
+
+.card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.HeaderGroup {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.card-icon {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+}
+
+.card-etapa {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.card-center-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 6px;
+}
+
+.card-title {
+    font-size: 1.125rem;
+    font-weight: 700;
+}
+
+.card-subtext {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    padding: 4px 12px;
+    border-radius: 20px;
+    display: inline-block;
+}
+
+#CardTCC .card-subtext {
+    background-color: var(--primary-light);
+    color: var(--primary);
+}
+
+#CardAgenda .card-subtext {
+    background-color: var(--green-light);
+    color: var(--green-accent);
+}
+
+#CardVersion .card-subtext {
+    background-color: var(--yellow-light);
+    color: var(--yellow-accent);
+}
+
+#CardFeedback .card-subtext {
+    background-color: var(--blue-light);
+    color: var(--blue-accent);
+}
+
+.btn-arrow-box {
+    position: absolute;
+    right: 16px;
+    bottom: 16px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+    border-radius: 50%;
+}
+
+/* ==========================================
+   MÁSCARAS DE ÍCONES (SVG)
+   ========================================== */
+
+.icon-mask {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    background-color: #000000;
+    -webkit-mask-repeat: no-repeat;
+    mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-position: center;
+    -webkit-mask-size: contain;
+    mask-size: contain;
+    pointer-events: none;
+}
+
+.icon-menu { 
+    -webkit-mask-image: url('../Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-sino { 
+    -webkit-mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-seta { 
+    -webkit-mask-image: url('../Icones/chevron_right_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/chevron_right_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-home { 
+    -webkit-mask-image: url('../Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-files { 
+    -webkit-mask-image: url('../Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-calendar { 
+    -webkit-mask-image: url('../Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-acervo { 
+    -webkit-mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-perfil { 
+    -webkit-mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+#BtnSeta .icon-mask {
+    width: 32px;
+    height: 32px;
+    background-color: rgb(2, 2, 191);
+}
+
+/* ==========================================
+   BOTTOM NAVIGATION
+   ========================================== */
+
+#BottomNav {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 64px;
+    background-color: var(--card-bg);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.1);
+    z-index: 100;
+}
+
+.nav-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 6px 12px;
+    border-radius: 8px;
+    gap: 2px;
+    flex: 1;
+}
+
+.nav-btn .Texto {
+    font-size: 0.75rem;
+    color: var(--text-main);
+}
+
+#BtnInicio.active {
+    background-color: var(--primary-light);
+}
+
+#BtnInicio.active .icon-mask {
+    background-color: var(--primary);
+}
+
+#BtnInicio.active .Texto {
+    color: var(--primary);
+    font-weight: 700;
+}

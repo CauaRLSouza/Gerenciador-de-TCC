@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu TCC</title>
+    <link rel="stylesheet" href="meutcc.css">
+</head>
+<body>
+
+    <div id="MeuTCC">
+        <!-- Header -->
+        <header id="Header">
+            <button id="BtnVoltar" class="icon-svg icon-menu"></button>
+            <h1 id="TituloPagina">Meu TCC</h1>
+            <button id="BtnMenu" class="icon-svg icon-sino"></button>
+        </header>
+
+        <!-- Corpo com Scroll -->
+        <main id="CorpoScroll">
+            
+            <!-- Card Título -->
+            <section id="CardTitulo" class="card">
+                <span id="LabelTituloCard">Título do Trabalho</span>
+                <h2 id="NomeTCC">Sistema de Gerenciamento de TCC</h2>
+                <span id="BadgeStatus" class="badge">Em desenvolvimento</span>
+            </section>
+
+            <!-- Card Descrição -->
+            <section id="CardDescricao" class="card">
+                <h3 id="TituloDescricao">Descrição</h3>
+                <p id="TextoDescricao">
+                    O objetivo deste trabalho é desenvolver um sistema para gerenciamento de Trabalhos de Conclusão de Curso, facilitando o acompanhamento entre alunos, orientadores e coordenação.
+                </p>
+                <button id="BtnVersoes">Ver todas as versões</button>
+            </section>
+
+            <!-- Lista de Informações -->
+            <section id="ListaInformacoes">
+                
+                <div id="ItemOrientador" class="info-item">
+                    <div id="IconeOrientador" class="Icone icon-orientador"></div>
+                    <div id="GrupoOrientador">
+                        <span id="TituloOrientador" class="info-label">Orientador</span>
+                        <strong id="ValorOrientador" class="info-value">Prof. Pedro Santos</strong>
+                    </div>
+                </div>
+
+                <div id="ItemCoorientador" class="info-item">
+                    <div id="IconeCoorientador" class="Icone icon-coorientador"></div>
+                    <div id="GrupoCoorientador">
+                        <span id="TituloCoorientador" class="info-label">Coorientador</span>
+                        <strong id="ValorCoorientador" class="info-value">Prof. Maria Silva</strong>
+                    </div>
+                </div>
+
+                <div id="ItemCurso" class="info-item">
+                    <div id="IconeCurso" class="Icone icon-curso"></div>
+                    <div id="GrupoCurso">
+                        <span id="TituloCurso" class="info-label">Curso</span>
+                        <strong id="ValorCurso" class="info-value">Licenciatura em Ciências da Computação</strong>
+                    </div>
+                </div>
+
+                <div id="ItemInicio" class="info-item">
+                    <div id="IconeInicio" class="Icone icon-ingresso"></div>
+                    <div id="GrupoInicio">
+                        <span id="TituloInicio" class="info-label">Data de ingresso</span>
+                        <strong id="ValorInicio" class="info-value">10/03/2025</strong>
+                    </div>
+                </div>
+
+            </section>
+
+        </main>
+
+        <!-- Bottom Navigation Fixo -->
+        <nav id="BottomNav">
+            <button id="BtnInicio" class="nav-btn">
+                <div class="Icone icon-home"></div>
+                <span class="Texto">Início</span>
+            </button>
+            <button id="BtnMeuTCC" class="nav-btn active">
+                <div class="Icone icon-files"></div>
+                <span class="Texto">Meu TCC</span>
+            </button>
+            <button id="BtnAgenda" class="nav-btn">
+                <div class="Icone icon-calendar-month"></div>
+                <span class="Texto">Reuniões</span>
+            </button>
+            <button id="BtnAcervo" class="nav-btn">
+                <div class="Icone icon-collections"></div>
+                <span class="Texto">Acervo</span>
+            </button>
+            <button id="BtnPerfil" class="nav-btn">
+                <div class="Icone icon-account"></div>
+                <span class="Texto">Perfil</span>
+            </button>
+        </nav>
+
+    </div>
+
+</body>
+</html>

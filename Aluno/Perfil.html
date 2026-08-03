@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <link rel="stylesheet" href="perfil.css">
+</head>
+<body>
+
+    <div id="TelaPerfil">
+        <!-- Header -->
+        <header id="Header">
+            <button id="BtnVoltar" class="icon-svg icon-menu"></button>
+            <h1 id="TituloPagina">Meu Perfil</h1>
+            <button id="BtnNotif" class="icon-svg icon-sino"></button>
+        </header>
+
+        <!-- Conteúdo Rolável -->
+        <main id="PerfilScroll">
+            <section id="PerfilCard" class="card">
+                
+                <!-- Cabeçalho do Card (Avatar + Infos Principais) -->
+                <div id="PerfilHeaderCard">
+                    <div id="AvatarContainer">
+                        <div id="AvatarCircle">
+                            <span id="AvatarIniciais">A</span>
+                        </div>
+                        <button id="BtnTrocarFoto" aria-label="Trocar Foto de Perfil"></button>
+                    </div>
+                    <h2 id="PerfilNome">Aluno</h2>
+                    <span id="PerfilEmail">aluno@email.com</span>
+                    <span id="PerfilTelefone">4002-8922</span>
+                </div>
+
+                <!-- Divisor -->
+                <div id="PerfilDivisor" class="divisor"></div>
+
+                <!-- Lista de Detalhes Acadêmicos -->
+                <div id="PerfilDetalhes">
+                    <div class="PerfilLinha">
+                        <span class="perfil-label">Matrícula</span>
+                        <span class="perfil-valor">202620262026</span>
+                    </div>
+                    <div class="PerfilLinha">
+                        <span class="perfil-label">Curso</span>
+                        <span class="perfil-valor">Licenciatura em Ciências da Computação</span>
+                    </div>
+                    <div class="PerfilLinha">
+                        <span class="perfil-label">Período</span>
+                        <span class="perfil-valor">8° Período</span>
+                    </div>
+                    <div class="PerfilLinha">
+                        <span class="perfil-label">Data de egresso</span>
+                        <span class="perfil-valor">17/07/2023</span>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <!-- Bottom Navigation Fixo -->
+        <nav id="BottomNav">
+            <button id="NavHome" class="nav-btn">
+                <div class="Icone icon-home"></div>
+            </button>
+            <button id="NavTCC" class="nav-btn">
+                <div class="Icone icon-files"></div>
+            </button>
+            <button id="NavAgenda" class="nav-btn">
+                <div class="Icone icon-calendar"></div>
+            </button>
+            <button id="BtnAcervo" class="nav-btn">
+                <div class="Icone icon-collections"></div>
+            </button>
+            <button id="NavPerfil" class="nav-btn nav-ativo">
+                <div class="Icone icon-account"></div>
+            </button>
+        </nav>
+    </div>
+
+</body>
+</html>

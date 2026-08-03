@@ -1,0 +1,365 @@
+/* ===========================
+   ESTRUTURA GERAL
+=========================== */
+#TelaAgenda {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    height: 100vh;
+    background-color: rgb(248, 248, 248);
+    position: relative;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+/* ===========================
+   HEADER
+=========================== */
+#Header {
+    height: 80px;
+    flex-shrink: 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background-color: white;
+}
+
+#TituloPagina {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 26px;
+    font-weight: bold;
+    color: rgb(35, 35, 35);
+    margin: 0;
+}
+
+#BtnVoltar {
+    width: 40px;
+    height: 40px;
+    border: 0;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 22px;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+#BtnVoltar:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+#Espacador {
+    width: 40px;
+    height: 40px;
+}
+
+/* ===========================
+   HERO CARD
+=========================== */
+#AgendaHeroCard {
+    margin: 20px;
+    padding: 22px;
+    border-radius: 24px;
+    background-color: rgb(104, 0, 185);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 6px 18px rgba(104, 0, 185, 0.25);
+}
+
+#AgendaHeroTitulo {
+    color: white;
+    font-size: 15px;
+    font-weight: bold;
+    opacity: 0.9;
+    margin-bottom: 18px;
+    display: block;
+}
+
+#AgendaHeroLinha {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#AgendaHeroData {
+    width: 74px;
+    height: 88px;
+    border-radius: 18px;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 18px;
+    flex-shrink: 0;
+}
+
+#AgendaHeroMes, #AgendaHeroDia {
+    font-weight: bold;
+    color: rgb(104, 0, 185);
+    line-height: 1.1;
+}
+
+#AgendaHeroMes { font-size: 13px; text-transform: uppercase; }
+#AgendaHeroDia { font-size: 34px; }
+
+#AgendaHeroInfo { 
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#AgendaHeroContador {
+    color: rgb(225, 205, 255);
+    font-size: 13px;
+    font-weight: bold;
+    margin-bottom: 6px;
+    display: block;
+}
+
+#AgendaHeroNome {
+    color: white;
+    font-size: 22px;
+    font-weight: bold;
+    margin: 0;
+}
+
+#AgendaHeroHorario {
+    margin-top: 8px;
+    color: white;
+    font-size: 16px;
+    display: block;
+}
+
+#AgendaHeroLocal {
+    margin-top: 4px;
+    color: rgb(235, 235, 235);
+    font-size: 15px;
+    display: block;
+}
+
+/* ===========================
+   CALENDÁRIO HORIZONTAL
+=========================== */
+#AgendaCalendario {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+#AgendaCalendarioTitulo {
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(40, 40, 40);
+    margin-bottom: 10px;
+}
+
+#AgendaCalendarioScroll {
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 6px;
+    /* Esconde barra de scroll padrão */
+    scrollbar-width: none;
+}
+
+#AgendaCalendarioScroll::-webkit-scrollbar {
+    display: none;
+}
+
+#AgendaCalendarioLinha {
+    display: flex;
+    flex-direction: row;
+}
+
+#AgendaCalendarioLinha button,
+#AgendaCalendarioLinha .unity-button {
+    width: 48px;
+    height: 56px;
+    border-radius: 14px;
+    background-color: white;
+    border: 1px solid rgb(230, 230, 230);
+    margin-right: 8px;
+    font-weight: bold;
+    font-size: 16px;
+    color: rgb(50, 50, 50);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: all 0.2s;
+}
+
+#AgendaCalendarioLinha button:hover {
+    background-color: rgb(240, 240, 240);
+}
+
+#AgendaCalendarioLinha button.dia-ativo {
+    background-color: rgb(104, 0, 185);
+    color: white;
+    border-color: rgb(104, 0, 185);
+}
+
+/* ===========================
+   LISTA DE REUNIÕES & CARDS
+=========================== */
+#AgendaScroll {
+    flex-grow: 1;
+    flex-shrink: 1;
+    overflow-y: auto;
+    padding: 10px 20px 100px 20px; /* Padding bottom para não cobrir com o BottomNav */
+}
+
+#AgendaLista {
+    display: flex;
+    flex-direction: column;
+}
+
+.card-reuniao,
+#AgendaReuniao01, #AgendaReuniao02 {
+    background-color: white;
+    border-radius: 22px;
+    padding: 18px;
+    margin-bottom: 18px;
+    border: 1px solid rgb(230, 230, 230);
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+.reuniao-cabecalho,
+#AgendaReuniao01Cabecalho, #AgendaReuniao02Cabecalho {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.reuniao-data,
+#AgendaReuniao01Data, #AgendaReuniao02Data {
+    width: 62px;
+    height: 74px;
+    border-radius: 18px;
+    background-color: rgb(104, 0, 185);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
+    flex-shrink: 0;
+}
+
+#AgendaReuniao01Mes, #AgendaReuniao02Mes,
+#AgendaReuniao01Dia, #AgendaReuniao02Dia {
+    color: white;
+    font-weight: bold;
+    line-height: 1.1;
+}
+
+#AgendaReuniao01Mes, #AgendaReuniao02Mes { font-size: 12px; text-transform: uppercase; }
+#AgendaReuniao01Dia, #AgendaReuniao02Dia { font-size: 28px; }
+
+.reuniao-info,
+#AgendaReuniao01Info, #AgendaReuniao02Info { 
+    flex-grow: 1; 
+    display: flex;
+    flex-direction: column;
+}
+
+#AgendaReuniao01Titulo, #AgendaReuniao02Titulo {
+    font-size: 20px;
+    font-weight: bold;
+    color: rgb(40, 40, 40);
+    margin: 0;
+}
+
+#AgendaReuniao01Horario, #AgendaReuniao02Horario {
+    margin-top: 6px;
+    font-size: 16px;
+    color: rgb(95, 95, 95);
+    display: block;
+}
+
+#AgendaReuniao01Local, #AgendaReuniao02Local {
+    margin-top: 2px;
+    font-size: 15px;
+    color: rgb(130, 130, 130);
+    display: block;
+}
+
+.separador,
+#AgendaReuniao01Separador, #AgendaReuniao02Separador {
+    height: 1px;
+    margin: 16px 0;
+    background-color: rgb(235, 235, 235);
+    width: 100%;
+}
+
+#AgendaReuniao01Pauta, #AgendaReuniao02Pauta {
+    font-size: 15px;
+    color: rgb(90, 90, 90);
+    margin-bottom: 16px;
+    line-height: 1.4;
+}
+
+.status-badge,
+#AgendaReuniao01Status, #AgendaReuniao02Status {
+    align-self: flex-start;
+    padding: 6px 14px;
+    border-radius: 100px;
+    font-weight: bold;
+    font-size: 13px;
+    display: inline-block;
+}
+
+.status-confirmada,
+#AgendaReuniao01Status {
+    background-color: rgb(222, 245, 225);
+    color: rgb(30, 130, 55);
+}
+
+.status-pendente,
+#AgendaReuniao02Status {
+    background-color: rgb(255, 242, 210);
+    color: rgb(180, 120, 0);
+}
+
+/* ===========================
+   BOTTOM NAVIGATION HORIZONTAL
+=========================== */
+#BottomNav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 82px;
+    background-color: white;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    border-top: 1px solid rgb(230, 230, 230);
+    z-index: 10;
+}
+
+.nav-btn {
+    width: 52px;
+    height: 52px;
+    border: 0;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 26px;
+    cursor: pointer;
+    border-radius: 16px;
+    transition: background-color 0.2s;
+}
+
+.nav-btn:hover {
+    background-color: rgba(0, 0, 0, 0.04);
+}
+
+/* Botão selecionado */
+.nav-ativo {
+    filter: invert(13%) sepia(94%) saturate(5412%) hue-rotate(270deg) brightness(80%) contrast(115%);
+}
