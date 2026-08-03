@@ -11,9 +11,13 @@
     <div id="MeuTCC">
         <!-- Header -->
         <header id="Header">
-            <button id="BtnVoltar" class="icon-svg icon-menu"></button>
+            <button id="BtnVoltar" class="icon-btn" type="button">
+                <span class="icon-mask icon-menu"></span>
+            </button>
             <h1 id="TituloPagina">Meu TCC</h1>
-            <button id="BtnMenu" class="icon-svg icon-sino"></button>
+            <button id="BtnNotificacoes" class="icon-btn" type="button">
+                <span class="icon-mask icon-sino"></span>
+            </button>
         </header>
 
         <!-- Corpo com Scroll -->
@@ -23,7 +27,9 @@
             <section id="CardTitulo" class="card">
                 <span id="LabelTituloCard">Título do Trabalho</span>
                 <h2 id="NomeTCC">Sistema de Gerenciamento de TCC</h2>
-                <span id="BadgeStatus" class="badge">Em desenvolvimento</span>
+                <div class="card-status">
+                    <span id="BadgeStatus" class="badge badge-em-andamento">Em desenvolvimento</span>
+                </div>
             </section>
 
             <!-- Card Descrição -->
@@ -32,41 +38,49 @@
                 <p id="TextoDescricao">
                     O objetivo deste trabalho é desenvolver um sistema para gerenciamento de Trabalhos de Conclusão de Curso, facilitando o acompanhamento entre alunos, orientadores e coordenação.
                 </p>
-                <button id="BtnVersoes">Ver todas as versões</button>
+                <button id="BtnVersoes" type="button">Ver todas as versões</button>
             </section>
 
             <!-- Lista de Informações -->
             <section id="ListaInformacoes">
                 
                 <div id="ItemOrientador" class="info-item">
-                    <div id="IconeOrientador" class="Icone icon-orientador"></div>
-                    <div id="GrupoOrientador">
-                        <span id="TituloOrientador" class="info-label">Orientador</span>
-                        <strong id="ValorOrientador" class="info-value">Prof. Pedro Santos</strong>
+                    <div class="info-icone-bg bg-roxo">
+                        <span class="icon-mask icon-orientador"></span>
+                    </div>
+                    <div class="info-detalhes">
+                        <span class="info-label">Orientador</span>
+                        <strong class="info-value">Prof. Pedro Santos</strong>
                     </div>
                 </div>
 
                 <div id="ItemCoorientador" class="info-item">
-                    <div id="IconeCoorientador" class="Icone icon-coorientador"></div>
-                    <div id="GrupoCoorientador">
-                        <span id="TituloCoorientador" class="info-label">Coorientador</span>
-                        <strong id="ValorCoorientador" class="info-value">Prof. Maria Silva</strong>
+                    <div class="info-icone-bg bg-azul">
+                        <span class="icon-mask icon-coorientador"></span>
+                    </div>
+                    <div class="info-detalhes">
+                        <span class="info-label">Coorientador</span>
+                        <strong class="info-value">Prof. Maria Silva</strong>
                     </div>
                 </div>
 
                 <div id="ItemCurso" class="info-item">
-                    <div id="IconeCurso" class="Icone icon-curso"></div>
-                    <div id="GrupoCurso">
-                        <span id="TituloCurso" class="info-label">Curso</span>
-                        <strong id="ValorCurso" class="info-value">Licenciatura em Ciências da Computação</strong>
+                    <div class="info-icone-bg bg-verde">
+                        <span class="icon-mask icon-curso"></span>
+                    </div>
+                    <div class="info-detalhes">
+                        <span class="info-label">Curso</span>
+                        <strong class="info-value">Licenciatura em Ciências da Computação</strong>
                     </div>
                 </div>
 
                 <div id="ItemInicio" class="info-item">
-                    <div id="IconeInicio" class="Icone icon-ingresso"></div>
-                    <div id="GrupoInicio">
-                        <span id="TituloInicio" class="info-label">Data de ingresso</span>
-                        <strong id="ValorInicio" class="info-value">10/03/2025</strong>
+                    <div class="info-icone-bg bg-amarelo">
+                        <span class="icon-mask icon-ingresso"></span>
+                    </div>
+                    <div class="info-detalhes">
+                        <span class="info-label">Data de ingresso</span>
+                        <strong class="info-value">10/03/2025</strong>
                     </div>
                 </div>
 
@@ -76,24 +90,24 @@
 
         <!-- Bottom Navigation Fixo -->
         <nav id="BottomNav">
-            <button id="BtnInicio" class="nav-btn">
-                <div class="Icone icon-home"></div>
+            <button id="BtnInicio" class="nav-btn" type="button">
+                <span class="icon-mask icon-home"></span>
                 <span class="Texto">Início</span>
             </button>
-            <button id="BtnMeuTCC" class="nav-btn active">
-                <div class="Icone icon-files"></div>
+            <button id="BtnMeuTCC" class="nav-btn active" type="button">
+                <span class="icon-mask icon-files"></span>
                 <span class="Texto">Meu TCC</span>
             </button>
-            <button id="BtnAgenda" class="nav-btn">
-                <div class="Icone icon-calendar-month"></div>
+            <button id="BtnAgenda" class="nav-btn" type="button">
+                <span class="icon-mask icon-calendar"></span>
                 <span class="Texto">Reuniões</span>
             </button>
-            <button id="BtnAcervo" class="nav-btn">
-                <div class="Icone icon-collections"></div>
+            <button id="BtnAcervo" class="nav-btn" type="button">
+                <span class="icon-mask icon-acervo"></span>
                 <span class="Texto">Acervo</span>
             </button>
-            <button id="BtnPerfil" class="nav-btn">
-                <div class="Icone icon-account"></div>
+            <button id="BtnPerfil" class="nav-btn" type="button">
+                <span class="icon-mask icon-perfil"></span>
                 <span class="Texto">Perfil</span>
             </button>
         </nav>

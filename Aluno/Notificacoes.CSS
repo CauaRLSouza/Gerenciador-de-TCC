@@ -1,0 +1,378 @@
+/* ==========================================================================
+   1. RESET & CSS VARIABLES
+   ========================================================================== */
+:root {
+    /* Cores do Sistema */
+    --primary-color: #6a3ea1;
+    --primary-hover: #583389;
+    --bg-main: #f8f9fa;
+    --card-bg: #ffffff;
+    --text-primary: #1e1e24;
+    --text-secondary: #6c757d;
+    --border-color: #e9ecef;
+
+    /* Cores dos Ícones / Categorias */
+    --icon-bg-purple: #eebefa;
+    --icon-color-purple: #9c36b5;
+    
+    --icon-bg-green: #d3f9d8;
+    --icon-color-green: #2b8a3e;
+    
+    --icon-bg-blue: #d0ebff;
+    --icon-color-blue: #1971c2;
+    
+    --icon-bg-muted: #e9ecef;
+    --icon-color-muted: #495057;
+
+    /* Status Dot */
+    --dot-unread: #6a3ea1;
+    --dot-read: #ced4da;
+
+    /* Fontes & Transições */
+    --font-main: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+    --transition-fast: 0.2s ease;
+    
+    /* Sombras & Bordas */
+    --radius-md: 12px;
+    --radius-circle: 50%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--bg-main);
+    color: var(--text-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* ==========================================================================
+   2. ESTRUTURA GLOBAL & APP CONTAINER
+   ========================================================================== */
+#TelaNotificacoes {
+    width: 100%;
+    max-width: 480px;
+    height: 100vh;
+    height: 100dvh;
+    background-color: var(--bg-main);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+#ScrollView {
+    flex: 1;
+    overflow-y: auto;
+    padding-bottom: 90px;
+}
+
+#ScrollView::-webkit-scrollbar {
+    display: none;
+}
+
+#ContainerNotificacoes {
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* ==========================================================================
+   3. HEADER & NAVEGAÇÃO SUPERIOR
+   ========================================================================== */
+#HeaderNotificacoes {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 8px 0;
+}
+
+#TituloPagina {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.header-spacer {
+    width: 36px;
+}
+
+/* ==========================================================================
+   4. AÇÕES (MARCAR TODAS COMO LIDAS)
+   ========================================================================== */
+#AcaoMarcarTodas {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#BtnMarcarLidas {
+    background: transparent;
+    border: none;
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity var(--transition-fast);
+}
+
+#BtnMarcarLidas:active {
+    opacity: 0.7;
+}
+
+/* ==========================================================================
+   5. SEÇÕES E CARDS DE NOTIFICAÇÃO
+   ========================================================================== */
+.secao-notificacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.secao-titulo {
+    font-size: 0.9375rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.lista-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-notificacao {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.notificacao-icone {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-circle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* Estilos Temáticos dos Ícones */
+.bg-roxo {
+    background-color: var(--icon-bg-purple);
+}
+.bg-roxo .icon-mask {
+    background-color: var(--icon-color-purple);
+}
+
+.bg-verde {
+    background-color: var(--icon-bg-green);
+}
+.bg-verde .icon-mask {
+    background-color: var(--icon-color-green);
+}
+
+.bg-azul {
+    background-color: var(--icon-bg-blue);
+}
+.bg-azul .icon-mask {
+    background-color: var(--icon-color-blue);
+}
+
+.bg-roxo-suave {
+    background-color: var(--icon-bg-muted);
+}
+.bg-roxo-suave .icon-mask {
+    background-color: var(--icon-color-muted);
+}
+
+.notificacao-conteudo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.notificacao-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.notificacao-titulo {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.2;
+}
+
+.notificacao-hora {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+}
+
+.notificacao-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.notificacao-texto {
+    font-size: 0.8125rem;
+    color: var(--text-secondary);
+    line-height: 1.3;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: var(--radius-circle);
+    flex-shrink: 0;
+}
+
+.nao-lida .status-dot {
+    background-color: var(--dot-unread);
+}
+
+.lida .status-dot {
+    background-color: var(--dot-read);
+}
+
+/* ==========================================================================
+   6. SISTEMA DE ÍCONES (MASK-IMAGE NATIVO)
+   ========================================================================== */
+.icon-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    width: 36px;
+    height: 36px;
+    border-radius: var(--radius-circle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-mask {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    background-color: var(--text-primary);
+    mask-repeat: no-repeat;
+    mask-position: center;
+    mask-size: contain;
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    -webkit-mask-size: contain;
+    pointer-events: none;
+}
+
+.icon-voltar {
+    mask-image: url('../Icones/arrow-left.svg');
+    -webkit-mask-image: url('../Icones/arrow-left.svg');
+}
+
+.icon-comment {
+    mask-image: url('../Icones/message-square.svg');
+    -webkit-mask-image: url('../Icones/message-square.svg');
+}
+
+.icon-feather {
+    mask-image: url('../Icones/send.svg');
+    -webkit-mask-image: url('../Icones/send.svg');
+}
+
+.icon-calendar-event {
+    mask-image: url('../Icones/calendar-event.svg');
+    -webkit-mask-image: url('../Icones/calendar-event.svg');
+}
+
+.icon-clipboard-clock {
+    mask-image: url('../Icones/clock.svg');
+    -webkit-mask-image: url('../Icones/clock.svg');
+}
+
+.icon-home {
+    mask-image: url('../Icones/home.svg');
+    -webkit-mask-image: url('../Icones/home.svg');
+}
+
+.icon-files {
+    mask-image: url('../Icones/files.svg');
+    -webkit-mask-image: url('../Icones/files.svg');
+}
+
+.icon-calendar {
+    mask-image: url('../Icones/calendar.svg');
+    -webkit-mask-image: url('../Icones/calendar.svg');
+}
+
+.icon-acervo {
+    mask-image: url('../Icones/archive.svg');
+    -webkit-mask-image: url('../Icones/archive.svg');
+}
+
+.icon-perfil {
+    mask-image: url('../Icones/user.svg');
+    -webkit-mask-image: url('../Icones/user.svg');
+}
+
+/* ==========================================================================
+   7. NAVEGAÇÃO INFERIOR (BOTTOM NAV)
+   ========================================================================== */
+#BottomNav {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background-color: var(--card-bg);
+    border-top: 1px solid var(--border-color);
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding: 0 8px;
+    z-index: 10;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    cursor: pointer;
+    width: 20%;
+}
+
+.nav-btn .icon-mask {
+    background-color: var(--text-secondary);
+}
+
+.nav-btn .Texto {
+    font-size: 0.6875rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+}
+
+.nav-btn.active .icon-mask {
+    background-color: var(--primary-color);
+}
+
+.nav-btn.active .Texto {
+    color: var(--primary-color);
+    font-weight: 700;
+}

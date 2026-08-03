@@ -278,7 +278,6 @@
     flex-shrink: 0;
 }
 
-/* Ícone do menu ativo (Aplicando a cor roxa #7C3AED via filtro) */
 .nav-ativo,
 .PerfilNavAtivo .PerfilNavIcone {
     filter: invert(28%) sepia(85%) saturate(3268%) hue-rotate(253deg) brightness(97%) contrast(96%);
