@@ -1,0 +1,371 @@
+/* public/css/Notificacoes.css */
+
+/* ==========================================================================
+   1. RESET, VARS & GLOBAL
+   ========================================================================== */
+:root {
+    --primary: #6800b7; 
+    --primary-bg: #ede6ff;
+    --bg-main: #f8fafc; 
+    --card-bg: #ffffff;
+    --text-1: #0f172a;  
+    --text-2: #64748b;
+    --text-3: #828282;
+    --border: #e6e6e6;
+    --blue: #1d4ed8;    
+    --blue-bg: #dbeafe;
+    --yellow: #d97706;  
+    --yellow-bg: #fef3c7;
+    --green: #15803d;   
+    --green-bg: #dcfce7;
+
+    --icon-bg-purple: #ede6ff;
+    --icon-color-purple: #6800b7;
+    --icon-bg-green: #d3f9d8;
+    --icon-color-green: #2b8a3e;
+    --icon-bg-blue: #d0ebff;
+    --icon-color-blue: #1971c2;
+    --icon-bg-muted: #f1f5f9;
+    --icon-color-muted: #64748b;
+
+    --dot-unread: #6800b7;
+    --dot-read: #cbd5e1;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: system-ui, -apple-system, sans-serif; 
+    user-select: none; 
+    -webkit-tap-highlight-color: transparent;
+}
+
+body { 
+    background: var(--bg-main); 
+    color: var(--text-1); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+}
+
+/* ==========================================================================
+   2. LAYOUT & SCROLL
+   ========================================================================== */
+#TelaNotificacoes { 
+    display: flex; 
+    flex-direction: column; 
+    height: 100vh; 
+    height: 100dvh; 
+    width: 100%; 
+    max-width: 480px; 
+    position: relative; 
+    overflow: hidden; 
+    background: var(--bg-main);
+}
+
+#ScrollView { 
+    flex: 1; 
+    overflow-y: auto; 
+    padding-bottom: 80px; 
+    scrollbar-width: none; 
+}
+
+#ScrollView::-webkit-scrollbar { 
+    display: none; 
+}
+
+#ContainerNotificacoes { 
+    padding: 16px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+}
+
+/* ==========================================================================
+   3. HEADER
+   ========================================================================== */
+#HeaderNotificacoes { 
+    height: 70px; 
+    flex-shrink: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 16px; 
+    background: var(--card-bg); 
+}
+
+#TituloPagina { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: var(--text-1);
+}
+
+.icon-btn { 
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 4px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    text-decoration: none;
+}
+
+#HeaderSinoWrapper {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--primary-bg);
+    text-decoration: none;
+}
+
+#HeaderSinoWrapper .icon-sino {
+    background-color: var(--primary) !important;
+}
+
+/* ==========================================================================
+   4. NOTIFICAÇÕES & CARDS
+   ========================================================================== */
+#AcaoMarcarTodas {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#BtnMarcarLidas {
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 4px 0;
+    transition: opacity 0.2s ease;
+}
+
+#BtnMarcarLidas:active { 
+    opacity: 0.7; 
+}
+
+.secao-notificacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.secao-titulo {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.lista-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-notificacao {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-notificacao.nao-lida {
+    background: #ffffff;
+    border-left: 4px solid var(--primary);
+}
+
+.card-notificacao.lida {
+    background: #fdfdfd;
+    opacity: 0.85;
+}
+
+.notificacao-icone {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bg-roxo { background-color: var(--icon-bg-purple); }
+.bg-roxo .icon-mask { background-color: var(--icon-color-purple); }
+
+.bg-verde { background-color: var(--icon-bg-green); }
+.bg-verde .icon-mask { background-color: var(--icon-color-green); }
+
+.bg-azul { background-color: var(--icon-bg-blue); }
+.bg-azul .icon-mask { background-color: var(--icon-color-blue); }
+
+.bg-roxo-suave { background-color: var(--icon-bg-muted); }
+.bg-roxo-suave .icon-mask { background-color: var(--icon-color-muted); }
+
+.notificacao-conteudo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.notificacao-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.notificacao-titulo {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-1);
+    line-height: 1.25;
+}
+
+.notificacao-hora {
+    font-size: 0.75rem;
+    color: var(--text-3);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.notificacao-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.notificacao-texto {
+    font-size: 0.8125rem;
+    color: var(--text-2);
+    line-height: 1.35;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.nao-lida .status-dot { background-color: var(--dot-unread); }
+.lida .status-dot { display: none; }
+
+/* ==========================================================================
+   5. MASK ICONS
+   ========================================================================== */
+.icon-mask { 
+    display: inline-block; 
+    width: 22px; 
+    height: 22px; 
+    background-color: var(--text-3); 
+    -webkit-mask: no-repeat center/contain;
+    mask: no-repeat center/contain;
+    pointer-events: none; 
+}
+
+.icon-menu { 
+    -webkit-mask-image: url('../Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    background-color: var(--text-1); 
+}
+
+.icon-sino { 
+    -webkit-mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    background-color: var(--text-1); 
+}
+
+.icon-home { 
+    -webkit-mask-image: url('../Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-files { 
+    -webkit-mask-image: url('../Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-calendar { 
+    -webkit-mask-image: url('../Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-acervo { 
+    -webkit-mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+.icon-perfil { 
+    -webkit-mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+}
+
+/* ==========================================================================
+   6. BOTTOM NAVIGATION
+   ========================================================================== */
+#BottomNav { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    width: 100%; 
+    height: 64px; 
+    background: var(--card-bg); 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.1); 
+    z-index: 100; 
+    padding: 4px 8px;
+}
+
+.nav-btn { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 6px 12px; 
+    border-radius: 8px; 
+    gap: 2px; 
+    flex: 1; 
+    height: 100%;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.nav-btn .Texto { 
+    font-size: 0.75rem; 
+    color: var(--text-1); 
+}
+
+.nav-btn.active { 
+    background: var(--primary-bg) !important; 
+}
+
+.nav-btn.active .icon-mask { 
+    background-color: var(--primary) !important; 
+}
+
+.nav-btn.active .Texto { 
+    color: var(--primary) !important; 
+    font-weight: 700 !important; 
+}

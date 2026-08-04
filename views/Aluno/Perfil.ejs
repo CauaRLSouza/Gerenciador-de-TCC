@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu Perfil</title>
-    <link rel="stylesheet" href="perfil.css">
+    <link rel="stylesheet" href="/css/perfil.css">
 </head>
 <body>
 
     <div id="TelaPerfil">
         <!-- Header -->
         <header id="Header">
-            <button id="BtnVoltar" class="icon-svg icon-menu"></button>
+            <a href="/dashboard" id="BtnVoltar" class="icon-btn">
+                <span class="icon-mask icon-menu"></span>
+            </a>
             <h1 id="TituloPagina">Meu Perfil</h1>
-            <button id="BtnNotif" class="icon-svg icon-sino"></button>
+            <a href="/notificacoes" id="BtnNotif" class="icon-btn">
+                <span class="icon-mask icon-sino"></span>
+            </a>
         </header>
 
         <!-- Conteúdo Rolável -->
@@ -26,7 +30,7 @@
                         <div id="AvatarCircle">
                             <span id="AvatarIniciais">A</span>
                         </div>
-                        <button id="BtnTrocarFoto" aria-label="Trocar Foto de Perfil"></button>
+                        <button id="BtnTrocarFoto" type="button" aria-label="Trocar Foto de Perfil"></button>
                     </div>
                     <h2 id="PerfilNome">Aluno</h2>
                     <span id="PerfilEmail">aluno@email.com</span>
@@ -61,23 +65,47 @@
 
         <!-- Bottom Navigation Fixo -->
         <nav id="BottomNav">
-            <button id="NavHome" class="nav-btn">
-                <div class="Icone icon-home"></div>
-            </button>
-            <button id="NavTCC" class="nav-btn">
-                <div class="Icone icon-files"></div>
-            </button>
-            <button id="NavAgenda" class="nav-btn">
-                <div class="Icone icon-calendar"></div>
-            </button>
-            <button id="BtnAcervo" class="nav-btn">
-                <div class="Icone icon-collections"></div>
-            </button>
-            <button id="NavPerfil" class="nav-btn nav-ativo">
-                <div class="Icone icon-account"></div>
-            </button>
+            <a href="/dashboard" id="NavHome" class="nav-btn">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+
+            <a href="/meutcc" id="NavTCC" class="nav-btn">
+                <span class="icon-mask icon-files"></span>
+                <span class="Texto">Meu TCC</span>
+            </a>
+
+            <a href="/agenda" id="NavAgenda" class="nav-btn">
+                <span class="icon-mask icon-calendar"></span>
+                <span class="Texto">Reuniões</span>
+            </a>
+
+            <a href="/acervo" id="BtnAcervo" class="nav-btn">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+
+            <a href="/perfil" id="NavPerfil" class="nav-btn">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </a>
         </nav>
     </div>
+
+    <!-- Script de Ativação Dinâmica da Nav -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const pathAtual = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href").toLowerCase();
+                if (pathAtual === href || (pathAtual === "/" && href === "/dashboard")) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

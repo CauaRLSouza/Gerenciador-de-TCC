@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Versões</title>
-    <link rel="stylesheet" href="Versoes.css">
+    <link rel="stylesheet" href="/css/versoes.css">
 </head>
 <body>
 
@@ -12,19 +12,22 @@
         <div id="ScrollView">
             <div id="ContainerVersoes">
                 
+                <!-- Header -->
                 <header id="HeaderVersoes">
-                    <button id="BtnVoltar" class="icon-btn" type="button">
+                    <a href="/meutcc" id="BtnVoltar" class="icon-btn">
                         <span class="icon-mask icon-voltar"></span>
-                    </button>
+                    </a>
                     <h1 id="TituloPagina">Versões</h1>
                     <div class="header-spacer"></div>
                 </header>
 
+                <!-- Botão Enviar Nova Versão -->
                 <button id="BtnEnviarVersao" type="button">
                     <span class="icon-mask icon-plus"></span>
                     <span>Enviar nova versão</span>
                 </button>
 
+                <!-- Filtro Ordenação -->
                 <div id="FiltroOrdenacao">
                     <label for="SelectOrdenacao">Ordenar por:</label>
                     <select id="SelectOrdenacao">
@@ -34,9 +37,11 @@
                     </select>
                 </div>
 
+                <!-- Lista de Versões -->
                 <div id="ListaVersoes">
 
-                    <div class="card-versao">
+                    <!-- Card Versão 3 -->
+                    <article class="card-versao">
                         <div class="card-versao-header">
                             <h2 class="versao-titulo">Versão 3</h2>
                             <span class="badge badge-aguardando">Aguardando revisão</span>
@@ -49,24 +54,25 @@
 
                         <div class="card-versao-detalhes">
                             <p class="versao-descricao">Correções da metodologia e resultados preliminares</p>
-                            <button class="btn-detalhes" type="button">
+                            <button class="btn-detalhes" type="button" aria-label="Ver detalhes">
                                 <span class="icon-mask icon-seta"></span>
                             </button>
                         </div>
 
                         <div class="card-arquivo">
-                            <img src="../Icones/pdf-icon.png" alt="PDF" class="icon-pdf">
+                            <img src="/Icones/pdf-icon.png" alt="PDF" class="icon-pdf">
                             <div class="arquivo-info">
                                 <p class="arquivo-nome">TCC_Versao3.pdf</p>
                                 <p class="arquivo-tamanho">2.4 MB</p>
                             </div>
-                            <button class="btn-download" type="button">
+                            <button class="btn-download" type="button" aria-label="Baixar arquivo">
                                 <span class="icon-mask icon-download"></span>
                             </button>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="card-versao">
+                    <!-- Card Versão 2 -->
+                    <article class="card-versao">
                         <div class="card-versao-header">
                             <h2 class="versao-titulo">Versão 2</h2>
                             <span class="badge badge-revisada">Revisada</span>
@@ -79,24 +85,25 @@
 
                         <div class="card-versao-detalhes">
                             <p class="versao-descricao">Adição do referencial teórico e metodologia</p>
-                            <button class="btn-detalhes" type="button">
+                            <button class="btn-detalhes" type="button" aria-label="Ver detalhes">
                                 <span class="icon-mask icon-seta"></span>
                             </button>
                         </div>
 
                         <div class="card-arquivo">
-                            <img src="../Icones/pdf-icon.png" alt="PDF" class="icon-pdf">
+                            <img src="/Icones/pdf-icon.png" alt="PDF" class="icon-pdf">
                             <div class="arquivo-info">
                                 <p class="arquivo-nome">TCC_Versao2.pdf</p>
                                 <p class="arquivo-tamanho">2.1 MB</p>
                             </div>
-                            <button class="btn-download" type="button">
+                            <button class="btn-download" type="button" aria-label="Baixar arquivo">
                                 <span class="icon-mask icon-download"></span>
                             </button>
                         </div>
-                    </div>
+                    </article>
 
-                    <div class="card-versao">
+                    <!-- Card Versão 1 -->
+                    <article class="card-versao">
                         <div class="card-versao-header">
                             <h2 class="versao-titulo">Versão 1</h2>
                             <span class="badge badge-aprovada">Aprovada</span>
@@ -109,51 +116,55 @@
 
                         <div class="card-versao-detalhes">
                             <p class="versao-descricao">Proposta inicial do projeto</p>
-                            <button class="btn-detalhes" type="button">
+                            <button class="btn-detalhes" type="button" aria-label="Ver detalhes">
                                 <span class="icon-mask icon-seta"></span>
                             </button>
                         </div>
 
                         <div class="card-arquivo">
-                            <img src="../Icones/pdf-icon.png" alt="PDF" class="icon-pdf">
+                            <img src="/Icones/pdf-icon.png" alt="PDF" class="icon-pdf">
                             <div class="arquivo-info">
                                 <p class="arquivo-nome">TCC_Versao1.pdf</p>
                                 <p class="arquivo-tamanho">1.8 MB</p>
                             </div>
-                            <button class="btn-download" type="button">
+                            <button class="btn-download" type="button" aria-label="Baixar arquivo">
                                 <span class="icon-mask icon-download"></span>
                             </button>
                         </div>
-                    </div>
+                    </article>
 
                 </div>
 
             </div>
         </div>
 
+        <!-- Bottom Navigation -->
         <nav id="BottomNav">
-            <button id="BtnInicio" class="nav-btn" type="button">
+            <a href="/dashboard" id="NavHome" class="nav-btn">
                 <span class="icon-mask icon-home"></span>
                 <span class="Texto">Início</span>
-            </button>
-            <button id="BtnMeuTCC" class="nav-btn active" type="button">
+            </a>
+
+            <a href="/meutcc" id="NavTCC" class="nav-btn active">
                 <span class="icon-mask icon-files"></span>
                 <span class="Texto">Meu TCC</span>
-            </button>
-            <button id="BtnAgenda" class="nav-btn" type="button">
+            </a>
+
+            <a href="/agenda" id="NavAgenda" class="nav-btn">
                 <span class="icon-mask icon-calendar"></span>
                 <span class="Texto">Reuniões</span>
-            </button>
-            <button id="BtnNotificacoes" class="nav-btn" type="button">
-                <span class="icon-mask icon-sino"></span>
-                <span class="Texto">Notificações</span>
-            </button>
-            <button id="BtnPerfil" class="nav-btn" type="button">
+            </a>
+
+            <a href="/acervo" id="BtnAcervo" class="nav-btn">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+
+            <a href="/perfil" id="NavPerfil" class="nav-btn">
                 <span class="icon-mask icon-perfil"></span>
                 <span class="Texto">Perfil</span>
-            </button>
+            </a>
         </nav>
-
     </div>
 
 </body>

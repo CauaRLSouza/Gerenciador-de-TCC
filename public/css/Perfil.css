@@ -1,0 +1,279 @@
+/* ==========================================================================
+   1. VARS, RESET & ESTRUTURA GERAL (Padronizado)
+   ========================================================================== */
+:root {
+    --primary: #6800b7; 
+    --primary-hover: #540096;
+    --primary-light: #a78bfa;
+    --primary-bg: #ede6ff;
+    --bg-main: #f8fafc; 
+    --card-bg: #ffffff;
+    --text-1: #0f172a;  
+    --text-2: #64748b;
+    --text-3: #828282;
+    --border: #e6e6e6;
+    --font: system-ui, -apple-system, sans-serif;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+    user-select: none; 
+}
+
+body { 
+    font-family: var(--font); 
+    background: var(--bg-main); 
+    color: var(--text-1); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+}
+
+#TelaPerfil { 
+    width: 100%; 
+    max-width: 480px; 
+    height: 100vh; 
+    height: 100dvh; 
+    background: var(--bg-main); 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+}
+
+/* ==========================================================================
+   2. HEADER (Padronizado - 60px)
+   ========================================================================== */
+#Header { 
+    height: 60px; 
+    flex-shrink: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 16px; 
+    background: var(--card-bg); 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+#TituloPagina { 
+    flex-grow: 1; 
+    text-align: center; 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: var(--text-1); 
+}
+
+.icon-btn { 
+    width: 40px; 
+    height: 40px; 
+    border: none; 
+    background: transparent; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    cursor: pointer; 
+    text-decoration: none; 
+}
+
+.icon-btn:active { background: rgba(0,0,0,0.05); }
+
+/* ==========================================================================
+   3. ÁREA DE SCROLL E CARD PRINCIPAL
+   ========================================================================== */
+#PerfilScroll { 
+    flex: 1; 
+    overflow-y: auto; 
+    padding: 16px 16px 80px; 
+    scrollbar-width: none; 
+}
+
+#PerfilScroll::-webkit-scrollbar { display: none; }
+
+.card { 
+    background: var(--card-bg); 
+    border-radius: 20px; 
+    padding: 24px 20px; 
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
+}
+
+/* ==========================================================================
+   4. AVATAR E DETALHES DO PERFIL
+   ========================================================================== */
+#PerfilHeaderCard { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+}
+
+#AvatarContainer { 
+    position: relative; 
+    width: 110px; 
+    height: 110px; 
+    margin-bottom: 16px; 
+}
+
+#AvatarCircle { 
+    width: 100%; 
+    height: 100%; 
+    border-radius: 50%; 
+    background: var(--primary); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+}
+
+#AvatarIniciais { 
+    color: #fff; 
+    font-size: 2.5rem; 
+    font-weight: 700; 
+}
+
+#BtnTrocarFoto { 
+    position: absolute; 
+    bottom: 0; 
+    right: 0; 
+    width: 36px; 
+    height: 36px; 
+    border-radius: 50%; 
+    background: var(--primary) url('/Icones/photo_camera_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg') no-repeat center/18px; 
+    border: 3px solid #fff; 
+    cursor: pointer; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15); 
+    transition: transform 0.2s, background-color 0.2s; 
+}
+
+#BtnTrocarFoto:active { 
+    transform: scale(1.08); 
+    background-color: var(--primary-hover); 
+}
+
+#PerfilNome { 
+    font-size: 1.375rem; 
+    font-weight: 700; 
+    color: var(--text-1); 
+    margin-bottom: 2px; 
+}
+
+#PerfilEmail, #PerfilTelefone { 
+    font-size: 0.875rem; 
+    color: var(--text-2); 
+    display: block; 
+}
+
+#PerfilEmail { margin-bottom: 2px; }
+
+.divisor { 
+    height: 1px; 
+    background: var(--border); 
+    margin: 20px 0; 
+    width: 100%; 
+}
+
+/* Tabela de Informações */
+#PerfilDetalhes { display: flex; flex-direction: column; }
+
+.PerfilLinha { 
+    display: flex; 
+    justify-content: space-between; 
+    align-items: center; 
+    padding: 12px 0; 
+    border-bottom: 1px solid var(--border); 
+}
+
+.PerfilLinha:last-child { border-bottom: none; }
+
+.perfil-label { 
+    font-size: 0.875rem; 
+    color: var(--text-2); 
+    font-weight: 500; 
+}
+
+.perfil-valor { 
+    font-size: 0.875rem; 
+    color: var(--text-1); 
+    font-weight: 700; 
+    text-align: right; 
+}
+
+/* ==========================================================================
+   5. MASK ICONS (Tamanho e Cores do Dashboard: 22px / var(--text-3))
+   ========================================================================== */
+.icon-mask { 
+    display: inline-block; 
+    width: 22px; 
+    height: 22px; 
+    background-color: var(--text-3); 
+    -webkit-mask: no-repeat center/contain; 
+    mask: no-repeat center/contain; 
+    pointer-events: none; 
+}
+
+.icon-menu { -webkit-mask-image: url('/Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
+.icon-sino { -webkit-mask-image: url('/Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
+.icon-home { -webkit-mask-image: url('/Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-files { -webkit-mask-image: url('/Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-calendar { -webkit-mask-image: url('/Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-acervo { -webkit-mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-perfil { -webkit-mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+
+/* ==========================================================================
+   6. BOTTOM NAVIGATION (Padronizada)
+   ========================================================================== */
+#BottomNav { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    width: 100%; 
+    height: 64px; 
+    background: var(--card-bg); 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.1); 
+    z-index: 100; 
+    padding: 4px 8px;
+}
+
+.nav-btn { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 6px 12px; 
+    border-radius: 8px; 
+    gap: 2px; 
+    flex: 1; 
+    height: 100%;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.nav-btn .Texto { 
+    font-size: 0.75rem; 
+    color: var(--text-1); 
+}
+
+.nav-btn.active { 
+    background: var(--primary-bg) !important; 
+}
+
+.nav-btn.active .icon-mask { 
+    background-color: var(--primary) !important; 
+}
+
+.nav-btn.active .Texto { 
+    color: var(--primary) !important; 
+    font-weight: 700 !important; 
+}

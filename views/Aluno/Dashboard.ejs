@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="Dashboard.css">
+    <link rel="stylesheet" href="/css/Dashboard.css">
 </head>
 <body>
 
@@ -32,7 +32,7 @@
 
                 <div id="CardTCC" class="card">
                     <div class="HeaderGroup">
-                        <img src="../Icones/File-removebg-preview.png" alt="TCC" class="card-icon">
+                        <img src="/Icones/File-removebg-preview.png" alt="TCC" class="card-icon">
                         <p id="Etapa" class="card-etapa">Etapa: Revisão Bibliográfica</p>
                     </div>
                     <div class="card-center-content">
@@ -43,7 +43,7 @@
 
                 <div id="CardAgenda" class="card">
                     <div class="HeaderGroup">
-                        <img src="../Icones/Calendar-removebg-preview.png" alt="Agenda" class="card-icon">
+                        <img src="/Icones/Calendar-removebg-preview.png" alt="Agenda" class="card-icon">
                         <p id="Prazo" class="card-etapa">Próximo prazo:</p>
                     </div>
                     <div class="card-center-content">
@@ -54,7 +54,7 @@
 
                 <div id="CardVersion" class="card">
                     <div class="HeaderGroup">
-                        <img src="../Icones/Version-removebg-preview.png" alt="Versão" class="card-icon">
+                        <img src="/Icones/Version-removebg-preview.png" alt="Versão" class="card-icon">
                         <p id="VersaoTXT" class="card-etapa">Versão atual</p>
                     </div>
                     <div class="card-center-content">
@@ -65,7 +65,7 @@
 
                 <div id="CardFeedback" class="card">
                     <div class="HeaderGroup">
-                        <img src="../Icones/Comment-removebg-preview.png" alt="Feedback" class="card-icon">
+                        <img src="/Icones/Comment-removebg-preview.png" alt="Feedback" class="card-icon">
                         <p id="Notif" class="card-etapa">Comentários não lidos</p>
                     </div>
                     <div class="card-center-content">
@@ -80,30 +80,52 @@
             </div>
         </div>
 
+        <!-- Bottom Navigation -->
         <nav id="BottomNav">
-            <button id="BtnInicio" class="nav-btn active" type="button">
+            <a href="/dashboard" id="BtnInicio" class="nav-btn">
                 <span class="icon-mask icon-home"></span>
                 <span class="Texto">Início</span>
-            </button>
-            <button id="BtnMeuTCC" class="nav-btn" type="button">
+            </a>
+
+            <a href="/meutcc" id="BtnMeuTCC" class="nav-btn">
                 <span class="icon-mask icon-files"></span>
                 <span class="Texto">Meu TCC</span>
-            </button>
-            <button id="BtnAgenda" class="nav-btn" type="button">
+            </a>
+
+            <a href="/agenda" id="BtnAgenda" class="nav-btn">
                 <span class="icon-mask icon-calendar"></span>
-                <span class="Texto">Agenda</span>
-            </button>
-            <button id="BtnAcervo" class="nav-btn" type="button">
+                <span class="Texto">Reuniões</span>
+            </a>
+
+            <a href="/acervo" id="BtnAcervo" class="nav-btn">
                 <span class="icon-mask icon-acervo"></span>
                 <span class="Texto">Acervo</span>
-            </button>
-            <button id="BtnPerfil" class="nav-btn" type="button">
+            </a>
+
+            <a href="/perfil" id="BtnPerfil" class="nav-btn">
                 <span class="icon-mask icon-perfil"></span>
                 <span class="Texto">Perfil</span>
-            </button>
+            </a>
         </nav>
 
     </div>
+
+    <!-- Script para Ativar o Botão Automaticamente com Fundo Roxo -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const pathAtual = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href").toLowerCase();
+                
+                // Compara a URL da página com a rota do link
+                if (pathAtual === href || (pathAtual === "/" && href === "/dashboard")) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

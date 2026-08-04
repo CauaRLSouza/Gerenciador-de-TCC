@@ -1,0 +1,139 @@
+/* ==========================================================================
+   1. RESET, VARS & GLOBAL
+   ========================================================================== */
+:root {
+    --primary: #6800b7; 
+    --primary-bg: #ede6ff;
+    --bg-main: #f8fafc; 
+    --card-bg: #ffffff;
+    --text-1: #0f172a;  
+    --text-2: #64748b;
+    --text-3: #828282;
+    --border: #e6e6e6;
+    --blue: #1d4ed8;    
+    --blue-bg: #dbeafe;
+    --yellow: #d97706;  
+    --yellow-bg: #fef3c7;
+    --green: #15803d;   
+    --green-bg: #dcfce7;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; user-select: none; }
+body { background: var(--bg-main); color: var(--text-1); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+
+/* ==========================================================================
+   2. LAYOUT & SCROLL (Container Limitado em 480px)
+   ========================================================================== */
+#TelaDashboard { 
+    display: flex; 
+    flex-direction: column; 
+    height: 100vh; 
+    height: 100dvh; 
+    width: 100%; 
+    max-width: 480px; 
+    position: relative; 
+    overflow: hidden; 
+    background: var(--bg-main);
+}
+
+#ScrollView { flex: 1; overflow-y: auto; padding-bottom: 80px; scrollbar-width: none; }
+#ScrollView::-webkit-scrollbar { display: none; }
+
+#Dashboard { padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+
+/* ==========================================================================
+   3. HEADER & SAUDAÇÕES
+   ========================================================================== */
+#Header { height:70px; flex-shrink:0; display:flex; align-items:center; justify-content:space-between; padding:0 16px; background:var(--card-bg); }
+#TituloDASH, #OlaAluno { font-size: 1.25rem; font-weight: 700; }
+#Saudacoes { display: flex; flex-direction: column; gap: 4px; }
+#OlaOrientador, #OlaCoorientador { font-size: 0.875rem; color: var(--text-2); }
+
+.icon-btn, .btn-arrow-box { background: transparent; border: none; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
+.btn-arrow-box { position: absolute; right: 16px; bottom: 16px; }
+
+/* ==========================================================================
+   4. CARDS & SUBTEXT BADGES
+   ========================================================================== */
+.card { background: var(--card-bg); border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--border); }
+.HeaderGroup { display: flex; align-items: center; gap: 8px; }
+.card-icon { width: 32px; height: 32px; object-fit: contain; }
+.card-etapa { font-size: 0.875rem; font-weight: 600; color: var(--text-2); }
+.card-center-content { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
+.card-title { font-size: 1.125rem; font-weight: 700; }
+.card-subtext { font-size: 0.8125rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; display: inline-block; }
+
+#CardTCC .card-subtext { background: var(--primary-bg); color: var(--primary); }
+#CardAgenda .card-subtext { background: var(--green-bg); color: var(--green); }
+#CardVersion .card-subtext { background: var(--yellow-bg); color: var(--yellow); }
+#CardFeedback .card-subtext { background: var(--blue-bg); color: var(--blue); }
+
+/* ==========================================================================
+   5. MASK ICONS
+   ========================================================================== */
+.icon-mask { display: inline-block; width: 22px; height: 22px; background-color: var(--text-3); -webkit-mask: no-repeat center/contain; mask: no-repeat center/contain; pointer-events: none; }
+
+.icon-menu { -webkit-mask-image: url('../Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
+.icon-sino { -webkit-mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
+.icon-seta { -webkit-mask-image: url('../Icones/chevron_right_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/chevron_right_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-3); }
+.icon-home { -webkit-mask-image: url('../Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-files { -webkit-mask-image: url('../Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-calendar { -webkit-mask-image: url('../Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-acervo { -webkit-mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-perfil { -webkit-mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+
+#BtnSeta .icon-mask { width: 24px; height: 24px; background-color: var(--blue); }
+
+/* ==========================================================================
+   6. BOTTOM NAVIGATION (MATERIAL YOU)
+   ========================================================================== */
+#BottomNav { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    width: 100%; 
+    height: 64px; 
+    background: var(--card-bg); 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.1); 
+    z-index: 100; 
+    padding: 4px 8px; /* Dá uma leve folga para o botão não colar nas bordas */
+}
+
+.nav-btn { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 6px 12px; 
+    border-radius: 8px; /* Arredondamento igual ao da sua imagem */
+    gap: 2px; 
+    flex: 1; 
+    height: 100%;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.nav-btn .Texto { 
+    font-size: 0.75rem; 
+    color: var(--text-1); 
+}
+
+.nav-btn.active { 
+    background: var(--primary-bg) !important; 
+}
+
+.nav-btn.active .icon-mask { 
+    background-color: var(--primary) !important; 
+}
+
+.nav-btn.active .Texto { 
+    color: var(--primary) !important; 
+    font-weight: 700 !important; 
+}

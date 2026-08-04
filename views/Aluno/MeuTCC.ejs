@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Meu TCC</title>
-    <link rel="stylesheet" href="meutcc.css">
+    <link rel="stylesheet" href="/css/meutcc.css">
 </head>
 <body>
 
     <div id="MeuTCC">
-        <!-- Header -->
+        <!-- Header Topo a Topo -->
         <header id="Header">
-            <button id="BtnVoltar" class="icon-btn" type="button">
+            <a href="/dashboard" id="BtnVoltar" class="icon-btn">
                 <span class="icon-mask icon-menu"></span>
-            </button>
+            </a>
             <h1 id="TituloPagina">Meu TCC</h1>
-            <button id="BtnNotificacoes" class="icon-btn" type="button">
+            <a href="/notificacoes" id="BtnNotificacoes" class="icon-btn">
                 <span class="icon-mask icon-sino"></span>
-            </button>
+            </a>
         </header>
 
         <!-- Corpo com Scroll -->
@@ -38,7 +38,7 @@
                 <p id="TextoDescricao">
                     O objetivo deste trabalho é desenvolver um sistema para gerenciamento de Trabalhos de Conclusão de Curso, facilitando o acompanhamento entre alunos, orientadores e coordenação.
                 </p>
-                <button id="BtnVersoes" type="button">Ver todas as versões</button>
+                <a href="/versoes" id="BtnVersoes" class="btn-link">Ver todas as versões</a>
             </section>
 
             <!-- Lista de Informações -->
@@ -90,29 +90,49 @@
 
         <!-- Bottom Navigation Fixo -->
         <nav id="BottomNav">
-            <button id="BtnInicio" class="nav-btn" type="button">
+            <a href="/dashboard" id="BtnInicio" class="nav-btn">
                 <span class="icon-mask icon-home"></span>
                 <span class="Texto">Início</span>
-            </button>
-            <button id="BtnMeuTCC" class="nav-btn active" type="button">
+            </a>
+
+            <a href="/meutcc" id="BtnMeuTCC" class="nav-btn">
                 <span class="icon-mask icon-files"></span>
                 <span class="Texto">Meu TCC</span>
-            </button>
-            <button id="BtnAgenda" class="nav-btn" type="button">
+            </a>
+
+            <a href="/agenda" id="BtnAgenda" class="nav-btn">
                 <span class="icon-mask icon-calendar"></span>
                 <span class="Texto">Reuniões</span>
-            </button>
-            <button id="BtnAcervo" class="nav-btn" type="button">
+            </a>
+
+            <a href="/acervo" id="BtnAcervo" class="nav-btn">
                 <span class="icon-mask icon-acervo"></span>
                 <span class="Texto">Acervo</span>
-            </button>
-            <button id="BtnPerfil" class="nav-btn" type="button">
+            </a>
+
+            <a href="/perfil" id="BtnPerfil" class="nav-btn">
                 <span class="icon-mask icon-perfil"></span>
                 <span class="Texto">Perfil</span>
-            </button>
+            </a>
         </nav>
 
     </div>
+
+    <!-- Script para Ativar o Botão Automaticamente pelo URL -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const pathAtual = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href").toLowerCase();
+                
+                if (pathAtual === href || (pathAtual === "/" && href === "/dashboard")) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

@@ -1,0 +1,367 @@
+/* ==========================================================================
+   1. VARS, RESET & ESTRUTURA GERAL (Padronizado)
+   ========================================================================== */
+:root {
+    --primary: #6800b7;
+    --primary-hover: #540096;
+    --primary-bg: #ede6ff;
+    --bg-main: #f8fafc;
+    --card-bg: #ffffff;
+    --text-1: #0f172a;
+    --text-2: #64748b;
+    --text-3: #828282;
+    --border: #e6e6e6;
+    --font: system-ui, -apple-system, sans-serif;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+    user-select: none; 
+}
+
+body { 
+    font-family: var(--font); 
+    background: var(--bg-main); 
+    color: var(--text-1); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+}
+
+#TelaVersoes { 
+    width: 100%; 
+    max-width: 480px; 
+    height: 100vh; 
+    height: 100dvh; 
+    background: var(--bg-main); 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+}
+
+/* ==========================================================================
+   2. SCROLL & CONTAINER PRINCIPAL
+   ========================================================================== */
+#ScrollView { 
+    flex: 1; 
+    overflow-y: auto; 
+    padding-bottom: 80px; 
+    scrollbar-width: none; 
+}
+
+#ScrollView::-webkit-scrollbar { display: none; }
+
+#ContainerVersoes { 
+    padding: 16px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+}
+
+/* ==========================================================================
+   3. HEADER & CONTROLES (BOTÃO ENVIAR / FILTRO)
+   ========================================================================== */
+#HeaderVersoes { 
+    height: 60px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    background: transparent; 
+}
+
+#HeaderVersoes #TituloPagina { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: var(--text-1); 
+}
+
+.header-spacer { width: 40px; }
+
+.icon-btn { 
+    width: 40px; 
+    height: 40px; 
+    border: none; 
+    background: transparent; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    cursor: pointer; 
+    text-decoration: none; 
+}
+
+.icon-btn:active { background: rgba(0, 0, 0, 0.05); }
+
+/* Botão Enviar Versão */
+#BtnEnviarVersao { 
+    width: 100%; 
+    height: 48px; 
+    border-radius: 16px; 
+    background: var(--primary); 
+    color: #fff; 
+    border: none; 
+    font-weight: 700; 
+    font-size: 0.9375rem; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    gap: 8px; 
+    cursor: pointer; 
+    box-shadow: 0 4px 12px rgba(104, 0, 185, 0.2); 
+    transition: background-color 0.2s, transform 0.1s; 
+}
+
+#BtnEnviarVersao:active { 
+    background: var(--primary-hover); 
+    transform: scale(0.98); 
+}
+
+#BtnEnviarVersao .icon-mask { 
+    background-color: #ffffff; 
+}
+
+/* Filtro de Ordenação */
+#FiltroOrdenacao { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    background: var(--card-bg); 
+    padding: 10px 14px; 
+    border-radius: 12px; 
+    border: 1px solid var(--border); 
+    font-size: 0.875rem; 
+    color: var(--text-2); 
+    font-weight: 600; 
+}
+
+#SelectOrdenacao { 
+    border: none; 
+    background: transparent; 
+    font-size: 0.875rem; 
+    font-weight: 700; 
+    color: var(--primary); 
+    cursor: pointer; 
+    outline: none; 
+}
+
+/* ==========================================================================
+   4. CARDS DE VERSÃO
+   ========================================================================== */
+#ListaVersoes { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 14px; 
+}
+
+.card-versao { 
+    background: var(--card-bg); 
+    border-radius: 20px; 
+    padding: 16px; 
+    border: 1px solid var(--border); 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
+    display: flex; 
+    flex-direction: column; 
+    gap: 10px; 
+}
+
+.card-versao-header { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+}
+
+.versao-titulo { 
+    font-size: 1.125rem; 
+    font-weight: 700; 
+    color: var(--text-1); 
+}
+
+/* Badges de Status */
+.badge { 
+    padding: 4px 10px; 
+    border-radius: 999px; 
+    font-weight: 700; 
+    font-size: 0.75rem; 
+}
+
+.badge-aguardando { background: #fff2d2; color: #b47800; }
+.badge-revisada { background: var(--primary-bg); color: var(--primary); }
+.badge-aprovada { background: #def5e1; color: #1e8237; }
+
+.card-versao-data { 
+    display: flex; 
+    align-items: center; 
+    gap: 6px; 
+    font-size: 0.8125rem; 
+    color: var(--text-3); 
+    font-weight: 500; 
+}
+
+.card-versao-detalhes { 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    gap: 12px; 
+}
+
+.versao-descricao { 
+    font-size: 0.875rem; 
+    color: var(--text-2); 
+    line-height: 1.35; 
+    flex: 1; 
+}
+
+.btn-detalhes { 
+    width: 32px; 
+    height: 32px; 
+    border: none; 
+    background: transparent; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+}
+
+/* Card Anexo do Arquivo */
+.card-arquivo { 
+    background: var(--bg-main); 
+    border-radius: 14px; 
+    padding: 10px 12px; 
+    display: flex; 
+    align-items: center; 
+    gap: 12px; 
+    border: 1px solid var(--border); 
+}
+
+.icon-pdf { 
+    width: 28px; 
+    height: 28px; 
+    object-fit: contain; 
+    flex-shrink: 0; 
+}
+
+.arquivo-info { 
+    flex: 1; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+}
+
+.arquivo-nome { 
+    font-size: 0.875rem; 
+    font-weight: 700; 
+    color: var(--text-1); 
+    white-space: nowrap; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+}
+
+.arquivo-tamanho { 
+    font-size: 0.75rem; 
+    color: var(--text-3); 
+    font-weight: 500; 
+}
+
+.btn-download { 
+    width: 36px; 
+    height: 36px; 
+    border: none; 
+    background: var(--card-bg); 
+    border-radius: 50%; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    cursor: pointer; 
+    border: 1px solid var(--border); 
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.03); 
+}
+
+.btn-download .icon-mask { 
+    background-color: var(--primary); 
+    width: 18px; 
+    height: 18px; 
+}
+
+/* ==========================================================================
+   5. MASK ICONS (Padrão Unificado)
+   ========================================================================== */
+.icon-mask { 
+    display: inline-block; 
+    width: 22px; 
+    height: 22px; 
+    background-color: var(--text-3); 
+    -webkit-mask: no-repeat center/contain; 
+    mask: no-repeat center/contain; 
+    pointer-events: none; 
+}
+
+.icon-voltar { -webkit-mask-image: url('/Icones/arrow_back_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/arrow_back_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
+.icon-plus { -webkit-mask-image: url('/Icones/add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-calendar-sm { -webkit-mask-image: url('/Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); width: 16px; height: 16px; }
+.icon-seta { -webkit-mask-image: url('/Icones/chevron_right_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/chevron_right_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-download { -webkit-mask-image: url('/Icones/download_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/download_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+
+.icon-home { -webkit-mask-image: url('/Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-files { -webkit-mask-image: url('/Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-calendar { -webkit-mask-image: url('/Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-acervo { -webkit-mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-perfil { -webkit-mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+
+/* ==========================================================================
+   6. BOTTOM NAVIGATION (Padronizada)
+   ========================================================================== */
+#BottomNav { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    width: 100%; 
+    height: 64px; 
+    background: var(--card-bg); 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1); 
+    z-index: 100; 
+    padding: 4px 8px;
+}
+
+.nav-btn { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 6px 12px; 
+    border-radius: 8px; 
+    gap: 2px; 
+    flex: 1; 
+    height: 100%;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.nav-btn .Texto { 
+    font-size: 0.75rem; 
+    color: var(--text-1); 
+}
+
+.nav-btn.active { 
+    background: var(--primary-bg) !important; 
+}
+
+.nav-btn.active .icon-mask { 
+    background-color: var(--primary) !important; 
+}
+
+.nav-btn.active .Texto { 
+    color: var(--primary) !important; 
+    font-weight: 700 !important; 
+}

@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda</title>
-    <link rel="stylesheet" href="agenda.css">
+    <link rel="stylesheet" href="/css/agenda.css">
 </head>
 <body>
 
     <div id="TelaAgenda">
         <!-- Header -->
         <header id="Header">
-            <button id="BtnVoltar" class="icon-svg icon-menu"></button>
+            <a href="/dashboard" id="BtnVoltar" class="icon-btn">
+                <span class="icon-mask icon-menu"></span>
+            </a>
             <h1 id="TituloPagina">Agenda</h1>
-            <div id="Espacador" class="icon-svg icon-sino"></div>
+            <a href="/notificacoes" id="Espacador" class="icon-btn">
+                <span class="icon-mask icon-sino"></span>
+            </a>
         </header>
 
         <!-- Hero Card (Próximo compromisso) -->
@@ -38,14 +42,14 @@
             <h3 id="AgendaCalendarioTitulo">Agosto 2026</h3>
             <div id="AgendaCalendarioScroll">
                 <div id="AgendaCalendarioLinha">
-                    <button name="AgendaDia24" id="AgendaDia24">24</button>
-                    <button name="AgendaDia25" id="AgendaDia25">25</button>
-                    <button name="AgendaDia26" id="AgendaDia26">26</button>
-                    <button name="AgendaDia27" id="AgendaDia27">27</button>
-                    <button name="AgendaDia28" id="AgendaDia28" class="dia-ativo">28</button>
-                    <button name="AgendaDia29" id="AgendaDia29">29</button>
-                    <button name="AgendaDia30" id="AgendaDia30">30</button>
-                    <button name="AgendaDia31" id="AgendaDia31">31</button>
+                    <button type="button" name="AgendaDia24" id="AgendaDia24">24</button>
+                    <button type="button" name="AgendaDia25" id="AgendaDia25">25</button>
+                    <button type="button" name="AgendaDia26" id="AgendaDia26">26</button>
+                    <button type="button" name="AgendaDia27" id="AgendaDia27">27</button>
+                    <button type="button" name="AgendaDia28" id="AgendaDia28" class="dia-ativo">28</button>
+                    <button type="button" name="AgendaDia29" id="AgendaDia29">29</button>
+                    <button type="button" name="AgendaDia30" id="AgendaDia30">30</button>
+                    <button type="button" name="AgendaDia31" id="AgendaDia31">31</button>
                 </div>
             </div>
         </section>
@@ -95,23 +99,48 @@
 
         <!-- Bottom Navigation Fixo -->
         <nav id="BottomNav">
-            <button id="NavHome" class="nav-btn">
-                <div class="Icone icon-home"></div>
-            </button>
-            <button id="NavTCC" class="nav-btn">
-                <div class="Icone icon-files"></div>
-            </button>
-            <button id="NavAgenda" class="nav-btn nav-ativo">
-                <div class="Icone icon-calendar"></div>
-            </button>
-            <button id="NavDocumentos" class="nav-btn">
-                <div class="Icone icon-collections"></div>
-            </button>
-            <button id="NavPerfil" class="nav-btn">
-                <div class="Icone icon-account"></div>
-            </button>
+            <a href="/dashboard" id="NavHome" class="nav-btn">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+
+            <a href="/meutcc" id="NavTCC" class="nav-btn">
+                <span class="icon-mask icon-files"></span>
+                <span class="Texto">Meu TCC</span>
+            </a>
+
+            <a href="/agenda" id="NavAgenda" class="nav-btn">
+                <span class="icon-mask icon-calendar"></span>
+                <span class="Texto">Reuniões</span>
+            </a>
+
+            <a href="/acervo" id="NavDocumentos" class="nav-btn">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+
+            <a href="/perfil" id="NavPerfil" class="nav-btn">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </a>
         </nav>
     </div>
+
+    <!-- Script de Ativação Dinâmica da Nav -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const pathAtual = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href").toLowerCase();
+                
+                if (pathAtual === href || (pathAtual === "/" && href === "/dashboard")) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
 
 </body>
 </html>

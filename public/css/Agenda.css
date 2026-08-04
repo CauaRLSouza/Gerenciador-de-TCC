@@ -1,0 +1,273 @@
+/* ==========================================================================
+   1. VARS, RESET & ESTRUTURA GERAL (Padronizado com Dashboard e MeuTCC)
+   ========================================================================== */
+:root {
+    --primary: #6800b7; 
+    --primary-light: #e1cdff;
+    --primary-bg: #ede6ff;
+    --bg-main: #f8fafc; 
+    --card-bg: #ffffff;
+    --text-1: #0f172a;  
+    --text-2: #64748b;
+    --text-3: #828282;
+    --border: #e6e6e6;
+    --font: system-ui, -apple-system, sans-serif;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    -webkit-tap-highlight-color: transparent; 
+    user-select: none; 
+    font-family: var(--font);
+}
+
+body { 
+    background: var(--bg-main); 
+    color: var(--text-1); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+}
+
+#TelaAgenda { 
+    width: 100%; 
+    max-width: 480px; 
+    height: 100vh; 
+    height: 100dvh; 
+    background: var(--bg-main); 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    overflow: hidden; 
+}
+
+/* ==========================================================================
+   2. HEADER (60px de altura, idêntico aos outros)
+   ========================================================================== */
+#Header { 
+    height: 60px; 
+    flex-shrink: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 16px; 
+    background: var(--card-bg); 
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    z-index: 10;
+}
+
+#TituloPagina { 
+    flex-grow: 1; 
+    text-align: center; 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: var(--text-1); 
+}
+
+.icon-btn { 
+    width: 40px; 
+    height: 40px; 
+    border: none; 
+    background: transparent; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    cursor: pointer; 
+    text-decoration: none; 
+}
+.icon-btn:active { background: rgba(0,0,0,0.05); }
+
+/* ==========================================================================
+   3. HERO CARD (PRÓXIMO COMPROMISSO)
+   ========================================================================== */
+#AgendaHeroCard { 
+    margin: 16px; 
+    padding: 20px; 
+    border-radius: 16px; 
+    background: var(--primary); 
+    display: flex; 
+    flex-direction: column; 
+    box-shadow: 0 6px 18px rgba(104,0,185,0.25); 
+}
+
+#AgendaHeroTitulo { color: #fff; font-size: 0.875rem; font-weight: 700; opacity: 0.9; margin-bottom: 14px; }
+#AgendaHeroLinha { display: flex; align-items: center; }
+
+#AgendaHeroData { 
+    width: 70px; 
+    height: 80px; 
+    border-radius: 12px; 
+    background: #fff; 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    margin-right: 16px; 
+    flex-shrink: 0; 
+}
+
+#AgendaHeroMes, #AgendaHeroDia { font-weight: 700; color: var(--primary); line-height: 1.1; }
+#AgendaHeroMes { font-size: 0.75rem; text-transform: uppercase; }
+#AgendaHeroDia { font-size: 2rem; }
+
+#AgendaHeroInfo { flex: 1; display: flex; flex-direction: column; }
+#AgendaHeroContador { color: var(--primary-light); font-size: 0.75rem; font-weight: 700; margin-bottom: 4px; }
+#AgendaHeroNome { color: #fff; font-size: 1.25rem; font-weight: 700; }
+#AgendaHeroHorario { color: #fff; font-size: 0.9375rem; margin-top: 4px; }
+#AgendaHeroLocal { color: #ebebeb; font-size: 0.875rem; margin-top: 2px; }
+
+/* ==========================================================================
+   4. CALENDÁRIO HORIZONTAL
+   ========================================================================== */
+#AgendaCalendario { padding: 0 16px 10px; display: flex; flex-direction: column; }
+#AgendaCalendarioTitulo { font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-1); }
+#AgendaCalendarioScroll { overflow-x: auto; scrollbar-width: none; }
+#AgendaCalendarioScroll::-webkit-scrollbar { display: none; }
+#AgendaCalendarioLinha { display: flex; gap: 8px; }
+
+#AgendaCalendarioLinha button { 
+    width: 46px; 
+    height: 52px; 
+    border-radius: 12px; 
+    background: #fff; 
+    border: 1px solid var(--border); 
+    font-weight: 700; 
+    font-size: 1rem; 
+    color: var(--text-1); 
+    cursor: pointer; 
+    flex-shrink: 0; 
+    transition: 0.2s; 
+}
+
+#AgendaCalendarioLinha button.dia-ativo { 
+    background: var(--primary); 
+    color: #fff; 
+    border-color: var(--primary); 
+}
+
+/* ==========================================================================
+   5. LISTA DE REUNIÕES & CARDS
+   ========================================================================== */
+#AgendaScroll { flex: 1; overflow-y: auto; padding: 10px 16px 80px; scrollbar-width: none; }
+#AgendaScroll::-webkit-scrollbar { display: none; }
+#AgendaLista { display: flex; flex-direction: column; gap: 16px; }
+
+.card-reuniao { 
+    background: #fff; 
+    border-radius: 12px; 
+    padding: 16px; 
+    border: 1px solid var(--border); 
+    display: flex; 
+    flex-direction: column; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+}
+
+.reuniao-cabecalho { display: flex; align-items: center; }
+
+.reuniao-data { 
+    width: 58px; 
+    height: 68px; 
+    border-radius: 12px; 
+    background: var(--primary); 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    margin-right: 14px; 
+    flex-shrink: 0; 
+    color: #fff; 
+    font-weight: 700; 
+}
+
+.reuniao-data span:first-child { font-size: 0.75rem; text-transform: uppercase; }
+.reuniao-data span:last-child { font-size: 1.625rem; }
+
+.reuniao-info { flex: 1; display: flex; flex-direction: column; }
+.reuniao-info h4 { font-size: 1.125rem; font-weight: 700; color: var(--text-1); }
+.reuniao-info span { font-size: 0.875rem; color: var(--text-2); margin-top: 2px; }
+
+.separador { height: 1px; margin: 14px 0; background: #ebebeb; }
+.card-reuniao p { font-size: 0.875rem; color: var(--text-2); margin-bottom: 12px; line-height: 1.4; }
+
+.status-badge { align-self: flex-start; padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.75rem; }
+.status-confirmada { background: #dcfce7; color: #15803d; }
+.status-pendente { background: #fef3c7; color: #d97706; }
+
+/* ==========================================================================
+   6. MASK ICONS (Tamanho e Cores do Dashboard: 22px / var(--text-3))
+   ========================================================================== */
+.icon-mask { 
+    display: inline-block; 
+    width: 22px; 
+    height: 22px; 
+    background-color: var(--text-3); 
+    -webkit-mask: no-repeat center/contain; 
+    mask: no-repeat center/contain; 
+    pointer-events: none; 
+}
+
+.icon-menu { -webkit-mask-image: url('/Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
+.icon-sino { -webkit-mask-image: url('/Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
+.icon-home { -webkit-mask-image: url('/Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-files { -webkit-mask-image: url('/Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-calendar { -webkit-mask-image: url('/Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-acervo { -webkit-mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-perfil { -webkit-mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+
+/* ==========================================================================
+   7. BOTTOM NAVIGATION (MATERIAL YOU)
+   ========================================================================== */
+#BottomNav { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    width: 100%; 
+    height: 64px; 
+    background: var(--card-bg); 
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.1); 
+    z-index: 100; 
+    padding: 4px 8px;
+}
+
+.nav-btn { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 6px 12px; 
+    border-radius: 8px; 
+    gap: 2px; 
+    flex: 1; 
+    height: 100%;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.nav-btn .Texto { 
+    font-size: 0.75rem; 
+    color: var(--text-1); 
+}
+
+.nav-btn.active { 
+    background: var(--primary-bg) !important; 
+}
+
+.nav-btn.active .icon-mask { 
+    background-color: var(--primary) !important; 
+}
+
+.nav-btn.active .Texto { 
+    color: var(--primary) !important; 
+    font-weight: 700 !important; 
+}

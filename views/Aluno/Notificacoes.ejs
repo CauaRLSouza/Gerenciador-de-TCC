@@ -1,41 +1,51 @@
+<!-- views/notificacoes.ejs -->
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notificações</title>
-    <link rel="stylesheet" href="Notificacoes.css">
+    <title>Notificações - TCC</title>
+    <link rel="stylesheet" href="/css/Notificacoes.css">
 </head>
 <body>
 
     <div id="TelaNotificacoes">
-        <div id="ScrollView">
+
+        <!-- ==========================================================================
+           1. HEADER
+           ========================================================================== -->
+        <header id="HeaderNotificacoes">
+            <button class="icon-btn" id="BtnMenu">
+                <span class="icon-mask icon-menu"></span>
+            </button>
+            <h1 id="TituloPagina">Notificações</h1>
+            <a href="/notificacoes" id="HeaderSinoWrapper">
+                <span class="icon-mask icon-sino"></span>
+            </a>
+        </header>
+
+        <!-- ==========================================================================
+           2. SCROLLVIEW / CONTEÚDO
+           ========================================================================== -->
+        <main id="ScrollView">
             <div id="ContainerNotificacoes">
-                
-                <header id="HeaderNotificacoes">
-                    <button id="BtnVoltar" class="icon-btn" type="button">
-                        <span class="icon-mask icon-voltar"></span>
-                    </button>
-                    <h1 id="TituloPagina">Notificações</h1>
-                    <div class="header-spacer"></div>
-                </header>
 
                 <div id="AcaoMarcarTodas">
-                    <button id="BtnMarcarLidas" type="button">Marcar todas como lidas</button>
+                    <button id="BtnMarcarLidas">Marcar todas como lidas</button>
                 </div>
 
                 <section class="secao-notificacoes">
                     <h2 class="secao-titulo">Hoje</h2>
-
+                    
                     <div class="lista-itens">
                         <article class="card-notificacao nao-lida">
                             <div class="notificacao-icone bg-roxo">
-                                <span class="icon-mask icon-comment"></span>
+                                <span class="icon-mask icon-sino"></span>
                             </div>
                             <div class="notificacao-conteudo">
                                 <div class="notificacao-top">
                                     <h3 class="notificacao-titulo">Novo comentário na versão 3</h3>
-                                    <time class="notificacao-hora">09:20</time>
+                                    <span class="notificacao-hora">09:20</span>
                                 </div>
                                 <div class="notificacao-bottom">
                                     <p class="notificacao-texto">Prof. Pedro Santos comentou seu trabalho.</p>
@@ -46,12 +56,12 @@
 
                         <article class="card-notificacao nao-lida">
                             <div class="notificacao-icone bg-verde">
-                                <span class="icon-mask icon-feather"></span>
+                                <span class="icon-mask icon-files"></span>
                             </div>
                             <div class="notificacao-conteudo">
                                 <div class="notificacao-top">
                                     <h3 class="notificacao-titulo">Versão enviada com sucesso</h3>
-                                    <time class="notificacao-hora">14:30</time>
+                                    <span class="notificacao-hora">14:30</span>
                                 </div>
                                 <div class="notificacao-bottom">
                                     <p class="notificacao-texto">Sua versão 3 foi enviada para revisão.</p>
@@ -62,12 +72,12 @@
 
                         <article class="card-notificacao lida">
                             <div class="notificacao-icone bg-azul">
-                                <span class="icon-mask icon-calendar-event"></span>
+                                <span class="icon-mask icon-calendar"></span>
                             </div>
                             <div class="notificacao-conteudo">
                                 <div class="notificacao-top">
                                     <h3 class="notificacao-titulo">Reunião agendada</h3>
-                                    <time class="notificacao-hora">08:15</time>
+                                    <span class="notificacao-hora">08:15</span>
                                 </div>
                                 <div class="notificacao-bottom">
                                     <p class="notificacao-texto">Reunião marcada para 28/08/2026 às 15:00.</p>
@@ -84,12 +94,12 @@
                     <div class="lista-itens">
                         <article class="card-notificacao lida">
                             <div class="notificacao-icone bg-roxo-suave">
-                                <span class="icon-mask icon-clipboard-clock"></span>
+                                <span class="icon-mask icon-files"></span>
                             </div>
                             <div class="notificacao-conteudo">
                                 <div class="notificacao-top">
                                     <h3 class="notificacao-titulo">Prazo se aproximando</h3>
-                                    <time class="notificacao-hora">09:00</time>
+                                    <span class="notificacao-hora">09:00</span>
                                 </div>
                                 <div class="notificacao-bottom">
                                     <p class="notificacao-texto">Faltam 7 dias para o prazo de entrega da versão parcial.</p>
@@ -101,29 +111,32 @@
                 </section>
 
             </div>
-        </div>
+        </main>
 
+        <!-- ==========================================================================
+           3. BOTTOM NAVIGATION
+           ========================================================================== -->
         <nav id="BottomNav">
-            <button id="BtnInicio" class="nav-btn" type="button">
+            <a href="/dashboard" class="nav-btn">
                 <span class="icon-mask icon-home"></span>
                 <span class="Texto">Início</span>
-            </button>
-            <button id="BtnMeuTCC" class="nav-btn" type="button">
+            </a>
+            <a href="/meu-tcc" class="nav-btn">
                 <span class="icon-mask icon-files"></span>
                 <span class="Texto">Meu TCC</span>
-            </button>
-            <button id="BtnAgenda" class="nav-btn" type="button">
+            </a>
+            <a href="/agenda" class="nav-btn">
                 <span class="icon-mask icon-calendar"></span>
                 <span class="Texto">Reuniões</span>
-            </button>
-            <button id="BtnAcervo" class="nav-btn" type="button">
+            </a>
+            <a href="/acervo" class="nav-btn">
                 <span class="icon-mask icon-acervo"></span>
                 <span class="Texto">Acervo</span>
-            </button>
-            <button id="BtnPerfil" class="nav-btn" type="button">
+            </a>
+            <a href="/perfil" class="nav-btn">
                 <span class="icon-mask icon-perfil"></span>
                 <span class="Texto">Perfil</span>
-            </button>
+            </a>
         </nav>
 
     </div>
