@@ -5,38 +5,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Orienta TCC - Login</title>
     <link rel="stylesheet" href="css/Login.css">
-    <!-- Ícones via Lucide Icons (mantido para o usuário, cadeado e olho) -->
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 <body>
 
     <main class="login-container">
-        <!-- Logo e Título -->
         <div class="logo-box">
             <div class="logo-icon">
-                <!-- Imagem atualizada com o seu arquivo da logo -->
                 <img src="Icones/LogoTCC-removebg-preview.png" alt="Logo Orienta TCC" class="logo-img">
             </div>
             <h1 class="app-title">Orienta<br>TCC</h1>
         </div>
 
-        <!-- Formulário -->
         <form class="login-form" action="/dashboard" method="GET">
 
-            <!-- Campo Usuário -->
             <div class="input-group">
                 <i data-lucide="user" class="input-icon"></i>
                 <input type="text" placeholder="Digite seu usuário" required>
             </div>
 
-            <!-- Campo Senha -->
             <div class="input-group">
                 <i data-lucide="lock" class="input-icon"></i>
-                <input type="password" placeholder="Digite sua senha" required>
-                <i data-lucide="eye" class="toggle-eye"></i>
+                <input type="password" id="inputSenha" placeholder="Digite sua senha" required>
+                <span id="btnToggleEye" style="cursor: pointer; display: inline-flex; align-items: center;">
+                    <i data-lucide="eye" class="toggle-eye"></i>
+                </span>
             </div>
 
-            <!-- Opções (Lembrar e Esqueci a senha) -->
             <div class="form-options">
                 <label class="remember-me">
                     <input type="checkbox">
@@ -45,7 +40,6 @@
                 <a href="#" class="forgot-pass">Esqueci minha senha</a>
             </div>
 
-            <!-- Botão Entrar -->
             <button type="submit" class="btn-entrar">Entrar</button>
 
         </form>
@@ -53,8 +47,25 @@
     </main>
 
     <script>
-        // Inicializa os ícones de usuário, cadeado e olho
         lucide.createIcons();
+
+        document.addEventListener("DOMContentLoaded", () => {
+            const inputSenha = document.getElementById("inputSenha");
+            const btnToggleEye = document.getElementById("btnToggleEye");
+
+            if (btnToggleEye && inputSenha) {
+                btnToggleEye.addEventListener("click", () => {
+                    const isPassword = inputSenha.getAttribute("type") === "password";
+                    
+                    inputSenha.setAttribute("type", isPassword ? "text" : "password");
+                    
+                    const iconName = isPassword ? "eye-off" : "eye";
+                    btnToggleEye.innerHTML = `<i data-lucide="${iconName}" class="toggle-eye"></i>`;
+                    
+                    lucide.createIcons();
+                });
+            }
+        });
     </script>
 </body>
 </html>
