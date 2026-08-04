@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Acervo de TCCs</title>
+    <link rel="stylesheet" href="/css/acervo.css">
+</head>
+<body>
+
+    <div id="TelaAcervo">
+        <header id="Header">
+            <button id="BtnMenu" class="icon-btn" type="button">
+                <span class="icon-mask icon-menu"></span>
+            </button>
+            <h1 id="TituloPagina">Acervo de TCCs</h1>
+            <a href="/notificacoes" id="BtnNotificacoes" class="icon-btn">
+                <span class="icon-mask icon-sino"></span>
+            </a>
+        </header>
+
+        <main id="CorpoScroll">
+            
+            <section id="BannerExplore" class="card-banner">
+                <div class="banner-icone-bg">
+                    <img src="Icones/AcervoLogo-removebg-preview.png" alt="Logo Acervo" class="banner-logo-img">
+                </div>
+                <div class="banner-texto">
+                    <h2>Explore o acervo de TCCs</h2>
+                    <p>Consulte trabalhos já defendidos e aprovados por outros alunos da instituição.</p>
+                </div>
+            </section>
+
+            <section id="SecaoBusca">
+                <div class="campo-busca">
+                    <button id="BtnBuscar" class="btn-buscar-lupa" type="submit">
+                        <span class="icon-mask icon-busca"></span>
+                    </button>
+                    <input type="text" placeholder="Buscar por título, autor ou palavra-chave...">
+                </div>
+
+                <div class="linha-filtros">
+                    <div class="select-container">
+                        <select id="FiltroCurso" class="select-filtro">
+                            <option value="">Curso</option>
+                            <option value="Licenciatura em Ciência da Computação">Licenciatura em Ciência da Computação</option>
+                            <option value="Licenciatura em Ciências Agrárias">Licenciatura em Ciências Agrárias</option>
+                            <option value="Licenciatura em Química">Licenciatura em Química</option>
+                            <option value="Bacharelado em Administração">Bacharelado em Administração</option>
+                        </select>
+                        <span class="icon-mask icon-seta-baixo select-icone"></span>
+                    </div>
+
+                    <div class="select-container">
+                        <select id="FiltroLinhaPesquisa" class="select-filtro">
+                            <option value="">Linha de Pesquisa</option>
+                            <option value="Computação">Computação</option>
+                            <option value="Agronomia e Solos">Agronomia e Solos</option>
+                            <option value="Química Orgânica e Analítica">Química Orgânica e Analítica</option>
+                            <option value="Educação e Didática">Educação e Didática</option>
+                            <option value="Gestão e Finanças">Gestão e Finanças</option>
+                        </select>
+                        <span class="icon-mask icon-seta-baixo select-icone"></span>
+                    </div>
+
+                    <div class="select-container">
+                        <select id="FiltroAno" class="select-filtro">
+                            <option value="">Ano</option>
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                            <option value="2019">2019</option>
+                            <option value="2018">2018</option>
+                            <option value="2017">2017</option>
+                            <option value="2016">2016</option>
+                            <option value="2015">2015</option>
+                        </select>
+                        <span class="icon-mask icon-seta-baixo select-icone"></span>
+                    </div>
+                </div>
+            </section>
+
+            <div id="InfoResultados">
+                <span>10 trabalhos encontrados</span>
+                <div class="select-container select-ordenacao">
+                    <select id="SelectOrdenacao" class="select-filtro-ordem">
+                        <option value="recentes">Mais recentes</option>
+                        <option value="antigos">Mais antigos</option>
+                        <option value="az">Ordem alfabética (A-Z)</option>
+                        <option value="za">Ordem alfabética (Z-A)</option>
+                    </select>
+                    <span class="icon-mask icon-seta-baixo select-icone"></span>
+                </div>
+            </div>
+
+            <section id="ListaAcervo">
+
+                <article class="card-tcc">
+                    <div class="tcc-icone-bg bg-amarelo">
+                        <span class="icon-mask icon-grafico"></span>
+                    </div>
+                    <div class="tcc-detalhes">
+                        <h3 class="tcc-titulo">Análise de Desempenho de Algoritmos de Ordenação</h3>
+                        <p class="tcc-autor">Maria Eduarda Santos</p>
+                        <div class="tcc-meta">
+                            <span class="tcc-curso">
+                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciência da Computação
+                            </span>
+                            <span class="tcc-ano">
+                                <span class="icon-mask icon-calendario"></span> 2024
+                            </span>
+                        </div>
+                    </div>
+                    <span class="icon-mask icon-seta-direita"></span>
+                </article>
+
+                <article class="card-tcc">
+                    <div class="tcc-icone-bg bg-verde">
+                        <span class="icon-mask icon-globe"></span>
+                    </div>
+                    <div class="tcc-detalhes">
+                        <h3 class="tcc-titulo">Uso do Solo e Irrigação no Semiárido Baiano</h3>
+                        <p class="tcc-autor">Lucas Oliveira</p>
+                        <div class="tcc-meta">
+                            <span class="tcc-curso">
+                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciências Agrárias
+                            </span>
+                            <span class="tcc-ano">
+                                <span class="icon-mask icon-calendario"></span> 2023
+                            </span>
+                        </div>
+                    </div>
+                    <span class="icon-mask icon-seta-direita"></span>
+                </article>
+
+                <article class="card-tcc">
+                    <div class="tcc-icone-bg bg-azul">
+                        <span class="icon-mask icon-brain"></span>
+                    </div>
+                    <div class="tcc-detalhes">
+                        <h3 class="tcc-titulo">Uso de Inteligência Artificial para Predição de Evasão Escolar</h3>
+                        <p class="tcc-autor">Ana Beatriz Lima</p>
+                        <div class="tcc-meta">
+                            <span class="tcc-curso">
+                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciência da Computação
+                            </span>
+                            <span class="tcc-ano">
+                                <span class="icon-mask icon-calendario"></span> 2023
+                            </span>
+                        </div>
+                    </div>
+                    <span class="icon-mask icon-seta-direita"></span>
+                </article>
+
+                <article class="card-tcc">
+                    <div class="tcc-icone-bg bg-roxo">
+                        <span class="icon-mask icon-cadeado"></span>
+                    </div>
+                    <div class="tcc-detalhes">
+                        <h3 class="tcc-titulo">Gestão Financeira e Estratégia em Microempresas Regionais</h3>
+                        <p class="tcc-autor">Pedro Henrique Souza</p>
+                        <div class="tcc-meta">
+                            <span class="tcc-curso">
+                                <span class="icon-mask icon-curso"></span> Bacharelado em Administração
+                            </span>
+                            <span class="tcc-ano">
+                                <span class="icon-mask icon-calendario"></span> 2023
+                            </span>
+                        </div>
+                    </div>
+                    <span class="icon-mask icon-seta-direita"></span>
+                </article>
+
+                <article class="card-tcc">
+                    <div class="tcc-icone-bg bg-amarelo">
+                        <span class="icon-mask icon-iot"></span>
+                    </div>
+                    <div class="tcc-detalhes">
+                        <h3 class="tcc-titulo">Análise Fitoquímica de Extratos de Plantas da Caatinga</h3>
+                        <p class="tcc-autor">Gabriel Costa</p>
+                        <div class="tcc-meta">
+                            <span class="tcc-curso">
+                                <span class="icon-mask icon-curso"></span> Licenciatura em Química
+                            </span>
+                            <span class="tcc-ano">
+                                <span class="icon-mask icon-calendario"></span> 2024
+                            </span>
+                        </div>
+                    </div>
+                    <span class="icon-mask icon-seta-direita"></span>
+                </article>
+
+                <article class="card-tcc">
+                    <div class="tcc-icone-bg bg-verde">
+                        <span class="icon-mask icon-blockchain"></span>
+                    </div>
+                    <div class="tcc-detalhes">
+                        <h3 class="tcc-titulo">Metodologias Ativas no Ensino de Química Orgânica</h3>
+                        <p class="tcc-autor">Juliana Martins</p>
+                        <div class="tcc-meta">
+                            <span class="tcc-curso">
+                                <span class="icon-mask icon-curso"></span> Licenciatura em Química
+                            </span>
+                            <span class="tcc-ano">
+                                <span class="icon-mask icon-calendario"></span> 2022
+                            </span>
+                        </div>
+                    </div>
+                    <span class="icon-mask icon-seta-direita"></span>
+                </article>
+
+                <article class="card-tcc">
+                    <div class="tcc-icone-bg bg-azul">
+                        <span class="icon-mask icon-games"></span>
+                    </div>
+                    <div class="tcc-detalhes">
+                        <h3 class="tcc-titulo">Desenvolvimento de Jogos Educativos para Ensino de Programação Infantil</h3>
+                        <p class="tcc-autor">Rafael Mendes</p>
+                        <div class="tcc-meta">
+                            <span class="tcc-curso">
+                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciência da Computação
+                            </span>
+                            <span class="tcc-ano">
+                                <span class="icon-mask icon-calendario"></span> 2024
+                            </span>
+                        </div>
+                    </div>
+                    <span class="icon-mask icon-seta-direita"></span>
+                </article>
+
+                <article class="card-tcc">
+                    <div class="tcc-icone-bg bg-roxo">
+                        <span class="icon-mask icon-cloud"></span>
+                    </div>
+                    <div class="tcc-detalhes">
+                        <h3 class="tcc-titulo">Impacto da Logística Integrada no Desempenho Organizacional</h3>
+                        <p class="tcc-autor">Camila Rocha</p>
+                        <div class="tcc-meta">
+                            <span class="tcc-curso">
+                                <span class="icon-mask icon-curso"></span> Bacharelado em Administração
+                            </span>
+                            <span class="tcc-ano">
+                                <span class="icon-mask icon-calendario"></span> 2023
+                            </span>
+                        </div>
+                    </div>
+                    <span class="icon-mask icon-seta-direita"></span>
+                </article>
+
+                <article class="card-tcc">
+                    <div class="tcc-icone-bg bg-amarelo">
+                        <span class="icon-mask icon-ux"></span>
+                    </div>
+                    <div class="tcc-detalhes">
+                        <h3 class="tcc-titulo">Sustentabilidade e Cadeias Produtivas na Agricultura Familiar</h3>
+                        <p class="tcc-autor">Thiago Barbosa</p>
+                        <div class="tcc-meta">
+                            <span class="tcc-curso">
+                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciências Agrárias
+                            </span>
+                            <span class="tcc-ano">
+                                <span class="icon-mask icon-calendario"></span> 2022
+                            </span>
+                        </div>
+                    </div>
+                    <span class="icon-mask icon-seta-direita"></span>
+                </article>
+
+                <article class="card-tcc">
+                    <div class="tcc-icone-bg bg-verde">
+                        <span class="icon-mask icon-visao"></span>
+                    </div>
+                    <div class="tcc-detalhes">
+                        <h3 class="tcc-titulo">Laboratórios Virtuais e Tecnologias no Ensino das Ciências</h3>
+                        <p class="tcc-autor">Fernanda Alves</p>
+                        <div class="tcc-meta">
+                            <span class="tcc-curso">
+                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciências Agrárias
+                            </span>
+                            <span class="tcc-ano">
+                                <span class="icon-mask icon-calendario"></span> 2024
+                            </span>
+                        </div>
+                    </div>
+                    <span class="icon-mask icon-seta-direita"></span>
+                </article>
+
+            </section>
+
+        </main>
+
+        <nav id="BottomNav">
+            <a href="/dashboard" id="BtnInicio" class="nav-btn">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+
+            <a href="/meutcc" id="BtnMeuTCC" class="nav-btn">
+                <span class="icon-mask icon-files"></span>
+                <span class="Texto">Meu TCC</span>
+            </a>
+
+            <a href="/agenda" id="BtnAgenda" class="nav-btn">
+                <span class="icon-mask icon-calendar"></span>
+                <span class="Texto">Reuniões</span>
+            </a>
+
+            <a href="/acervo" id="BtnAcervo" class="nav-btn">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+
+            <a href="/perfil" id="BtnPerfil" class="nav-btn">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </a>
+        </nav>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const pathAtual = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
+
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href").toLowerCase();
+                if (pathAtual === href) {
+                    link.classList.add("active");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
