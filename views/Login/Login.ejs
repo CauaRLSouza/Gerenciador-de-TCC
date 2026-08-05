@@ -17,16 +17,22 @@
             <h1 class="app-title">Orienta<br>TCC</h1>
         </div>
 
-        <form class="login-form" action="/dashboard" method="GET">
+        <% if (typeof erro !== 'undefined' && erro) { %>
+            <div style="color: #e74c3c; background-color: #fde8e8; border: 1px solid #f5c6cb; padding: 10px; border-radius: 6px; margin-bottom: 15px; text-align: center; font-size: 0.9rem; font-weight: 500;">
+                <%= erro %>
+            </div>
+        <% } %>
+
+        <form class="login-form" action="/login" method="POST">
 
             <div class="input-group">
                 <i data-lucide="user" class="input-icon"></i>
-                <input type="text" placeholder="Digite seu usuário" required>
+                <input type="text" name="email" placeholder="Digite seu usuário" required>
             </div>
 
             <div class="input-group">
                 <i data-lucide="lock" class="input-icon"></i>
-                <input type="password" id="inputSenha" placeholder="Digite sua senha" required>
+                <input type="password" id="inputSenha" name="senha" placeholder="Digite sua senha" required>
                 <span id="btnToggleEye" style="cursor: pointer; display: inline-flex; align-items: center;">
                     <i data-lucide="eye" class="toggle-eye"></i>
                 </span>
@@ -34,7 +40,7 @@
 
             <div class="form-options">
                 <label class="remember-me">
-                    <input type="checkbox">
+                    <input type="checkbox" name="lembrar">
                     <span>Lembrar de mim</span>
                 </label>
                 <a href="#" class="forgot-pass">Esqueci minha senha</a>

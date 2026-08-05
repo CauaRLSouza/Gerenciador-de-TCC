@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda</title>
     <link rel="stylesheet" href="/css/agenda.css">
-     <script>
+    <script>
     (function() {
         const tema = localStorage.getItem("tema_app") || "sistema";
         if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
@@ -18,18 +18,16 @@
 <body>
 
     <div id="TelaAgenda">
-        <!-- Header -->
         <header id="Header">
-              <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn">
+            <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn">
                 <span class="icon-mask icon-settings"></span>
-              </a>
+            </a>
             <h1 id="TituloPagina">Agenda</h1>
             <a href="/notificacoes" id="Espacador" class="icon-btn">
                 <span class="icon-mask icon-sino"></span>
             </a>
         </header>
 
-        <!-- Hero Card (Próximo compromisso) -->
         <section id="AgendaHeroCard" class="card">
             <span id="AgendaHeroTitulo">Próximo compromisso</span>
             <div id="AgendaHeroLinha">
@@ -46,29 +44,46 @@
             </div>
         </section>
 
-        <!-- Calendário Horizontal -->
         <section id="AgendaCalendario">
-            <h3 id="AgendaCalendarioTitulo">Agosto 2026</h3>
-            <div id="AgendaCalendarioScroll">
-                <div id="AgendaCalendarioLinha">
-                    <button type="button" name="AgendaDia24" id="AgendaDia24">24</button>
-                    <button type="button" name="AgendaDia25" id="AgendaDia25">25</button>
-                    <button type="button" name="AgendaDia26" id="AgendaDia26">26</button>
-                    <button type="button" name="AgendaDia27" id="AgendaDia27">27</button>
-                    <button type="button" name="AgendaDia28" id="AgendaDia28" class="dia-ativo">28</button>
-                    <button type="button" name="AgendaDia29" id="AgendaDia29">29</button>
-                    <button type="button" name="AgendaDia30" id="AgendaDia30">30</button>
-                    <button type="button" name="AgendaDia31" id="AgendaDia31">31</button>
+            <div id="AgendaCalendarioHeader" style="display: flex; align-items: center; justify-content: space-between;">
+                <button type="button" id="BtnMesAnterior" class="btn-navegacao" style="background:none; border:none; color:var(--primary); font-size:1.2rem; cursor:pointer; padding: 4px 8px;">◀</button>
+                <h3 id="AgendaCalendarioTitulo">Agosto 2026</h3>
+                <button type="button" id="BtnMesProximo" class="btn-navegacao" style="background:none; border:none; color:var(--primary); font-size:1.2rem; cursor:pointer; padding: 4px 8px;">▶</button>
+            </div>
+
+            <div id="AgendaSemanaContainer" style="display: flex; align-items: center; gap: 4px; margin-top: 8px;">
+                <button type="button" id="BtnSemanaAnterior" class="btn-navegacao" style="background:none; border:none; color:var(--primary); font-size:1rem; cursor:pointer; padding: 4px;">◀</button>
+                
+                <div id="AgendaCalendarioScroll" style="flex: 1; overflow-x: auto; scrollbar-width: none;">
+                    <div id="AgendaCalendarioLinha" style="display: flex; gap: 8px;">
+                    </div>
                 </div>
+
+                <button type="button" id="BtnSemanaProxima" class="btn-navegacao" style="background:none; border:none; color:var(--primary); font-size:1rem; cursor:pointer; padding: 4px;">▶</button>
             </div>
         </section>
 
-        <!-- Lista de Reuniões -->
         <main id="AgendaScroll">
             <div id="AgendaLista">
                 
-                <!-- Reunião 01 -->
-                <article id="AgendaReuniao01" class="card-reuniao">
+                <article id="AgendaReuniao00" class="card-reuniao" data-data="2026-08-05">
+                    <div id="AgendaReuniao00Cabecalho" class="reuniao-cabecalho">
+                        <div id="AgendaReuniao00Data" class="reuniao-data">
+                            <span id="AgendaReuniao00Mes">AGO</span>
+                            <span id="AgendaReuniao00Dia">05</span>
+                        </div>
+                        <div id="AgendaReuniao00Info" class="reuniao-info">
+                            <h4 id="AgendaReuniao00Titulo">Reunião de Orientação</h4>
+                            <span id="AgendaReuniao00Horario">14:00</span>
+                            <span id="AgendaReuniao00Local">Sala 204 • Bloco B</span>
+                        </div>
+                    </div>
+                    <div id="AgendaReuniao00Separador" class="separador"></div>
+                    <p id="AgendaReuniao00Pauta">Definição do tema do TCC e cronograma inicial.</p>
+                    <span id="AgendaReuniao00Status" class="status-badge status-realizada">Realizada</span>
+                </article>
+
+                <article id="AgendaReuniao01" class="card-reuniao" data-data="2026-08-28">
                     <div id="AgendaReuniao01Cabecalho" class="reuniao-cabecalho">
                         <div id="AgendaReuniao01Data" class="reuniao-data">
                             <span id="AgendaReuniao01Mes">AGO</span>
@@ -85,8 +100,7 @@
                     <span id="AgendaReuniao01Status" class="status-badge status-confirmada">Confirmada</span>
                 </article>
 
-                <!-- Reunião 02 -->
-                <article id="AgendaReuniao02" class="card-reuniao">
+                <article id="AgendaReuniao02" class="card-reuniao" data-data="2026-09-11">
                     <div id="AgendaReuniao02Cabecalho" class="reuniao-cabecalho">
                         <div id="AgendaReuniao02Data" class="reuniao-data">
                             <span id="AgendaReuniao02Mes">SET</span>
@@ -103,10 +117,14 @@
                     <span id="AgendaReuniao02Status" class="status-badge status-pendente">Pendente</span>
                 </article>
 
+                <div id="AgendaEmptyState" class="agenda-empty-state" style="display: none; text-align: center; padding: 30px 10px;">
+                    <span style="font-size: 2rem; display: block; margin-bottom: 8px;">📅</span>
+                    <p style="font-size: 0.875rem; color: var(--text-2); font-weight: 600;">Nenhuma reunião agendada para este dia.</p>
+                </div>
+
             </div>
         </main>
 
-        <!-- Bottom Navigation Fixo -->
         <nav id="BottomNav">
             <a href="/dashboard" id="NavHome" class="nav-btn">
                 <span class="icon-mask icon-home"></span>
@@ -135,21 +153,139 @@
         </nav>
     </div>
 
-    <!-- Script de Ativação Dinâmica da Nav -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const pathAtual = window.location.pathname.toLowerCase();
             const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
-
             navLinks.forEach(link => {
                 const href = link.getAttribute("href").toLowerCase();
-                
                 if (pathAtual === href || (pathAtual === "/" && href === "/dashboard")) {
                     link.classList.add("active");
                 }
             });
+
+            const datasComReuniao = ["2026-08-05", "2026-08-28", "2026-09-11"];
+            const nomesMeses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
+            const diasDaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+
+            let dataAtual = new Date(2026, 7, 5);
+            let diaSelecionado = "2026-08-05";
+
+            const elTituloMes = document.getElementById("AgendaCalendarioTitulo");
+            const elLinhaCalendario = document.getElementById("AgendaCalendarioLinha");
+            const elEmptyState = document.getElementById("AgendaEmptyState");
+            const cardsReuniao = document.querySelectorAll(".card-reuniao");
+
+            function formatarDataISO(ano, mes, dia) {
+                const m = String(mes + 1).padStart(2, '0');
+                const d = String(dia).padStart(2, '0');
+                return `${ano}-${m}-${d}`;
+            }
+
+            function renderizarCalendario() {
+                const ano = dataAtual.getFullYear();
+                const mes = dataAtual.getMonth();
+
+                elTituloMes.textContent = `${nomesMeses[mes]} ${ano}`;
+                elLinhaCalendario.innerHTML = "";
+
+                let inicioSemana = new Date(dataAtual);
+                let diaSemana = inicioSemana.getDay();
+                let diff = inicioSemana.getDate() - diaSemana;
+                inicioSemana.setDate(diff);
+
+                for (let i = 0; i < 7; i++) {
+                    let d = new Date(inicioSemana);
+                    d.setDate(inicioSemana.getDate() + i);
+
+                    const isoDate = formatarDataISO(d.getFullYear(), d.getMonth(), d.getDate());
+                    const numDia = d.getDate();
+                    const diaSemanaNome = diasDaSemana[d.getDay()];
+
+                    const btn = document.createElement("button");
+                    btn.type = "button";
+                    btn.className = "card-dia";
+                    btn.id = `AgendaDia${numDia}`;
+
+                    if (d.getMonth() !== mes) {
+                        btn.style.opacity = "0.4";
+                    }
+
+                    btn.innerHTML = `
+                        <span class="dia-semana-rotulo">${diaSemanaNome}</span>
+                        <span>${numDia}</span>
+                    `;
+
+                    if (isoDate === diaSelecionado) {
+                        btn.classList.add("dia-ativo");
+                    }
+
+                    if (datasComReuniao.includes(isoDate)) {
+                        btn.classList.add("dia-com-evento");
+                    }
+
+                    btn.addEventListener("click", () => {
+                        diaSelecionado = isoDate;
+                        dataAtual = new Date(d);
+                        renderizarCalendario();
+                        filtrarFeed();
+                    });
+
+                    elLinhaCalendario.appendChild(btn);
+                }
+            }
+
+            function filtrarFeed() {
+                let encontrou = false;
+                cardsReuniao.forEach(card => {
+                    if (card.getAttribute("data-data") === diaSelecionado) {
+                        card.style.display = "flex";
+                        encontrou = true;
+                    } else {
+                        card.style.display = "none";
+                    }
+                });
+
+                if (encontrou) {
+                    elEmptyState.style.display = "none";
+                } else {
+                    elEmptyState.style.display = "block";
+                }
+            }
+
+            document.getElementById("BtnMesAnterior").addEventListener("click", () => {
+                dataAtual.setMonth(dataAtual.getMonth() - 1);
+                dataAtual.setDate(1);
+                diaSelecionado = formatarDataISO(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate());
+                renderizarCalendario();
+                filtrarFeed();
+            });
+
+            document.getElementById("BtnMesProximo").addEventListener("click", () => {
+                dataAtual.setMonth(dataAtual.getMonth() + 1);
+                dataAtual.setDate(1);
+                diaSelecionado = formatarDataISO(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate());
+                renderizarCalendario();
+                filtrarFeed();
+            });
+
+            document.getElementById("BtnSemanaAnterior").addEventListener("click", () => {
+                dataAtual.setDate(dataAtual.getDate() - 7);
+                diaSelecionado = formatarDataISO(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate());
+                renderizarCalendario();
+                filtrarFeed();
+            });
+
+            document.getElementById("BtnSemanaProxima").addEventListener("click", () => {
+                dataAtual.setDate(dataAtual.getDate() + 7);
+                diaSelecionado = formatarDataISO(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate());
+                renderizarCalendario();
+                filtrarFeed();
+            });
+
+            renderizarCalendario();
+            filtrarFeed();
         });
     </script>
-
 </body>
 </html>

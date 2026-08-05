@@ -1,80 +1,96 @@
 document.addEventListener("DOMContentLoaded", () => {
-
-    const pathAtual = window.location.pathname.toLowerCase();
-    const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
-
-    navLinks.forEach(link => {
-        const href = link.getAttribute("href").toLowerCase();
-        if (pathAtual === href) {
-            link.classList.add("active");
-        }
-    });
-
     const inputBusca = document.getElementById("InputBusca");
     const filtroCurso = document.getElementById("FiltroCurso");
-    const filtroLinha = document.getElementById("FiltroLinhaPesquisa");
+    const filtroLinhaPesquisa = document.getElementById("FiltroLinhaPesquisa");
     const filtroAno = document.getElementById("FiltroAno");
     const selectOrdenacao = document.getElementById("SelectOrdenacao");
-    const listaAcervo = document.getElementById("ListaAcervo");
     const contadorResultados = document.getElementById("ContadorResultados");
+    const listaAcervo = document.getElementById("ListaAcervo");
+    
+    const cardsArray = Array.from(listaAcervo.querySelectorAll(".card-tcc"));
 
-    function filtrarEOrdenar() {
-        if (!listaAcervo) return;
+    function carregarEstadoDaURL() {
+        const urlParams = new URLSearchParams(window.location.search);
 
-        const termoBusca = inputBusca ? inputBusca.value.toLowerCase().trim() : "";
-        const cursoSelecionado = filtroCurso ? filtroCurso.value : "";
-        const linhaSelecionada = filtroLinha ? filtroLinha.value : "";
-        const anoSelecionado = filtroAno ? filtroAno.value : "";
-        const ordem = selectOrdenacao ? selectOrdenacao.value : "recentes";
+        if (urlParams.has("busca")) inputBusca.value = urlParams.get("busca");
+        if (urlParams.has("curso")) filtroCurso.value = urlParams.get("curso");
+        if (urlParams.has("linha")) filtroLinhaPesquisa.value = urlParams.get("linha");
+        if (urlParams.has("ano")) filtroAno.value = urlParams.get("ano");
+        if (urlParams.has("ordem")) selectOrdenacao.value = urlParams.get("ordem");
+    }
 
-        const cards = Array.from(listaAcervo.querySelectorAll(".card-tcc"));
-        let visiveisCount = 0;
+    function atualizarURL() {
+        const url = new URL(window.location);
 
-        cards.forEach(card => {
-            const titulo = card.querySelector(".tcc-titulo")?.textContent.toLowerCase() || "";
-            const autor = card.querySelector(".tcc-autor")?.textContent.toLowerCase() || "";
-            const curso = card.dataset.curso || "";
-            const linha = card.dataset.linha || "";
-            const ano = card.dataset.ano || "";
+        inputBusca.value.trim() ? url.searchParams.set("busca", inputBusca.value.trim()) : url.searchParams.delete("busca");
+        filtroCurso.value ? url.searchParams.set("curso", filtroCurso.value) : url.searchParams.delete("curso");
+        filtroLinhaPesquisa.value ? url.searchParams.set("linha", filtroLinhaPesquisa.value) : url.searchParams.delete("linha");
+        filtroAno.value ? url.searchParams.set("ano", filtroAno.value) : url.searchParams.delete("ano");
+        selectOrdenacao.value ? url.searchParams.set("ordem", selectOrdenacao.value) : url.searchParams.delete("ordem");
 
-            const atendeBusca = !termoBusca || titulo.includes(termoBusca) || autor.includes(termoBusca);
-            const atendeCurso = !cursoSelecionado || curso === cursoSelecionado;
-            const atendeLinha = !linhaSelecionada || linha === linhaSelecionada;
-            const atendeAno = !anoSelecionado || ano === anoSelecionado;
+        window.history.replaceState({}, "", url);
+    }
 
-            if (atendeBusca && atendeCurso && atendeLinha && atendeAno) {
-                card.style.display = "flex";
-                visiveisCount++;
-            } else {
-                card.style.display = "none";
-            }
+    function aplicarFiltrosEOordenacao() {
+        const termoBusca = inputBusca.value.toLowerCase().trim();
+        const cursoSelecionado = filtroCurso.value;
+        const linhaSelecionada = filtroLinhaPesquisa.value;
+        const anoSelecionado = filtroAno.value;
+        const ordemSelecionada = selectOrdenacao.value;
+
+        const cardsVisiveis = cardsArray.filter(card => {
+            const titulo = card.querySelector(".tcc-titulo").textContent.toLowerCase();
+            const autor = card.querySelector(".tcc-autor").textContent.toLowerCase();
+            const cursoCard = card.dataset.curso || "";
+            const linhaCard = card.dataset.linha || "";
+            const anoCard = card.dataset.ano || "";
+
+            const bateBusca = !termoBusca || titulo.includes(termoBusca) || autor.includes(termoBusca);
+            const bateCurso = !cursoSelecionado || cursoCard === cursoSelecionado;
+            const bateLinha = !linhaSelecionada || linhaCard === linhaSelecionada;
+            const bateAno = !anoSelecionado || anoCard === anoSelecionado;
+
+            return bateBusca && bateCurso && bateLinha && bateAno;
         });
 
-        cards.sort((a, b) => {
-            const tituloA = a.querySelector(".tcc-titulo")?.textContent || "";
-            const tituloB = b.querySelector(".tcc-titulo")?.textContent || "";
+        cardsVisiveis.sort((a, b) => {
+            const tituloA = a.querySelector(".tcc-titulo").textContent.trim();
+            const tituloB = b.querySelector(".tcc-titulo").textContent.trim();
             const anoA = parseInt(a.dataset.ano, 10) || 0;
             const anoB = parseInt(b.dataset.ano, 10) || 0;
 
-            if (ordem === "recentes") return anoB - anoA;
-            if (ordem === "antigos") return anoA - anoB;
-            if (ordem === "az") return tituloA.localeCompare(tituloB);
-            if (ordem === "za") return tituloB.localeCompare(tituloA);
-            return 0;
+            switch (ordemSelecionada) {
+                case "recentes":
+                    return anoB - anoA;
+                case "antigos":
+                    return anoA - anoB;
+                case "az":
+                    return tituloA.localeCompare(tituloB, 'pt-BR');
+                case "za":
+                    return tituloB.localeCompare(tituloA, 'pt-BR');
+                default:
+                    return 0;
+            }
         });
 
-        cards.forEach(card => listaAcervo.appendChild(card));
+        cardsArray.forEach(card => card.style.display = "none");
+        cardsVisiveis.forEach(card => {
+            card.style.display = "flex";
+            listaAcervo.appendChild(card);
+        });
 
-        if (contadorResultados) {
-            contadorResultados.textContent = `${visiveisCount} ${visiveisCount === 1 ? 'trabalho encontrado' : 'trabalhos encontrados'}`;
-        }
+        const total = cardsVisiveis.length;
+        contadorResultados.textContent = `${total} ${total === 1 ? 'trabalho encontrado' : 'trabalhos encontrados'}`;
+
+        atualizarURL();
     }
 
-    if (inputBusca) inputBusca.addEventListener("input", filtrarEOrdenar);
-    if (filtroCurso) filtroCurso.addEventListener("change", filtrarEOrdenar);
-    if (filtroLinha) filtroLinha.addEventListener("change", filtrarEOrdenar);
-    if (filtroAno) filtroAno.addEventListener("change", filtrarEOrdenar);
-    if (selectOrdenacao) selectOrdenacao.addEventListener("change", filtrarEOrdenar);
+    carregarEstadoDaURL();
+    aplicarFiltrosEOordenacao();
 
-    filtrarEOrdenar();
+    inputBusca.addEventListener("input", aplicarFiltrosEOordenacao);
+    filtroCurso.addEventListener("change", aplicarFiltrosEOordenacao);
+    filtroLinhaPesquisa.addEventListener("change", aplicarFiltrosEOordenacao);
+    filtroAno.addEventListener("change", aplicarFiltrosEOordenacao);
+    selectOrdenacao.addEventListener("change", aplicarFiltrosEOordenacao);
 });

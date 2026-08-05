@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Versões</title>
     <link rel="stylesheet" href="/css/versoes.css">
-     <script>
+    <script>
     (function() {
         const tema = localStorage.getItem("tema_app") || "sistema";
         if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
@@ -21,22 +21,19 @@
         <div id="ScrollView">
             <div id="ContainerVersoes">
                 
-                <!-- Header -->
                 <header id="HeaderVersoes">
                      <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn">
-                <span class="icon-mask icon-settings"></span>
+                        <span class="icon-mask icon-settings"></span>
                      </a>
                     <h1 id="TituloPagina">Versões</h1>
                     <div class="header-spacer"></div>
                 </header>
 
-                <!-- Botão Enviar Nova Versão -->
                 <button id="BtnEnviarVersao" type="button">
                     <span class="icon-mask icon-plus"></span>
                     <span>Enviar nova versão</span>
                 </button>
 
-                <!-- Filtro Ordenação -->
                 <div id="FiltroOrdenacao">
                     <label for="SelectOrdenacao">Ordenar por:</label>
                     <select id="SelectOrdenacao">
@@ -46,10 +43,8 @@
                     </select>
                 </div>
 
-                <!-- Lista de Versões -->
                 <div id="ListaVersoes">
 
-                    <!-- Card Versão 3 -->
                     <article class="card-versao">
                         <div class="card-versao-header">
                             <h2 class="versao-titulo">Versão 3</h2>
@@ -80,7 +75,6 @@
                         </div>
                     </article>
 
-                    <!-- Card Versão 2 -->
                     <article class="card-versao">
                         <div class="card-versao-header">
                             <h2 class="versao-titulo">Versão 2</h2>
@@ -111,7 +105,6 @@
                         </div>
                     </article>
 
-                    <!-- Card Versão 1 -->
                     <article class="card-versao">
                         <div class="card-versao-header">
                             <h2 class="versao-titulo">Versão 1</h2>
@@ -147,7 +140,6 @@
             </div>
         </div>
 
-        <!-- Bottom Navigation -->
         <nav id="BottomNav">
             <a href="/dashboard" id="NavHome" class="nav-btn">
                 <span class="icon-mask icon-home"></span>
@@ -175,6 +167,59 @@
             </a>
         </nav>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const selectOrdenacao = document.getElementById("SelectOrdenacao");
+            const containerLista = document.getElementById("ListaVersoes");
+
+            if (!selectOrdenacao || !containerLista) return;
+
+            const ordenacaoSalva = localStorage.getItem("ordenacao_versoes");
+            if (ordenacaoSalva) {
+                selectOrdenacao.value = ordenacaoSalva;
+            }
+
+            function parseData(textoData) {
+                const match = textoData.match(/(\d{2})\/(\d{2})\/(\d{4})\s*•\s*(\d{2}):(\d{2})/);
+                if (!match) return 0;
+                const [, dia, mes, ano, hora, minuto] = match;
+                return new Date(ano, mes - 1, dia, hora, minuto).getTime();
+            }
+
+            function ordenarCards() {
+                const opcao = selectOrdenacao.value;
+                localStorage.setItem("ordenacao_versoes", opcao);
+
+                const cards = Array.from(containerLista.querySelectorAll(".card-versao"));
+
+                cards.sort((a, b) => {
+                    const tituloA = a.querySelector(".versao-titulo")?.textContent.trim() || "";
+                    const tituloB = b.querySelector(".versao-titulo")?.textContent.trim() || "";
+                    
+                    const dataTextoA = a.querySelector(".card-versao-data time")?.textContent.trim() || "";
+                    const dataTextoB = b.querySelector(".card-versao-data time")?.textContent.trim() || "";
+                    
+                    const timestampA = parseData(dataTextoA);
+                    const timestampB = parseData(dataTextoB);
+
+                    if (opcao === "recentes") {
+                        return timestampB - timestampA;
+                    } else if (opcao === "antigas") {
+                        return timestampA - timestampB;
+                    } else if (opcao === "alfabetica") {
+                        return tituloA.localeCompare(tituloB, "pt-BR", { numeric: true, sensitivity: "base" });
+                    }
+                    return 0;
+                });
+
+                cards.forEach(card => containerLista.appendChild(card));
+            }
+
+            selectOrdenacao.addEventListener("change", ordenarCards);
+            ordenarCards();
+        });
+    </script>
 
 </body>
 </html>

@@ -1,6 +1,3 @@
-/* ==========================================================================
-   1. VARS, RESET & ESTRUTURA GERAL (Padronizado com Dashboard e MeuTCC)
-   ========================================================================== */
 :root {
     --primary: #6800b7; 
     --primary-light: #e1cdff;
@@ -21,7 +18,7 @@ body[data-tema="escuro"] {
     --text-2: #94a3b8;
     --text-3: #64748b;
     --border: #334155;
-    --primary-bg: #2d1548; /* Tom roxo escuro para o fundo dos ícones */
+    --primary-bg: #2d1548;
 }
 
 * { 
@@ -54,9 +51,6 @@ body {
     overflow: hidden; 
 }
 
-/* ==========================================================================
-   2. HEADER (60px de altura, idêntico aos outros)
-   ========================================================================== */
 #Header { 
     height: 70px; 
     flex-shrink: 0; 
@@ -90,9 +84,6 @@ body {
 }
 .icon-btn:active { background: rgba(0,0,0,0.05); }
 
-/* ==========================================================================
-   3. HERO CARD (PRÓXIMO COMPROMISSO)
-   ========================================================================== */
 #AgendaHeroCard { 
     margin: 16px; 
     padding: 20px; 
@@ -129,18 +120,16 @@ body {
 #AgendaHeroHorario { color: #fff; font-size: 0.9375rem; margin-top: 4px; }
 #AgendaHeroLocal { color: #ebebeb; font-size: 0.875rem; margin-top: 2px; }
 
-/* ==========================================================================
-   4. CALENDÁRIO HORIZONTAL
-   ========================================================================== */
 #AgendaCalendario { padding: 0 16px 10px; display: flex; flex-direction: column; }
 #AgendaCalendarioTitulo { font-size: 1rem; font-weight: 700; margin-bottom: 10px; color: var(--text-1); }
 #AgendaCalendarioScroll { overflow-x: auto; scrollbar-width: none; }
 #AgendaCalendarioScroll::-webkit-scrollbar { display: none; }
 #AgendaCalendarioLinha { display: flex; gap: 8px; }
 
-#AgendaCalendarioLinha button { 
-    width: 46px; 
-    height: 52px; 
+#AgendaCalendarioLinha button,
+.card-dia { 
+    width: 48px; 
+    height: 56px; 
     border-radius: 12px; 
     background: var(--card-bg); 
     border: 1px solid var(--border); 
@@ -150,17 +139,49 @@ body {
     cursor: pointer; 
     flex-shrink: 0; 
     transition: 0.2s; 
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
 }
 
-#AgendaCalendarioLinha button.dia-ativo { 
+.dia-semana-rotulo {
+    font-size: 0.65rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    color: var(--text-2);
+    margin-bottom: 2px;
+}
+
+#AgendaCalendarioLinha button.dia-ativo,
+.card-dia.dia-ativo { 
     background: var(--primary); 
     color: #fff; 
     border-color: var(--primary); 
 }
 
-/* ==========================================================================
-   5. LISTA DE REUNIÕES & CARDS
-   ========================================================================== */
+.card-dia.dia-ativo .dia-semana-rotulo {
+    color: var(--primary-light);
+}
+
+.dia-com-evento::after {
+    content: '';
+    position: absolute;
+    bottom: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: var(--primary);
+}
+
+.card-dia.dia-ativo.dia-com-evento::after {
+    background-color: #ffffff;
+}
+
 #AgendaScroll { flex: 1; overflow-y: auto; padding: 10px 16px 80px; scrollbar-width: none; }
 #AgendaScroll::-webkit-scrollbar { display: none; }
 #AgendaLista { display: flex; flex-direction: column; gap: 16px; }
@@ -204,16 +225,14 @@ body {
 
 .status-badge { align-self: flex-start; padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 0.75rem; }
 
-/* Adaptação dos Badges para Tema Claro e Escuro */
 .status-confirmada { background: #dcfce7; color: #15803d; }
 .status-pendente { background: #fef3c7; color: #d97706; }
+.status-realizada { background: #e2e8f0; color: #475569; }
 
 body[data-tema="escuro"] .status-confirmada { background: #064e3b; color: #6ee7b7; }
 body[data-tema="escuro"] .status-pendente { background: #78350f; color: #fde68a; }
+body[data-tema="escuro"] .status-realizada { background: #334155; color: #94a3b8; }
 
-/* ==========================================================================
-   6. MASK ICONS (Tamanho e Cores do Dashboard: 22px / var(--text-3))
-   ========================================================================== */
 .icon-mask { 
     display: inline-block; 
     width: 22px; 
@@ -232,9 +251,6 @@ body[data-tema="escuro"] .status-pendente { background: #78350f; color: #fde68a;
 .icon-acervo { -webkit-mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-perfil { -webkit-mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 
-/* ==========================================================================
-   7. BOTTOM NAVIGATION (MATERIAL YOU)
-   ========================================================================== */
 #BottomNav { 
     position: absolute; 
     bottom: 0; 
