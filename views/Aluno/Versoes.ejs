@@ -5,6 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Versões</title>
     <link rel="stylesheet" href="/css/versoes.css">
+     <script>
+    (function() {
+        const tema = localStorage.getItem("tema_app") || "sistema";
+        if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.setAttribute("data-tema", "escuro");
+            document.addEventListener("DOMContentLoaded", () => document.body.setAttribute("data-tema", "escuro"));
+        }
+    })();
+    </script>
 </head>
 <body>
 

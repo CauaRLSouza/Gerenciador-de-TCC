@@ -14,6 +14,16 @@
     --red-bg: #fef2f2;
 }
 
+body[data-tema="escuro"] {
+    --bg-main: #0f172a;
+    --card-bg: #1e293b;
+    --text-1: #f8fafc;
+    --text-2: #94a3b8;
+    --text-3: #64748b;
+    --border: #334155;
+    --primary-bg: #2d1548; /* Tom roxo escuro para o fundo dos ícones */
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; user-select: none; }
 body { background: var(--bg-main); color: var(--text-1); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
 
@@ -40,7 +50,7 @@ body { background: var(--bg-main); color: var(--text-1); display: flex; justify-
 /* ==========================================================================
    3. HEADER & AÇÕES Superior
    ========================================================================== */
-#Header { height: 70px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: var(--card-bg); }
+#Header { height: 70px; flex-shrink: 0; display: flex; align-items: center; justify-content: space-between; padding: 0 16px; background: var(--card-bg); border-bottom: 1px solid var(--border); }
 #TituloConfig { font-size: 1.25rem; font-weight: 700; color: var(--text-1); }
 
 .header-lado-esquerdo, .header-lado-direito { display: flex; align-items: center; gap: 4px; }
@@ -200,7 +210,7 @@ input:checked + .slider-toggle:before { transform: translateX(20px); }
 .icon-lua { -webkit-mask-image: url('../Icones/bedtime_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/bedtime_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-sino-pref { -webkit-mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-vibracao { -webkit-mask-image: url('../Icones/mobile_vibrate_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/mobile_vibrate_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
-.icon-ajuda { -webkit-mask-image: url('../Icones/support_agent_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/support_agent_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-suporte { -webkit-mask-image: url('../Icones/support_agent_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/support_agent_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-info { -webkit-mask-image: url('../Icones/info_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/info_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-escudo { -webkit-mask-image: url('../Icones/shield_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/shield_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-documento { -webkit-mask-image: url('../Icones/contract_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/contract_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }

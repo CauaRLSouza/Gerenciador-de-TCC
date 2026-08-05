@@ -14,6 +14,16 @@
     --font: system-ui, -apple-system, sans-serif;
 }
 
+body[data-tema="escuro"] {
+    --bg-main: #0f172a;
+    --card-bg: #1e293b;
+    --text-1: #f8fafc;
+    --text-2: #94a3b8;
+    --text-3: #64748b;
+    --border: #334155;
+    --primary-bg: #2d1548; /* Tom roxo escuro para o fundo dos ícones */
+}
+
 * { 
     margin: 0; 
     padding: 0; 

@@ -9,28 +9,19 @@
 <body>
 
     <div id="TelaConfiguracoes">
+
+        <header id="Header">
+            <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn active">
+                <span class="icon-mask icon-engrenagem"></span>
+            </a>
+            <h1 id="TituloConfig">Configurações</h1>
+            <a href="/notificacoes" id="BtnNotificacoes" class="icon-btn">
+                <span class="icon-mask icon-sino"></span>
+            </a>
+        </header>
+
         <div id="ScrollView">
             <div id="Configuracoes">
-                
-                <header id="Header">
-                    <div class="header-lado-esquerdo">
-                        <a href="javascript:history.back()" id="BtnVoltar" class="icon-btn">
-                            <span class="icon-mask icon-voltar"></span>
-                        </a>
-                        
-                        <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn active">
-                            <span class="icon-mask icon-engrenagem"></span>
-                        </a>
-                    </div>
-                    
-                    <h1 id="TituloConfig">Configurações</h1>
-                    
-                    <div class="header-lado-direito">
-                        <a href="/notificacoes" id="BtnNotificacoes" class="icon-btn">
-                            <span class="icon-mask icon-sino"></span>
-                        </a>
-                    </div>
-                </header>
 
                 <main id="Conteudo">
 
@@ -50,7 +41,7 @@
                             <div class="seletor-tema">
                                 <button type="button" class="btn-tema" data-tema="claro">Claro</button>
                                 <button type="button" class="btn-tema" data-tema="escuro">Escuro</button>
-                                <button type="button" class="btn-tema active" data-tema="sistema">Sistema</button>
+                                <button type="button" class="btn-tema" data-tema="sistema">Sistema</button>
                             </div>
                         </div>
                     </section>
@@ -93,7 +84,7 @@
                     <section class="grupo-secao">
                         <h2 class="titulo-secao">Secretaria</h2>
                         <div class="card card-opcoes">
-                            <a href="mailto:secretaria@instituicao.edu.br" class="item-opcao item-clicavel">
+                            <a href="mailto:matheuscs0v7@gmail.com" class="item-opcao item-clicavel">
                                 <div class="opcao-icone">
                                     <span class="icon-mask icon-suporte"></span>
                                 </div>
@@ -217,11 +208,40 @@
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const botoesTema = document.querySelectorAll(".btn-tema");
-            
+
+            function aplicarTema(tema) {
+                if (tema === "escuro") {
+                    document.body.setAttribute("data-tema", "escuro");
+                } else if (tema === "claro") {
+                    document.body.setAttribute("data-tema", "claro");
+                } else {
+                    const prefereEscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                    if (prefereEscuro) {
+                        document.body.setAttribute("data-tema", "escuro");
+                    } else {
+                        document.body.setAttribute("data-tema", "claro");
+                    }
+                }
+            }
+
+            const temaSalvo = localStorage.getItem("tema_app") || "sistema";
+            aplicarTema(temaSalvo);
+
             botoesTema.forEach(btn => {
+                if (btn.dataset.tema === temaSalvo) {
+                    btn.classList.add("active");
+                } else {
+                    btn.classList.remove("active");
+                }
+
                 btn.addEventListener("click", () => {
+                    const novoTema = btn.dataset.tema;
+                    
                     botoesTema.forEach(b => b.classList.remove("active"));
                     btn.classList.add("active");
+
+                    localStorage.setItem("tema_app", novoTema);
+                    aplicarTema(novoTema);
                 });
             });
         });

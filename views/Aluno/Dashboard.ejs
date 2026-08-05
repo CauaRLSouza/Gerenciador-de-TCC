@@ -5,24 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="/css/Dashboard.css">
+     <script>
+    (function() {
+        const tema = localStorage.getItem("tema_app") || "sistema";
+        if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.setAttribute("data-tema", "escuro");
+            document.addEventListener("DOMContentLoaded", () => document.body.setAttribute("data-tema", "escuro"));
+        }
+    })();
+    </script>
 </head>
 <body>
 
     <div id="TelaDashboard">
+
+        <!-- Header fora do ScrollView para encostar nas bordas -->
+        <header id="Header">
+            <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn">
+                <span class="icon-mask icon-settings"></span>
+            </a>
+            <h1 id="TituloPagina">Dashboard</h1>
+            <a href="/notificacoes" id="BtnNotificacoes" class="icon-btn">
+                <span class="icon-mask icon-sino"></span>
+            </a>
+        </header>
+
+        <!-- Área de rolagem apenas com os cards e conteúdo -->
         <div id="ScrollView">
             <div id="Dashboard">
-                
-                <header id="Header">
-                      <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn">
-                <span class="icon-mask icon-settings"></span>
-                      </a>
-                    
-                    <h1 id="TituloDASH">Dashboard</h1>
-                    
-                    <a href="/notificacoes" id="Espacador" class="icon-btn">
-                        <span class="icon-mask icon-sino"></span>
-                    </a>
-                </header>
 
                 <section id="Saudacoes">
                     <p id="OlaAluno">Olá, Aluno!</p>
@@ -110,7 +120,6 @@
 
     </div>
 
-    <!-- Script para Ativar o Botão Automaticamente com Fundo Roxo -->
     <script>
         document.addEventListener("DOMContentLoaded", () => {
             const pathAtual = window.location.pathname.toLowerCase();
@@ -119,7 +128,6 @@
             navLinks.forEach(link => {
                 const href = link.getAttribute("href").toLowerCase();
                 
-                // Compara a URL da página com a rota do link
                 if (pathAtual === href || (pathAtual === "/" && href === "/dashboard")) {
                     link.classList.add("active");
                 }
@@ -128,4 +136,4 @@
     </script>
 
 </body>
-</html>
+</html> 
