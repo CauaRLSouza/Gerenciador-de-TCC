@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações</title>
+    <link rel="stylesheet" href="/css/configuracoes.css">
+</head>
+<body>
+
+    <div id="TelaConfiguracoes">
+        <div id="ScrollView">
+            <div id="Configuracoes">
+                
+                <header id="Header">
+                    <div class="header-lado-esquerdo">
+                        <a href="javascript:history.back()" id="BtnVoltar" class="icon-btn">
+                            <span class="icon-mask icon-voltar"></span>
+                        </a>
+                        
+                        <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn active">
+                            <span class="icon-mask icon-engrenagem"></span>
+                        </a>
+                    </div>
+                    
+                    <h1 id="TituloConfig">Configurações</h1>
+                    
+                    <div class="header-lado-direito">
+                        <a href="/notificacoes" id="BtnNotificacoes" class="icon-btn">
+                            <span class="icon-mask icon-sino"></span>
+                        </a>
+                    </div>
+                </header>
+
+                <main id="Conteudo">
+
+                    <section class="grupo-secao">
+                        <h2 class="titulo-secao">Aparência</h2>
+                        <div class="card card-opcoes">
+                            <div class="item-opcao">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-lua"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Tema</h3>
+                                    <p class="opcao-subtitulo">Escolha entre o tema claro, escuro ou do sistema.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="seletor-tema">
+                                <button type="button" class="btn-tema" data-tema="claro">Claro</button>
+                                <button type="button" class="btn-tema" data-tema="escuro">Escuro</button>
+                                <button type="button" class="btn-tema active" data-tema="sistema">Sistema</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="grupo-secao">
+                        <h2 class="titulo-secao">Preferências</h2>
+                        <div class="card card-opcoes">
+                            <div class="item-opcao">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-sino-pref"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Notificações</h3>
+                                    <p class="opcao-subtitulo">Receber notificações sobre reuniões, prazos e atualizações.</p>
+                                </div>
+                                <label class="switch-toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="slider-toggle"></span>
+                                </label>
+                            </div>
+
+                            <div class="divisor-item"></div>
+
+                            <div class="item-opcao">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-vibracao"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Vibração</h3>
+                                    <p class="opcao-subtitulo">Vibrar ao receber notificações importantes.</p>
+                                </div>
+                                <label class="switch-toggle">
+                                    <input type="checkbox">
+                                    <span class="slider-toggle"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="grupo-secao">
+                        <h2 class="titulo-secao">Secretaria</h2>
+                        <div class="card card-opcoes">
+                            <a href="mailto:secretaria@instituicao.edu.br" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-suporte"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Alteração de dados da conta</h3>
+                                    <p class="opcao-subtitulo">Para solicitar alteração de qualquer dado da sua conta, entre em contato com a secretaria.</p>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="grupo-secao">
+                        <h2 class="titulo-secao">Aplicativo</h2>
+                        <div class="card card-opcoes">
+                            <div class="item-opcao">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-info"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Sobre o Orienta TCC</h3>
+                                    <p class="opcao-subtitulo">Versão 1.0.0</p>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </div>
+
+                            <div class="divisor-item"></div>
+
+                            <a href="/privacidade" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-escudo"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Política de Privacidade</h3>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+
+                            <div class="divisor-item"></div>
+
+                            <a href="/termos" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-documento"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Termos de Uso</h3>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="grupo-secao">
+                        <h2 class="titulo-secao">Ajuda</h2>
+                        <div class="card card-opcoes">
+                            <a href="/faq" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-ajuda"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Perguntas Frequentes</h3>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+
+                            <div class="divisor-item"></div>
+
+                            <a href="/contato" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-email"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Falar com a Secretaria</h3>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+                        </div>
+                    </section>
+
+                    <div class="area-btn-sair">
+                        <a href="/login" id="BtnSair" class="btn-sair">
+                            <span class="icon-mask icon-sair"></span>
+                            <span>Sair da conta</span>
+                        </a>
+                    </div>
+
+                </main>
+
+            </div>
+        </div>
+
+        <nav id="BottomNav">
+            <a href="/dashboard" id="BtnInicio" class="nav-btn">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+
+            <a href="/meutcc" id="BtnMeuTCC" class="nav-btn">
+                <span class="icon-mask icon-files"></span>
+                <span class="Texto">Meu TCC</span>
+            </a>
+
+            <a href="/agenda" id="BtnAgenda" class="nav-btn">
+                <span class="icon-mask icon-calendar"></span>
+                <span class="Texto">Reuniões</span>
+            </a>
+
+            <a href="/acervo" id="BtnAcervo" class="nav-btn">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+
+            <a href="/perfil" id="BtnPerfil" class="nav-btn">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </a>
+        </nav>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const botoesTema = document.querySelectorAll(".btn-tema");
+            
+            botoesTema.forEach(btn => {
+                btn.addEventListener("click", () => {
+                    botoesTema.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

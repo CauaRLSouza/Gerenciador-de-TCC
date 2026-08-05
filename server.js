@@ -11,11 +11,9 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// --- MIDDLEWARE DE PROTEÇÃO DE URL ---
 function proibirAcessoDireto(req, res, next) {
     const referer = req.headers.referer;
 
-    // Se não houver referer (usuário digitou direto na URL), redireciona para o login
     if (!referer) {
         return res.redirect('/login');
     }
@@ -24,7 +22,7 @@ function proibirAcessoDireto(req, res, next) {
     next();
 }
 
-// --- ROTAS PÚBLICAS ---
+
 
 app.get('/', (req, res) => {
     res.redirect('/login');
@@ -34,19 +32,21 @@ app.get('/login', (req, res) => {
     res.render('Login/Login');
 });
 
-// --- ROTAS PROTEGIDAS (Bloqueiam digitação direta na URL) ---
 
 app.get('/dashboard', proibirAcessoDireto, (req, res) => {
     res.render('Aluno/Dashboard', { currentPage: 'inicio' });
 });
 
-// Aceita tanto /meutcc quanto /meu-tcc
 app.get(['/meutcc', '/meu-tcc'], proibirAcessoDireto, (req, res) => {
     res.render('Aluno/MeuTCC', { currentPage: 'meutcc' });
 });
 
 app.get('/notificacoes', proibirAcessoDireto, (req, res) => {
     res.render('Aluno/Notificacoes', { currentPage: 'notificacoes' });
+});
+
+app.get('/configuracoes', proibirAcessoDireto, (req, res) => {
+    res.render('Aluno/Configuracoes', { currentPage: 'configuracoes' });
 });
 
 app.get('/versoes', proibirAcessoDireto, (req, res) => {
@@ -65,7 +65,6 @@ app.get('/perfil', proibirAcessoDireto, (req, res) => {
     res.render('Aluno/Perfil', { currentPage: 'perfil' });
 });
 
-// --- TRATAMENTO DE ERRO 404 E SERVIDOR ---
 
 app.use((req, res) => {
     res.status(404).send('<h1>Página não encontrada (404)</h1>');

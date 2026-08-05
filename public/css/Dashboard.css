@@ -18,8 +18,22 @@
     --green-bg: #dcfce7;
 }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: system-ui, -apple-system, sans-serif; user-select: none; }
-body { background: var(--bg-main); color: var(--text-1); display: flex; justify-content: center; align-items: center; min-height: 100vh; }
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: system-ui, -apple-system, sans-serif; 
+    user-select: none; 
+}
+
+body { 
+    background: var(--bg-main); 
+    color: var(--text-1); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+}
 
 /* ==========================================================================
    2. LAYOUT & SCROLL (Container Limitado em 480px)
@@ -36,32 +50,123 @@ body { background: var(--bg-main); color: var(--text-1); display: flex; justify-
     background: var(--bg-main);
 }
 
-#ScrollView { flex: 1; overflow-y: auto; padding-bottom: 80px; scrollbar-width: none; }
+#ScrollView { 
+    flex: 1; 
+    overflow-y: auto; 
+    padding-bottom: 80px; 
+    scrollbar-width: none; 
+}
 #ScrollView::-webkit-scrollbar { display: none; }
 
-#Dashboard { padding: 16px; display: flex; flex-direction: column; gap: 16px; }
+#Dashboard { 
+    padding: 16px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+}
 
 /* ==========================================================================
-   3. HEADER & SAUDAÇÕES
+   3. HEADER (Padronizado)
    ========================================================================== */
-#Header { height:70px; flex-shrink:0; display:flex; align-items:center; justify-content:space-between; padding:0 16px; background:var(--card-bg); }
-#TituloDASH, #OlaAluno { font-size: 1.25rem; font-weight: 700; }
-#Saudacoes { display: flex; flex-direction: column; gap: 4px; }
-#OlaOrientador, #OlaCoorientador { font-size: 0.875rem; color: var(--text-2); }
+#Header { 
+    height: 70px; 
+    flex-shrink: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 16px; 
+    background: var(--card-bg); 
+    border-bottom: 1px solid var(--border);
+}
 
-.icon-btn, .btn-arrow-box { background: transparent; border: none; cursor: pointer; padding: 4px; display: flex; align-items: center; justify-content: center; border-radius: 50%; }
-.btn-arrow-box { position: absolute; right: 16px; bottom: 16px; }
+#TituloDASH, #OlaAluno { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: var(--text-1);
+}
+
+#Saudacoes { 
+    display: flex; 
+    flex-direction: column; 
+    gap: 4px; 
+}
+
+#OlaOrientador, #OlaCoorientador { 
+    font-size: 0.875rem; 
+    color: var(--text-2); 
+}
+
+.icon-btn, .btn-arrow-box { 
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 4px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    text-decoration: none;
+}
+
+.btn-arrow-box { 
+    position: absolute; 
+    right: 16px; 
+    bottom: 16px; 
+}
 
 /* ==========================================================================
    4. CARDS & SUBTEXT BADGES
    ========================================================================== */
-.card { background: var(--card-bg); border-radius: 12px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); position: relative; display: flex; flex-direction: column; gap: 12px; border: 1px solid var(--border); }
-.HeaderGroup { display: flex; align-items: center; gap: 8px; }
-.card-icon { width: 32px; height: 32px; object-fit: contain; }
-.card-etapa { font-size: 0.875rem; font-weight: 600; color: var(--text-2); }
-.card-center-content { display: flex; flex-direction: column; align-items: center; text-align: center; gap: 6px; }
-.card-title { font-size: 1.125rem; font-weight: 700; }
-.card-subtext { font-size: 0.8125rem; font-weight: 600; padding: 4px 12px; border-radius: 20px; display: inline-block; }
+.card { 
+    background: var(--card-bg); 
+    border-radius: 12px; 
+    padding: 16px; 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
+    position: relative; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 12px; 
+    border: 1px solid var(--border); 
+}
+
+.HeaderGroup { 
+    display: flex; 
+    align-items: center; 
+    gap: 8px; 
+}
+
+.card-icon { 
+    width: 32px; 
+    height: 32px; 
+    object-fit: contain; 
+}
+
+.card-etapa { 
+    font-size: 0.875rem; 
+    font-weight: 600; 
+    color: var(--text-2); 
+}
+
+.card-center-content { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    text-align: center; 
+    gap: 6px; 
+}
+
+.card-title { 
+    font-size: 1.125rem; 
+    font-weight: 700; 
+}
+
+.card-subtext { 
+    font-size: 0.8125rem; 
+    font-weight: 600; 
+    padding: 4px 12px; 
+    border-radius: 20px; 
+    display: inline-block; 
+}
 
 #CardTCC .card-subtext { background: var(--primary-bg); color: var(--primary); }
 #CardAgenda .card-subtext { background: var(--green-bg); color: var(--green); }
@@ -71,9 +176,17 @@ body { background: var(--bg-main); color: var(--text-1); display: flex; justify-
 /* ==========================================================================
    5. MASK ICONS
    ========================================================================== */
-.icon-mask { display: inline-block; width: 22px; height: 22px; background-color: var(--text-3); -webkit-mask: no-repeat center/contain; mask: no-repeat center/contain; pointer-events: none; }
+.icon-mask { 
+    display: inline-block; 
+    width: 22px; 
+    height: 22px; 
+    background-color: var(--text-3); 
+    -webkit-mask: no-repeat center/contain; 
+    mask: no-repeat center/contain; 
+    pointer-events: none; 
+}
 
-.icon-menu { -webkit-mask-image: url('../Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/menu_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
+.icon-settings { -webkit-mask-image: url('../Icones/settings_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/settings_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
 .icon-sino { -webkit-mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
 .icon-seta { -webkit-mask-image: url('../Icones/chevron_right_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/chevron_right_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-3); }
 .icon-home { -webkit-mask-image: url('../Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
@@ -100,7 +213,7 @@ body { background: var(--bg-main); color: var(--text-1); display: flex; justify-
     align-items: center; 
     box-shadow: 0 -1px 3px rgba(0,0,0,0.1); 
     z-index: 100; 
-    padding: 4px 8px; /* Dá uma leve folga para o botão não colar nas bordas */
+    padding: 4px 8px; 
 }
 
 .nav-btn { 
@@ -112,7 +225,7 @@ body { background: var(--bg-main); color: var(--text-1); display: flex; justify-
     border: none; 
     cursor: pointer; 
     padding: 6px 12px; 
-    border-radius: 8px; /* Arredondamento igual ao da sua imagem */
+    border-radius: 8px; 
     gap: 2px; 
     flex: 1; 
     height: 100%;

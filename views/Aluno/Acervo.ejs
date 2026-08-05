@@ -10,9 +10,9 @@
 
     <div id="TelaAcervo">
         <header id="Header">
-            <button id="BtnMenu" class="icon-btn" type="button">
-                <span class="icon-mask icon-menu"></span>
-            </button>
+             <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn">
+                <span class="icon-mask icon-settings"></span>
+             </a>
             <h1 id="TituloPagina">Acervo de TCCs</h1>
             <a href="/notificacoes" id="BtnNotificacoes" class="icon-btn">
                 <span class="icon-mask icon-sino"></span>
@@ -36,7 +36,8 @@
                     <button id="BtnBuscar" class="btn-buscar-lupa" type="submit">
                         <span class="icon-mask icon-busca"></span>
                     </button>
-                    <input type="text" placeholder="Buscar por título, autor ou palavra-chave...">
+                    <!-- Adicionado id="InputBusca" -->
+                    <input type="text" id="InputBusca" placeholder="Buscar por título, autor ou palavra-chave...">
                 </div>
 
                 <div class="linha-filtros">
@@ -72,11 +73,6 @@
                             <option value="2022">2022</option>
                             <option value="2021">2021</option>
                             <option value="2020">2020</option>
-                            <option value="2019">2019</option>
-                            <option value="2018">2018</option>
-                            <option value="2017">2017</option>
-                            <option value="2016">2016</option>
-                            <option value="2015">2015</option>
                         </select>
                         <span class="icon-mask icon-seta-baixo select-icone"></span>
                     </div>
@@ -84,7 +80,8 @@
             </section>
 
             <div id="InfoResultados">
-                <span>10 trabalhos encontrados</span>
+                <!-- Adicionado id="ContadorResultados" -->
+                <span id="ContadorResultados">10 trabalhos encontrados</span>
                 <div class="select-container select-ordenacao">
                     <select id="SelectOrdenacao" class="select-filtro-ordem">
                         <option value="recentes">Mais recentes</option>
@@ -97,8 +94,8 @@
             </div>
 
             <section id="ListaAcervo">
-
-                <article class="card-tcc">
+                <!-- Adicionados data-curso, data-linha e data-ano em cada card -->
+                <article class="card-tcc" data-curso="Licenciatura em Ciência da Computação" data-linha="Computação" data-ano="2024">
                     <div class="tcc-icone-bg bg-amarelo">
                         <span class="icon-mask icon-grafico"></span>
                     </div>
@@ -117,7 +114,7 @@
                     <span class="icon-mask icon-seta-direita"></span>
                 </article>
 
-                <article class="card-tcc">
+                <article class="card-tcc" data-curso="Licenciatura em Ciências Agrárias" data-linha="Agronomia e Solos" data-ano="2023">
                     <div class="tcc-icone-bg bg-verde">
                         <span class="icon-mask icon-globe"></span>
                     </div>
@@ -136,7 +133,7 @@
                     <span class="icon-mask icon-seta-direita"></span>
                 </article>
 
-                <article class="card-tcc">
+                <article class="card-tcc" data-curso="Licenciatura em Ciência da Computação" data-linha="Computação" data-ano="2023">
                     <div class="tcc-icone-bg bg-azul">
                         <span class="icon-mask icon-brain"></span>
                     </div>
@@ -155,7 +152,7 @@
                     <span class="icon-mask icon-seta-direita"></span>
                 </article>
 
-                <article class="card-tcc">
+                <article class="card-tcc" data-curso="Bacharelado em Administração" data-linha="Gestão e Finanças" data-ano="2023">
                     <div class="tcc-icone-bg bg-roxo">
                         <span class="icon-mask icon-cadeado"></span>
                     </div>
@@ -174,7 +171,7 @@
                     <span class="icon-mask icon-seta-direita"></span>
                 </article>
 
-                <article class="card-tcc">
+                <article class="card-tcc" data-curso="Licenciatura em Química" data-linha="Química Orgânica e Analítica" data-ano="2024">
                     <div class="tcc-icone-bg bg-amarelo">
                         <span class="icon-mask icon-iot"></span>
                     </div>
@@ -193,7 +190,7 @@
                     <span class="icon-mask icon-seta-direita"></span>
                 </article>
 
-                <article class="card-tcc">
+                <article class="card-tcc" data-curso="Licenciatura em Química" data-linha="Educação e Didática" data-ano="2022">
                     <div class="tcc-icone-bg bg-verde">
                         <span class="icon-mask icon-blockchain"></span>
                     </div>
@@ -212,7 +209,7 @@
                     <span class="icon-mask icon-seta-direita"></span>
                 </article>
 
-                <article class="card-tcc">
+                <article class="card-tcc" data-curso="Licenciatura em Ciência da Computação" data-linha="Educação e Didática" data-ano="2024">
                     <div class="tcc-icone-bg bg-azul">
                         <span class="icon-mask icon-games"></span>
                     </div>
@@ -231,7 +228,7 @@
                     <span class="icon-mask icon-seta-direita"></span>
                 </article>
 
-                <article class="card-tcc">
+                <article class="card-tcc" data-curso="Bacharelado em Administração" data-linha="Gestão e Finanças" data-ano="2023">
                     <div class="tcc-icone-bg bg-roxo">
                         <span class="icon-mask icon-cloud"></span>
                     </div>
@@ -250,7 +247,7 @@
                     <span class="icon-mask icon-seta-direita"></span>
                 </article>
 
-                <article class="card-tcc">
+                <article class="card-tcc" data-curso="Licenciatura em Ciências Agrárias" data-linha="Agronomia e Solos" data-ano="2022">
                     <div class="tcc-icone-bg bg-amarelo">
                         <span class="icon-mask icon-ux"></span>
                     </div>
@@ -269,7 +266,7 @@
                     <span class="icon-mask icon-seta-direita"></span>
                 </article>
 
-                <article class="card-tcc">
+                <article class="card-tcc" data-curso="Licenciatura em Ciências Agrárias" data-linha="Educação e Didática" data-ano="2024">
                     <div class="tcc-icone-bg bg-verde">
                         <span class="icon-mask icon-visao"></span>
                     </div>
@@ -321,19 +318,8 @@
 
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const pathAtual = window.location.pathname.toLowerCase();
-            const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
-
-            navLinks.forEach(link => {
-                const href = link.getAttribute("href").toLowerCase();
-                if (pathAtual === href) {
-                    link.classList.add("active");
-                }
-            });
-        });
-    </script>
+    <!-- Script do Acervo -->
+    <script src="/js/acervo.js"></script>
 
 </body>
 </html>
