@@ -11,11 +11,11 @@
     <div id="TelaConfiguracoes">
 
         <header id="Header">
-            <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn active">
-                <span class="icon-mask icon-engrenagem"></span>
+           <a href="/configuracoes?perfil=<%= perfil %>" class="icon-btn" aria-label="Configurações">
+                <span class="icon-mask icon-settings"></span>
             </a>
             <h1 id="TituloConfig">Configurações</h1>
-            <a href="/notificacoes" id="BtnNotificacoes" class="icon-btn">
+            <a href="/notificacoes?perfil=<%= perfil %>" class="icon-btn" aria-label="Notificações">
                 <span class="icon-mask icon-sino"></span>
             </a>
         </header>
