@@ -19,11 +19,11 @@
 
     <div id="TelaAcervo">
         <header id="Header">
-             <a href="/configuracoes" id="BtnConfiguracoes" class="icon-btn">
+             <a href="/configuracoes?perfil=<%= perfil %>" id="BtnConfiguracoes" class="icon-btn">
                 <span class="icon-mask icon-settings"></span>
              </a>
             <h1 id="TituloPagina">Acervo de TCCs</h1>
-            <a href="/notificacoes" id="BtnNotificacoes" class="icon-btn">
+            <a href="/notificacoes?perfil=<%= perfil %>" id="BtnNotificacoes" class="icon-btn">
                 <span class="icon-mask icon-sino"></span>
             </a>
         </header>
@@ -45,7 +45,6 @@
                     <button id="BtnBuscar" class="btn-buscar-lupa" type="submit">
                         <span class="icon-mask icon-busca"></span>
                     </button>
-                    <!-- Adicionado id="InputBusca" -->
                     <input type="text" id="InputBusca" placeholder="Buscar por título, autor ou palavra-chave...">
                 </div>
 
@@ -89,7 +88,6 @@
             </section>
 
             <div id="InfoResultados">
-                <!-- Adicionado id="ContadorResultados" -->
                 <span id="ContadorResultados">10 trabalhos encontrados</span>
                 <div class="select-container select-ordenacao">
                     <select id="SelectOrdenacao" class="select-filtro-ordem">
@@ -103,7 +101,6 @@
             </div>
 
             <section id="ListaAcervo">
-                <!-- Adicionados data-curso, data-linha e data-ano em cada card -->
                 <article class="card-tcc" data-curso="Licenciatura em Ciência da Computação" data-linha="Computação" data-ano="2024">
                     <div class="tcc-icone-bg bg-amarelo">
                         <span class="icon-mask icon-grafico"></span>
@@ -299,27 +296,27 @@
         </main>
 
         <nav id="BottomNav">
-            <a href="/dashboard" id="BtnInicio" class="nav-btn">
+            <a href="/dashboard?perfil=<%= perfil %>" id="BtnInicio" class="nav-btn <%= currentPage === 'inicio' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-home"></span>
                 <span class="Texto">Início</span>
             </a>
 
-            <a href="/meutcc" id="BtnMeuTCC" class="nav-btn">
+            <a href="/meutcc?perfil=<%= perfil %>" id="BtnMeuTCC" class="nav-btn <%= currentPage === 'meutcc' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-files"></span>
                 <span class="Texto">Meu TCC</span>
             </a>
 
-            <a href="/agenda" id="BtnAgenda" class="nav-btn">
+            <a href="/agenda?perfil=<%= perfil %>" id="BtnAgenda" class="nav-btn <%= currentPage === 'agenda' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-calendar"></span>
                 <span class="Texto">Reuniões</span>
             </a>
 
-            <a href="/acervo" id="BtnAcervo" class="nav-btn">
+            <a href="/acervo?perfil=<%= perfil %>" id="BtnAcervo" class="nav-btn <%= currentPage === 'acervo' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-acervo"></span>
                 <span class="Texto">Acervo</span>
             </a>
 
-            <a href="/perfil" id="BtnPerfil" class="nav-btn">
+            <a href="/perfil?perfil=<%= perfil %>" id="BtnPerfil" class="nav-btn <%= currentPage === 'perfil' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-perfil"></span>
                 <span class="Texto">Perfil</span>
             </a>
