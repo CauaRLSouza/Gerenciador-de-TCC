@@ -12,13 +12,15 @@
 }
 
 body[data-tema="escuro"] {
-    --bg-main: #0f172a;
-    --card-bg: #1e293b;
-    --text-1: #f8fafc;
-    --text-2: #94a3b8;
-    --text-3: #64748b;
-    --border: #334155;
-    --primary-bg: #2d1548;
+    --bg-main: #121214;
+    --card-bg: #1e1e22;
+    --text-1: #f4f4f5;
+    --text-2: #a1a1aa;
+    --text-3: #71717a;
+    --border: #27272a;
+    --primary: #9d4edd;
+    --primary-light: #e0aaff;
+    --primary-bg: rgba(157, 78, 221, 0.15);
 }
 
 * { 
@@ -193,7 +195,7 @@ body {
     border: 1px solid var(--border); 
     display: flex; 
     flex-direction: column; 
-    box-shadow: 0 1px 3px rgba(0,0,0,0.05); 
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1); 
 }
 
 .reuniao-cabecalho { display: flex; align-items: center; }
@@ -229,9 +231,9 @@ body {
 .status-pendente { background: #fef3c7; color: #d97706; }
 .status-realizada { background: #e2e8f0; color: #475569; }
 
-body[data-tema="escuro"] .status-confirmada { background: #064e3b; color: #6ee7b7; }
-body[data-tema="escuro"] .status-pendente { background: #78350f; color: #fde68a; }
-body[data-tema="escuro"] .status-realizada { background: #334155; color: #94a3b8; }
+body[data-tema="escuro"] .status-confirmada { background: rgba(21, 128, 61, 0.2); color: #4ade80; }
+body[data-tema="escuro"] .status-pendente { background: rgba(217, 119, 6, 0.2); color: #fbbf24; }
+body[data-tema="escuro"] .status-realizada { background: rgba(71, 85, 105, 0.25); color: #94a3b8; }
 
 .icon-mask { 
     display: inline-block; 
@@ -259,10 +261,11 @@ body[data-tema="escuro"] .status-realizada { background: #334155; color: #94a3b8
     width: 100%; 
     height: 64px; 
     background: var(--card-bg); 
+    border-top: 1px solid var(--border);
     display: flex; 
     justify-content: space-around; 
     align-items: center; 
-    box-shadow: 0 -1px 3px rgba(0,0,0,0.1); 
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.2); 
     z-index: 100; 
     padding: 4px 8px;
 }
@@ -286,7 +289,7 @@ body[data-tema="escuro"] .status-realizada { background: #334155; color: #94a3b8
 
 .nav-btn .Texto { 
     font-size: 0.75rem; 
-    color: var(--text-1); 
+    color: var(--text-2); 
 }
 
 .nav-btn.active { 

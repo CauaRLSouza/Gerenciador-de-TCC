@@ -5,6 +5,7 @@
    ========================================================================== */
 :root {
     --primary: #6800b7; 
+    --primary-light: #e1cdff;
     --primary-bg: #ede6ff;
     --bg-main: #f8fafc; 
     --card-bg: #ffffff;
@@ -18,6 +19,7 @@
     --yellow-bg: #fef3c7;
     --green: #15803d;   
     --green-bg: #dcfce7;
+    --font: system-ui, -apple-system, sans-serif;
 
     --icon-bg-purple: #ede6ff;
     --icon-color-purple: #6800b7;
@@ -33,20 +35,37 @@
 }
 
 body[data-tema="escuro"] {
-    --bg-main: #0f172a;
-    --card-bg: #1e293b;
-    --text-1: #f8fafc;
-    --text-2: #94a3b8;
-    --text-3: #64748b;
-    --border: #334155;
-    --primary-bg: #2d1548; /* Tom roxo escuro para o fundo dos ícones */
+    --bg-main: #121214;
+    --card-bg: #1e1e22;
+    --text-1: #f4f4f5;
+    --text-2: #a1a1aa;
+    --text-3: #71717a;
+    --border: #27272a;
+    --primary: #9d4edd;
+    --primary-light: #e0aaff;
+    --primary-bg: rgba(157, 78, 221, 0.15);
+    --blue: #60a5fa;
+    --blue-bg: rgba(96, 165, 250, 0.15);
+    --yellow: #fbbf24;
+    --yellow-bg: rgba(251, 191, 36, 0.15);
+    --green: #4ade80;
+    --green-bg: rgba(74, 222, 128, 0.15);
+    --icon-bg-purple: rgba(157, 78, 221, 0.2);
+    --icon-color-purple: #e0aaff;
+    --icon-bg-green: rgba(74, 222, 128, 0.2);
+    --icon-color-green: #4ade80;
+    --icon-bg-blue: rgba(96, 165, 250, 0.2);
+    --icon-color-blue: #60a5fa;
+    --icon-bg-muted: rgba(113, 113, 122, 0.2);
+    --icon-color-muted: #a1a1aa;
+    --dot-unread: #9d4edd;
 }
 
 * { 
     margin: 0; 
     padding: 0; 
     box-sizing: border-box; 
-    font-family: system-ui, -apple-system, sans-serif; 
+    font-family: var(--font); 
     user-select: none; 
     -webkit-tap-highlight-color: transparent;
 }
@@ -104,6 +123,7 @@ body {
     justify-content: space-between; 
     padding: 0 16px; 
     background: var(--card-bg); 
+    border-bottom: 1px solid var(--border);
 }
 
 #TituloPagina { 
@@ -122,7 +142,10 @@ body {
     justify-content: center; 
     border-radius: 50%; 
     text-decoration: none;
+    transition: background 0.2s ease;
 }
+
+.icon-btn:active { background: rgba(0,0,0,0.05); }
 
 #HeaderSinoWrapper {
     width: 40px;
@@ -194,13 +217,13 @@ body {
 }
 
 .card-notificacao.nao-lida {
-    background: #ffffff;
+    background: var(--card-bg);
     border-left: 4px solid var(--primary);
 }
 
 .card-notificacao.lida {
-    background: #fdfdfd;
-    opacity: 0.85;
+    background: var(--card-bg);
+    opacity: 0.75;
 }
 
 .notificacao-icone {
@@ -295,7 +318,6 @@ body {
     background-color: var(--text-1);
 }
 
-
 .icon-sino { 
     -webkit-mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
     mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
@@ -338,10 +360,11 @@ body {
     width: 100%; 
     height: 64px; 
     background: var(--card-bg); 
+    border-top: 1px solid var(--border);
     display: flex; 
     justify-content: space-around; 
     align-items: center; 
-    box-shadow: 0 -1px 3px rgba(0,0,0,0.1); 
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.2); 
     z-index: 100; 
     padding: 4px 8px;
 }
@@ -365,7 +388,7 @@ body {
 
 .nav-btn .Texto { 
     font-size: 0.75rem; 
-    color: var(--text-1); 
+    color: var(--text-2); 
 }
 
 .nav-btn.active { 

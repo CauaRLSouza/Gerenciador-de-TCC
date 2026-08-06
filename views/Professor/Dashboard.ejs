@@ -21,18 +21,16 @@
     <link rel="stylesheet" href="/cssProfessor/Dashboard.css">
     <script>
         (function() {
-            const temaSalvo = localStorage.getItem('tema');
+            const temaSalvo = localStorage.getItem("tema_app");
             if (temaSalvo) {
-                document.documentElement.setAttribute('data-tema', temaSalvo);
-                document.body?.setAttribute('data-tema', temaSalvo);
-            } else if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-                document.documentElement.setAttribute('data-tema', 'escuro');
-                document.body?.setAttribute('data-tema', 'escuro');
+                document.documentElement.setAttribute("data-tema", temaSalvo);
+            } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                document.documentElement.setAttribute("data-tema", "escuro");
             }
         })();
     </script>
 </head>
-<body data-tema="<%= typeof tema !== 'undefined' ? tema : '' %>">
+<body>
 
     <div id="TelaDashboard">
         <header id="Header">
@@ -51,7 +49,7 @@
                 <p style="font-size: 0.875rem; color: var(--text-2); margin-top: 2px;">Aqui está o resumo das suas orientações</p>
             </section>
 
-            <a href="/orientandos?perfil=<%= perfil %>" class="card-hero" style="background: var(--primary, #6800B7); border-radius: 16px; padding: 20px; color: #ffffff; text-decoration: none; display: flex; flex-direction: column; gap: 16px; position: relative; box-shadow: 0 4px 12px rgba(104, 0, 183, 0.25);">
+            <a href="/orientandos?perfil=<%= perfil %>" class="card-hero">
                 <div style="display: flex; justify-content: space-between; align-items: flex-start;">
                     <div>
                         <span style="font-size: 0.875rem; opacity: 0.9; font-weight: 500;">Meus orientandos</span>
@@ -86,7 +84,7 @@
                         <span style="font-size: 0.75rem; color: var(--text-2); font-weight: 600; display: block; line-height: 1.2;">Reuniões hoje</span>
                         <span style="font-size: 1.75rem; font-weight: 800; color: var(--yellow); margin-top: 18px; display: block;"><%= res.reunioesHoje %></span>
                     </div>
-                    <a href="/reunioes?perfil=<%= perfil %>" style="background: var(--yellow-bg); color: var(--yellow); text-decoration: none; text-align: center; padding: 6px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-top: 8px; display: inline-block; width: fit-content;">
+                    <a href="/agenda?perfil=<%= perfil %>" style="background: var(--yellow-bg); color: var(--yellow); text-decoration: none; text-align: center; padding: 6px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-top: 8px; display: inline-block; width: fit-content;">
                         Ver agenda
                     </a>
                 </div>
@@ -133,28 +131,37 @@
         </main>
 
         <nav id="BottomNav">
-            <a href="/dashboard?perfil=<%= perfil %>" class="nav-btn <%= currentPage === 'dashboard' || currentPage === 'inicio' ? 'ativo active' : '' %>">
+            <a href="/dashboard?perfil=<%= perfil %>" class="nav-btn <%= currentPage === 'dashboard' || currentPage === 'inicio' ? 'active' : '' %>">
                 <span class="icon-mask icon-home"></span>
                 <span class="Texto">Início</span>
             </a>
-            <a href="/orientandos?perfil=<%= perfil %>" class="nav-btn <%= currentPage === 'orientandos' ? 'ativo active' : '' %>">
-                <span class="icon-mask icon-perfil"></span>
+            <a href="/orientandos?perfil=<%= perfil %>" class="nav-btn <%= currentPage === 'orientandos' ? 'active' : '' %>">
+                <span class="icon-mask icon-group"></span>
                 <span class="Texto">Orientandos</span>
             </a>
-            <a href="/reunioes?perfil=<%= perfil %>" class="nav-btn <%= currentPage === 'reunioes' ? 'ativo active' : '' %>">
+            <a href="/agenda?perfil=<%= perfil %>" class="nav-btn <%= currentPage === 'agenda' ? 'active' : '' %>">
                 <span class="icon-mask icon-calendar"></span>
                 <span class="Texto">Agenda</span>
             </a>
-            <a href="/acervo?perfil=<%= perfil %>" class="nav-btn <%= currentPage === 'acervo' ? 'ativo active' : '' %>">
+            <a href="/acervo?perfil=<%= perfil %>" class="nav-btn <%= currentPage === 'acervo' ? 'active' : '' %>">
                 <span class="icon-mask icon-acervo"></span>
                 <span class="Texto">Acervo</span>
             </a>
-            <a href="/perfil?perfil=<%= perfil %>" class="nav-btn <%= currentPage === 'perfil' ? 'ativo active' : '' %>">
+            <a href="/perfil?perfil=<%= perfil %>" class="nav-btn <%= currentPage === 'perfil' ? 'active' : '' %>">
                 <span class="icon-mask icon-perfil"></span>
                 <span class="Texto">Perfil</span>
             </a>
         </nav>
     </div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const temaSalvo = localStorage.getItem("tema_app");
+            if (temaSalvo) {
+                document.documentElement.setAttribute("data-tema", temaSalvo);
+                document.body.setAttribute("data-tema", temaSalvo);
+            }
+        });
+    </script>
 </body>
 </html>

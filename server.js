@@ -68,6 +68,11 @@ app.get('/dashboard', proibirAcessoDireto, (req, res) => {
     res.render(`${perfil}/Dashboard`, { currentPage: 'inicio', perfil });
 });
 
+app.get('/orientandos', proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Professor';
+    res.render(`${perfil}/Orientandos`, { currentPage: 'orientandos', perfil });
+});
+
 app.get(['/meutcc', '/meu-tcc'], proibirAcessoDireto, (req, res) => {
     const perfil = req.query.perfil || 'Aluno';
     res.render(`${perfil}/MeuTCC`, { currentPage: 'meutcc', perfil });

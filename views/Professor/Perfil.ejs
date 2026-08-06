@@ -1,0 +1,120 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'professor';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'perfil';
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Perfil - Professor</title>
+    <link rel="stylesheet" href="/cssProfessor/perfil.css">
+    <script>
+        (function() {
+            const temaSalvo = localStorage.getItem("tema_app");
+            if (temaSalvo) {
+                document.documentElement.setAttribute("data-tema", temaSalvo);
+            } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaPerfil">
+        <header id="Header">
+            <a href="/configuracoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Configurações">
+                <span class="icon-mask icon-settings"></span>
+            </a>
+            <h1 id="TituloPagina">Meu Perfil</h1>
+            <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
+                <span class="icon-mask icon-sino"></span>
+            </a>
+        </header>
+
+        <main id="PerfilScroll">
+            <section id="PerfilCard" class="card">
+                
+                <div id="PerfilHeaderCard">
+                    <div id="AvatarContainer">
+                        <div id="AvatarCircle">
+                            <span id="AvatarIniciais">PS</span>
+                        </div>
+                        <button id="BtnTrocarFoto" type="button" aria-label="Trocar Foto de Perfil"></button>
+                    </div>
+                    <h2 id="PerfilNome">Prof. Pedro Santos</h2>
+                    <span id="PerfilEmail">professor@teste.com</span>
+                    <span id="PerfilTelefone">3541-3541</span>
+                </div>
+
+                <div id="PerfilDivisor" class="divisor"></div>
+
+                <div id="PerfilDetalhes">
+                    <div class="PerfilLinha">
+                        <span class="perfil-label">SIAPE</span>
+                        <span class="perfil-valor">1234567</span>
+                    </div>
+                    <div class="PerfilLinha">
+                        <span class="perfil-label">Afiliação</span>
+                        <span class="perfil-valor">IFBaiano Campus Senhor do Bonfim</span>
+                    </div>
+                    <div class="PerfilLinha">
+                        <span class="perfil-label">Titulação</span>
+                        <span class="perfil-valor">Mestre</span>
+                    </div>
+                    <div class="PerfilLinha">
+                        <span class="perfil-label">Data de contratação</span>
+                        <span class="perfil-valor">12/03/2012</span>
+                    </div>
+                </div>
+
+            </section>
+        </main>
+
+        <nav id="BottomNav">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'dashboard' || paginaAtual === 'inicio' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+            <a href="/orientandos?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'orientandos' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-group"></span>
+                <span class="Texto">Orientandos</span>
+            </a>
+            <a href="/agenda?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'agenda' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-calendar"></span>
+                <span class="Texto">Agenda</span>
+            </a>
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'acervo' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'perfil' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const temaSalvo = localStorage.getItem("tema_app");
+            if (temaSalvo) {
+                document.documentElement.setAttribute("data-tema", temaSalvo);
+                document.body.setAttribute("data-tema", temaSalvo);
+            }
+
+            const pathAtual = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href").toLowerCase();
+                const rotaBaseHref = href.split('?')[0];
+                if (pathAtual === rotaBaseHref || (pathAtual === "/" && rotaBaseHref.includes("/dashboard"))) {
+                    link.classList.add("ativo", "active");
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
