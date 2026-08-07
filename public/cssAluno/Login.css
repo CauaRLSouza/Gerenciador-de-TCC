@@ -1,4 +1,4 @@
-/* Reset Básico */
+
 * {
     margin: 0;
     padding: 0;
@@ -15,7 +15,7 @@ body {
     color: #ffffff;
 }
 
-/* Container Principal Mobile */
+
 .login-container {
     width: 100%;
     max-width: 380px;
@@ -25,7 +25,6 @@ body {
     align-items: center;
 }
 
-/* Container do Card da Logo */
 .logo-box {
     display: flex;
     flex-direction: column;
@@ -33,14 +32,12 @@ body {
     margin-bottom: 35px;
 }
 
-/* Ajuste da Imagem da Logo */
 .logo-img {
     width: 250px;
     height: 250px;
-    object-fit: contain; /* Mantém a proporção exata da sua imagem sem deformar */
+    object-fit: contain;
 }
 
-/* Título Centralizado */
 .app-title {
     font-size: 32px;
     font-weight: 700;
@@ -49,7 +46,6 @@ body {
     letter-spacing: 0.5px;
 }
 
-/* Formulário e Inputs */
 .login-form {
     width: 100%;
     display: flex;
@@ -97,7 +93,6 @@ body {
     flex-shrink: 0;
 }
 
-/* Linha de Opções (Checkbox e Esqueci Senha) */
 .form-options {
     display: flex;
     justify-content: space-between;
@@ -127,7 +122,6 @@ body {
     font-weight: 500;
 }
 
-/* Botão Entrar Magenta */
 .btn-entrar {
     width: 100%;
     height: 46px;

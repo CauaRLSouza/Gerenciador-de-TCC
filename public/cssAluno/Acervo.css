@@ -1,6 +1,4 @@
-/* ==========================================================================
-   1. RESET, VARS & GLOBAL
-   ========================================================================== */
+
 :root {
     --primary: #6800b7; 
     --primary-bg: #ede6ff;
@@ -19,14 +17,14 @@
 }
 
 body[data-tema="escuro"] {
-    --bg-main: #121214; /* Fundo geral bem escuro (igual ao print) */
-    --card-bg: #1e1e22; /* Cinza grafite elegante para os cards */
-    --text-1: #f4f4f5;  /* Branco suave para textos principais */
-    --text-2: #a1a1aa;  /* Cinza claro para subtítulos */
-    --text-3: #71717a;  /* Cinza neutro para detalhes */
-    --border: #27272a;  /* Borda sutil e discreta */
-    --primary: #9d4edd; /* Roxo mais vibrante e iluminado para o escuro */
-    --primary-bg: rgba(157, 78, 221, 0.15); /* Fundo roxo translúcido padrão Material */
+    --bg-main: #121214; 
+    --card-bg: #1e1e22; 
+    --text-1: #f4f4f5;  
+    --text-2: #a1a1aa; 
+    --text-3: #71717a;  
+    --border: #27272a;  
+    --primary: #9d4edd; 
+    --primary-bg: rgba(157, 78, 221, 0.15); 
 }
 
 * { 
@@ -46,9 +44,6 @@ body {
     min-height: 100vh; 
 }
 
-/* ==========================================================================
-   2. LAYOUT & CONTAINER (480px Max)
-   ========================================================================== */
 #TelaAcervo { 
     display: flex; 
     flex-direction: column; 
@@ -72,9 +67,6 @@ body {
 }
 #CorpoScroll::-webkit-scrollbar { display: none; }
 
-/* ==========================================================================
-   3. HEADER
-   ========================================================================== */
 #Header { 
     height: 70px; 
     flex-shrink: 0; 
@@ -104,9 +96,6 @@ body {
     text-decoration: none;
 }
 
-/* ==========================================================================
-   4. BANNER EXPLORE (Com a Logo PNG)
-   ========================================================================== */
 .card-banner {
     background: var(--primary-bg);
     border-radius: 12px;
@@ -145,9 +134,6 @@ body {
     line-height: 1.3;
 }
 
-/* ==========================================================================
-   5. BUSCA, FILTROS E SELECTION BOXES
-   ========================================================================== */
 #SecaoBusca {
     display: flex;
     flex-direction: column;
@@ -265,9 +251,6 @@ body {
     cursor: pointer;
 }
 
-/* ==========================================================================
-   6. CARDS DE TCC (ACERVO)
-   ========================================================================== */
 #ListaAcervo {
     display: flex;
     flex-direction: column;
@@ -345,9 +328,6 @@ body {
     gap: 4px;
 }
 
-/* ==========================================================================
-   7. MASK ICONS (SISTEMA DE ARQUIVOS SVG EXATOS)
-   ========================================================================== */
 .icon-mask { 
     display: inline-block; 
     width: 22px; 
@@ -383,9 +363,6 @@ body {
 .icon-ux { -webkit-mask-image: url('../Icones/devices_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/devices_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-visao { -webkit-mask-image: url('../Icones/visibility_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/visibility_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 
-/* ==========================================================================
-   8. BOTTOM NAVIGATION (MATERIAL YOU)
-   ========================================================================== */
 #BottomNav { 
     position: absolute; 
     bottom: 0; 

@@ -1,8 +1,4 @@
-/* public/css/Perfil.css */
 
-/* ==========================================================================
-   1. VARS, RESET & ESTRUTURA GERAL (Padronizado)
-   ========================================================================== */
 :root {
     --primary: #6800b7; 
     --primary-hover: #540096;
@@ -60,9 +56,6 @@ body {
     overflow: hidden; 
 }
 
-/* ==========================================================================
-   2. HEADER (Padronizado - 60px)
-   ========================================================================== */
 #Header { 
     height: 60px; 
     flex-shrink: 0; 
@@ -100,9 +93,6 @@ body {
 
 .icon-btn:active { background: rgba(0,0,0,0.05); }
 
-/* ==========================================================================
-   3. ÁREA DE SCROLL E CARD PRINCIPAL
-   ========================================================================== */
 #PerfilScroll { 
     flex: 1; 
     overflow-y: auto; 
@@ -120,9 +110,6 @@ body {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05); 
 }
 
-/* ==========================================================================
-   4. AVATAR E DETALHES DO PERFIL
-   ========================================================================== */
 #PerfilHeaderCard { 
     display: flex; 
     flex-direction: column; 
@@ -194,7 +181,6 @@ body {
     width: 100%; 
 }
 
-/* Tabela de Informações */
 #PerfilDetalhes { display: flex; flex-direction: column; }
 
 .PerfilLinha { 
@@ -220,9 +206,6 @@ body {
     text-align: right; 
 }
 
-/* ==========================================================================
-   5. MASK ICONS (Tamanho e Cores padronizados do Dashboard)
-   ========================================================================== */
 .icon-mask { 
     display: inline-block; 
     width: 22px; 
@@ -241,9 +224,6 @@ body {
 .icon-acervo { -webkit-mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-perfil { -webkit-mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 
-/* ==========================================================================
-   6. BOTTOM NAVIGATION (Padronizada)
-   ========================================================================== */
 #BottomNav { 
     position: absolute; 
     bottom: 0; 

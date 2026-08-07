@@ -1,6 +1,4 @@
-/* ==========================================================================
-   1. RESET, VARS & GLOBAL
-   ========================================================================== */
+
 :root {
     --primary: #6800b7; 
     --primary-light: #e1cdff;
@@ -56,9 +54,6 @@ body {
     min-height: 100vh; 
 }
 
-/* ==========================================================================
-   2. LAYOUT & SCROLL (Container Limitado em 480px)
-   ========================================================================== */
 #TelaDashboard { 
     display: flex; 
     flex-direction: column; 
@@ -86,9 +81,6 @@ body {
     gap: 16px; 
 }
 
-/* ==========================================================================
-   3. HEADER (Padronizado)
-   ========================================================================== */
 #Header { 
     height: 70px; 
     flex-shrink: 0; 
@@ -138,9 +130,6 @@ body {
     bottom: 16px; 
 }
 
-/* ==========================================================================
-   4. CARDS & SUBTEXT BADGES
-   ========================================================================== */
 .card { 
     background: var(--card-bg); 
     border-radius: 12px; 
@@ -197,9 +186,6 @@ body {
 #CardVersion .card-subtext { background: var(--yellow-bg); color: var(--yellow); }
 #CardFeedback .card-subtext { background: var(--blue-bg); color: var(--blue); }
 
-/* ==========================================================================
-   5. MASK ICONS
-   ========================================================================== */
 .icon-mask { 
     display: inline-block; 
     width: 22px; 
@@ -221,9 +207,6 @@ body {
 
 #BtnSeta .icon-mask { width: 24px; height: 24px; background-color: var(--blue); }
 
-/* ==========================================================================
-   6. BOTTOM NAVIGATION (MATERIAL YOU)
-   ========================================================================== */
 #BottomNav { 
     position: absolute; 
     bottom: 0; 

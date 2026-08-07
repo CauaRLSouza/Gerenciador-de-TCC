@@ -1,8 +1,7 @@
-/* public/css/Notificacoes.css */
 
-/* ==========================================================================
-   1. RESET, VARS & GLOBAL
-   ========================================================================== */
+
+
+
 :root {
     --primary: #6800b7; 
     --primary-light: #e1cdff;
@@ -79,9 +78,6 @@ body {
     min-height: 100vh; 
 }
 
-/* ==========================================================================
-   2. LAYOUT & SCROLL
-   ========================================================================== */
 #TelaNotificacoes { 
     display: flex; 
     flex-direction: column; 
@@ -112,9 +108,6 @@ body {
     gap: 16px; 
 }
 
-/* ==========================================================================
-   3. HEADER
-   ========================================================================== */
 #HeaderNotificacoes { 
     height: 70px; 
     flex-shrink: 0; 
@@ -162,9 +155,7 @@ body {
     background-color: var(--primary) !important;
 }
 
-/* ==========================================================================
-   4. NOTIFICAÇÕES & CARDS
-   ========================================================================== */
+
 #AcaoMarcarTodas {
     display: flex;
     justify-content: flex-end;
@@ -299,9 +290,6 @@ body {
 .nao-lida .status-dot { background-color: var(--dot-unread); }
 .lida .status-dot { display: none; }
 
-/* ==========================================================================
-   5. MASK ICONS
-   ========================================================================== */
 .icon-mask { 
     display: inline-block; 
     width: 22px; 
@@ -349,9 +337,6 @@ body {
     mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
 }
 
-/* ==========================================================================
-   6. BOTTOM NAVIGATION
-   ========================================================================== */
 #BottomNav { 
     position: absolute; 
     bottom: 0; 

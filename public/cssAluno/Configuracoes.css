@@ -1,6 +1,4 @@
-/* ==========================================================================
-   1. RESET, VARS & GLOBAL
-   ========================================================================== */
+
 :root {
     --primary: #6800b7; 
     --primary-light: #e1cdff;
@@ -48,9 +46,6 @@ body {
     min-height: 100vh; 
 }
 
-/* ==========================================================================
-   2. LAYOUT & SCROLL
-   ========================================================================== */
 #TelaConfiguracoes { 
     display: flex; 
     flex-direction: column; 
@@ -73,9 +68,6 @@ body {
 
 #Configuracoes { padding-bottom: 16px; }
 
-/* ==========================================================================
-   3. HEADER & AÇÕES Superior
-   ========================================================================== */
 #Header { 
     height: 70px; 
     flex-shrink: 0; 
@@ -122,9 +114,6 @@ body {
     background-color: var(--primary);
 }
 
-/* ==========================================================================
-   4. CONTEÚDO, CARDS & INTERFACE
-   ========================================================================== */
 #Conteudo { 
     padding: 16px; 
     display: flex; 
@@ -199,7 +188,6 @@ body {
     margin: 12px 0; 
 }
 
-/* SELETOR DE TEMA */
 .seletor-tema { 
     margin-top: 12px; 
     background-color: var(--bg-main); 
@@ -228,7 +216,6 @@ body {
     color: #ffffff; 
 }
 
-/* SWITCH TOGGLE */
 .switch-toggle { 
     position: relative; 
     display: inline-block; 
@@ -262,7 +249,6 @@ body {
 input:checked + .slider-toggle { background-color: var(--primary); }
 input:checked + .slider-toggle:before { transform: translateX(20px); }
 
-/* BOTÃO SAIR */
 .area-btn-sair { margin-top: 8px; }
 
 .btn-sair { 
@@ -284,9 +270,6 @@ input:checked + .slider-toggle:before { transform: translateX(20px); }
 
 .btn-sair .icon-sair { background-color: var(--red); }
 
-/* ==========================================================================
-   5. MASK ICONS
-   ========================================================================== */
 .icon-mask { 
     display: inline-block; 
     width: 22px; 
@@ -305,7 +288,6 @@ input:checked + .slider-toggle:before { transform: translateX(20px); }
 .icon-acervo { -webkit-mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-perfil { -webkit-mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 
-/* ÍCONES DAS CONFIGURAÇÕES */
 .icon-engrenagem { -webkit-mask-image: url('../Icones/settings_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/settings_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
 .icon-lua { -webkit-mask-image: url('../Icones/bedtime_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/bedtime_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-sino-pref { -webkit-mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
@@ -318,9 +300,6 @@ input:checked + .slider-toggle:before { transform: translateX(20px); }
 .icon-email { -webkit-mask-image: url('../Icones/mail_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/mail_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-sair { -webkit-mask-image: url('../Icones/logout_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/logout_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 
-/* ==========================================================================
-   6. BOTTOM NAVIGATION (MATERIAL YOU)
-   ========================================================================== */
 #BottomNav { 
     position: absolute; 
     bottom: 0; 
