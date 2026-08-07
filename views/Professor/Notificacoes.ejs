@@ -1,0 +1,135 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'professor';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'notificacoes';
+
+    const notificacoesBanco = (typeof notificacoes !== 'undefined' && notificacoes) ? notificacoes : [
+        {
+            secao: 'Hoje',
+            itens: [
+                { id: 1, titulo: 'Nova versão enviada', hora: '14:30', texto: 'João da Silva enviou a Versão 2 do TCC para revisão.', lida: false, bgIcone: 'bg-verde', icone: 'icon-files' },
+                { id: 2, titulo: 'Confirmação de Reunião', hora: '10:15', texto: 'Maria Santos confirmou o agendamento para 18/08 às 14:00.', lida: false, bgIcone: 'bg-azul', icone: 'icon-calendar' },
+                { id: 3, titulo: 'Comentário respondido', hora: '08:45', texto: 'Carlos Alberto respondeu ao seu comentário na Introdução.', lida: true, bgIcone: 'bg-roxo', icone: 'icon-sino' }
+            ]
+        },
+        {
+            secao: 'Ontem',
+            itens: [
+                { id: 4, titulo: 'Lembrete de Banca', hora: '16:00', texto: 'Você foi indicado como avaliador na banca de Pedro Oliveira.', lida: true, bgIcone: 'bg-roxo-suave', icone: 'icon-calendar' },
+                { id: 5, titulo: 'Prazo de Avaliação', hora: '09:00', texto: 'Faltam 3 dias para o encerramento do prazo de entrega das notas.', lida: true, bgIcone: 'bg-roxo-suave', icone: 'icon-files' }
+            ]
+        }
+    ];
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificações - Professor</title>
+    <link rel="stylesheet" href="/cssProfessor/Notificacoes.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+                document.addEventListener("DOMContentLoaded", () => document.body.setAttribute("data-tema", "escuro"));
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaNotificacoes">
+
+        <header id="HeaderNotificacoes">
+            <a href="/configuracoes?perfil=<%= perfilAtual %>" id="BtnConfiguracoes" class="icon-btn" aria-label="Configurações">
+                <span class="icon-mask icon-settings"></span>
+            </a>
+            <h1 id="TituloPagina">Notificações</h1>
+            <a href="/notificacoes?perfil=<%= perfilAtual %>" id="HeaderSinoWrapper" aria-label="Notificações">
+                <span class="icon-mask icon-sino"></span>
+            </a>
+        </header>
+
+        <main id="ScrollView">
+            <div id="ContainerNotificacoes">
+
+                <div id="AcaoMarcarTodas">
+                    <button id="BtnMarcarLidas" type="button">Marcar todas como lidas</button>
+                </div>
+
+                <% notificacoesBanco.forEach(grupo => { %>
+                    <section class="secao-notificacoes">
+                        <h2 class="secao-titulo"><%= grupo.secao %></h2>
+                        
+                        <div class="lista-itens">
+                            <% grupo.itens.forEach(item => { %>
+                                <article class="card-notificacao <%= item.lida ? 'lida' : 'nao-lida' %>">
+                                    <div class="notificacao-icone <%= item.bgIcone %>">
+                                        <span class="icon-mask <%= item.icone %>"></span>
+                                    </div>
+                                    <div class="notificacao-conteudo">
+                                        <div class="notificacao-top">
+                                            <h3 class="notificacao-titulo"><%= item.titulo %></h3>
+                                            <span class="notificacao-hora"><%= item.hora %></span>
+                                        </div>
+                                        <div class="notificacao-bottom">
+                                            <p class="notificacao-texto"><%= item.texto %></p>
+                                            <span class="status-dot"></span>
+                                        </div>
+                                    </div>
+                                </article>
+                            <% }); %>
+                        </div>
+                    </section>
+                <% }); %>
+
+            </div>
+        </main>
+
+        <nav id="BottomNav">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'dashboard' || paginaAtual === 'inicio' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+            <a href="/orientandos?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'orientandos' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-group"></span>
+                <span class="Texto">Orientandos</span>
+            </a>
+            <a href="/agenda?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'agenda' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-calendar"></span>
+                <span class="Texto">Agenda</span>
+            </a>
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'acervo' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'perfil' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </a>
+        </nav>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+                document.body.setAttribute("data-tema", "escuro");
+            }
+
+            const pathAtual = window.location.pathname.toLowerCase();
+            const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
+            navLinks.forEach(link => {
+                const href = link.getAttribute("href").toLowerCase();
+                const rotaBaseHref = href.split('?')[0];
+                if (pathAtual === rotaBaseHref) {
+                    link.classList.add("ativo", "active");
+                }
+            });
+        });
+    </script>
+</body>
+</html>

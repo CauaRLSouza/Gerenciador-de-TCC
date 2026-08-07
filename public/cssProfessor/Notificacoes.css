@@ -1,0 +1,378 @@
+/* public/css/Notificacoes.css */
+
+/* ==========================================================================
+   1. RESET, VARS & GLOBAL
+   ========================================================================== */
+:root {
+    --primary: #6800b7; 
+    --primary-light: #e1cdff;
+    --primary-bg: #ede6ff;
+    --bg-main: #f8fafc; 
+    --card-bg: #ffffff;
+    --text-1: #0f172a;  
+    --text-2: #64748b;
+    --text-3: #828282;
+    --border: #e6e6e6;
+    --blue: #1d4ed8;    
+    --blue-bg: #dbeafe;
+    --yellow: #d97706;  
+    --yellow-bg: #fef3c7;
+    --green: #15803d;   
+    --green-bg: #dcfce7;
+    --font: system-ui, -apple-system, sans-serif;
+
+    --icon-bg-purple: #ede6ff;
+    --icon-color-purple: #6800b7;
+    --icon-bg-green: #d3f9d8;
+    --icon-color-green: #2b8a3e;
+    --icon-bg-blue: #d0ebff;
+    --icon-color-blue: #1971c2;
+    --icon-bg-muted: #f1f5f9;
+    --icon-color-muted: #64748b;
+
+    --dot-unread: #6800b7;
+    --dot-read: #cbd5e1;
+}
+
+body[data-tema="escuro"] {
+    --bg-main: #121214;
+    --card-bg: #1e1e22;
+    --text-1: #f4f4f5;
+    --text-2: #a1a1aa;
+    --text-3: #71717a;
+    --border: #27272a;
+    --primary: #9d4edd;
+    --primary-light: #e0aaff;
+    --primary-bg: rgba(157, 78, 221, 0.15);
+    --blue: #60a5fa;
+    --blue-bg: rgba(96, 165, 250, 0.15);
+    --yellow: #fbbf24;
+    --yellow-bg: rgba(251, 191, 36, 0.15);
+    --green: #4ade80;
+    --green-bg: rgba(74, 222, 128, 0.15);
+    --icon-bg-purple: rgba(157, 78, 221, 0.2);
+    --icon-color-purple: #e0aaff;
+    --icon-bg-green: rgba(74, 222, 128, 0.2);
+    --icon-color-green: #4ade80;
+    --icon-bg-blue: rgba(96, 165, 250, 0.2);
+    --icon-color-blue: #60a5fa;
+    --icon-bg-muted: rgba(113, 113, 122, 0.2);
+    --icon-color-muted: #a1a1aa;
+    --dot-unread: #9d4edd;
+}
+
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+    font-family: var(--font); 
+    user-select: none; 
+    -webkit-tap-highlight-color: transparent;
+}
+
+body { 
+    background: var(--bg-main); 
+    color: var(--text-1); 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+}
+
+/* ==========================================================================
+   2. LAYOUT & SCROLL
+   ========================================================================== */
+#TelaNotificacoes { 
+    display: flex; 
+    flex-direction: column; 
+    height: 100vh; 
+    height: 100dvh; 
+    width: 100%; 
+    max-width: 480px; 
+    position: relative; 
+    overflow: hidden; 
+    background: var(--bg-main);
+}
+
+#ScrollView { 
+    flex: 1; 
+    overflow-y: auto; 
+    padding-bottom: 80px; 
+    scrollbar-width: none; 
+}
+
+#ScrollView::-webkit-scrollbar { 
+    display: none; 
+}
+
+#ContainerNotificacoes { 
+    padding: 16px; 
+    display: flex; 
+    flex-direction: column; 
+    gap: 16px; 
+}
+
+/* ==========================================================================
+   3. HEADER
+   ========================================================================== */
+#HeaderNotificacoes { 
+    height: 70px; 
+    flex-shrink: 0; 
+    display: flex; 
+    align-items: center; 
+    justify-content: space-between; 
+    padding: 0 16px; 
+    background: var(--card-bg); 
+    border-bottom: 1px solid var(--border);
+}
+
+#TituloPagina { 
+    font-size: 1.25rem; 
+    font-weight: 700; 
+    color: var(--text-1);
+}
+
+.icon-btn { 
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 4px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 50%; 
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.icon-btn:active { background: rgba(0,0,0,0.05); }
+
+#HeaderSinoWrapper {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: var(--primary-bg);
+    text-decoration: none;
+}
+
+#HeaderSinoWrapper .icon-sino {
+    background-color: var(--primary) !important;
+}
+
+/* ==========================================================================
+   4. NOTIFICAÇÕES & CARDS
+   ========================================================================== */
+#AcaoMarcarTodas {
+    display: flex;
+    justify-content: flex-end;
+}
+
+#BtnMarcarLidas {
+    background: transparent;
+    border: none;
+    color: var(--primary);
+    font-size: 0.8125rem;
+    font-weight: 700;
+    cursor: pointer;
+    padding: 4px 0;
+    transition: opacity 0.2s ease;
+}
+
+#BtnMarcarLidas:active { 
+    opacity: 0.7; 
+}
+
+.secao-notificacoes {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.secao-titulo {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-2);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.lista-itens {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.card-notificacao {
+    background: var(--card-bg);
+    border-radius: 12px;
+    padding: 14px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.card-notificacao.nao-lida {
+    background: var(--card-bg);
+    border-left: 4px solid var(--primary);
+}
+
+.card-notificacao.lida {
+    background: var(--card-bg);
+    opacity: 0.75;
+}
+
+.notificacao-icone {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.bg-roxo { background-color: var(--icon-bg-purple); }
+.bg-roxo .icon-mask { background-color: var(--icon-color-purple); }
+
+.bg-verde { background-color: var(--icon-bg-green); }
+.bg-verde .icon-mask { background-color: var(--icon-color-green); }
+
+.bg-azul { background-color: var(--icon-bg-blue); }
+.bg-azul .icon-mask { background-color: var(--icon-color-blue); }
+
+.bg-roxo-suave { background-color: var(--icon-bg-muted); }
+.bg-roxo-suave .icon-mask { background-color: var(--icon-color-muted); }
+
+.notificacao-conteudo {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.notificacao-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.notificacao-titulo {
+    font-size: 0.875rem;
+    font-weight: 700;
+    color: var(--text-1);
+    line-height: 1.25;
+}
+
+.notificacao-hora {
+    font-size: 0.75rem;
+    color: var(--text-3);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.notificacao-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+}
+
+.notificacao-texto {
+    font-size: 0.8125rem;
+    color: var(--text-2);
+    line-height: 1.35;
+}
+
+.status-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+
+.nao-lida .status-dot { background-color: var(--dot-unread); }
+.lida .status-dot { display: none; }
+
+/* ==========================================================================
+   5. MASK ICONS
+   ========================================================================== */
+.icon-mask { 
+    display: inline-block; 
+    width: 22px; 
+    height: 22px; 
+    background-color: var(--text-3); 
+    -webkit-mask: no-repeat center/contain;
+    mask: no-repeat center/contain;
+    pointer-events: none; 
+}
+
+.icon-settings { -webkit-mask-image: url('/Icones/settings_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/settings_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
+.icon-sino { -webkit-mask-image: url('/Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/notifications_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-1); }
+.icon-home { -webkit-mask-image: url('/Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/home_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-group { -webkit-mask-image: url('/Icones/groups_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/groups_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-perfil { -webkit-mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-calendar { -webkit-mask-image: url('/Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-acervo { -webkit-mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+.icon-files { -webkit-mask-image: url('../Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
+
+
+/* ==========================================================================
+   6. BOTTOM NAVIGATION
+   ========================================================================== */
+#BottomNav { 
+    position: absolute; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
+    width: 100%; 
+    height: 64px; 
+    background: var(--card-bg); 
+    border-top: 1px solid var(--border);
+    display: flex; 
+    justify-content: space-around; 
+    align-items: center; 
+    box-shadow: 0 -1px 3px rgba(0,0,0,0.2); 
+    z-index: 100; 
+    padding: 4px 8px;
+}
+
+.nav-btn { 
+    display: flex; 
+    flex-direction: column; 
+    align-items: center; 
+    justify-content: center; 
+    background: transparent; 
+    border: none; 
+    cursor: pointer; 
+    padding: 6px 12px; 
+    border-radius: 8px; 
+    gap: 2px; 
+    flex: 1; 
+    height: 100%;
+    text-decoration: none;
+    transition: background 0.2s ease;
+}
+
+.nav-btn .Texto { 
+    font-size: 0.75rem; 
+    color: var(--text-2); 
+}
+
+.nav-btn.active { 
+    background: var(--primary-bg) !important; 
+}
+
+.nav-btn.active .icon-mask { 
+    background-color: var(--primary) !important; 
+}
+
+.nav-btn.active .Texto { 
+    color: var(--primary) !important; 
+    font-weight: 700 !important; 
+}

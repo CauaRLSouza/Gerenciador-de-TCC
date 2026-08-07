@@ -1,0 +1,131 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'professor';
+
+    const orientandos = [
+        {
+            id: 1,
+            nome: 'João da Silva',
+            iniciais: 'JS',
+            tituloTCC: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web',
+            versao: 'Versão 3',
+            dataEnvio: '15/08/2025 às 14:32',
+            etapa: 'Desenvolvimento',
+            status: 'Aguardando revisão'
+        },
+        {
+            id: 2,
+            nome: 'Maria Santos',
+            iniciais: 'MS',
+            tituloTCC: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos',
+            versao: 'Versão 1',
+            dataEnvio: '12/08/2025 às 09:15',
+            etapa: 'Revisão Bibliográfica',
+            status: 'Revisada'
+        },
+        {
+            id: 3,
+            nome: 'Carlos Correia',
+            iniciais: 'CC',
+            tituloTCC: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias',
+            versao: 'Versão 2',
+            dataEnvio: '10/08/2025 às 22:07',
+            etapa: 'Metodologia',
+            status: 'Revisada'
+        }
+    ];
+
+    const versoesPendente = orientandos.filter(aluno => aluno.status === 'Aguardando revisão');
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Versões aguardando revisão</title>
+    <link rel="stylesheet" href="/cssProfessor/OrientandoDetalhes.css">
+    <link rel="stylesheet" href="/cssProfessor/Versoes.css">
+
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+                document.addEventListener("DOMContentLoaded", () => document.body.setAttribute("data-tema", "escuro"));
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaVersoesAguardando">
+        <header id="Header">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Voltar para Dashboard">
+                <span class="icon-mask icon-arrow-left"></span>
+            </a>
+            <h1 id="TituloPagina">Versões aguardando revisão</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <main id="CorpoScroll">
+            <div class="lista-versoes">
+                <% versoesPendente.forEach(aluno => { %>
+                    <div class="card-versao-item">
+                        <div class="card-versao-top">
+                            <div class="avatar-aluno"><%= aluno.iniciais %></div>
+                            <div class="info-versao-aluno">
+                                <h3 class="nome-aluno"><%= aluno.nome %></h3>
+                                <p class="titulo-tcc-aluno"><%= aluno.tituloTCC %></p>
+                            </div>
+                        </div>
+
+                        <div class="badge-versao">
+                            <%= aluno.versao %>
+                        </div>
+
+                        <div class="meta-info-versao">
+                            <p class="data-envio">
+                                <span class="icon-mask icon-calendar"></span>
+                                Enviada em <%= aluno.dataEnvio %>
+                            </p>
+                            <p class="etapa-info">
+                                <span class="dot-etapa"></span>
+                                Etapa: <%= aluno.etapa %>
+                            </p>
+                        </div>
+
+                        <div class="card-versao-acao">
+                            <a href="/orientando/<%= aluno.id %>?perfil=<%= perfilAtual %>" class="btn-revisar">
+                                Revisar <span class="icon-mask icon-arrow-right"></span>
+                            </a>
+                        </div>
+                    </div>
+                <% }); %>
+            </div>
+        </main>
+
+        <nav id="BottomNav">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn ativo active">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+            <a href="/orientandos?perfil=<%= perfilAtual %>" class="nav-btn">
+                <span class="icon-mask icon-group"></span>
+                <span class="Texto">Orientandos</span>
+            </a>
+            <a href="/agenda?perfil=<%= perfilAtual %>" class="nav-btn">
+                <span class="icon-mask icon-calendar"></span>
+                <span class="Texto">Agenda</span>
+            </a>
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+</body>
+</html>

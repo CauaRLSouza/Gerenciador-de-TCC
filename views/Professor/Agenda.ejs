@@ -1,6 +1,12 @@
 <%
     const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'professor';
     const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'agenda';
+    const listaOrientandos = (typeof orientandos !== 'undefined' && orientandos) ? orientandos : [
+        { id: 1, nome: 'João da Silva' },
+        { id: 2, nome: 'Maria Santos' },
+        { id: 3, nome: 'Carlos Correia' }
+
+    ];
 %>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -8,7 +14,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda - Professor</title>
-    <link rel="stylesheet" href="/cssProfessor/agenda.css"> 
+    <link rel="stylesheet" href="/cssProfessor/agenda.css">
+    <link rel="stylesheet" href="/cssProfessor/BoxAgenda.css">
     <script>
     (function() {
         const tema = localStorage.getItem("tema_app") || "sistema";
@@ -43,7 +50,7 @@
                     <span id="AgendaHeroContador">EM 2 DIAS</span>
                     <h2 id="AgendaHeroNome">Reunião de Orientação</h2>
                     <span id="AgendaHeroHorario">Quinta-feira • 15:00</span>
-                    <span id="AgendaHeroLocal">Orientando: Carlos Correia</span>
+                    <span id="AgendaHeroLocal">Orientando: João da Silva</span>
                 </div>
             </div>
         </section>
@@ -76,7 +83,7 @@
                             <span id="AgendaReuniao00Dia">05</span>
                         </div>
                         <div id="AgendaReuniao00Info" class="reuniao-info">
-                            <h4 id="AgendaReuniao00Titulo">Lucas Silva</h4>
+                            <h4 id="AgendaReuniao00Titulo">Maria Santos</h4>
                             <span id="AgendaReuniao00Horario">14:00 • Sala 204</span>
                         </div>
                     </div>
@@ -92,7 +99,7 @@
                             <span id="AgendaReuniao01Dia">28</span>
                         </div>
                         <div id="AgendaReuniao01Info" class="reuniao-info">
-                            <h4 id="AgendaReuniao01Titulo">Carlos Correia</h4>
+                            <h4 id="AgendaReuniao01Titulo">João da Silva</h4>
                             <span id="AgendaReuniao01Horario">15:00 • Sala Virtual</span>
                         </div>
                     </div>
@@ -108,7 +115,7 @@
                             <span id="AgendaReuniao02Dia">11</span>
                         </div>
                         <div id="AgendaReuniao02Info" class="reuniao-info">
-                            <h4 id="AgendaReuniao02Titulo">Jaqueline Costa</h4>
+                            <h4 id="AgendaReuniao02Titulo">Maria Santos</h4>
                             <span id="AgendaReuniao02Horario">14:00 • Sala Virtual</span>
                         </div>
                     </div>
@@ -153,150 +160,72 @@
         </nav>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const pathAtual = window.location.pathname.toLowerCase();
-            const navLinks = document.querySelectorAll("#BottomNav .nav-btn");
-            navLinks.forEach(link => {
-                const href = link.getAttribute("href").toLowerCase();
-                if (pathAtual === href || (pathAtual === "/" && href.includes("/dashboard"))) {
-                    link.classList.add("ativo", "active");
-                }
-            });
+    <div id="modalAgendarReuniao" class="modal-overlay" style="display: none;">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div>
+                    <h2>Agendar reunião</h2>
+                    <p>Preencha os dados para agendar a reunião com seu orientando.</p>
+                </div>
+                <button type="button" id="btnFecharModal" class="btn-close">&times;</button>
+            </div>
 
-            const datasComReuniao = ["2026-08-05", "2026-08-28", "2026-09-11"];
-            const nomesMeses = ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"];
-            const diasDaSemana = ['Dom', 'Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb'];
+            <form id="formAgendarReuniao" action="/agendar-reuniao" method="POST">
+                <input type="hidden" name="perfil" value="<%= perfilAtual %>">
 
-            let dataAtual = new Date(2026, 7, 28);
-            let diaSelecionado = "2026-08-28";
+                <div class="form-group">
+                    <label for="orientandoId">Orientando</label>
+                    <select id="orientandoId" name="orientandoId" required>
+                        <option value="" disabled selected>Selecione o orientando</option>
+                        <% listaOrientandos.forEach(aluno => { %>
+                            <option value="<%= aluno.id %>"><%= aluno.nome %></option>
+                        <% }); %>
+                    </select>
+                </div>
 
-            const elTituloMes = document.getElementById("AgendaCalendarioTitulo");
-            const elLinhaCalendario = document.getElementById("AgendaCalendarioLinha");
-            const elEmptyState = document.getElementById("AgendaEmptyState");
-            const cardsReuniao = document.querySelectorAll(".card-reuniao");
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="dataReuniao">Data</label>
+                        <input type="date" id="dataReuniao" name="data" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="horaReuniao">Horário</label>
+                        <input type="time" id="horaReuniao" name="hora" required>
+                    </div>
+                </div>
 
-            function formatarDataISO(ano, mes, dia) {
-                const m = String(mes + 1).padStart(2, '0');
-                const d = String(dia).padStart(2, '0');
-                return `${ano}-${m}-${d}`;
-            }
+                <div class="form-group">
+                    <label>Modalidade</label>
+                    <div class="toggle-modalidade">
+                        <button type="button" id="btnModalidadePresencial" class="btn-modalidade active">Presencial</button>
+                        <button type="button" id="btnModalidadeOnline" class="btn-modalidade">Online</button>
+                    </div>
+                    <input type="hidden" id="inputModalidade" name="modalidade" value="presencial">
+                </div>
 
-            function renderizarCalendario() {
-                const ano = dataAtual.getFullYear();
-                const mes = dataAtual.getMonth();
+                <div class="form-group" id="campoPresencial">
+                    <label for="localSala">Local</label>
+                    <input type="text" id="localSala" name="local" placeholder="Ex: Sala 204 - Bloco B">
+                </div>
 
-                if (elTituloMes) elTituloMes.textContent = `${nomesMeses[mes]} ${ano}`;
-                if (!elLinhaCalendario) return;
-                elLinhaCalendario.innerHTML = "";
+                <div class="form-group" id="campoOnline" style="display: none;">
+                    <label for="linkReuniao">Link da Reunião</label>
+                    <input type="url" id="linkReuniao" name="link" placeholder="https://meet.google.com/abc-defg-hij">
+                </div>
 
-                let inicioSemana = new Date(dataAtual);
-                let diaSemana = inicioSemana.getDay();
-                let diff = inicioSemana.getDate() - diaSemana;
-                inicioSemana.setDate(diff);
+                <div class="form-group">
+                    <label for="pautaReuniao">Pauta da reunião</label>
+                    <textarea id="pautaReuniao" name="pauta" rows="3" maxlength="300" placeholder="Discussão dos resultados e próximos passos."></textarea>
+                </div>
 
-                for (let i = 0; i < 7; i++) {
-                    let d = new Date(inicioSemana);
-                    d.setDate(inicioSemana.getDate() + i);
+                <div class="modal-actions">
+                    <button type="button" id="btnCancelarAgendamento" class="btn-secundario">Cancelar</button>
+                    <button type="submit" class="btn-primario">Agendar reunião</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-                    const isoDate = formatarDataISO(d.getFullYear(), d.getMonth(), d.getDate());
-                    const numDia = d.getDate();
-                    const diaSemanaNome = diasDaSemana[d.getDay()];
-
-                    const btn = document.createElement("button");
-                    btn.type = "button";
-                    btn.className = "card-dia";
-                    btn.id = `AgendaDia${numDia}`;
-
-                    if (d.getMonth() !== mes) {
-                        btn.style.opacity = "0.4";
-                    }
-
-                    btn.innerHTML = `
-                        <span class="dia-semana-rotulo">${diaSemanaNome}</span>
-                        <span>${numDia}</span>
-                    `;
-
-                    if (isoDate === diaSelecionado) {
-                        btn.classList.add("dia-ativo");
-                    }
-
-                    if (datasComReuniao.includes(isoDate)) {
-                        btn.classList.add("dia-com-evento");
-                    }
-
-                    btn.addEventListener("click", () => {
-                        diaSelecionado = isoDate;
-                        dataAtual = new Date(d);
-                        renderizarCalendario();
-                        filtrarFeed();
-                    });
-
-                    elLinhaCalendario.appendChild(btn);
-                }
-            }
-
-            function filtrarFeed() {
-                let encontrou = false;
-                cardsReuniao.forEach(card => {
-                    if (card.getAttribute("data-data") === diaSelecionado) {
-                        card.style.display = "flex";
-                        encontrou = true;
-                    } else {
-                        card.style.display = "none";
-                    }
-                });
-
-                if (elEmptyState) {
-                    elEmptyState.style.display = encontrou ? "none" : "block";
-                }
-            }
-
-            const btnMesAnt = document.getElementById("BtnMesAnterior");
-            if (btnMesAnt) {
-                btnMesAnt.addEventListener("click", () => {
-                    dataAtual.setMonth(dataAtual.getMonth() - 1);
-                    dataAtual.setDate(1);
-                    diaSelecionado = formatarDataISO(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate());
-                    renderizarCalendario();
-                    filtrarFeed();
-                });
-            }
-
-            const btnMesProx = document.getElementById("BtnMesProximo");
-            if (btnMesProx) {
-                btnMesProx.addEventListener("click", () => {
-                    dataAtual.setMonth(dataAtual.getMonth() + 1);
-                    dataAtual.setDate(1);
-                    diaSelecionado = formatarDataISO(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate());
-                    renderizarCalendario();
-                    filtrarFeed();
-                });
-            }
-
-            const btnSemAnt = document.getElementById("BtnSemanaAnterior");
-            if (btnSemAnt) {
-                btnSemAnt.addEventListener("click", () => {
-                    dataAtual.setDate(dataAtual.getDate() - 7);
-                    diaSelecionado = formatarDataISO(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate());
-                    renderizarCalendario();
-                    filtrarFeed();
-                });
-            }
-
-            const btnSemProx = document.getElementById("BtnSemanaProxima");
-            if (btnSemProx) {
-                btnSemProx.addEventListener("click", () => {
-                    dataAtual.setDate(dataAtual.getDate() + 7);
-                    diaSelecionado = formatarDataISO(dataAtual.getFullYear(), dataAtual.getMonth(), dataAtual.getDate());
-                    renderizarCalendario();
-                    filtrarFeed();
-                });
-            }
-
-            renderizarCalendario();
-            filtrarFeed();
-        });
-    </script>
+    <script src="/js/BoxAgenda.js"></script>
 </body>
 </html>

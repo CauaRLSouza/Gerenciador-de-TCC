@@ -1,0 +1,124 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'professor';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'dashboard';
+    
+    const listaComentarios = (typeof NaoLidos !== 'undefined' && NaoLidos) ? NaoLidos : [
+        { id: 1, nome: 'João da Silva', iniciais: 'JS', versao: 'Versão 4 • Em desenvolvimento', texto: 'Professor, fiz todas as correções solicitadas no capítulo 2....', textoCompleto: 'Professor, fiz todas as correções solicitadas no capítulo 2 conforme conversamos na última orientação. Por favor, dê uma olhada quando tiver um tempinho.', tempo: 'Hoje às 15:40' },
+        { id: 2, nome: 'Maria Santos', iniciais: 'MS', versao: 'Versão 1 • Revisão Bibliográfica', texto: 'Poderia revisar novamente a metodologia? Tenho dúvida...', textoCompleto: 'Poderia revisar novamente a metodologia? Tenho dúvida se a abordagem que escolhi está alinhada com o tema do TCC.', tempo: 'Ontem às 09:13' },
+        { id: 3, nome: 'Carlos Correia', iniciais: 'CC', versao: 'Versão 3 • Metodologia', texto: 'Segue a nova versão com as alterações sugeridas.', textoCompleto: 'Segue a nova versão com as alterações sugeridas durante a nossa última reunião. Ajustei os pontos da introdução.', tempo: '26/08 às 18:22' }
+    ];
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comentários não lidos - Professor</title>
+    <link rel="stylesheet" href="/cssProfessor/NaoLidos.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaVersoesAguardando">
+        <header id="Header">
+            <a href="javascript:history.back()" class="icon-btn" aria-label="Voltar">
+                <span class="icon-mask icon-arrow-left"></span>
+            </a>
+            <h1 id="TituloPagina">Comentários não lidos</h1>
+            <div class="header-spacer"></div>
+        </header>
+
+        <main id="CorpoScroll">
+            <section class="lista-versoes">
+                <% listaComentarios.forEach(item => { %>
+                    <div onclick="abrirModal('<%= item.nome %>', '<%= item.versao %>', '<%= item.textoCompleto || item.texto %>', '<%= item.tempo %>')" 
+                         class="card-versao-item">
+                        <div class="card-versao-top">
+                            <div class="avatar-aluno">
+                                <%= item.iniciais %>
+                                <span class="dot-nao-lido"></span>
+                            </div>
+                            <div class="info-versao-aluno">
+                                <span class="nome-aluno"><%= item.nome %></span>
+                                <span class="titulo-tcc-aluno"><%= item.versao %></span>
+                                <p class="texto-comentario-preview">"<%= item.texto %>"</p>
+                                <div class="meta-info-versao">
+                                    <div class="data-envio">
+                                        <span class="icon-mask icon-calendar" style="width: 14px; height: 14px; background-color: var(--text-2);"></span>
+                                        <span><%= item.tempo %></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card-versao-acao">
+                                <span class="icon-mask icon-arrow-right"></span>
+                            </div>
+                        </div>
+                    </div>
+                <% }); %>
+            </section>
+        </main>
+
+        <!-- Modal de Comentário Completo -->
+        <div id="modalComentario" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 id="modalNome" class="modal-title"></h3>
+                    <button onclick="fecharModal()" class="modal-close">&times;</button>
+                </div>
+                <span id="modalVersao" class="modal-subtitle"></span>
+                <div class="modal-body">
+                    <p id="modalTexto" class="modal-text"></p>
+                </div>
+                <div class="modal-footer">
+                    <span id="modalTempo"></span>
+                    <button onclick="fecharModal()" class="btn-fechar-modal">Fechar</button>
+                </div>
+            </div>
+        </div>
+
+        <nav id="BottomNav">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn ativo active">
+                <span class="icon-mask icon-home"></span>
+                <span>Início</span>
+            </a>
+            <a href="/orientandos?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'orientandos' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-group"></span>
+                <span>Orientandos</span>
+            </a>
+            <a href="/agenda?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'agenda' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-calendar"></span>
+                <span>Agenda</span>
+            </a>
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'acervo' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-acervo"></span>
+                <span>Acervo</span>
+            </a>
+            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'perfil' ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-perfil"></span>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        function abrirModal(nome, versao, texto, tempo) {
+            document.getElementById('modalNome').innerText = nome;
+            document.getElementById('modalVersao').innerText = versao;
+            document.getElementById('modalTexto').innerText = '"' + texto + '"';
+            document.getElementById('modalTempo').innerText = tempo;
+            document.getElementById('modalComentario').style.display = 'flex';
+        }
+
+        function fecharModal() {
+            document.getElementById('modalComentario').style.display = 'none';
+        }
+    </script>
+</body>
+</html>

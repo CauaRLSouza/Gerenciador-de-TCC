@@ -1,0 +1,187 @@
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    padding: 16px;
+    box-sizing: border-box;
+}
+
+.modal-container {
+    background-color: var(--card-bg, var(--bg-card, #ffffff));
+    color: var(--text, var(--text-1, #1a1a1a));
+    border: 1px solid var(--border-color, #e0e0e0);
+    width: 100%;
+    max-width: 500px;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text, var(--text-1, #1a1a1a));
+}
+
+.modal-header p {
+    margin: 4px 0 0 0;
+    font-size: 0.875rem;
+    color: var(--text-secondary, var(--text-2, #666666));
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--text-secondary, var(--text-2, #666666));
+    padding: 0;
+    line-height: 1;
+}
+
+#formAgendarReuniao {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.875rem;
+    font-weight: 600;
+    color: var(--text, var(--text-1, #1a1a1a));
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--border-color, #d0d0d0);
+    border-radius: 6px;
+    font-size: 0.9rem;
+    box-sizing: border-box;
+    background-color: var(--input-bg, var(--bg-input, #f8f9fa));
+    color: var(--text, var(--text-1, #1a1a1a));
+    outline: none;
+    transition: border-color 0.2s, background-color 0.2s;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: var(--text-secondary, #888888);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    border-color: var(--primary, #7b1fa2);
+}
+
+.form-row {
+    display: flex;
+    gap: 12px;
+}
+
+.form-row .form-group {
+    flex: 1;
+}
+
+.toggle-modalidade {
+    display: flex;
+    gap: 4px;
+    background-color: var(--bg-secondary, #f0f0f0);
+    padding: 4px;
+    border-radius: 8px;
+}
+
+.btn-modalidade {
+    flex: 1;
+    padding: 8px;
+    border: none;
+    background: transparent;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.875rem;
+    color: var(--text-secondary, var(--text-2, #666666));
+    transition: all 0.2s ease;
+}
+
+.btn-modalidade.active {
+    background-color: var(--card-bg, #ffffff);
+    color: var(--primary, #7b1fa2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 8px;
+}
+
+.btn-primario,
+.btn-secundario {
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    font-size: 0.875rem;
+}
+
+.btn-primario {
+    background-color: var(--primary, #7b1fa2);
+    color: #ffffff;
+    border: none;
+}
+
+.btn-secundario {
+    background-color: transparent;
+    color: var(--text-secondary, var(--text-2, #666666));
+    border: 1px solid var(--border-color, #d0d0d0);
+}
+
+[data-tema="escuro"] .modal-container {
+    background-color: var(--card-bg, #1e1e1e);
+    border-color: #333333;
+}
+
+[data-tema="escuro"] .form-group input,
+[data-tema="escuro"] .form-group select,
+[data-tema="escuro"] .form-group textarea {
+    background-color: var(--input-bg, #2a2a2a);
+    border-color: #444444;
+    color: #ffffff;
+}
+
+[data-tema="escuro"] .toggle-modalidade {
+    background-color: #2a2a2a;
+}
+
+[data-tema="escuro"] .btn-modalidade.active {
+    background-color: #383838;
+    color: #ffffff;
+}

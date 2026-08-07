@@ -2,16 +2,11 @@
     const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'professor';
     const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'orientandos';
     
-    const todosOrientandos = (typeof orientandos !== 'undefined' && orientandos) ? orientandos : [
-        { id: 1, nome: 'João da Silva', iniciais: 'JS', ultimaVersao: '15/08/2025', badgeVersao: 2, status: 'Aguardando revisão', statusCor: 'yellow', aba: 'ativo' },
-        { id: 2, nome: 'Maria Santos', iniciais: 'MS', ultimaVersao: '12/08/2025', badgeVersao: 1, status: 'Revisada', statusCor: 'green', aba: 'ativo' },
-        { id: 3, nome: 'Carlos Alberto', iniciais: 'CA', ultimaVersao: '08/08/2025', badgeVersao: null, status: 'Concluído', statusCor: 'green', aba: 'concluido' },
-        { id: 4, nome: 'Ana Beatriz', iniciais: 'AB', ultimaVersao: '05/08/2025', badgeVersao: null, status: 'Concluído', statusCor: 'green', aba: 'concluido' },
-        { id: 5, nome: 'Lucas Pereira', iniciais: 'LP', ultimaVersao: '01/08/2025', badgeVersao: null, status: 'Concluído', statusCor: 'green', aba: 'concluido' }
+    const listaOrientandos = (typeof orientandos !== 'undefined' && orientandos) ? orientandos : [
+        { id: 1, nome: 'João da Silva', iniciais: 'JS', ultimaVersao: '15/08/2025', badgeVersao: 2, status: 'Aguardando revisão', statusCor: 'yellow' },
+        { id: 2, nome: 'Maria Santos', iniciais: 'MS', ultimaVersao: '12/08/2025', badgeVersao: 1, status: 'Revisada', statusCor: 'green' },
+        { id: 3, nome: 'Carlos Correia', iniciais: 'CC', ultimaVersao: '07/08/2025', badgeVersao: 1, status: 'Revisada', statusCor: 'green' }
     ];
-
-    const ativos = todosOrientandos.filter(o => o.aba === 'ativo');
-    const concluidos = todosOrientandos.filter(o => o.aba === 'concluido');
 %>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -22,10 +17,8 @@
     <link rel="stylesheet" href="/cssProfessor/Orientandos.css">
     <script>
         (function() {
-            const temaSalvo = localStorage.getItem("tema_app");
-            if (temaSalvo) {
-                document.documentElement.setAttribute("data-tema", temaSalvo);
-            } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
                 document.documentElement.setAttribute("data-tema", "escuro");
             }
         })();
@@ -45,34 +38,29 @@
         </header>
 
         <main id="CorpoScroll">
-            <div style="display: flex; gap: 10px; align-items: center; margin-top: 4px;">
+            <div style="display: flex; gap: 10px; align-items: center; margin-top: 4px; margin-bottom: 12px;">
                 <div style="flex: 1; position: relative; display: flex; align-items: center;">
                     <span class="icon-mask icon-search" style="position: absolute; left: 14px; width: 18px; height: 18px; background-color: var(--text-2);"></span>
-                    <input type="text" placeholder="Buscar orientando..." style="width: 100%; padding: 12px 14px 12px 42px; border-radius: 24px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-1); font-size: 0.875rem; outline: none;">
+                    <input type="text" id="inputBusca" placeholder="Buscar orientando..." style="width: 100%; padding: 12px 14px 12px 42px; border-radius: 24px; border: 1px solid var(--border); background: var(--card-bg); color: var(--text-1); font-size: 0.875rem; outline: none;">
                 </div>
-                <button style="background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; justify-content: center;" aria-label="Filtrar">
+                <button id="btnFiltro" style="background: none; border: none; cursor: pointer; padding: 8px; display: flex; align-items: center; justify-content: center;" aria-label="Filtrar">
                     <span class="icon-mask icon-filter" style="width: 22px; height: 22px; background-color: var(--text-1);"></span>
                 </button>
             </div>
 
-            <div style="display: flex; border-bottom: 1px solid var(--border); margin-top: 6px;">
-                <button id="btnAbaAtivos" onclick="alternarAba('ativos')" style="flex: 1; padding: 12px; background: none; border: none; border-bottom: 2px solid var(--primary); color: var(--primary); font-weight: 700; font-size: 0.875rem; cursor: pointer;">
-                    Ativos (<%= ativos.length %>)
-                </button>
-                <button id="btnAbaConcluidos" onclick="alternarAba('concluidos')" style="flex: 1; padding: 12px; background: none; border: none; color: var(--text-2); font-weight: 600; font-size: 0.875rem; cursor: pointer;">
-                    Concluídos (<%= concluidos.length %>)
-                </button>
-            </div>
-
-            <section id="listaAtivos" style="display: flex; flex-direction: column; gap: 12px;">
-                <% ativos.forEach(aluno => { %>
-                    <a href="/orientando/<%= aluno.id %>?perfil=<%= perfilAtual %>" style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 14px; text-decoration: none; display: flex; align-items: center; gap: 14px; position: relative;">
+            <section id="listaOrientandos" style="display: flex; flex-direction: column; gap: 12px;">
+                <% listaOrientandos.forEach(aluno => { %>
+                    <a href="/orientando/<%= aluno.id %>?perfil=<%= perfilAtual %>" 
+                       class="card-orientando" 
+                       data-nome="<%= aluno.nome %>" 
+                       data-status="<%= aluno.status %>"
+                       style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 14px; text-decoration: none; display: flex; align-items: center; gap: 14px; position: relative;">
                         <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--primary-bg); color: var(--primary); font-weight: 800; font-size: 0.9375rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
                             <%= aluno.iniciais %>
                         </div>
                         <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
                             <span style="font-size: 0.9375rem; font-weight: 700; color: var(--text-1);"><%= aluno.nome %></span>
-                            <span style="font-size: 0.75rem; color: var(--text-2);">Última versão: <%= aluno.ultimaVersao %></span>
+                            <span style="font-size: 0.75rem; color: var(--text-2);">Última versão: <%= aluno.versaoAtual || (aluno.versoes && aluno.versoes.length > 0 ? aluno.versoes[0].titulo + ' - ' + aluno.versoes[0].data : 'Não informada') %></span>
                             <div style="margin-top: 2px;">
                                 <% if (aluno.statusCor === 'yellow') { %>
                                     <span style="background: var(--yellow-bg); color: var(--yellow); padding: 4px 10px; border-radius: 12px; font-size: 0.6875rem; font-weight: 700; display: inline-block;">
@@ -100,93 +88,32 @@
                     </a>
                 <% }); %>
             </section>
-
-            <section id="listaConcluidos" style="display: none; flex-direction: column; gap: 12px;">
-                <% concluidos.forEach(aluno => { %>
-                    <a href="/orientando/<%= aluno.id %>?perfil=<%= perfilAtual %>" style="background: var(--card-bg); border: 1px solid var(--border); border-radius: 16px; padding: 14px; text-decoration: none; display: flex; align-items: center; gap: 14px; position: relative;">
-                        <div style="width: 44px; height: 44px; border-radius: 50%; background: var(--primary-bg); color: var(--primary); font-weight: 800; font-size: 0.9375rem; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
-                            <%= aluno.iniciais %>
-                        </div>
-                        <div style="flex: 1; display: flex; flex-direction: column; gap: 4px;">
-                            <span style="font-size: 0.9375rem; font-weight: 700; color: var(--text-1);"><%= aluno.nome %></span>
-                            <span style="font-size: 0.75rem; color: var(--text-2);">Última versão: <%= aluno.ultimaVersao %></span>
-                            <div style="margin-top: 2px;">
-                                <span style="background: var(--green-bg); color: var(--green); padding: 4px 10px; border-radius: 12px; font-size: 0.6875rem; font-weight: 700; display: inline-block;">
-                                    <%= aluno.status %>
-                                </span>
-                            </div>
-                        </div>
-                        <div style="display: flex; align-items: center; gap: 8px;">
-                            <span class="icon-mask icon-chevron-right" style="width: 18px; height: 18px; background-color: var(--text-2);"></span>
-                        </div>
-                    </a>
-                <% }); %>
-            </section>
         </main>
 
         <nav id="BottomNav">
-            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'dashboard' || paginaAtual === 'inicio' ? 'ativo' : '' %>">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'dashboard' || paginaAtual === 'inicio' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-home"></span>
                 <span class="Texto">Início</span>
             </a>
-            <a href="/orientandos?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'orientandos' ? 'ativo' : '' %>">
+            <a href="/orientandos?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'orientandos' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-group"></span>
                 <span class="Texto">Orientandos</span>
             </a>
-            <a href="/agenda?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'agenda' ? 'ativo' : '' %>">
+            <a href="/agenda?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'agenda' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-calendar"></span>
                 <span class="Texto">Agenda</span>
             </a>
-            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'acervo' ? 'ativo' : '' %>">
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'acervo' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-acervo"></span>
                 <span class="Texto">Acervo</span>
             </a>
-            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'perfil' ? 'ativo' : '' %>">
+            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'perfil' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-perfil"></span>
                 <span class="Texto">Perfil</span>
             </a>
         </nav>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const temaSalvo = localStorage.getItem("tema_app");
-            if (temaSalvo) {
-                document.documentElement.setAttribute("data-tema", temaSalvo);
-                document.body.setAttribute("data-tema", temaSalvo);
-            }
-        });
-
-        function alternarAba(aba) {
-            const listaAtivos = document.getElementById('listaAtivos');
-            const listaConcluidos = document.getElementById('listaConcluidos');
-            const btnAtivos = document.getElementById('btnAbaAtivos');
-            const btnConcluidos = document.getElementById('btnAbaConcluidos');
-
-            if (aba === 'ativos') {
-                listaAtivos.style.display = 'flex';
-                listaConcluidos.style.display = 'none';
-
-                btnAtivos.style.borderBottom = '2px solid var(--primary)';
-                btnAtivos.style.color = 'var(--primary)';
-                btnAtivos.style.fontWeight = '700';
-
-                btnConcluidos.style.borderBottom = 'none';
-                btnConcluidos.style.color = 'var(--text-2)';
-                btnConcluidos.style.fontWeight = '600';
-            } else {
-                listaAtivos.style.display = 'none';
-                listaConcluidos.style.display = 'flex';
-
-                btnConcluidos.style.borderBottom = '2px solid var(--primary)';
-                btnConcluidos.style.color = 'var(--primary)';
-                btnConcluidos.style.fontWeight = '700';
-
-                btnAtivos.style.borderBottom = 'none';
-                btnAtivos.style.color = 'var(--text-2)';
-                btnAtivos.style.fontWeight = '600';
-            }
-        }
-    </script>
+    <script src="/js/orientandos.js" defer></script>
 </body>
 </html>

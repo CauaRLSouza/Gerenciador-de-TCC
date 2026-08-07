@@ -20,14 +20,13 @@
     <title>Dashboard - Professor</title>
     <link rel="stylesheet" href="/cssProfessor/Dashboard.css">
     <script>
-        (function() {
-            const temaSalvo = localStorage.getItem("tema_app");
-            if (temaSalvo) {
-                document.documentElement.setAttribute("data-tema", temaSalvo);
-            } else if (window.matchMedia("(prefers-color-scheme: dark)").matches) {
-                document.documentElement.setAttribute("data-tema", "escuro");
-            }
-        })();
+    (function() {
+        const tema = localStorage.getItem("tema_app") || "sistema";
+        if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+            document.documentElement.setAttribute("data-tema", "escuro");
+            document.addEventListener("DOMContentLoaded", () => document.body.setAttribute("data-tema", "escuro"));
+        }
+    })();
     </script>
 </head>
 <body>
@@ -104,7 +103,7 @@
                         <span style="font-size: 0.75rem; color: var(--text-2); font-weight: 600; display: block; line-height: 1.2;">Comentários não lidos</span>
                         <span style="font-size: 1.75rem; font-weight: 800; color: var(--primary); margin-top: 18px; display: block;"><%= res.comentariosNaoLidos %></span>
                     </div>
-                    <a href="/comentarios?perfil=<%= perfil %>" style="background: var(--primary-bg); color: var(--primary); text-decoration: none; text-align: center; padding: 6px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-top: 8px; display: inline-block; width: fit-content;">
+                    <a href="/NaoLidos?perfil=<%= perfil %>" style="background: var(--primary-bg); color: var(--primary); text-decoration: none; text-align: center; padding: 6px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; margin-top: 8px; display: inline-block; width: fit-content;">
                         Ver comentários
                     </a>
                 </div>
@@ -156,10 +155,10 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", () => {
-            const temaSalvo = localStorage.getItem("tema_app");
-            if (temaSalvo) {
-                document.documentElement.setAttribute("data-tema", temaSalvo);
-                document.body.setAttribute("data-tema", temaSalvo);
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+                document.body.setAttribute("data-tema", "escuro");
             }
         });
     </script>

@@ -1,0 +1,315 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'professor';
+    const paginaAtual = 'orientandos';
+
+    const orientandosMap = {
+        1: {
+            id: 1,
+            nome: 'João da Silva',
+            iniciais: 'JS',
+            email: 'joao.silva@aluno.edu.br',
+            curso: 'Sistemas de Informação',
+            tituloTCC: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web',
+            dataInicio: '10/03/2025',
+            previsaoConclusao: '15/12/2025',
+            linhaPesquisa: 'Engenharia de Software',
+            status: 'Aguardando revisão',
+            statusCor: 'yellow',
+            versaoAtual: 'Versão 3 enviada em 15/08/2025',
+            versoes: [
+                { id: 3, titulo: 'Versão 3 (Final)', data: '15/08/2025', status: 'Aguardando revisão' },
+                { id: 2, titulo: 'Versão 2 (Parcial)', data: '01/08/2025', status: 'Revisada' },
+                { id: 1, titulo: 'Versão 1 (Pré-projeto)', data: '10/03/2025', status: 'Aprovado' }
+            ],
+            reunioes: [
+                { id: 101, data: '18/08/2025', hora: '14:00', pauta: 'Revisão do Capítulo 3' },
+                { id: 102, data: '02/08/2025', hora: '10:00', pauta: 'Alinhamento dos Requisitos' }
+            ],
+            comentarios: [
+                { id: 201, autor: 'Você', data: '02/08/2025', texto: 'Ajustar a metodologia no capítulo 2.' },
+                { id: 202, autor: 'João da Silva', data: '03/08/2025', texto: 'Ajustes realizados conforme solicitado.' }
+            ]
+        },
+        2: {
+            id: 2,
+            nome: 'Maria Santos',
+            iniciais: 'MS',
+            email: 'maria.santos@aluno.edu.br',
+            curso: 'Ciência da Computação',
+            tituloTCC: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos',
+            dataInicio: '15/02/2025',
+            previsaoConclusao: '10/12/2025',
+            linhaPesquisa: 'Sistemas Distribuídos',
+            status: 'Revisada',
+            statusCor: 'green',
+            versaoAtual: 'Versão 1 enviada em 12/08/2025',
+            versoes: [
+                { id: 1, titulo: 'Versão 1 (Capítulos 1 e 2)', data: '12/08/2025', status: 'Revisada' }
+            ],
+            reunioes: [
+                { id: 105, data: '14/08/2025', hora: '09:00', pauta: 'Discussão sobre carga de testes' }
+            ],
+            comentarios: [
+                { id: 205, autor: 'Você', data: '13/08/2025', texto: 'Capítulo 1 muito bem estruturado.' }
+            ]
+        },
+        3: {
+            id: 3,
+            nome: 'Carlos Correia',
+            iniciais: 'CC',
+            email: 'carlos.correia@aluno.edu.br',
+            curso: 'Engenharia de Software',
+            tituloTCC: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias',
+            dataInicio: '01/04/2025',
+            previsaoConclusao: '20/12/2025',
+            linhaPesquisa: 'Inteligência Artificial',
+            status: 'Revisada',
+            statusCor: 'green',
+            versaoAtual: 'Versão 2 enviada em 10/08/2025',
+            versoes: [
+                { id: 2, titulo: 'Versão 2 (Capítulos 1 ao 4)', data: '10/08/2025', status: 'Revisada' },
+                { id: 1, titulo: 'Versão 1 (Introdução e Metodologia)', data: '15/05/2025', status: 'Aprovado' }
+            ],
+            reunioes: [
+                { id: 103, data: '12/08/2025', hora: '16:00', pauta: 'Validação dos Experimentos Práticos' },
+                { id: 104, data: '20/06/2025', hora: '11:00', pauta: 'Definição da Métrica de Avaliação' }
+            ],
+            comentarios: [
+                { id: 203, autor: 'Você', data: '11/08/2025', texto: 'Os resultados do gráfico 4 precisam de detalhamento nas conclusões.' },
+                { id: 204, autor: 'Carlos Correia', data: '12/08/2025', texto: 'Certo, inclusão das discussões adicionadas para a próxima entrega.' }
+            ]
+        }
+    };
+
+    let aluno = (typeof orientando !== 'undefined' && orientando) ? orientando : null;
+
+    if (!aluno && typeof orientandoId !== 'undefined' && orientandosMap[orientandoId]) {
+        aluno = orientandosMap[orientandoId];
+    }
+
+    if (!aluno) {
+        aluno = orientandosMap[1];
+    }
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= aluno.nome %></title>
+    <link rel="stylesheet" href="/cssProfessor/OrientandoDetalhes.css">
+    <link rel="stylesheet" href="/cssProfessor/BoxComentario.css">
+
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+                document.addEventListener("DOMContentLoaded", () => document.body.setAttribute("data-tema", "escuro"));
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaDetalhesOrientando">
+        <header id="Header">
+            <a href="/configuracoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Configurações">
+                <span class="icon-mask icon-settings"></span>
+            </a>
+            <h1 id="TituloPagina"><%= aluno.nome %></h1>
+            <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
+                <span class="icon-mask icon-sino"></span>
+            </a>
+        </header>
+
+        <section id="PerfilHeader">
+            <div class="avatar-aluno"><%= aluno.iniciais %></div>
+            <div class="info-aluno">
+                <h2 class="nome-aluno"><%= aluno.nome %></h2>
+                <span class="email-aluno"><%= aluno.email %></span>
+                <span class="curso-aluno"><%= aluno.curso %></span>
+            </div>
+        </section>
+
+        <nav id="NavAbas">
+            <button class="aba-item ativa" onclick="mudarAba('resumo', this)">Resumo</button>
+            <button class="aba-item" onclick="mudarAba('versoes', this)">Versões</button>
+            <button class="aba-item" onclick="mudarAba('reunioes', this)">Reuniões</button>
+            <button class="aba-item" onclick="mudarAba('comentarios', this)">Comentários</button>
+        </nav>
+
+        <main id="CorpoScroll">
+            <div id="aba-resumo" class="conteudo-aba ativa">
+                <div class="card-info">
+                    <h3>Informações do TCC</h3>
+                    
+                    <div class="campo-info">
+                        <label>Título do trabalho</label>
+                        <p><%= aluno.tituloTCC %></p>
+                    </div>
+
+                    <div class="campo-info">
+                        <label>Data de início</label>
+                        <p><%= aluno.dataInicio %></p>
+                    </div>
+
+                    <div class="campo-info">
+                        <label>Previsão de conclusão</label>
+                        <p><%= aluno.previsaoConclusao %></p>
+                    </div>
+
+                    <div class="campo-info">
+                        <label>Linha de pesquisa</label>
+                        <p><%= aluno.linhaPesquisa %></p>
+                    </div>
+                </div>
+
+                <div class="card-info">
+                    <h3>Status atual</h3>
+                    <div class="status-box">
+                        <span class="icon-mask icon-files icon-status"></span>
+                        <div class="status-textos">
+                            <span class="badge-status <%= aluno.statusCor %>"><%= aluno.status %></span>
+                            <span class="subtexto-status"><%= aluno.versaoAtual %></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="aba-versoes" class="conteudo-aba">
+                <div class="lista-cards">
+                    <% aluno.versoes.forEach(v => { %>
+                        <div class="card-info flex-row">
+                            <div>
+                                <h4 class="card-titulo-item"><%= v.titulo %></h4>
+                                <span class="subtexto-status">Enviado em <%= v.data %></span>
+                            </div>
+                            <span class="badge-status"><%= v.status %></span>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+
+            <div id="aba-reunioes" class="conteudo-aba">
+                <div class="lista-cards">
+                    <% aluno.reunioes.forEach(r => { %>
+                        <div class="card-info">
+                            <h4 class="card-titulo-item">Reunião - <%= r.data %> às <%= r.hora %></h4>
+                            <p class="subtexto-status">Pauta: <%= r.pauta %></p>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+
+            <div id="aba-comentarios" class="conteudo-aba">
+                <div class="lista-cards">
+                    <% aluno.comentarios.forEach(c => { %>
+                        <div class="card-info">
+                            <div class="flex-row">
+                                <strong><%= c.autor %></strong>
+                                <span class="subtexto-status"><%= c.data %></span>
+                            </div>
+                            <p class="texto-comentario"><%= c.texto %></p>
+                        </div>
+                    <% }); %>
+                </div>
+            </div>
+        </main>
+
+        <div id="AreaAcao">
+            <button id="btnAdicionarComentario" class="btn-principal" onclick="abrirModalComentario()">
+                Adicionar comentário
+            </button>
+        </div>
+
+        <nav id="BottomNav">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+            <a href="/orientandos?perfil=<%= perfilAtual %>" class="nav-btn ativo active">
+                <span class="icon-mask icon-group"></span>
+                <span class="Texto">Orientandos</span>
+            </a>
+            <a href="/agenda?perfil=<%= perfilAtual %>" class="nav-btn">
+                <span class="icon-mask icon-calendar"></span>
+                <span class="Texto">Agenda</span>
+            </a>
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <div id="modalComentario" class="modal-overlay" style="display: none;">
+        <div class="modal-container">
+            <div class="modal-header">
+                <div>
+                    <h2>Adicionar comentário</h2>
+                    <p>Envie um feedback sobre a versão do TCC de <strong><%= aluno.nome %></strong>.</p>
+                </div>
+                <button type="button" class="btn-close" onclick="fecharModalComentario()">&times;</button>
+            </div>
+
+            <form id="formAdicionarComentario" action="/adicionar-comentario" method="POST" enctype="multipart/form-data">
+                <input type="hidden" name="perfil" value="<%= perfilAtual %>">
+                <input type="hidden" name="orientandoId" value="<%= aluno.id %>">
+
+                <div class="form-group">
+                    <label for="versaoTcc">Versão do TCC</label>
+                    <select id="versaoTcc" name="versaoId" required>
+                        <% aluno.versoes.forEach(v => { %>
+                            <option value="<%= v.id %>"><%= v.titulo %> (<%= v.data %>)</option>
+                        <% }); %>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="textoComentario">Comentário / Feedback</label>
+                    <textarea id="textoComentario" name="comentario" rows="4" required placeholder="Digite aqui suas observações sobre o trabalho..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="anexoComentario">Anexos (opcional)</label>
+                    <input type="file" id="anexoComentario" name="anexo" multiple class="input-file">
+                </div>
+
+                <div class="modal-actions">
+                    <button type="button" class="btn-secundario" onclick="fecharModalComentario()">Cancelar</button>
+                    <button type="submit" class="btn-primario">Enviar comentário</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function mudarAba(idAba, elemento) {
+            document.querySelectorAll('.conteudo-aba').forEach(aba => aba.classList.remove('ativa'));
+            document.querySelectorAll('.aba-item').forEach(btn => btn.classList.remove('ativa'));
+
+            document.getElementById('aba-' + idAba).classList.add('ativa');
+            elemento.classList.add('ativa');
+        }
+
+        function abrirModalComentario() {
+            const modal = document.getElementById("modalComentario");
+            if (modal) modal.style.display = "flex";
+        }
+
+        function fecharModalComentario() {
+            const modal = document.getElementById("modalComentario");
+            if (modal) modal.style.display = "none";
+        }
+
+        document.getElementById("modalComentario")?.addEventListener("click", function(e) {
+            if (e.target === this) fecharModalComentario();
+        });
+    </script>
+</body>
+</html>
