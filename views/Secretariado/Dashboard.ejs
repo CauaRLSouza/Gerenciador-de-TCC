@@ -1,0 +1,188 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'inicio';
+    const periodoSelecionado = (typeof periodo !== 'undefined' && periodo) ? periodo : '2026.1';
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="/cssSecretaria/Dashboard.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaDashboard">
+        <header id="Header">
+            <button class="icon-btn" aria-label="Configurações">
+                <span class="icon-mask icon-settings"></span>
+            </button>
+            <h1 id="TituloPagina">Dashboard</h1>
+            <div class="header-actions">
+                <button class="icon-btn notification-btn" aria-label="Notificações">
+                    <span class="icon-mask icon-notification"></span>
+                </button>
+            </div>
+        </header>
+
+        <main id="CorpoScroll">
+            <div class="saudacao-container">
+                <h2>Olá, Secretaria! 👋</h2>
+                <p>Aqui está o resumo geral do sistema</p>
+            </div>
+
+            <div class="card-resumo">
+                <div class="resumo-topo">
+                    <div class="resumo-titulo-container">
+                        <span class="resumo-titulo">Resumo geral</span>
+                        <span id="badgeStatusPeriodo" class="badge-status-periodo oculto">Período letivo fechado</span>
+                    </div>
+                    <div class="select-periodo-wrapper">
+                        <label for="periodoLetivo" class="sr-only">Período letivo</label>
+                        <select id="periodoLetivo" class="select-periodo" onchange="atualizarPeriodo(this.value)">
+                            <option value="2026.1" <%= periodoSelecionado === '2026.1' ? 'selected' : '' %>>Período letivo: 2026.1</option>
+                            <option value="2025.2" <%= periodoSelecionado === '2025.2' ? 'selected' : '' %>>Período letivo: 2025.2</option>
+                            <option value="2025.1" <%= periodoSelecionado === '2025.1' ? 'selected' : '' %>>Período letivo: 2025.1</option>
+                            <option value="2024.2" <%= periodoSelecionado === '2024.2' ? 'selected' : '' %>>Período letivo: 2024.2</option>
+                            <option value="2024.1" <%= periodoSelecionado === '2024.1' ? 'selected' : '' %>>Período letivo: 2024.1</option>
+                            <option value="2023.2" <%= periodoSelecionado === '2023.2' ? 'selected' : '' %>>Período letivo: 2023.2</option>
+                            <option value="2023.1" <%= periodoSelecionado === '2023.1' ? 'selected' : '' %>>Período letivo: 2023.1</option>
+                            <option value="2022.2" <%= periodoSelecionado === '2022.2' ? 'selected' : '' %>>Período letivo: 2022.2</option>
+                            <option value="2022.1" <%= periodoSelecionado === '2022.1' ? 'selected' : '' %>>Período letivo: 2022.1</option>
+                            <option value="2021.2" <%= periodoSelecionado === '2021.2' ? 'selected' : '' %>>Período letivo: 2021.2</option>
+                            <option value="2021.1" <%= periodoSelecionado === '2021.1' ? 'selected' : '' %>>Período letivo: 2021.1</option>
+                            <option value="2020.2" <%= periodoSelecionado === '2020.2' ? 'selected' : '' %>>Período letivo: 2020.2</option>
+                            <option value="2020.1" <%= periodoSelecionado === '2020.1' ? 'selected' : '' %>>Período letivo: 2020.1</option>
+                        </select>
+                        <span class="icon-mask icon-chevron-down"></span>
+                    </div>
+                </div>
+
+                <div class="resumo-grid">
+                    <div class="resumo-item">
+                        <span id="lblTccs" class="resumo-label">TCCs em andamento</span>
+                        <span id="valTccsAndamento" class="resumo-valor">26</span>
+                    </div>
+                    <div class="resumo-item">
+                        <span id="lblAptos" class="resumo-label">Aptos para banca</span>
+                        <span id="valAptosBanca" class="resumo-valor">8</span>
+                    </div>
+                    <div class="resumo-item">
+                        <span id="lblBancas" class="resumo-label">Bancas agendadas</span>
+                        <span id="valBancasAgendadas" class="resumo-valor">3</span>
+                    </div>
+                    <div class="resumo-item">
+                        <span id="lblConcluidos" class="resumo-label">Concluídos</span>
+                        <span id="valConcluidos" class="resumo-valor">15</span>
+                    </div>
+                </div>
+
+                <button class="btn-relatorio" onclick="verRelatorioCompleto()">
+                    Ver relatório completo
+                </button>
+            </div>
+
+            <section class="secao-atalhos">
+                <h3 class="secao-titulo">Atalhos rápidos</h3>
+                <div class="atalhos-grid">
+                    <a href="/alunos?perfil=<%= perfilAtual %>" class="card-atalho verde">
+                        <div class="atalho-icone-wrapper">
+                            <span class="icon-mask icon-studant"></span>
+                        </div>
+                        <div class="atalho-info">
+                            <span class="atalho-nome">Alunos</span>
+                            <span id="valAtalhoAlunos" class="atalho-valor">26</span>
+                        </div>
+                    </a>
+
+                    <a href="/professores?perfil=<%= perfilAtual %>" class="card-atalho amarelo">
+                        <div class="atalho-icone-wrapper">
+                            <span class="icon-mask icon-professor"></span>
+                        </div>
+                        <div class="atalho-info">
+                            <span class="atalho-nome">Professores</span>
+                            <span id="valAtalhoProfessores" class="atalho-valor">11</span>
+                        </div>
+                    </a>
+
+                    <a href="/tccs?perfil=<%= perfilAtual %>" class="card-atalho azul">
+                        <div class="atalho-icone-wrapper">
+                            <span class="icon-mask icon-files"></span>
+                        </div>
+                        <div class="atalho-info">
+                            <span class="atalho-nome">TCCs</span>
+                            <span id="valAtalhoTccs" class="atalho-valor">26</span>
+                        </div>
+                    </a>
+
+                    <a href="/bancas?perfil=<%= perfilAtual %>" class="card-atalho vermelho">
+                        <div class="atalho-icone-wrapper">
+                            <span class="icon-mask icon-calendar"></span>
+                        </div>
+                        <div class="atalho-info">
+                            <span class="atalho-nome">Bancas</span>
+                            <span id="valAtalhoBancas" class="atalho-valor">3</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <section class="secao-pendencias">
+                <div class="pendencias-header">
+                    <h3 class="secao-titulo">Pendências urgentes</h3>
+                    <a href="/pendencias?perfil=<%= perfilAtual %>" class="link-ver-todas">Ver todas</a>
+                </div>
+
+                <div class="card-pendencias">
+                    <div class="pendencia-item">
+                        <span id="valPendenciaBanca" class="badge-numero laranja">5</span>
+                        <span class="pendencia-texto">TCCs aguardando definição de banca</span>
+                    </div>
+                    <div class="pendencia-item">
+                        <span id="valPendenciaTermos" class="badge-numero laranja">3</span>
+                        <span class="pendencia-texto">Termos de aceite pendentes</span>
+                    </div>
+                    <div class="pendencia-item">
+                        <span id="valPendenciaRevisao" class="badge-numero laranja">7</span>
+                        <span class="pendencia-texto">Versões aguardando revisão do orientador</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <nav id="BottomNav">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'inicio' || paginaAtual === 'dashboard' || paginaAtual === '/dashboard' || !paginaAtual) ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-home"></span>
+                <span>Início</span>
+            </a>
+            <a href="/alunos?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'alunos' || paginaAtual === '/alunos') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-studant"></span>
+                <span>Alunos</span>
+            </a>
+            <a href="/professores?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'professores' || paginaAtual === '/professores') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-professor"></span>
+                <span>Professores</span>
+            </a>
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'acervo' || paginaAtual === '/acervo') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-acervo"></span>
+                <span>Acervo</span>
+            </a>
+            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'perfil' || paginaAtual === '/perfil') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-perfil"></span>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="/JS/Resumo.js"></script>
+</body>
+</html>
