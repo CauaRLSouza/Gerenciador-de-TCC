@@ -1,0 +1,153 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar Aluno</title>
+    <link rel="stylesheet" href="/cssSecretaria/CadastrarAluno.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaCadastrarAluno">
+        <header id="Header">
+            <a href="/alunos?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Voltar">
+                <span class="icon-mask icon-arrow-left"></span>
+            </a>
+            <h1 id="TituloPagina">Cadastrar aluno</h1>
+            <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn icon-notif-wrapper" aria-label="Notificações">
+                <span class="icon-mask icon-notification"></span>
+            </a>
+        </header>
+
+        <main id="CorpoScroll">
+            <form action="/alunos/cadastrar" method="POST" id="formCadastrarAluno" class="card-formulario">
+                
+                <div class="cabecalho-secao">
+                    <div class="icone-secao">
+                        <span class="icon-mask icon-studant"></span>
+                    </div>
+                    <div class="texto-secao">
+                        <h2>Dados do aluno</h2>
+                        <p>Preencha as informações do aluno</p>
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="nomeCompleto">Nome completo <span class="obrigatorio">*</span></label>
+                    <input type="text" id="nomeCompleto" name="nomeCompleto" placeholder="Digite o nome completo" required>
+                </div>
+
+                <div class="linha-dupla">
+                    <div class="campo-grupo">
+                        <label for="matricula">Matrícula <span class="obrigatorio">*</span></label>
+                        <input type="text" id="matricula" name="matricula" placeholder="Digite a matrícula" required>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="telefone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(xx) xxxxx-xxxx">
+                    </div>
+                </div>
+
+                <div class="linha-dupla">
+                    <div class="campo-grupo">
+                        <label for="dataNascimento">Data de nascimento</label>
+                        <div class="wrapper-input-icone">
+                            <input type="date" id="dataNascimento" name="dataNascimento">
+                        </div>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label for="curso">Curso <span class="obrigatorio">*</span></label>
+                        <div class="wrapper-select">
+                            <select id="curso" name="curso" required>
+                                <option value="" disabled selected hidden>Selecione o curso</option>
+                                <option value="Licenciatura em Ciências da Computação">Licenciatura em Ciências da Computação</option>
+                                <option value="Licenciatura em Ciências Agrárias">Licenciatura em Ciências Agrárias</option>
+                                <option value="Licenciatura em Química">Licenciatura em Química</option>
+                                <option value="Bacharelado em Administração">Bacharelado em Administração</option>
+                            </select>
+                            <span class="icon-mask icon-chevron-down"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="periodoSemestre">Período / Semestre <span class="obrigatorio">*</span></label>
+                    <div class="wrapper-select">
+                        <select id="periodoSemestre" name="periodoSemestre" required>
+                            <option value="" disabled selected hidden>Selecione o período</option>
+                            <option value="6º Semestre">6º Semestre</option>
+                            <option value="8º Semestre">8º Semestre</option>
+                        </select>
+                        <span class="icon-mask icon-chevron-down"></span>
+                    </div>
+                </div>
+
+                <div class="subtitulo-secao">
+                    <h3>Acesso ao sistema</h3>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="emailAcesso">E-mail de acesso <span class="obrigatorio">*</span></label>
+                    <input type="email" id="emailAcesso" name="emailAcesso" placeholder="Digite o e-mail que o aluno usará para acessar" required>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="senhaProvisoria">Senha provisória <span class="obrigatorio">*</span></label>
+                    <div class="wrapper-input-icone">
+                        <input type="password" id="senhaProvisoria" name="senhaProvisoria" placeholder="Digite a senha" required>
+                        <button type="button" class="btn-toggle-senha" aria-label="Mostrar senha">
+                            <span class="icon-mask icon-eye"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="campo-grupo">
+                    <label for="confirmarSenha">Confirmar senha <span class="obrigatorio">*</span></label>
+                    <div class="wrapper-input-icone">
+                        <input type="password" id="confirmarSenha" name="confirmarSenha" placeholder="Confirme a senha" required>
+                        <button type="button" class="btn-toggle-senha" aria-label="Mostrar senha">
+                            <span class="icon-mask icon-eye"></span>
+                        </button>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submeter">
+                    <span class="icon-mask icon-save"></span>
+                    <span>Cadastrar aluno</span>
+                </button>
+
+            </form>
+        </main>
+    </div>
+
+    <script>
+        document.querySelectorAll('.btn-toggle-senha').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const input = this.previousElementSibling;
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    this.querySelector('.icon-mask').classList.remove('icon-eye');
+                    this.querySelector('.icon-mask').classList.add('icon-eye-off');
+                } else {
+                    input.type = 'password';
+                    this.querySelector('.icon-mask').classList.remove('icon-eye-off');
+                    this.querySelector('.icon-mask').classList.add('icon-eye');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

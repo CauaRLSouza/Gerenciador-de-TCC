@@ -222,6 +222,11 @@ app.get('/alunos', proibirAcessoDireto, (req, res) => {
     res.render(`${perfil}/alunos`, { currentPage: 'alunos', perfil });
 });
 
+app.get('/cadastrar-aluno', proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Aluno';
+    res.render(`${perfil}/CadastrarAluno`, { currentPage: 'CadastrarAluno', perfil });
+});
+
 
 app.use((req, res) => {
     res.status(404).send('<h1>Página não encontrada (404)</h1>');
