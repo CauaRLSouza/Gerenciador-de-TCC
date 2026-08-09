@@ -1,0 +1,189 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'alunos';
+    
+    const cursoUrl = (typeof query !== 'undefined' && query.curso) ? query.curso : '';
+    const semestreUrl = (typeof query !== 'undefined' && query.semestre) ? query.semestre : '';
+    const ordemUrl = (typeof query !== 'undefined' && query.ordem) ? query.ordem : 'az';
+
+    const alunosMock = [
+        { id: '1', nome: 'João da Silva', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataEgresso: '2028-07-10', status: 'ativo' },
+        { id: '2', nome: 'Maria Santos', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.1', dataEgresso: '2027-12-15', status: 'ativo' },
+        { id: '3', nome: 'Carlos Correia', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.1', dataEgresso: '2028-12-15', status: 'ativo' },
+        { id: '4', nome: 'Ana Beatriz Souza', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.1', dataEgresso: '2026-12-20', status: 'ativo' },
+        { id: '5', nome: 'Bruno Ferreira', curso: 'Licenciatura em Química', semestre: '2023.2', dataEgresso: '2027-07-15', status: 'ativo' },
+        { id: '6', nome: 'Camila Oliveira', curso: 'Bacharel em Administração', semestre: '2024.1', dataEgresso: '2028-02-28', status: 'ativo' },
+        { id: '7', nome: 'Daniel Costa', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.2', dataEgresso: '2029-07-10', status: 'ativo' },
+        { id: '8', nome: 'Eduarda Lima', curso: 'Licenciatura em Ciências Agrárias', semestre: '2021.2', dataEgresso: '2025-12-18', status: 'inativo' },
+        { id: '9', nome: 'Felipe Rocha', curso: 'Licenciatura em Química', semestre: '2022.2', dataEgresso: '2026-07-22', status: 'ativo' },
+        { id: '10', nome: 'Gabriela Alves', curso: 'Bacharel em Administração', semestre: '2023.1', dataEgresso: '2027-02-10', status: 'ativo' },
+        { id: '11', nome: 'Gabriel Santos', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataEgresso: '2028-07-30', status: 'ativo' },
+        { id: '12', nome: 'Heitor Martins', curso: 'Licenciatura em Ciências Agrárias', semestre: '2025.1', dataEgresso: '2029-02-15', status: 'ativo' },
+        { id: '13', nome: 'Isabela Ribeiro', curso: 'Licenciatura em Química', semestre: '2021.1', dataEgresso: '2025-07-10', status: 'inativo' },
+        { id: '14', nome: 'Lucas Mendes', curso: 'Bacharel em Administração', semestre: '2022.2', dataEgresso: '2026-12-15', status: 'ativo' },
+        { id: '15', nome: 'Mariana Barbosa', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.2', dataEgresso: '2027-07-20', status: 'ativo' },
+        { id: '16', nome: 'Matheus Fernandes', curso: 'Licenciatura em Ciências Agrárias', semestre: '2024.1', dataEgresso: '2028-02-10', status: 'ativo' },
+        { id: '17', nome: 'Nathalia Carvalho', curso: 'Licenciatura em Química', semestre: '2025.2', dataEgresso: '2029-12-18', status: 'ativo' },
+        { id: '18', nome: 'Otávio Teixeira', curso: 'Bacharel em Administração', semestre: '2021.2', dataEgresso: '2025-12-05', status: 'inativo' },
+        { id: '19', nome: 'Patricia Gomes', curso: 'Licenciatura em Ciências da Computação', semestre: '2022.1', dataEgresso: '2026-07-15', status: 'ativo' },
+        { id: '20', nome: 'Rafael Cardoso', curso: 'Licenciatura em Ciências Agrárias', semestre: '2023.1', dataEgresso: '2027-02-28', status: 'ativo' },
+        { id: '21', nome: 'Sophia Monteiro', curso: 'Licenciatura em Química', semestre: '2024.2', dataEgresso: '2028-07-12', status: 'ativo' },
+        { id: '22', nome: 'Thiago Nunes', curso: 'Bacharel em Administração', semestre: '2025.1', dataEgresso: '2029-02-20', status: 'ativo' },
+        { id: '23', nome: 'Vinícius Moreira', curso: 'Licenciatura em Ciências da Computação', semestre: '2021.1', dataEgresso: '2025-07-25', status: 'inativo' },
+        { id: '24', nome: 'Yasmin Vieira', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.2', dataEgresso: '2026-12-10', status: 'ativo' },
+        { id: '25', nome: 'Igor Cavalcante', curso: 'Licenciatura em Química', semestre: '2023.2', dataEgresso: '2027-07-05', status: 'ativo' },
+        { id: '26', nome: 'Letícia Freitas', curso: 'Bacharel em Administração', semestre: '2024.1', dataEgresso: '2028-02-18', status: 'ativo' }
+    ];
+
+    let listaAlunos = (typeof orientandos !== 'undefined' && orientandos.length > 0) ? orientandos : alunosMock;
+
+    listaAlunos.sort((a, b) => a.nome.localeCompare(b.nome));
+
+    function getIniciais(nome) {
+        const partes = nome.trim().split(' ');
+        if (partes.length >= 2) {
+            return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
+        }
+        return partes[0].substring(0, 2).toUpperCase();
+    }
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alunos</title>
+    <link rel="stylesheet" href="/cssSecretaria/Alunos.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaAlunos">
+        <header id="Header">
+            <a href="/configuracoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Configurações">
+                <span class="icon-mask icon-settings"></span>
+            </a>
+            <h1 id="TituloPagina">Alunos</h1>
+            <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
+                <span class="icon-mask icon-notification"></span>
+            </a>
+        </header>
+
+        <main id="CorpoScroll">
+            <div class="busca-filter-container">
+                <div class="input-busca-wrapper">
+                    <span class="icon-mask icon-search"></span>
+                    <input type="text" placeholder="Buscar aluno..." id="inputBusca">
+                </div>
+                <button type="button" class="btn-filtro-icon" id="btnToggleFiltros" aria-label="Filtros e Ordenação">
+                    <span class="icon-mask icon-filter"></span>
+                </button>
+            </div>
+
+            <div class="painel-filtros-oculto" id="painelFiltros">
+                <div class="controle-item">
+                    <label for="selectFiltroCurso">Filtrar por Curso</label>
+                    <select id="selectFiltroCurso" class="select-padrao">
+                        <option value="">Todos os Cursos</option>
+                        <option value="Licenciatura em Ciências da Computação" <%= cursoUrl === 'Licenciatura em Ciências da Computação' ? 'selected' : '' %>>Licenciatura em Ciências da Computação</option>
+                        <option value="Licenciatura em Ciências Agrárias" <%= cursoUrl === 'Licenciatura em Ciências Agrárias' ? 'selected' : '' %>>Licenciatura em Ciências Agrárias</option>
+                        <option value="Licenciatura em Química" <%= cursoUrl === 'Licenciatura em Química' ? 'selected' : '' %>>Licenciatura em Química</option>
+                        <option value="Bacharel em Administração" <%= cursoUrl === 'Bacharel em Administração' ? 'selected' : '' %>>Bacharel em Administração</option>
+                    </select>
+                </div>
+
+                <div class="controle-item">
+                    <label for="selectFiltroSemestre">Filtrar por Semestre</label>
+                    <select id="selectFiltroSemestre" class="select-padrao">
+                        <option value="">Todos os Semestres</option>
+                        <option value="2025.2" <%= semestreUrl === '2025.2' ? 'selected' : '' %>>2025.2</option>
+                        <option value="2025.1" <%= semestreUrl === '2025.1' ? 'selected' : '' %>>2025.1</option>
+                        <option value="2024.2" <%= semestreUrl === '2024.2' ? 'selected' : '' %>>2024.2</option>
+                        <option value="2024.1" <%= semestreUrl === '2024.1' ? 'selected' : '' %>>2024.1</option>
+                        <option value="2023.2" <%= semestreUrl === '2023.2' ? 'selected' : '' %>>2023.2</option>
+                        <option value="2023.1" <%= semestreUrl === '2023.1' ? 'selected' : '' %>>2023.1</option>
+                        <option value="2022.2" <%= semestreUrl === '2022.2' ? 'selected' : '' %>>2022.2</option>
+                        <option value="2022.1" <%= semestreUrl === '2022.1' ? 'selected' : '' %>>2022.1</option>
+                        <option value="2021.2" <%= semestreUrl === '2021.2' ? 'selected' : '' %>>2021.2</option>
+                        <option value="2021.1" <%= semestreUrl === '2021.1' ? 'selected' : '' %>>2021.1</option>
+                    </select>
+                </div>
+
+                <div class="controle-item">
+                    <label for="selectOrdenar">Ordenar por</label>
+                    <select id="selectOrdenar" class="select-padrao">
+                        <option value="az" <%= ordemUrl === 'az' ? 'selected' : '' %>>Ordem Alfabética (A-Z)</option>
+                        <option value="za" <%= ordemUrl === 'za' ? 'selected' : '' %>>Ordem Alfabética (Z-A)</option>
+                        <option value="egresso_recente" <%= ordemUrl === 'egresso_recente' ? 'selected' : '' %>>Mais recentes (Data de Egresso)</option>
+                        <option value="egresso_antigo" <%= ordemUrl === 'egresso_antigo' ? 'selected' : '' %>>Mais antigos (Data de Egresso)</option>
+                        <option value="semestre_crescente" <%= ordemUrl === 'semestre_crescente' ? 'selected' : '' %>>Semestre Crescente</option>
+                        <option value="semestre_decrescente" <%= ordemUrl === 'semestre_decrescente' ? 'selected' : '' %>>Semestre Decrescente</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="lista-alunos-vertical" id="gridAlunos">
+                <% listaAlunos.forEach(aluno => { %>
+                    <a href="/orientando/<%= aluno.id %>?perfil=<%= perfilAtual %>" 
+                       class="item-aluno-linha item-aluno" 
+                       data-nome="<%= aluno.nome %>" 
+                       data-curso="<%= aluno.curso %>" 
+                       data-semestre="<%= aluno.semestre %>" 
+                       data-egresso="<%= aluno.dataEgresso %>">
+                        <div class="avatar-circulo">
+                            <%= getIniciais(aluno.nome) %>
+                        </div>
+                        <div class="aluno-info-principal">
+                            <span class="aluno-nome-linha"><%= aluno.nome %></span>
+                            <span class="aluno-subtitulo-linha"><%= aluno.semestre %> • <%= aluno.curso %></span>
+                            <span class="badge-status-aluno <%= aluno.status || 'ativo' %>"><%= aluno.status || 'ativo' %></span>
+                        </div>
+                        <span class="icon-mask icon-chevron-right"></span>
+                    </a>
+                <% }); %>
+            </div>
+        </main>
+
+        <a href="/alunos/novo?perfil=<%= perfilAtual %>" class="fab-adicionar" aria-label="Adicionar Aluno">
+            <span class="icon-mask icon-plus"></span>
+        </a>
+
+        <nav id="BottomNav">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'inicio' || paginaAtual === 'dashboard' || paginaAtual === '/dashboard') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+            <a href="/alunos?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'alunos' || paginaAtual === '/alunos') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-studant"></span>
+                <span class="Texto">Alunos</span>
+            </a>
+            <a href="/professores?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'professores' || paginaAtual === '/professores') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-professor"></span>
+                <span class="Texto">Professores</span>
+            </a>
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'acervo' || paginaAtual === '/acervo') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'perfil' || paginaAtual === '/perfil') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        document.getElementById('btnToggleFiltros')?.addEventListener('click', function() {
+            document.getElementById('painelFiltros')?.classList.toggle('ativo');
+        });
+    </script>
+    <script src="/JS/ControlarAlunos.js"></script>
+</body>
+</html>

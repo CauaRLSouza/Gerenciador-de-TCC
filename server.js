@@ -217,6 +217,11 @@ app.get('/bancas', proibirAcessoDireto, (req, res) => {
     res.render(`${perfil}/bancas`, { currentPage: 'bancas', perfil });
 });
 
+app.get('/alunos', proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Aluno';
+    res.render(`${perfil}/alunos`, { currentPage: 'alunos', perfil });
+});
+
 
 app.use((req, res) => {
     res.status(404).send('<h1>Página não encontrada (404)</h1>');
