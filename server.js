@@ -1,5 +1,5 @@
 const express = require('express');
-const path = require('path');
+const path = path = require('path');
 
 const app = express();
 const PORT = 3000;
@@ -17,81 +17,33 @@ const usuariosMock = [
     { email: 'sec@teste.com', perfil: 'Secretariado' }
 ];
 
-const orientandosAtivosMock = [
-    {
-        id: '1',
-        nome: 'João da Silva',
-        iniciais: 'JS',
-        email: 'joao.silva@aluno.edu.br',
-        curso: 'Sistemas de Informação',
-        tituloTCC: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web',
-        dataInicio: '10/03/2025',
-        previsaoConclusao: '15/12/2025',
-        linhaPesquisa: 'Engenharia de Software',
-        status: 'Aguardando revisão',
-        statusCor: 'yellow',
-        versaoAtual: 'Versão 3 enviada em 15/08/2025',
-        versoes: [
-            { id: 3, titulo: 'Versão 3 (Final)', data: '15/08/2025', status: 'Aguardando revisão' },
-            { id: 2, titulo: 'Versão 2 (Parcial)', data: '01/08/2025', status: 'Revisada' },
-            { id: 1, titulo: 'Versão 1 (Pré-projeto)', data: '10/03/2025', status: 'Aprovado' }
-        ],
-        reunioes: [
-            { id: 101, data: '18/08/2025', hora: '14:00', pauta: 'Revisão do Capítulo 3' },
-            { id: 102, data: '02/08/2025', hora: '10:00', pauta: 'Alinhamento dos Requisitos' }
-        ],
-        comentarios: [
-            { id: 201, autor: 'Você', data: '02/08/2025', texto: 'Ajustar a metodologia no capítulo 2.' },
-            { id: 202, autor: 'João da Silva', data: '03/08/2025', texto: 'Ajustes realizados conforme solicitado.' }
-        ]
-    },
-    {
-        id: '2',
-        nome: 'Maria Santos',
-        iniciais: 'MS',
-        email: 'maria.santos@aluno.edu.br',
-        curso: 'Ciência da Computação',
-        tituloTCC: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos',
-        dataInicio: '15/02/2025',
-        previsaoConclusao: '10/12/2025',
-        linhaPesquisa: 'Sistemas Distribuídos',
-        status: 'Revisada',
-        statusCor: 'green',
-        versaoAtual: 'Versão 1 enviada em 12/08/2025',
-        versoes: [
-            { id: 1, titulo: 'Versão 1 (Capítulos 1 e 2)', data: '12/08/2025', status: 'Revisada' }
-        ],
-        reunioes: [
-            { id: 105, data: '14/08/2025', hora: '09:00', pauta: 'Discussão sobre carga de testes' }
-        ],
-        comentarios: [
-            { id: 205, autor: 'Você', data: '13/08/2025', texto: 'Capítulo 1 muito bem estruturado.' }
-        ]
-    },
-    {
-        id: '3',
-        nome: 'Carlos Correia',
-        iniciais: 'CC',
-        email: 'carlos.correia@aluno.edu.br',
-        curso: 'Engenharia de Software',
-        tituloTCC: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias',
-        dataInicio: '01/04/2025',
-        previsaoConclusao: '20/12/2025',
-        linhaPesquisa: 'Inteligência Artificial',
-        status: 'Revisada',
-        statusCor: 'green',
-        versaoAtual: 'Versão 2 enviada em 10/08/2025',
-        versoes: [
-            { id: 2, titulo: 'Versão 2 (Capítulos 1 ao 4)', data: '10/08/2025', status: 'Revisada' },
-            { id: 1, titulo: 'Versão 1 (Introdução e Metodologia)', data: '15/05/2025', status: 'Aprovado' }
-        ],
-        reunioes: [
-            { id: 103, data: '12/08/2025', hora: '16:00', pauta: 'Validação dos Experimentos Práticos' }
-        ],
-        comentarios: [
-            { id: 203, autor: 'Você', data: '11/08/2025', texto: 'Os resultados do gráfico 4 precisam de detalhamento nas conclusões.' }
-        ]
-    }
+const todosAlunosMock = [
+    { id: '1', nome: 'João da Silva', matricula: '202410101', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-10', email: 'joao.silva@aluno.edu.br', tituloTCC: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web', dataInicio: '10/03/2025', previsaoConclusao: '15/12/2025', linhaPesquisa: 'Engenharia de Software', status: 'Aguardando revisão', statusCor: 'yellow' },
+    { id: '2', nome: 'Maria Santos', matricula: '202310102', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.1', dataIngresso: '2023-02-15', email: 'maria.santos@aluno.edu.br', tituloTCC: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos', dataInicio: '15/02/2025', previsaoConclusao: '10/12/2025', linhaPesquisa: 'Sistemas Distribuídos', status: 'Revisada', statusCor: 'green' },
+    { id: '3', nome: 'Carlos Correia', matricula: '202510103', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.1', dataIngresso: '2025-02-15', email: 'carlos.correia@aluno.edu.br', tituloTCC: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias', dataInicio: '01/04/2025', previsaoConclusao: '20/12/2025', linhaPesquisa: 'Inteligência Artificial', status: 'Revisada', statusCor: 'green' },
+    { id: '4', nome: 'Ana Beatriz Souza', matricula: '202210104', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.1', dataIngresso: '2022-02-20', email: 'ana.souza@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '5', nome: 'Bruno Ferreira', matricula: '202310105', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-15', email: 'bruno.ferreira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '6', nome: 'Camila Oliveira', matricula: '202410106', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-28', email: 'camila.oliveira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '7', nome: 'Daniel Costa', matricula: '202510107', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.2', dataIngresso: '2025-07-10', email: 'daniel.costa@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '8', nome: 'Eduarda Lima', matricula: '202110108', curso: 'Licenciatura em Ciências Agrárias', semestre: '2021.2', dataIngresso: '2021-07-18', email: 'eduarda.lima@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '9', nome: 'Felipe Rocha', matricula: '202210109', curso: 'Licenciatura em Química', semestre: '2022.2', dataIngresso: '2022-07-22', email: 'felipe.rocha@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '10', nome: 'Gabriela Alves', matricula: '202310110', curso: 'Bacharel em Administração', semestre: '2023.1', dataIngresso: '2023-02-10', email: 'gabriela.alves@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '11', nome: 'Gabriel Santos', matricula: '202410111', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-30', email: 'gabriel.santos@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '12', nome: 'Heitor Martins', matricula: '202510112', curso: 'Licenciatura em Ciências Agrárias', semestre: '2025.1', dataIngresso: '2025-02-15', email: 'heitor.martins@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '13', nome: 'Isabela Ribeiro', matricula: '202110113', curso: 'Licenciatura em Química', semestre: '2021.1', dataIngresso: '2021-02-10', email: 'isabela.ribeiro@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '14', nome: 'Lucas Mendes', matricula: '202210114', curso: 'Bacharel em Administração', semestre: '2022.2', dataIngresso: '2022-07-15', email: 'lucas.mendes@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '15', nome: 'Mariana Barbosa', matricula: '202310115', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.2', dataIngresso: '2023-07-20', email: 'mariana.barbosa@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '16', nome: 'Matheus Fernandes', matricula: '202410116', curso: 'Licenciatura em Ciências Agrárias', semestre: '2024.1', dataIngresso: '2024-02-10', email: 'matheus.fernandes@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '17', nome: 'Nathalia Carvalho', matricula: '202510117', curso: 'Licenciatura em Química', semestre: '2025.2', dataIngresso: '2025-07-18', email: 'nathalia.carvalho@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '18', nome: 'Otávio Teixeira', matricula: '202110118', curso: 'Bacharel em Administração', semestre: '2021.2', dataIngresso: '2021-07-05', email: 'otavio.teixeira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '19', nome: 'Patricia Gomes', matricula: '202210119', curso: 'Licenciatura em Ciências da Computação', semestre: '2022.1', dataIngresso: '2022-02-15', email: 'patricia.gomes@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '20', nome: 'Rafael Cardoso', matricula: '202310120', curso: 'Licenciatura em Ciências Agrárias', semestre: '2023.1', dataIngresso: '2023-02-28', email: 'rafael.cardoso@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '21', nome: 'Sophia Monteiro', matricula: '202410121', curso: 'Licenciatura em Química', semestre: '2024.2', dataIngresso: '2024-07-12', email: 'sophia.monteiro@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '22', nome: 'Thiago Nunes', matricula: '202510122', curso: 'Bacharel em Administração', semestre: '2025.1', dataIngresso: '2025-02-20', email: 'thiago.nunes@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '23', nome: 'Vinícius Moreira', matricula: '202110123', curso: 'Licenciatura em Ciências da Computação', semestre: '2021.1', dataIngresso: '2021-02-25', email: 'vinicius.moreira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '24', nome: 'Yasmin Vieira', matricula: '202210124', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.2', dataIngresso: '2022-07-10', email: 'yasmin.vieira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '25', nome: 'Igor Cavalcante', matricula: '202310125', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-05', email: 'igor.cavalcante@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { id: '26', nome: 'Letícia Freitas', matricula: '202410126', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-18', email: 'leticia.freitas@aluno.edu.br', status: 'Ativo', statusCor: 'green' }
 ];
 
 function proibirAcessoDireto(req, res, next) {
@@ -102,6 +54,15 @@ function proibirAcessoDireto(req, res, next) {
     }
 
     next();
+}
+
+function gerarIniciais(nome) {
+    if (!nome) return '';
+    const partes = nome.trim().split(' ');
+    if (partes.length >= 2) {
+        return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
+    }
+    return partes[0].substring(0, 2).toUpperCase();
 }
 
 app.get('/', (req, res) => {
@@ -150,7 +111,7 @@ app.get('/orientandos', proibirAcessoDireto, (req, res) => {
     res.render(`${perfil}/Orientandos`, { 
         currentPage: 'orientandos', 
         perfil,
-        orientandos: orientandosAtivosMock
+        orientandos: todosAlunosMock.slice(0, 3)
     });
 });
 
@@ -158,7 +119,7 @@ app.get('/orientando/:id', proibirAcessoDireto, (req, res) => {
     const perfil = req.query.perfil || 'Professor';
     const alunoId = req.params.id;
 
-    const orientandoEncontrado = orientandosAtivosMock.find(a => String(a.id) === String(alunoId));
+    const orientandoEncontrado = todosAlunosMock.find(a => String(a.id) === String(alunoId));
 
     if (!orientandoEncontrado) {
         return res.status(404).send('<h1>Orientando não encontrado</h1>');
@@ -218,8 +179,12 @@ app.get('/bancas', proibirAcessoDireto, (req, res) => {
 });
 
 app.get('/alunos', proibirAcessoDireto, (req, res) => {
-    const perfil = req.query.perfil || 'Aluno';
-    res.render(`${perfil}/alunos`, { currentPage: 'alunos', perfil });
+    const perfil = req.query.perfil || 'Secretariado';
+    res.render(`${perfil}/alunos`, { 
+        currentPage: 'alunos', 
+        perfil,
+        orientandos: todosAlunosMock
+    });
 });
 
 app.get('/cadastrar-aluno', proibirAcessoDireto, (req, res) => {
@@ -227,6 +192,26 @@ app.get('/cadastrar-aluno', proibirAcessoDireto, (req, res) => {
     res.render(`${perfil}/CadastrarAluno`, { currentPage: 'CadastrarAluno', perfil });
 });
 
+app.get(['/DetalharAluno/:id', '/detalhar-aluno/:id'], proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Secretariado';
+    const alunoId = req.params.id;
+
+    const alunoEncontrado = todosAlunosMock.find(a => String(a.id) === String(alunoId));
+
+    if (!alunoEncontrado) {
+        return res.status(404).send('<h1>Aluno não encontrado</h1>');
+    }
+
+    alunoEncontrado.iniciais = gerarIniciais(alunoEncontrado.nome);
+
+    res.render(`${perfil}/DetalhesAluno`, { 
+        currentPage: 'alunos', 
+        perfil, 
+        aluno: alunoEncontrado,
+        orientando: alunoEncontrado,
+        alunoId: alunoEncontrado.id
+    });
+});
 
 app.use((req, res) => {
     res.status(404).send('<h1>Página não encontrada (404)</h1>');

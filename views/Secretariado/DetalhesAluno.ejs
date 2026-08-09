@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= aluno.nome %></title>
+    
+    <script>
+        (function() {
+            function aplicarTema() {
+                const temaSalvo = localStorage.getItem("tema_app") || "sistema";
+                const escuroPeloSistema = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+                if (temaSalvo === "escuro" || (temaSalvo === "sistema" && escuroPeloSistema)) {
+                    document.documentElement.setAttribute("data-tema", "escuro");
+                } else {
+                    document.documentElement.removeAttribute("data-tema");
+                }
+            }
+
+            // Executa imediatamente para evitar o efeito FOUT/piscada de tela clara
+            aplicarTema();
+
+            // Ouve alterações no tema do SO (caso o usuário esteja no modo 'sistema')
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+                const temaSalvo = localStorage.getItem("tema_app") || "sistema";
+                if (temaSalvo === "sistema") {
+                    aplicarTema();
+                }
+            });
+        })();
+    </script>
+
+    <link rel="stylesheet" href="/cssSecretaria/DetalhesAluno.css">
+</head>
+<body>
+    <div id="TelaDetalhesAluno">
+        <header id="Header">
+            <a href="/alunos" class="icon-btn" aria-label="Voltar">
+                <span class="icon-mask icon-arrow-back"></span>
+            </a>
+            <h1 id="TituloPagina"><%= aluno.nome %></h1>
+            <button class="icon-btn" aria-label="Notificações">
+                <span class="icon-mask icon-notification"></span>
+                <% if (aluno.notificacoesCount && aluno.notificacoesCount > 0) { %>
+                    <span class="badge-notificacao"><%= aluno.notificacoesCount %></span>
+                <% } %>
+            </button>
+        </header>
+
+        <main id="CorpoScroll">
+            <section class="card-perfil-header">
+                <div class="avatar-circulo-lg">
+                    <%= aluno.iniciais %>
+                </div>
+                <div class="perfil-header-info">
+                    <h2 class="perfil-nome"><%= aluno.nome %></h2>
+                    <p class="perfil-matricula">Matrícula: <%= aluno.matricula %></p>
+                    <p class="perfil-curso"><%= aluno.curso %></p>
+                </div>
+            </section>
+
+            <section class="card-secao">
+                <div class="secao-header">
+                    <h3 class="secao-titulo">Dados pessoais</h3>
+                    <a href="/alunos/<%= aluno.id %>/editar#dados-pessoais" class="btn-editar">
+                        <span class="icon-mask icon-edit"></span>
+                        Editar
+                    </a>
+                </div>
+                <div class="lista-detalhes">
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-person"></span>
+                            <span>Nome completo</span>
+                        </div>
+                        <span class="valor-detalhe"><%= aluno.nome %></span>
+                    </div>
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-badge"></span>
+                            <span>Matrícula</span>
+                        </div>
+                        <span class="valor-detalhe"><%= aluno.matricula %></span>
+                    </div>
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-calendar"></span>
+                            <span>Data de nascimento</span>
+                        </div>
+                        <span class="valor-detalhe"><%= aluno.dataNascimento %></span>
+                    </div>
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-phone"></span>
+                            <span>Telefone</span>
+                        </div>
+                        <span class="valor-detalhe"><%= aluno.telefone %></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-secao">
+                <h3 class="secao-titulo">Dados acadêmicos</h3>
+                <div class="lista-detalhes">
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-school"></span>
+                            <span>Curso</span>
+                        </div>
+                        <span class="valor-detalhe"><%= aluno.curso %></span>
+                    </div>
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-calendar"></span>
+                            <span>Período de ingresso</span>
+                        </div>
+                        <span class="valor-detalhe"><%= aluno.periodoIngresso %></span>
+                    </div>
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-book"></span>
+                            <span>Período atual</span>
+                        </div>
+                        <span class="valor-detalhe"><%= aluno.periodoAtual %></span>
+                    </div>
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-flag"></span>
+                            <span>Situação acadêmica</span>
+                        </div>
+                        <span class="valor-detalhe"><%= aluno.situacaoAcademica %></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-secao">
+                <h3 class="secao-titulo">Acesso ao sistema</h3>
+                <div class="lista-detalhes">
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-mail"></span>
+                            <span>E-mail de acesso</span>
+                        </div>
+                        <span class="valor-detalhe"><%= aluno.email %></span>
+                    </div>
+                    <div class="item-detalhe item-senha">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-lock"></span>
+                            <span>Senha</span>
+                        </div>
+                        <div class="senha-wrapper">
+                            <span class="valor-detalhe valor-senha">••••••••</span>
+                            <button type="button" class="btn-redefinir-senha">
+                                <span class="icon-mask icon-lock-reset"></span>
+                                Redefinir senha
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <% if (aluno.tcc) { %>
+                <section class="card-secao">
+                    <h3 class="secao-titulo">Informações do TCC</h3>
+                    <div class="lista-detalhes">
+                        <div class="item-detalhe">
+                            <div class="label-com-icone">
+                                <span class="icon-mask icon-description"></span>
+                                <span>Título do TCC</span>
+                            </div>
+                            <span class="valor-detalhe valor-truncate"><%= aluno.tcc.titulo %></span>
+                        </div>
+                        <div class="item-detalhe">
+                            <div class="label-com-icone">
+                                <span class="icon-mask icon-person"></span>
+                                <span>Orientador(a)</span>
+                            </div>
+                            <span class="valor-detalhe"><%= aluno.tcc.orientador %></span>
+                        </div>
+                        <div class="item-detalhe">
+                            <div class="label-com-icone">
+                                <span class="icon-mask icon-list"></span>
+                                <span>Status do TCC</span>
+                            </div>
+                            <span class="valor-detalhe"><%= aluno.tcc.status %></span>
+                        </div>
+                        <div class="item-detalhe">
+                            <div class="label-com-icone">
+                                <span class="icon-mask icon-flag"></span>
+                                <span>Etapa atual</span>
+                            </div>
+                            <span class="valor-detalhe"><%= aluno.tcc.etapaAtual %></span>
+                        </div>
+                        <div class="item-detalhe">
+                            <div class="label-com-icone">
+                                <span class="icon-mask icon-schedule"></span>
+                                <span>Última atualização</span>
+                            </div>
+                            <span class="valor-detalhe"><%= aluno.tcc.ultimaAtualizacao %></span>
+                        </div>
+                    </div>
+                    <a href="/tcc/<%= aluno.tcc.id %>" class="btn-tcc-detalhes">
+                        <span>Ver detalhes do TCC</span>
+                        <span class="icon-mask icon-chevron-right"></span>
+                    </a>
+                </section>
+            <% } %>
+        </main>
+    </div>
+</body>
+</html>

@@ -59,8 +59,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const nomeA = (a.getAttribute('data-nome') || '').toLowerCase();
             const nomeB = (b.getAttribute('data-nome') || '').toLowerCase();
             
-            const egressoA = a.getAttribute('data-egresso') || '';
-            const egressoB = b.getAttribute('data-egresso') || '';
+            const IngressoA = a.getAttribute('data-Ingresso') || '';
+            const IngressoB = b.getAttribute('data-Ingresso') || '';
             
             const semestreA = a.getAttribute('data-semestre') || '';
             const semestreB = b.getAttribute('data-semestre') || '';
@@ -70,10 +70,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     return nomeA.localeCompare(nomeB);
                 case 'za':
                     return nomeB.localeCompare(nomeA);
-                case 'egresso_recente':
-                    return egressoB.localeCompare(egressoA);
-                case 'egresso_antigo':
-                    return egressoA.localeCompare(egressoB);
+                case 'Ingresso_recente':
+                    return IngressoB.localeCompare(IngressoA);
+                case 'Ingresso_antigo':
+                    return IngressoA.localeCompare(IngressoB);
                 case 'semestre_crescente':
                     return semestreA.localeCompare(semestreB);
                 case 'semestre_decrescente':

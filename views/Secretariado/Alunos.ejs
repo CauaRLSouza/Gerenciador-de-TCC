@@ -7,32 +7,32 @@
     const ordemUrl = (typeof query !== 'undefined' && query.ordem) ? query.ordem : 'az';
 
     const alunosMock = [
-        { id: '1', nome: 'João da Silva', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataEgresso: '2028-07-10', status: 'ativo' },
-        { id: '2', nome: 'Maria Santos', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.1', dataEgresso: '2027-12-15', status: 'ativo' },
-        { id: '3', nome: 'Carlos Correia', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.1', dataEgresso: '2028-12-15', status: 'ativo' },
-        { id: '4', nome: 'Ana Beatriz Souza', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.1', dataEgresso: '2026-12-20', status: 'ativo' },
-        { id: '5', nome: 'Bruno Ferreira', curso: 'Licenciatura em Química', semestre: '2023.2', dataEgresso: '2027-07-15', status: 'ativo' },
-        { id: '6', nome: 'Camila Oliveira', curso: 'Bacharel em Administração', semestre: '2024.1', dataEgresso: '2028-02-28', status: 'ativo' },
-        { id: '7', nome: 'Daniel Costa', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.2', dataEgresso: '2029-07-10', status: 'ativo' },
-        { id: '8', nome: 'Eduarda Lima', curso: 'Licenciatura em Ciências Agrárias', semestre: '2021.2', dataEgresso: '2025-12-18', status: 'inativo' },
-        { id: '9', nome: 'Felipe Rocha', curso: 'Licenciatura em Química', semestre: '2022.2', dataEgresso: '2026-07-22', status: 'ativo' },
-        { id: '10', nome: 'Gabriela Alves', curso: 'Bacharel em Administração', semestre: '2023.1', dataEgresso: '2027-02-10', status: 'ativo' },
-        { id: '11', nome: 'Gabriel Santos', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataEgresso: '2028-07-30', status: 'ativo' },
-        { id: '12', nome: 'Heitor Martins', curso: 'Licenciatura em Ciências Agrárias', semestre: '2025.1', dataEgresso: '2029-02-15', status: 'ativo' },
-        { id: '13', nome: 'Isabela Ribeiro', curso: 'Licenciatura em Química', semestre: '2021.1', dataEgresso: '2025-07-10', status: 'inativo' },
-        { id: '14', nome: 'Lucas Mendes', curso: 'Bacharel em Administração', semestre: '2022.2', dataEgresso: '2026-12-15', status: 'ativo' },
-        { id: '15', nome: 'Mariana Barbosa', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.2', dataEgresso: '2027-07-20', status: 'ativo' },
-        { id: '16', nome: 'Matheus Fernandes', curso: 'Licenciatura em Ciências Agrárias', semestre: '2024.1', dataEgresso: '2028-02-10', status: 'ativo' },
-        { id: '17', nome: 'Nathalia Carvalho', curso: 'Licenciatura em Química', semestre: '2025.2', dataEgresso: '2029-12-18', status: 'ativo' },
-        { id: '18', nome: 'Otávio Teixeira', curso: 'Bacharel em Administração', semestre: '2021.2', dataEgresso: '2025-12-05', status: 'inativo' },
-        { id: '19', nome: 'Patricia Gomes', curso: 'Licenciatura em Ciências da Computação', semestre: '2022.1', dataEgresso: '2026-07-15', status: 'ativo' },
-        { id: '20', nome: 'Rafael Cardoso', curso: 'Licenciatura em Ciências Agrárias', semestre: '2023.1', dataEgresso: '2027-02-28', status: 'ativo' },
-        { id: '21', nome: 'Sophia Monteiro', curso: 'Licenciatura em Química', semestre: '2024.2', dataEgresso: '2028-07-12', status: 'ativo' },
-        { id: '22', nome: 'Thiago Nunes', curso: 'Bacharel em Administração', semestre: '2025.1', dataEgresso: '2029-02-20', status: 'ativo' },
-        { id: '23', nome: 'Vinícius Moreira', curso: 'Licenciatura em Ciências da Computação', semestre: '2021.1', dataEgresso: '2025-07-25', status: 'inativo' },
-        { id: '24', nome: 'Yasmin Vieira', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.2', dataEgresso: '2026-12-10', status: 'ativo' },
-        { id: '25', nome: 'Igor Cavalcante', curso: 'Licenciatura em Química', semestre: '2023.2', dataEgresso: '2027-07-05', status: 'ativo' },
-        { id: '26', nome: 'Letícia Freitas', curso: 'Bacharel em Administração', semestre: '2024.1', dataEgresso: '2028-02-18', status: 'ativo' }
+        { id: '1', nome: 'João da Silva', matricula: '202410101', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-10' },
+        { id: '2', nome: 'Maria Santos', matricula: '202310102', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.1', dataIngresso: '2023-02-15' },
+        { id: '3', nome: 'Carlos Correia', matricula: '202510103', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.1', dataIngresso: '2025-02-15' },
+        { id: '4', nome: 'Ana Beatriz Souza', matricula: '202210104', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.1', dataIngresso: '2022-02-20' },
+        { id: '5', nome: 'Bruno Ferreira', matricula: '202310105', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-15' },
+        { id: '6', nome: 'Camila Oliveira', matricula: '202410106', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-28' },
+        { id: '7', nome: 'Daniel Costa', matricula: '202510107', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.2', dataIngresso: '2025-07-10' },
+        { id: '8', nome: 'Eduarda Lima', matricula: '202110108', curso: 'Licenciatura em Ciências Agrárias', semestre: '2021.2', dataIngresso: '2021-07-18' },
+        { id: '9', nome: 'Felipe Rocha', matricula: '202210109', curso: 'Licenciatura em Química', semestre: '2022.2', dataIngresso: '2022-07-22' },
+        { id: '10', nome: 'Gabriela Alves', matricula: '202310110', curso: 'Bacharel em Administração', semestre: '2023.1', dataIngresso: '2023-02-10' },
+        { id: '11', nome: 'Gabriel Santos', matricula: '202410111', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-30' },
+        { id: '12', nome: 'Heitor Martins', matricula: '202510112', curso: 'Licenciatura em Ciências Agrárias', semestre: '2025.1', dataIngresso: '2025-02-15' },
+        { id: '13', nome: 'Isabela Ribeiro', matricula: '202110113', curso: 'Licenciatura em Química', semestre: '2021.1', dataIngresso: '2021-02-10' },
+        { id: '14', nome: 'Lucas Mendes', matricula: '202210114', curso: 'Bacharel em Administração', semestre: '2022.2', dataIngresso: '2022-07-15' },
+        { id: '15', nome: 'Mariana Barbosa', matricula: '202310115', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.2', dataIngresso: '2023-07-20' },
+        { id: '16', nome: 'Matheus Fernandes', matricula: '202410116', curso: 'Licenciatura em Ciências Agrárias', semestre: '2024.1', dataIngresso: '2024-02-10' },
+        { id: '17', nome: 'Nathalia Carvalho', matricula: '202510117', curso: 'Licenciatura em Química', semestre: '2025.2', dataIngresso: '2025-07-18' },
+        { id: '18', nome: 'Otávio Teixeira', matricula: '202110118', curso: 'Bacharel em Administração', semestre: '2021.2', dataIngresso: '2021-07-05' },
+        { id: '19', nome: 'Patricia Gomes', matricula: '202210119', curso: 'Licenciatura em Ciências da Computação', semestre: '2022.1', dataIngresso: '2022-02-15' },
+        { id: '20', nome: 'Rafael Cardoso', matricula: '202310120', curso: 'Licenciatura em Ciências Agrárias', semestre: '2023.1', dataIngresso: '2023-02-28' },
+        { id: '21', nome: 'Sophia Monteiro', matricula: '202410121', curso: 'Licenciatura em Química', semestre: '2024.2', dataIngresso: '2024-07-12' },
+        { id: '22', nome: 'Thiago Nunes', matricula: '202510122', curso: 'Bacharel em Administração', semestre: '2025.1', dataIngresso: '2025-02-20' },
+        { id: '23', nome: 'Vinícius Moreira', matricula: '202110123', curso: 'Licenciatura em Ciências da Computação', semestre: '2021.1', dataIngresso: '2021-02-25' },
+        { id: '24', nome: 'Yasmin Vieira', matricula: '202210124', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.2', dataIngresso: '2022-07-10' },
+        { id: '25', nome: 'Igor Cavalcante', matricula: '202310125', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-05' },
+        { id: '26', nome: 'Letícia Freitas', matricula: '202410126', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-18' }
     ];
 
     let listaAlunos = (typeof orientandos !== 'undefined' && orientandos.length > 0) ? orientandos : alunosMock;
@@ -121,8 +121,8 @@
                     <select id="selectOrdenar" class="select-padrao">
                         <option value="az" <%= ordemUrl === 'az' ? 'selected' : '' %>>Ordem Alfabética (A-Z)</option>
                         <option value="za" <%= ordemUrl === 'za' ? 'selected' : '' %>>Ordem Alfabética (Z-A)</option>
-                        <option value="egresso_recente" <%= ordemUrl === 'egresso_recente' ? 'selected' : '' %>>Mais recentes (Data de Egresso)</option>
-                        <option value="egresso_antigo" <%= ordemUrl === 'egresso_antigo' ? 'selected' : '' %>>Mais antigos (Data de Egresso)</option>
+                        <option value="ingresso_recente" <%= ordemUrl === 'ingresso_recente' ? 'selected' : '' %>>Mais recentes (Data de Ingresso)</option>
+                        <option value="ingresso_antigo" <%= ordemUrl === 'ingresso_antigo' ? 'selected' : '' %>>Mais antigos (Data de Ingresso)</option>
                         <option value="semestre_crescente" <%= ordemUrl === 'semestre_crescente' ? 'selected' : '' %>>Semestre Crescente</option>
                         <option value="semestre_decrescente" <%= ordemUrl === 'semestre_decrescente' ? 'selected' : '' %>>Semestre Decrescente</option>
                     </select>
@@ -131,19 +131,22 @@
 
             <div class="lista-alunos-vertical" id="gridAlunos">
                 <% listaAlunos.forEach(aluno => { %>
-                    <a href="/orientando/<%= aluno.id %>?perfil=<%= perfilAtual %>" 
+                    <a href="/DetalharAluno/<%= aluno.id %>?perfil=<%= perfilAtual %>" 
                        class="item-aluno-linha item-aluno" 
                        data-nome="<%= aluno.nome %>" 
+                       data-matricula="<%= aluno.matricula || '' %>"
                        data-curso="<%= aluno.curso %>" 
                        data-semestre="<%= aluno.semestre %>" 
-                       data-egresso="<%= aluno.dataEgresso %>">
+                       data-ingresso="<%= aluno.dataIngresso %>">
                         <div class="avatar-circulo">
                             <%= getIniciais(aluno.nome) %>
                         </div>
                         <div class="aluno-info-principal">
                             <span class="aluno-nome-linha"><%= aluno.nome %></span>
-                            <span class="aluno-subtitulo-linha"><%= aluno.semestre %> • <%= aluno.curso %></span>
-                            <span class="badge-status-aluno <%= aluno.status || 'ativo' %>"><%= aluno.status || 'ativo' %></span>
+                            <% if (aluno.matricula) { %>
+                                <span class="badge-matricula" style="background-color: rgba(30, 144, 255, 0.2); color: #60a5fa; font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 10px; display: inline-block; width: fit-content; margin: 3px 0 2px 0;"><%= aluno.matricula %></span>
+                            <% } %>
+                            <span class="aluno-subtitulo-linha"><%= aluno.curso %></span>
                         </div>
                         <span class="icon-mask icon-chevron-right"></span>
                     </a>
