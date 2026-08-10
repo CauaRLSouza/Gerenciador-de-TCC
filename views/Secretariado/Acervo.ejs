@@ -1,3 +1,7 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'acervo';
+%>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -6,35 +10,41 @@
     <title>Acervo de TCCs</title>
     <link rel="stylesheet" href="/cssSecretaria/Acervo.css">
     <link rel="stylesheet" href="/cssSecretaria/PublicarTCC.css">
+    <link rel="stylesheet" href="/cssSecretaria/BottomSheet.css">
     <script>
-    (function() {
-        const tema = localStorage.getItem("tema_app") || "sistema";
-        if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
-            document.documentElement.setAttribute("data-tema", "escuro");
-            document.addEventListener("DOMContentLoaded", () => document.body.setAttribute("data-tema", "escuro"));
-        }
-    })();
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+                document.addEventListener("DOMContentLoaded", () => {
+                    document.body.setAttribute("data-tema", "escuro");
+                });
+            }
+        })();
     </script>
 </head>
 <body>
 
     <div id="TelaAcervo">
         <header id="Header">
-            <a href="/configuracoes?perfil=<%= perfil %>" id="BtnConfiguracoes" class="icon-btn">
+            <a href="/configuracoes?perfil=<%= perfilAtual %>" id="BtnConfiguracoes" class="icon-btn" aria-label="Configurações">
                 <span class="icon-mask icon-settings"></span>
             </a>
+
             <h1 id="TituloPagina">Acervo de TCCs</h1>
-            <a href="/notificacoes?perfil=<%= perfil %>" id="BtnNotificacoes" class="icon-btn">
+
+            <a href="/notificacoes?perfil=<%= perfilAtual %>" id="BtnNotificacoes" class="icon-btn" aria-label="Notificações">
                 <span class="icon-mask icon-sino"></span>
             </a>
         </header>
 
         <main id="CorpoScroll">
-            
+
             <section id="BannerExplore" class="card-banner">
                 <div class="banner-icone-bg">
-                    <img src="Icones/AcervoLogo-removebg-preview.png" alt="Logo Acervo" class="banner-logo-img">
+                    <img src="/Icones/AcervoLogo-removebg-preview.png" alt="Logo Acervo" class="banner-logo-img">
                 </div>
+
                 <div class="banner-texto">
                     <h2>Explore o acervo de TCCs</h2>
                     <p>Consulte trabalhos já defendidos e aprovados por outros alunos da instituição.</p>
@@ -43,9 +53,10 @@
 
             <section id="SecaoBusca">
                 <div class="campo-busca">
-                    <button id="BtnBuscar" class="btn-buscar-lupa" type="submit">
+                    <button id="BtnBuscar" class="btn-buscar-lupa" type="button" aria-label="Buscar">
                         <span class="icon-mask icon-busca"></span>
                     </button>
+
                     <input type="text" id="InputBusca" placeholder="Buscar por título, autor ou palavra-chave...">
                 </div>
 
@@ -90,6 +101,7 @@
 
             <div id="InfoResultados">
                 <span id="ContadorResultados">10 trabalhos encontrados</span>
+
                 <div class="select-container select-ordenacao">
                     <select id="SelectOrdenacao" class="select-filtro-ordem">
                         <option value="recentes">Mais recentes</option>
@@ -102,6 +114,7 @@
             </div>
 
             <section id="ListaAcervo">
+
                 <article class="card-tcc" data-curso="Licenciatura em Ciência da Computação" data-linha="Computação" data-ano="2024">
                     <div class="tcc-icone-bg bg-amarelo">
                         <span class="icon-mask icon-grafico"></span>
@@ -111,10 +124,12 @@
                         <p class="tcc-autor">Maria Eduarda Santos</p>
                         <div class="tcc-meta">
                             <span class="tcc-curso">
-                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciência da Computação
+                                <span class="icon-mask icon-curso"></span>
+                                Licenciatura em Ciência da Computação
                             </span>
                             <span class="tcc-ano">
-                                <span class="icon-mask icon-calendario"></span> 2024
+                                <span class="icon-mask icon-calendario"></span>
+                                2024
                             </span>
                         </div>
                     </div>
@@ -130,10 +145,12 @@
                         <p class="tcc-autor">Lucas Oliveira</p>
                         <div class="tcc-meta">
                             <span class="tcc-curso">
-                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciências Agrárias
+                                <span class="icon-mask icon-curso"></span>
+                                Licenciatura em Ciências Agrárias
                             </span>
                             <span class="tcc-ano">
-                                <span class="icon-mask icon-calendario"></span> 2023
+                                <span class="icon-mask icon-calendario"></span>
+                                2023
                             </span>
                         </div>
                     </div>
@@ -149,10 +166,12 @@
                         <p class="tcc-autor">Ana Beatriz Lima</p>
                         <div class="tcc-meta">
                             <span class="tcc-curso">
-                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciência da Computação
+                                <span class="icon-mask icon-curso"></span>
+                                Licenciatura em Ciência da Computação
                             </span>
                             <span class="tcc-ano">
-                                <span class="icon-mask icon-calendario"></span> 2023
+                                <span class="icon-mask icon-calendario"></span>
+                                2023
                             </span>
                         </div>
                     </div>
@@ -168,10 +187,12 @@
                         <p class="tcc-autor">Pedro Henrique Souza</p>
                         <div class="tcc-meta">
                             <span class="tcc-curso">
-                                <span class="icon-mask icon-curso"></span> Bacharelado em Administração
+                                <span class="icon-mask icon-curso"></span>
+                                Bacharelado em Administração
                             </span>
                             <span class="tcc-ano">
-                                <span class="icon-mask icon-calendario"></span> 2023
+                                <span class="icon-mask icon-calendario"></span>
+                                2023
                             </span>
                         </div>
                     </div>
@@ -187,10 +208,12 @@
                         <p class="tcc-autor">Gabriel Costa</p>
                         <div class="tcc-meta">
                             <span class="tcc-curso">
-                                <span class="icon-mask icon-curso"></span> Licenciatura em Química
+                                <span class="icon-mask icon-curso"></span>
+                                Licenciatura em Química
                             </span>
                             <span class="tcc-ano">
-                                <span class="icon-mask icon-calendario"></span> 2024
+                                <span class="icon-mask icon-calendario"></span>
+                                2024
                             </span>
                         </div>
                     </div>
@@ -206,10 +229,12 @@
                         <p class="tcc-autor">Juliana Martins</p>
                         <div class="tcc-meta">
                             <span class="tcc-curso">
-                                <span class="icon-mask icon-curso"></span> Licenciatura em Química
+                                <span class="icon-mask icon-curso"></span>
+                                Licenciatura em Química
                             </span>
                             <span class="tcc-ano">
-                                <span class="icon-mask icon-calendario"></span> 2022
+                                <span class="icon-mask icon-calendario"></span>
+                                2022
                             </span>
                         </div>
                     </div>
@@ -225,10 +250,12 @@
                         <p class="tcc-autor">Rafael Mendes</p>
                         <div class="tcc-meta">
                             <span class="tcc-curso">
-                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciência da Computação
+                                <span class="icon-mask icon-curso"></span>
+                                Licenciatura em Ciência da Computação
                             </span>
                             <span class="tcc-ano">
-                                <span class="icon-mask icon-calendario"></span> 2024
+                                <span class="icon-mask icon-calendario"></span>
+                                2024
                             </span>
                         </div>
                     </div>
@@ -244,10 +271,12 @@
                         <p class="tcc-autor">Camila Rocha</p>
                         <div class="tcc-meta">
                             <span class="tcc-curso">
-                                <span class="icon-mask icon-curso"></span> Bacharelado em Administração
+                                <span class="icon-mask icon-curso"></span>
+                                Bacharelado em Administração
                             </span>
                             <span class="tcc-ano">
-                                <span class="icon-mask icon-calendario"></span> 2023
+                                <span class="icon-mask icon-calendario"></span>
+                                2023
                             </span>
                         </div>
                     </div>
@@ -263,10 +292,12 @@
                         <p class="tcc-autor">Thiago Barbosa</p>
                         <div class="tcc-meta">
                             <span class="tcc-curso">
-                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciências Agrárias
+                                <span class="icon-mask icon-curso"></span>
+                                Licenciatura em Ciências Agrárias
                             </span>
                             <span class="tcc-ano">
-                                <span class="icon-mask icon-calendario"></span> 2022
+                                <span class="icon-mask icon-calendario"></span>
+                                2022
                             </span>
                         </div>
                     </div>
@@ -282,51 +313,55 @@
                         <p class="tcc-autor">Fernanda Alves</p>
                         <div class="tcc-meta">
                             <span class="tcc-curso">
-                                <span class="icon-mask icon-curso"></span> Licenciatura em Ciências Agrárias
+                                <span class="icon-mask icon-curso"></span>
+                                Licenciatura em Ciências Agrárias
                             </span>
                             <span class="tcc-ano">
-                                <span class="icon-mask icon-calendario"></span> 2024
+                                <span class="icon-mask icon-calendario"></span>
+                                2024
                             </span>
                         </div>
                     </div>
                     <span class="icon-mask icon-seta"></span>
                 </article>
+
             </section>
         </main>
 
-        <button id="BtnPublicarTCC" class="btn-flutuante-publicar" aria-label="Publicar TCC">
+        <button id="BtnPublicarTCC" class="btn-flutuante-publicar" type="button" aria-label="Publicar TCC">
             <span class="icon-mask icon-upload"></span>
         </button>
 
         <nav id="BottomNav">
-            <a href="/dashboard?perfil=<%= perfil %>" class="nav-btn <%= (currentPage === 'inicio' || currentPage === 'dashboard' || currentPage === '/dashboard' || !currentPage) ? 'ativo active' : '' %>">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'inicio' || paginaAtual === 'dashboard' || paginaAtual === '/dashboard') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-home"></span>
                 <span>Início</span>
             </a>
 
-            <a href="/alunos?perfil=<%= perfil %>" class="nav-btn <%= (currentPage === 'alunos' || currentPage === '/alunos') ? 'ativo active' : '' %>">
+            <a href="/alunos?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'alunos' || paginaAtual === '/alunos') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-studant"></span>
                 <span>Alunos</span>
             </a>
 
-            <a href="/professores?perfil=<%= perfil %>" class="nav-btn <%= (currentPage === 'professores' || currentPage === '/professores') ? 'ativo active' : '' %>">
+            <a href="/professores?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'professores' || paginaAtual === '/professores') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-professor"></span>
                 <span>Professores</span>
             </a>
 
-            <a href="/acervo?perfil=<%= perfil %>" class="nav-btn <%= (currentPage === 'acervo' || currentPage === '/acervo') ? 'ativo active' : '' %>">
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'acervo' || paginaAtual === '/acervo') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-acervo"></span>
                 <span>Acervo</span>
             </a>
 
-            <a href="/perfil?perfil=<%= perfil %>" class="nav-btn <%= (currentPage === 'perfil' || currentPage === '/perfil') ? 'ativo active' : '' %>">
-                <span class="icon-mask icon-perfil"></span>
-                <span>Perfil</span>
-            </a>
+            <button id="btnAbrirMais" type="button" class="nav-btn">
+                <i class="icon-mask icon-more"></i>
+                <span class="Texto">Mais</span>
+            </button>
         </nav>
     </div>
 
     <script src="/js/acervo.js"></script>
     <script src="/js/PublicarTCC.js"></script>
+    <script src="/JS/BottomSheet.js"></script>
 </body>
 </html>

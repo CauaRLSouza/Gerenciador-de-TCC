@@ -453,10 +453,16 @@ body {
     mask-image: url('../Icones/badge_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
 }
 
+.icon-more {
+    -webkit-mask-image: url('../Icones/more_horiz_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
+    mask-image: url('../Icones/more_horiz_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
+}
+
 .icon-perfil {
     -webkit-mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
     mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
 }
+
 
 .icon-acervo {
     -webkit-mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');

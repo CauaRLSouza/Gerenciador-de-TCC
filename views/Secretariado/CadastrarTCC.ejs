@@ -1,0 +1,363 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+    const alunosLista = (typeof alunos !== 'undefined' && alunos) ? alunos : [];
+    const professoresLista = (typeof professores !== 'undefined' && professores) ? professores : [];
+
+    function getIniciais(nome) {
+        if (!nome) return '--';
+        const partes = nome.trim().split(' ');
+        if (partes.length >= 2) {
+            return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
+        }
+        return partes[0].substring(0, 2).toUpperCase();
+    }
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastrar TCC</title>
+    <link rel="stylesheet" href="/cssSecretaria/CadastrarTCC.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaCadastrarTCC" class="app-container">
+        <header id="Header">
+            <a href="javascript:history.back()" class="icon-btn" aria-label="Voltar">
+                <span class="icon-mask icon-back"></span>
+            </a>
+            <h1 id="TituloPagina">Cadastrar TCC</h1>
+            <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
+                <span class="icon-mask icon-notification"></span>
+            </a>
+        </header>
+
+        <main id="CorpoScroll">
+            <div class="banner-informativo">
+                <div class="banner-icone">
+                    <span class="icon-mask icon-tcc"></span>
+                </div>
+                <div class="banner-texto">
+                    <h2>Novo Trabalho de Conclusão de Curso</h2>
+                    <p>Cadastre as informações do TCC e vincule aluno, orientador e, se houver, coorientador.</p>
+                </div>
+            </div>
+
+            <form id="formCadastrarTCC" action="/cadastrar-tcc?perfil=<%= perfilAtual %>" method="POST">
+                <section class="secao-form">
+                    <h3 class="titulo-secao">Dados do TCC</h3>
+
+                    <div class="campo-grupo">
+                        <div class="label-wrapper">
+                            <label for="tituloTCC">Título do TCC <span class="obrigatorio">*</span></label>
+                            <span class="contador-caracteres"><span id="charCounter">0</span>/200</span>
+                        </div>
+                        <textarea id="tituloTCC" name="titulo" rows="3" maxlength="200" placeholder="Digite o título do TCC..." required></textarea>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label>Aluno <span class="obrigatorio">*</span></label>
+                        
+                        <div class="select-custom-container" id="selectAlunoContainer">
+                            <button type="button" class="btn-select-trigger" id="btnTriggerAluno">
+                                <span class="icon-mask icon-search"></span>
+                                <span class="trigger-text">Buscar aluno por nome ou matrícula...</span>
+                                <span class="icon-mask icon-chevron-down"></span>
+                            </button>
+
+                            <div class="dropdown-select-painel" id="dropdownAluno">
+                                <div class="busca-dropdown-wrapper">
+                                    <input type="text" id="inputBuscaAluno" placeholder="Pesquisar aluno...">
+                                </div>
+                                <ul class="lista-opcoes-select" id="listaAlunosOptions">
+                                    <% alunosLista.forEach(aluno => { %>
+                                        <li class="opcao-item" 
+                                            data-id="<%= aluno.id %>" 
+                                            data-nome="<%= aluno.nome %>" 
+                                            data-matricula="<%= aluno.matricula %>" 
+                                            data-curso="<%= aluno.curso %>"
+                                            data-iniciais="<%= getIniciais(aluno.nome) %>">
+                                            <div class="avatar-mini"><%= getIniciais(aluno.nome) %></div>
+                                            <div class="opcao-info">
+                                                <strong><%= aluno.nome %></strong>
+                                                <small>Matrícula: <%= aluno.matricula %> • <%= aluno.curso %></small>
+                                            </div>
+                                        </li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="alunoId" name="alunoId" required>
+
+                        <div class="card-selecionado card-aluno" id="cardAlunoSelecionado" style="display: none;">
+                            <div class="avatar-circulo" id="avatarAlunoSel">--</div>
+                            <div class="info-selecionado">
+                                <strong id="nomeAlunoSel">--</strong>
+                                <small id="detalheAlunoSel">--</small>
+                            </div>
+                            <button type="button" class="btn-remover-selecao" id="btnRemoverAluno" aria-label="Remover aluno">
+                                <span class="icon-mask icon-close"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label>Orientador <span class="obrigatorio">*</span></label>
+                        
+                        <div class="select-custom-container" id="selectOrientadorContainer">
+                            <button type="button" class="btn-select-trigger" id="btnTriggerOrientador">
+                                <span class="icon-mask icon-professor"></span>
+                                <span class="trigger-text">Selecione o orientador...</span>
+                                <span class="icon-mask icon-chevron-down"></span>
+                            </button>
+
+                            <div class="dropdown-select-painel" id="dropdownOrientador">
+                                <div class="busca-dropdown-wrapper">
+                                    <input type="text" id="inputBuscaOrientador" placeholder="Pesquisar orientador...">
+                                </div>
+                                <ul class="lista-opcoes-select" id="listaOrientadoresOptions">
+                                    <% professoresLista.forEach(prof => { %>
+                                        <li class="opcao-item" 
+                                            data-id="<%= prof.id %>" 
+                                            data-nome="<%= prof.nome %>" 
+                                            data-titulacao="<%= prof.titulacao || prof.cargo || 'Sem titulação' %>" 
+                                            data-area="<%= prof.area || prof.areaAtuacao || 'Geral' %>"
+                                            data-iniciais="<%= getIniciais(prof.nome) %>">
+                                            <div class="avatar-mini avatar-prof"><%= getIniciais(prof.nome) %></div>
+                                            <div class="opcao-info">
+                                                <strong><%= prof.nome %></strong>
+                                                <small><%= prof.titulacao || prof.cargo || 'Sem titulação' %> • Área: <%= prof.area || prof.areaAtuacao || 'Geral' %></small>
+                                            </div>
+                                        </li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="orientadorId" name="orientadorId" required>
+
+                        <div class="card-selecionado card-professor" id="cardOrientadorSelecionado" style="display: none;">
+                            <div class="avatar-circulo avatar-prof" id="avatarOrientadorSel">--</div>
+                            <div class="info-selecionado">
+                                <strong id="nomeOrientadorSel">--</strong>
+                                <small id="detalheOrientadorSel">--</small>
+                            </div>
+                            <button type="button" class="btn-remover-selecao" id="btnRemoverOrientador" aria-label="Remover orientador">
+                                <span class="icon-mask icon-close"></span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="campo-grupo">
+                        <label>Coorientador <span class="opcional">(opcional)</span></label>
+                        
+                        <div class="select-custom-container" id="selectCoorientadorContainer">
+                            <button type="button" class="btn-select-trigger" id="btnTriggerCoorientador">
+                                <span class="icon-mask icon-professor"></span>
+                                <span class="trigger-text">Selecione o coorientador...</span>
+                                <span class="icon-mask icon-chevron-down"></span>
+                            </button>
+
+                            <div class="dropdown-select-painel" id="dropdownCoorientador">
+                                <div class="busca-dropdown-wrapper">
+                                    <input type="text" id="inputBuscaCoorientador" placeholder="Pesquisar coorientador...">
+                                </div>
+                                <ul class="lista-opcoes-select" id="listaCoorientadoresOptions">
+                                    <% professoresLista.forEach(prof => { %>
+                                        <li class="opcao-item" 
+                                            data-id="<%= prof.id %>" 
+                                            data-nome="<%= prof.nome %>" 
+                                            data-titulacao="<%= prof.titulacao || prof.cargo || 'Sem titulação' %>" 
+                                            data-area="<%= prof.area || prof.areaAtuacao || 'Geral' %>"
+                                            data-iniciais="<%= getIniciais(prof.nome) %>">
+                                            <div class="avatar-mini avatar-prof"><%= getIniciais(prof.nome) %></div>
+                                            <div class="opcao-info">
+                                                <strong><%= prof.nome %></strong>
+                                                <small><%= prof.titulacao || prof.cargo || 'Sem titulação' %> • Área: <%= prof.area || prof.areaAtuacao || 'Geral' %></small>
+                                            </div>
+                                        </li>
+                                    <% }); %>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <input type="hidden" id="coorientadorId" name="coorientadorId">
+
+                        <div class="card-selecionado card-professor" id="cardCoorientadorSelecionado" style="display: none;">
+                            <div class="avatar-circulo avatar-prof" id="avatarCoorientadorSel">--</div>
+                            <div class="info-selecionado">
+                                <strong id="nomeCoorientadorSel">--</strong>
+                                <small id="detalheCoorientadorSel">--</small>
+                            </div>
+                            <button type="button" class="btn-remover-selecao" id="btnRemoverCoorientador" aria-label="Remover coorientador">
+                                <span class="icon-mask icon-close"></span>
+                            </button>
+                        </div>
+
+                        <div class="card-placeholder-opcional" id="placeholderCoorientador">
+                            <span class="icon-plus-circulo">+</span>
+                            <span>Adicionar coorientador (não obrigatório)</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn-submit-primario">
+                        <span class="icon-mask icon-add-document"></span>
+                        <span>Cadastrar TCC</span>
+                    </button>
+                </section>
+            </form>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const tituloTCC = document.getElementById('tituloTCC');
+            const charCounter = document.getElementById('charCounter');
+
+            tituloTCC.addEventListener('input', function() {
+                charCounter.textContent = this.value.length;
+            });
+
+            function setupCustomSelect(config) {
+                const trigger = document.getElementById(config.triggerId);
+                const dropdown = document.getElementById(config.dropdownId);
+                const inputBusca = document.getElementById(config.inputBuscaId);
+                const lista = document.getElementById(config.listaId);
+                const hiddenInput = document.getElementById(config.hiddenInputId);
+                const card = document.getElementById(config.cardId);
+                const btnRemover = document.getElementById(config.btnRemoverId);
+                const placeholder = config.placeholderId ? document.getElementById(config.placeholderId) : null;
+
+                trigger.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const estaAberto = dropdown.classList.contains('ativo');
+                    fecharTodosDropdowns();
+                    if (!estaAberto) {
+                        dropdown.classList.add('ativo');
+                        inputBusca.focus();
+                    }
+                });
+
+                if (placeholder) {
+                    placeholder.addEventListener('click', function() {
+                        trigger.click();
+                    });
+                }
+
+                inputBusca.addEventListener('input', function() {
+                    const termo = this.value.toLowerCase();
+                    const itens = lista.querySelectorAll('.opcao-item');
+                    itens.forEach(item => {
+                        const texto = item.textContent.toLowerCase();
+                        item.style.display = texto.includes(termo) ? 'flex' : 'none';
+                    });
+                });
+
+                lista.addEventListener('click', function(e) {
+                    const item = e.target.closest('.opcao-item');
+                    if (!item) return;
+
+                    const id = item.dataset.id;
+                    const nome = item.dataset.nome;
+                    const iniciais = item.dataset.iniciais;
+
+                    hiddenInput.value = id;
+
+                    document.getElementById(config.avatarSelId).textContent = iniciais;
+                    document.getElementById(config.nomeSelId).textContent = nome;
+
+                    if (config.tipo === 'aluno') {
+                        document.getElementById(config.detalheSelId).textContent = `Matrícula: ${item.dataset.matricula} • ${item.dataset.curso}`;
+                    } else {
+                        document.getElementById(config.detalheSelId).textContent = `${item.dataset.titulacao} • Área: ${item.dataset.area}`;
+                    }
+
+                    trigger.style.display = 'none';
+                    dropdown.classList.remove('ativo');
+                    card.style.display = 'flex';
+
+                    if (placeholder) {
+                        placeholder.style.display = 'none';
+                    }
+                });
+
+                btnRemover.addEventListener('click', function() {
+                    hiddenInput.value = '';
+                    card.style.display = 'none';
+                    trigger.style.display = 'flex';
+                    if (placeholder) {
+                        placeholder.style.display = 'flex';
+                    }
+                });
+            }
+
+            function fecharTodosDropdowns() {
+                document.querySelectorAll('.dropdown-select-painel').forEach(d => d.classList.remove('ativo'));
+            }
+
+            document.addEventListener('click', function() {
+                fecharTodosDropdowns();
+            });
+
+            document.querySelectorAll('.dropdown-select-painel').forEach(d => {
+                d.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                });
+            });
+
+            setupCustomSelect({
+                tipo: 'aluno',
+                triggerId: 'btnTriggerAluno',
+                dropdownId: 'dropdownAluno',
+                inputBuscaId: 'inputBuscaAluno',
+                listaId: 'listaAlunosOptions',
+                hiddenInputId: 'alunoId',
+                cardId: 'cardAlunoSelecionado',
+                btnRemoverId: 'btnRemoverAluno',
+                avatarSelId: 'avatarAlunoSel',
+                nomeSelId: 'nomeAlunoSel',
+                detalheSelId: 'detalheAlunoSel'
+            });
+
+            setupCustomSelect({
+                tipo: 'professor',
+                triggerId: 'btnTriggerOrientador',
+                dropdownId: 'dropdownOrientador',
+                inputBuscaId: 'inputBuscaOrientador',
+                listaId: 'listaOrientadoresOptions',
+                hiddenInputId: 'orientadorId',
+                cardId: 'cardOrientadorSelecionado',
+                btnRemoverId: 'btnRemoverOrientador',
+                avatarSelId: 'avatarOrientadorSel',
+                nomeSelId: 'nomeOrientadorSel',
+                detalheSelId: 'detalheOrientadorSel'
+            });
+
+            setupCustomSelect({
+                tipo: 'professor',
+                triggerId: 'btnTriggerCoorientador',
+                dropdownId: 'dropdownCoorientador',
+                inputBuscaId: 'inputBuscaCoorientador',
+                listaId: 'listaCoorientadoresOptions',
+                hiddenInputId: 'coorientadorId',
+                cardId: 'cardCoorientadorSelecionado',
+                btnRemoverId: 'btnRemoverCoorientador',
+                placeholderId: 'placeholderCoorientador',
+                avatarSelId: 'avatarCoorientadorSel',
+                nomeSelId: 'nomeCoorientadorSel',
+                detalheSelId: 'detalheCoorientadorSel'
+            });
+        });
+    </script>
+</body>
+</html>

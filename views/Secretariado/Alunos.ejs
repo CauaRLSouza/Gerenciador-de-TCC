@@ -7,32 +7,32 @@
     const ordemUrl = (typeof query !== 'undefined' && query.ordem) ? query.ordem : 'az';
 
     const alunosMock = [
-        { id: '1', nome: 'João da Silva', matricula: '202410101', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-10' },
-        { id: '2', nome: 'Maria Santos', matricula: '202310102', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.1', dataIngresso: '2023-02-15' },
-        { id: '3', nome: 'Carlos Correia', matricula: '202510103', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.1', dataIngresso: '2025-02-15' },
-        { id: '4', nome: 'Ana Beatriz Souza', matricula: '202210104', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.1', dataIngresso: '2022-02-20' },
-        { id: '5', nome: 'Bruno Ferreira', matricula: '202310105', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-15' },
-        { id: '6', nome: 'Camila Oliveira', matricula: '202410106', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-28' },
-        { id: '7', nome: 'Daniel Costa', matricula: '202510107', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.2', dataIngresso: '2025-07-10' },
-        { id: '8', nome: 'Eduarda Lima', matricula: '202110108', curso: 'Licenciatura em Ciências Agrárias', semestre: '2021.2', dataIngresso: '2021-07-18' },
-        { id: '9', nome: 'Felipe Rocha', matricula: '202210109', curso: 'Licenciatura em Química', semestre: '2022.2', dataIngresso: '2022-07-22' },
-        { id: '10', nome: 'Gabriela Alves', matricula: '202310110', curso: 'Bacharel em Administração', semestre: '2023.1', dataIngresso: '2023-02-10' },
-        { id: '11', nome: 'Gabriel Santos', matricula: '202410111', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-30' },
-        { id: '12', nome: 'Heitor Martins', matricula: '202510112', curso: 'Licenciatura em Ciências Agrárias', semestre: '2025.1', dataIngresso: '2025-02-15' },
-        { id: '13', nome: 'Isabela Ribeiro', matricula: '202110113', curso: 'Licenciatura em Química', semestre: '2021.1', dataIngresso: '2021-02-10' },
-        { id: '14', nome: 'Lucas Mendes', matricula: '202210114', curso: 'Bacharel em Administração', semestre: '2022.2', dataIngresso: '2022-07-15' },
-        { id: '15', nome: 'Mariana Barbosa', matricula: '202310115', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.2', dataIngresso: '2023-07-20' },
-        { id: '16', nome: 'Matheus Fernandes', matricula: '202410116', curso: 'Licenciatura em Ciências Agrárias', semestre: '2024.1', dataIngresso: '2024-02-10' },
-        { id: '17', nome: 'Nathalia Carvalho', matricula: '202510117', curso: 'Licenciatura em Química', semestre: '2025.2', dataIngresso: '2025-07-18' },
-        { id: '18', nome: 'Otávio Teixeira', matricula: '202110118', curso: 'Bacharel em Administração', semestre: '2021.2', dataIngresso: '2021-07-05' },
-        { id: '19', nome: 'Patricia Gomes', matricula: '202210119', curso: 'Licenciatura em Ciências da Computação', semestre: '2022.1', dataIngresso: '2022-02-15' },
-        { id: '20', nome: 'Rafael Cardoso', matricula: '202310120', curso: 'Licenciatura em Ciências Agrárias', semestre: '2023.1', dataIngresso: '2023-02-28' },
-        { id: '21', nome: 'Sophia Monteiro', matricula: '202410121', curso: 'Licenciatura em Química', semestre: '2024.2', dataIngresso: '2024-07-12' },
-        { id: '22', nome: 'Thiago Nunes', matricula: '202510122', curso: 'Bacharel em Administração', semestre: '2025.1', dataIngresso: '2025-02-20' },
-        { id: '23', nome: 'Vinícius Moreira', matricula: '202110123', curso: 'Licenciatura em Ciências da Computação', semestre: '2021.1', dataIngresso: '2021-02-25' },
-        { id: '24', nome: 'Yasmin Vieira', matricula: '202210124', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.2', dataIngresso: '2022-07-10' },
-        { id: '25', nome: 'Igor Cavalcante', matricula: '202310125', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-05' },
-        { id: '26', nome: 'Letícia Freitas', matricula: '202410126', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-18' }
+        { id: '1', nome: 'João da Silva', matricula: '202410101', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-10', dataNascimento: '15/03/2002', telefone: '(74) 99911-2233' },
+        { id: '2', nome: 'Maria Santos', matricula: '202310102', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.1', dataIngresso: '2023-02-15', dataNascimento: '22/08/2001', telefone: '(74) 99822-3344' },
+        { id: '3', nome: 'Carlos Correia', matricula: '202510103', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.1', dataIngresso: '2025-02-15', dataNascimento: '10/11/2003', telefone: '(74) 99733-4455' },
+        { id: '4', nome: 'Ana Beatriz Souza', matricula: '202210104', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.1', dataIngresso: '2022-02-20', dataNascimento: '05/01/2000', telefone: '(74) 99644-5566' },
+        { id: '5', nome: 'Bruno Ferreira', matricula: '202310105', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-15', dataNascimento: '18/04/2002', telefone: '(74) 99555-6677' },
+        { id: '6', nome: 'Camila Oliveira', matricula: '202410106', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-28', dataNascimento: '30/09/2001', telefone: '(74) 99466-7788' },
+        { id: '7', nome: 'Daniel Costa', matricula: '202510107', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.2', dataIngresso: '2025-07-10', dataNascimento: '12/06/2004', telefone: '(74) 99377-8899' },
+        { id: '8', nome: 'Eduarda Lima', matricula: '202110108', curso: 'Licenciatura em Ciências Agrárias', semestre: '2021.2', dataIngresso: '2021-07-18', dataNascimento: '25/12/1999', telefone: '(74) 99288-9900' },
+        { id: '9', nome: 'Felipe Rocha', matricula: '202210109', curso: 'Licenciatura em Química', semestre: '2022.2', dataIngresso: '2022-07-22', dataNascimento: '14/02/2001', telefone: '(74) 99199-0011' },
+        { id: '10', nome: 'Gabriela Alves', matricula: '202310110', curso: 'Bacharel em Administração', semestre: '2023.1', dataIngresso: '2023-02-10', dataNascimento: '08/07/2002', telefone: '(74) 99000-1122' },
+        { id: '11', nome: 'Gabriel Santos', matricula: '202410111', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-30', dataNascimento: '19/05/2003', telefone: '(74) 98811-2233' },
+        { id: '12', nome: 'Heitor Martins', matricula: '202510112', curso: 'Licenciatura em Ciências Agrárias', semestre: '2025.1', dataIngresso: '2025-02-15', dataNascimento: '03/03/2004', telefone: '(74) 98722-3344' },
+        { id: '13', nome: 'Isabela Ribeiro', matricula: '202110113', curso: 'Licenciatura em Química', semestre: '2021.1', dataIngresso: '2021-02-10', dataNascimento: '27/10/2000', telefone: '(74) 98633-4455' },
+        { id: '14', nome: 'Lucas Mendes', matricula: '202210114', curso: 'Bacharel em Administração', semestre: '2022.2', dataIngresso: '2022-07-15', dataNascimento: '11/01/2001', telefone: '(74) 98544-5566' },
+        { id: '15', nome: 'Mariana Barbosa', matricula: '202310115', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.2', dataIngresso: '2023-07-20', dataNascimento: '02/08/2002', telefone: '(74) 98455-6677' },
+        { id: '16', nome: 'Matheus Fernandes', matricula: '202410116', curso: 'Licenciatura em Ciências Agrárias', semestre: '2024.1', dataIngresso: '2024-02-10', dataNascimento: '17/04/2003', telefone: '(74) 98366-7788' },
+        { id: '17', nome: 'Nathalia Carvalho', matricula: '202510117', curso: 'Licenciatura em Química', semestre: '2025.2', dataIngresso: '2025-07-18', dataNascimento: '09/09/2004', telefone: '(74) 98277-8899' },
+        { id: '18', nome: 'Otávio Teixeira', matricula: '202110118', curso: 'Bacharel em Administração', semestre: '2021.2', dataIngresso: '2021-07-05', dataNascimento: '21/12/1999', telefone: '(74) 98188-9900' },
+        { id: '19', nome: 'Patricia Gomes', matricula: '202210119', curso: 'Licenciatura em Ciências da Computação', semestre: '2022.1', dataIngresso: '2022-02-15', dataNascimento: '06/06/2001', telefone: '(74) 98099-0011' },
+        { id: '20', nome: 'Rafael Cardoso', matricula: '202310120', curso: 'Licenciatura em Ciências Agrárias', semestre: '2023.1', dataIngresso: '2023-02-28', dataNascimento: '13/02/2002', telefone: '(74) 97900-1122' },
+        { id: '21', nome: 'Sophia Monteiro', matricula: '202410121', curso: 'Licenciatura em Química', semestre: '2024.2', dataIngresso: '2024-07-12', dataNascimento: '28/03/2003', telefone: '(74) 97811-2233' },
+        { id: '22', nome: 'Thiago Nunes', matricula: '202510122', curso: 'Bacharel em Administração', semestre: '2025.1', dataIngresso: '2025-02-20', dataNascimento: '04/10/2004', telefone: '(74) 97722-3344' },
+        { id: '23', nome: 'Vinícius Moreira', matricula: '202110123', curso: 'Licenciatura em Ciências da Computação', semestre: '2021.1', dataIngresso: '2021-02-25', dataNascimento: '16/07/2000', telefone: '(74) 97633-4455' },
+        { id: '24', nome: 'Yasmin Vieira', matricula: '202210124', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.2', dataIngresso: '2022-07-10', dataNascimento: '23/01/2001', telefone: '(74) 97544-5566' },
+        { id: '25', nome: 'Igor Cavalcante', matricula: '202310125', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-05', dataNascimento: '07/11/2002', telefone: '(74) 97455-6677' },
+        { id: '26', nome: 'Letícia Freitas', matricula: '202410126', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-18', dataNascimento: '31/08/2003', telefone: '(74) 97366-7788' }
     ];
 
     let listaAlunos = (typeof orientandos !== 'undefined' && orientandos.length > 0) ? orientandos : alunosMock;
@@ -54,6 +54,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Alunos</title>
     <link rel="stylesheet" href="/cssSecretaria/Alunos.css">
+    <link rel="stylesheet" href="/cssSecretaria/BottomSheet.css">
     <script>
         (function() {
             const tema = localStorage.getItem("tema_app") || "sistema";
@@ -137,7 +138,9 @@
                        data-matricula="<%= aluno.matricula || '' %>"
                        data-curso="<%= aluno.curso %>" 
                        data-semestre="<%= aluno.semestre %>" 
-                       data-ingresso="<%= aluno.dataIngresso %>">
+                       data-ingresso="<%= aluno.dataIngresso %>"
+                       data-nascimento="<%= aluno.dataNascimento || '' %>"
+                       data-telefone="<%= aluno.telefone || '' %>">
                         <div class="avatar-circulo">
                             <%= getIniciais(aluno.nome) %>
                         </div>
@@ -175,10 +178,10 @@
                 <span class="icon-mask icon-acervo"></span>
                 <span class="Texto">Acervo</span>
             </a>
-            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'perfil' || paginaAtual === '/perfil') ? 'ativo active' : '' %>">
-                <span class="icon-mask icon-perfil"></span>
-                <span class="Texto">Perfil</span>
-            </a>
+            <button id="btnAbrirMais" type="button" class="nav-btn">
+                <i class="icon-mask icon-more"></i>
+                <span class="Texto">Mais</span>
+            </button>
         </nav>
     </div>
 
@@ -188,5 +191,6 @@
         });
     </script>
     <script src="/JS/ControlarAlunos.js"></script>
+    <script src="/JS/BottomSheet.js"></script>
 </body>
 </html>

@@ -10,6 +10,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
     <link rel="stylesheet" href="/cssSecretaria/Dashboard.css">
+    <link rel="stylesheet" href="/cssSecretaria/BottomSheet.css">
+    
     <script>
         (function() {
             const tema = localStorage.getItem("tema_app") || "sistema";
@@ -23,9 +25,9 @@
 
     <div id="TelaDashboard">
         <header id="Header">
-            <button class="icon-btn" aria-label="Configurações">
+            <a href="/configuracoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Configurações">
                 <span class="icon-mask icon-settings"></span>
-            </button>
+            </a>
             <h1 id="TituloPagina">Dashboard</h1>
             <div class="header-actions">
                 <button class="icon-btn notification-btn" aria-label="Notificações">
@@ -114,17 +116,17 @@
                         </div>
                     </a>
 
-                    <a href="/tccs?perfil=<%= perfilAtual %>" class="card-atalho azul">
+                    <a href="/cadastrar-tcc?perfil=<%= perfilAtual %>" class="card-atalho azul">
                         <div class="atalho-icone-wrapper">
                             <span class="icon-mask icon-files"></span>
                         </div>
                         <div class="atalho-info">
-                            <span class="atalho-nome">TCCs</span>
+                            <span class="atalho-nome">Cadastrar TCC</span>
                             <span id="valAtalhoTccs" class="atalho-valor">26</span>
                         </div>
                     </a>
 
-                    <a href="/bancas?perfil=<%= perfilAtual %>" class="card-atalho vermelho">
+                    <a href="/agendar-banca?perfil=<%= perfilAtual %>" class="card-atalho vermelho">
                         <div class="atalho-icone-wrapper">
                             <span class="icon-mask icon-calendar"></span>
                         </div>
@@ -176,13 +178,14 @@
                 <span class="icon-mask icon-acervo"></span>
                 <span>Acervo</span>
             </a>
-            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'perfil' || paginaAtual === '/perfil') ? 'ativo active' : '' %>">
-                <span class="icon-mask icon-perfil"></span>
-                <span>Perfil</span>
-            </a>
+            <button id="btnAbrirMais" type="button" class="nav-btn">
+                <span class="icon-mask icon-more"></span>
+                <span>Mais</span>
+            </button>
         </nav>
     </div>
 
     <script src="/JS/Resumo.js"></script>
+    <script src="/JS/BottomSheet.js"></script>
 </body>
 </html>

@@ -10,6 +10,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Professores</title>
     <link rel="stylesheet" href="/cssSecretaria/Professores.css">
+    <link rel="stylesheet" href="/cssSecretaria/BottomSheet.css">
     <script>
         (function() {
             const tema = localStorage.getItem("tema_app") || "sistema";
@@ -54,6 +55,7 @@
                         <option value="doutorado">Doutorado</option>
                     </select>
                 </div>
+
                 <div class="controle-item">
                     <label for="selectOrdenar">Ordenar por</label>
                     <select id="selectOrdenar" class="select-padrao">
@@ -98,25 +100,35 @@
                 <span class="icon-mask icon-home"></span>
                 <span class="Texto">Início</span>
             </a>
+
             <a href="/alunos?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'alunos' || paginaAtual === '/alunos') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-studant"></span>
                 <span class="Texto">Alunos</span>
             </a>
+
             <a href="/professores?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'professores' || paginaAtual === '/professores') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-professor"></span>
                 <span class="Texto">Professores</span>
             </a>
+
             <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'acervo' || paginaAtual === '/acervo') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-acervo"></span>
                 <span class="Texto">Acervo</span>
             </a>
-            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'perfil' || paginaAtual === '/perfil') ? 'ativo active' : '' %>">
-                <span class="icon-mask icon-perfil"></span>
-                <span class="Texto">Perfil</span>
-            </a>
+
+            <button id="btnAbrirMais" type="button" class="nav-btn">
+                <span class="icon-mask icon-more"></span>
+                <span class="Texto">Mais</span>
+            </button>
         </nav>
     </div>
 
+    <script>
+        document.getElementById('btnToggleFiltros')?.addEventListener('click', function() {
+            document.getElementById('painelFiltros')?.classList.toggle('ativo');
+        });
+    </script>
     <script src="/JS/ControlarProfessores.js"></script>
+    <script src="/JS/BottomSheet.js"></script>
 </body>
 </html>
