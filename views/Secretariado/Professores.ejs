@@ -1,0 +1,122 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'professores';
+    const listaProfessores = (typeof professores !== 'undefined') ? professores : [];
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professores</title>
+    <link rel="stylesheet" href="/cssSecretaria/Professores.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaProfessores">
+        <header id="Header">
+            <a href="/configuracoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Configurações">
+                <span class="icon-mask icon-settings"></span>
+            </a>
+            <h1 id="TituloPagina">Professores</h1>
+            <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
+                <span class="icon-mask icon-notification"></span>
+            </a>
+        </header>
+
+        <main id="CorpoScroll">
+            <div class="busca-filter-container">
+                <div class="input-busca-wrapper">
+                    <span class="icon-mask icon-search"></span>
+                    <input type="text" placeholder="Buscar professor..." id="inputBusca">
+                </div>
+                <button type="button" class="btn-filtro-icon" id="btnToggleFiltros" aria-label="Filtros e Ordenação">
+                    <span class="icon-mask icon-filter"></span>
+                </button>
+            </div>
+
+            <div class="painel-filtros-oculto" id="painelFiltros">
+                <div class="controle-item">
+                    <label for="selectTitularidade">Titularidade</label>
+                    <select id="selectTitularidade" class="select-padrao">
+                        <option value="todas">Todas as Titularidades</option>
+                        <option value="graduacao">Graduação</option>
+                        <option value="especializacao">Especialização</option>
+                        <option value="mestrado">Mestrado</option>
+                        <option value="doutorado">Doutorado</option>
+                    </select>
+                </div>
+                <div class="controle-item">
+                    <label for="selectOrdenar">Ordenar por</label>
+                    <select id="selectOrdenar" class="select-padrao">
+                        <option value="az">Ordem Alfabética (A-Z)</option>
+                        <option value="za">Ordem Alfabética (Z-A)</option>
+                        <option value="mais_orientandos">Mais orientandos</option>
+                        <option value="menos_orientandos">Menos orientandos</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="lista-alunos-vertical" id="gridProfessores">
+                <% listaProfessores.forEach(prof => { %>
+                    <a href="/detalhar-professor/<%= prof.id %>?perfil=<%= perfilAtual %>" 
+                       class="item-aluno-linha item-professor" 
+                       data-nome="<%= prof.nome %>" 
+                       data-email="<%= prof.email %>" 
+                       data-orientandos="<%= prof.qtdOrientandos || 0 %>"
+                       data-titularidade="<%= prof.titulacao || '' %>">
+                        <div class="avatar-circulo">
+                            <%= prof.iniciais %>
+                        </div>
+                        <div class="aluno-info-principal">
+                            <span class="aluno-nome-linha"><%= prof.nome %></span>
+                            <span class="badge-matricula" style="background-color: rgba(30, 144, 255, 0.2); color: #60a5fa; font-size: 0.72rem; font-weight: 600; padding: 2px 8px; border-radius: 10px; display: inline-block; width: fit-content; margin: 3px 0 2px 0;">
+                                <%= prof.qtdOrientandos || 0 %> orientando(s)
+                            </span>
+                            <span class="aluno-subtitulo-linha"><%= prof.email %></span>
+                        </div>
+                        <span class="icon-mask icon-chevron-right"></span>
+                    </a>
+                <% }); %>
+            </div>
+        </main>
+
+        <a href="/cadastrar-professor?perfil=<%= perfilAtual %>" class="fab-adicionar" aria-label="Adicionar Professor">
+            <span class="icon-mask icon-plus"></span>
+        </a>
+
+        <nav id="BottomNav">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'inicio' || paginaAtual === 'dashboard' || paginaAtual === '/dashboard') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+            <a href="/alunos?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'alunos' || paginaAtual === '/alunos') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-studant"></span>
+                <span class="Texto">Alunos</span>
+            </a>
+            <a href="/professores?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'professores' || paginaAtual === '/professores') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-professor"></span>
+                <span class="Texto">Professores</span>
+            </a>
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'acervo' || paginaAtual === '/acervo') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+            <a href="/perfil?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'perfil' || paginaAtual === '/perfil') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-perfil"></span>
+                <span class="Texto">Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="/JS/ControlarProfessores.js"></script>
+</body>
+</html>

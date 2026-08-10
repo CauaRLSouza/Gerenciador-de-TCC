@@ -18,10 +18,8 @@
                 }
             }
 
-            // Executa imediatamente para evitar o efeito FOUT/piscada de tela clara
             aplicarTema();
 
-            // Ouve alterações no tema do SO (caso o usuário esteja no modo 'sistema')
             window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
                 const temaSalvo = localStorage.getItem("tema_app") || "sistema";
                 if (temaSalvo === "sistema") {
@@ -74,28 +72,28 @@
                             <span class="icon-mask icon-person"></span>
                             <span>Nome completo</span>
                         </div>
-                        <span class="valor-detalhe"><%= aluno.nome %></span>
+                        <span class="valor-detalhe"><%= aluno.nome || '-' %></span>
                     </div>
                     <div class="item-detalhe">
                         <div class="label-com-icone">
                             <span class="icon-mask icon-badge"></span>
                             <span>Matrícula</span>
                         </div>
-                        <span class="valor-detalhe"><%= aluno.matricula %></span>
+                        <span class="valor-detalhe"><%= aluno.matricula || '-' %></span>
                     </div>
                     <div class="item-detalhe">
                         <div class="label-com-icone">
                             <span class="icon-mask icon-calendar"></span>
                             <span>Data de nascimento</span>
                         </div>
-                        <span class="valor-detalhe"><%= aluno.dataNascimento %></span>
+                        <span class="valor-detalhe"><%= aluno.dataNascimento || 'Não informada' %></span>
                     </div>
                     <div class="item-detalhe">
                         <div class="label-com-icone">
                             <span class="icon-mask icon-phone"></span>
                             <span>Telefone</span>
                         </div>
-                        <span class="valor-detalhe"><%= aluno.telefone %></span>
+                        <span class="valor-detalhe"><%= aluno.telefone || 'Não informado' %></span>
                     </div>
                 </div>
             </section>
@@ -108,28 +106,28 @@
                             <span class="icon-mask icon-school"></span>
                             <span>Curso</span>
                         </div>
-                        <span class="valor-detalhe"><%= aluno.curso %></span>
+                        <span class="valor-detalhe"><%= aluno.curso || '-' %></span>
                     </div>
                     <div class="item-detalhe">
                         <div class="label-com-icone">
                             <span class="icon-mask icon-calendar"></span>
                             <span>Período de ingresso</span>
                         </div>
-                        <span class="valor-detalhe"><%= aluno.periodoIngresso %></span>
+                        <span class="valor-detalhe"><%= aluno.periodoIngresso || aluno.dataIngresso || '-' %></span>
                     </div>
                     <div class="item-detalhe">
                         <div class="label-com-icone">
                             <span class="icon-mask icon-book"></span>
                             <span>Período atual</span>
                         </div>
-                        <span class="valor-detalhe"><%= aluno.periodoAtual %></span>
+                        <span class="valor-detalhe"><%= aluno.periodoAtual || '-' %></span>
                     </div>
                     <div class="item-detalhe">
                         <div class="label-com-icone">
                             <span class="icon-mask icon-flag"></span>
                             <span>Situação acadêmica</span>
                         </div>
-                        <span class="valor-detalhe"><%= aluno.situacaoAcademica %></span>
+                        <span class="valor-detalhe"><%= aluno.situacaoAcademica || aluno.status || 'Ativo' %></span>
                     </div>
                 </div>
             </section>
@@ -142,7 +140,7 @@
                             <span class="icon-mask icon-mail"></span>
                             <span>E-mail de acesso</span>
                         </div>
-                        <span class="valor-detalhe"><%= aluno.email %></span>
+                        <span class="valor-detalhe"><%= aluno.email || '-' %></span>
                     </div>
                     <div class="item-detalhe item-senha">
                         <div class="label-com-icone">
@@ -169,35 +167,35 @@
                                 <span class="icon-mask icon-description"></span>
                                 <span>Título do TCC</span>
                             </div>
-                            <span class="valor-detalhe valor-truncate"><%= aluno.tcc.titulo %></span>
+                            <span class="valor-detalhe valor-truncate"><%= aluno.tcc.titulo || '-' %></span>
                         </div>
                         <div class="item-detalhe">
                             <div class="label-com-icone">
                                 <span class="icon-mask icon-person"></span>
                                 <span>Orientador(a)</span>
                             </div>
-                            <span class="valor-detalhe"><%= aluno.tcc.orientador %></span>
+                            <span class="valor-detalhe"><%= aluno.tcc.orientador || '-' %></span>
                         </div>
                         <div class="item-detalhe">
                             <div class="label-com-icone">
                                 <span class="icon-mask icon-list"></span>
                                 <span>Status do TCC</span>
                             </div>
-                            <span class="valor-detalhe"><%= aluno.tcc.status %></span>
+                            <span class="valor-detalhe"><%= aluno.tcc.status || '-' %></span>
                         </div>
                         <div class="item-detalhe">
                             <div class="label-com-icone">
                                 <span class="icon-mask icon-flag"></span>
                                 <span>Etapa atual</span>
                             </div>
-                            <span class="valor-detalhe"><%= aluno.tcc.etapaAtual %></span>
+                            <span class="valor-detalhe"><%= aluno.tcc.etapaAtual || '-' %></span>
                         </div>
                         <div class="item-detalhe">
                             <div class="label-com-icone">
                                 <span class="icon-mask icon-schedule"></span>
                                 <span>Última atualização</span>
                             </div>
-                            <span class="valor-detalhe"><%= aluno.tcc.ultimaAtualizacao %></span>
+                            <span class="valor-detalhe"><%= aluno.tcc.ultimaAtualizacao || '-' %></span>
                         </div>
                     </div>
                     <a href="/tcc/<%= aluno.tcc.id %>" class="btn-tcc-detalhes">

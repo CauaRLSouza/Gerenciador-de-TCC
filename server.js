@@ -1,5 +1,5 @@
 const express = require('express');
-const path = path = require('path');
+const path = require('path');
 
 const app = express();
 const PORT = 3000;
@@ -15,6 +15,20 @@ const usuariosMock = [
     { email: 'aluno@teste.com', perfil: 'Aluno' },
     { email: 'prof@teste.com', perfil: 'Professor' },
     { email: 'sec@teste.com', perfil: 'Secretariado' }
+];
+
+const todosProfessoresMock = [
+    { id: '1', nome: 'Pedro Felipe', email: 'PFASA@campus.edu.br', matricula: '1928371', telefone: '(74) 99911-1001', titulacao: 'Doutorado', qtdOrientandos: 4, status: 'Ativo' },
+    { id: '2', nome: 'Renata Rocha', email: 'renata.rocha@campus.edu.br', matricula: '1928372', telefone: '(74) 99911-1002', titulacao: 'Mestrado', qtdOrientandos: 4, status: 'Ativo' },
+    { id: '3', nome: 'Sérgio Lima', email: 'sergio.lima@campus.edu.br', matricula: '1928373', telefone: '(74) 99911-1003', titulacao: 'Mestrado', qtdOrientandos: 3, status: 'Ativo' },
+    { id: '4', nome: 'Helena Oliveira', email: 'helena.oliveira@campus.edu.br', matricula: '1928374', telefone: '(74) 99911-1004', titulacao: 'Mestrado', qtdOrientandos: 3, status: 'Ativo' },
+    { id: '5', nome: 'Vanessa Mendes', email: 'vanessa.mendes@campus.edu.br', matricula: '1928375', telefone: '(74) 99911-1005', titulacao: 'Mestrado', qtdOrientandos: 3, status: 'Ativo' },
+    { id: '6', nome: 'Rodrigo Alves', email: 'rodrigo.alves@campus.edu.br', matricula: '1928376', telefone: '(74) 99911-1006', titulacao: 'Especialização', qtdOrientandos: 2, status: 'Ativo' },
+    { id: '7', nome: 'Tatiane Costa', email: 'tatiane.costa@campus.edu.br', matricula: '1928377', telefone: '(74) 99911-1007', titulacao: 'Especialização', qtdOrientandos: 2, status: 'Ativo' },
+    { id: '8', nome: 'Maurício Ferreira', email: 'mauricio.ferreira@campus.edu.br', matricula: '1928378', telefone: '(74) 99911-1008', titulacao: 'Especialização', qtdOrientandos: 2, status: 'Ativo' },
+    { id: '9', nome: 'Adriana Peixoto', email: 'adriana.peixoto@campus.edu.br', matricula: '1928379', telefone: '(74) 99911-1009', titulacao: 'Especialização', qtdOrientandos: 2, status: 'Ativo' },
+    { id: '10', nome: 'Cláudio Nogueira', email: 'claudio.nogueira@campus.edu.br', matricula: '1928380', telefone: '(74) 99911-1010', titulacao: 'Graduação', qtdOrientandos: 1, status: 'Ativo' },
+    { id: '11', nome: 'Juliana Barreto', email: 'juliana.barreto@campus.edu.br', matricula: '1928381', telefone: '(74) 99911-1011', titulacao: 'Graduação', qtdOrientandos: 0, status: 'Ativo' }
 ];
 
 const todosAlunosMock = [
@@ -58,7 +72,7 @@ function proibirAcessoDireto(req, res, next) {
 
 function gerarIniciais(nome) {
     if (!nome) return '';
-    const partes = nome.trim().split(' ');
+    const partes = nome.replace(/^(Prof\.|Profa\.)\s+/i, '').trim().split(' ');
     if (partes.length >= 2) {
         return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
     }
@@ -187,9 +201,28 @@ app.get('/alunos', proibirAcessoDireto, (req, res) => {
     });
 });
 
+app.get('/professores', proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Secretariado';
+    const professoresComIniciais = todosProfessoresMock.map(prof => ({
+        ...prof,
+        iniciais: gerarIniciais(prof.nome)
+    }));
+
+    res.render(`${perfil}/Professores`, { 
+        currentPage: 'professores', 
+        perfil,
+        professores: professoresComIniciais
+    });
+});
+
 app.get('/cadastrar-aluno', proibirAcessoDireto, (req, res) => {
     const perfil = req.query.perfil || 'Aluno';
     res.render(`${perfil}/CadastrarAluno`, { currentPage: 'CadastrarAluno', perfil });
+});
+
+app.get('/cadastrar-professor', proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Secretariado';
+    res.render(`${perfil}/CadastrarProfessor`, { currentPage: 'CadastrarProfessor', perfil });
 });
 
 app.get(['/DetalharAluno/:id', '/detalhar-aluno/:id'], proibirAcessoDireto, (req, res) => {

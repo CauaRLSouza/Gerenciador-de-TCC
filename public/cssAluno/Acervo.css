@@ -348,9 +348,9 @@ body {
 .icon-perfil { -webkit-mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/account_circle_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 
 .icon-busca { -webkit-mask-image: url('../Icones/search_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/search_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-3); }
-.icon-seta-baixo { -webkit-mask-image: url('../Icones/expand_more_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/expand_more_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--primary); width: 18px; height: 18px; }
+.icon-seta-baixo { -webkit-mask-image: url('../Icones/keyboard_arrow_down_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/keyboard_arrow_down_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--primary); width: 18px; height: 18px; }
 .icon-curso { -webkit-mask-image: url('../Icones/school_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/school_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-2); width: 16px; height: 16px; }
-.icon-calendario { -webkit-mask-image: url('../Icones/calendar_today_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/calendar_today_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-2); width: 16px; height: 16px; }
+.icon-calendario { -webkit-mask-image: url('../Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); background-color: var(--text-2); width: 16px; height: 16px; }
 
 .icon-grafico { -webkit-mask-image: url('../Icones/bar_chart_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/bar_chart_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-globe { -webkit-mask-image: url('../Icones/public_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/public_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }

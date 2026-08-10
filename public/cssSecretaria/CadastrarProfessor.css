@@ -63,7 +63,7 @@ body {
     min-height: 100vh; 
 }
 
-#TelaCadastrarAluno { 
+#TelaCadastrarProfessor { 
     width: 100%; 
     max-width: 480px; 
     height: 100vh; 
@@ -371,9 +371,9 @@ input:focus, select:focus {
     background-color: var(--text-1); 
 }
 
-.icon-studant { 
-    -webkit-mask-image: url('../Icones/school_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
-    mask-image: url('../Icones/school_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+.icon-teacher { 
+    -webkit-mask-image: url('../Icones/badge_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
+    mask-image: url('../Icones/badge_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); 
 }
 
 .icon-chevron-down {
