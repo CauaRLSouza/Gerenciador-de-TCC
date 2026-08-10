@@ -355,7 +355,42 @@ body {
   gap: 4px;
 }
 
-/* Máscaras de Ícones (SVG) */
+.btn-flutuante-publicar {
+  position: absolute;
+  bottom: 80px;
+  right: 20px;
+  z-index: 99;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: #ffffff;
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  transition: transform 0.2s ease, background-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-flutuante-publicar:hover {
+  transform: scale(1.05);
+  background-color: var(--primary-hover);
+  box-shadow: 0 0 20px var(--primary), 0 0 40px var(--primary);
+}
+
+.btn-flutuante-publicar:active {
+  transform: scale(0.95);
+  box-shadow: 0 0 10px var(--primary);
+}
+
+.btn-flutuante-publicar .icon-mask {
+  width: 24px;
+  height: 24px;
+  background-color: #ffffff;
+}
+
 .icon-mask {
   display: inline-block;
   width: 22px;
@@ -364,6 +399,11 @@ body {
   -webkit-mask: no-repeat center/contain;
   mask: no-repeat center/contain;
   pointer-events: none;
+}
+
+.icon-upload {
+  -webkit-mask-image: url('../Icones/upload_file_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
+  mask-image: url('../Icones/upload_file_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
 }
 
 .icon-settings {
@@ -494,7 +534,6 @@ body {
   mask-image: url('../Icones/visibility_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
 }
 
-/* Navegação Inferior */
 #BottomNav {
   position: absolute;
   bottom: 0;

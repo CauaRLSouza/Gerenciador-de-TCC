@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Acervo de TCCs</title>
     <link rel="stylesheet" href="/cssSecretaria/Acervo.css">
+    <link rel="stylesheet" href="/cssSecretaria/PublicarTCC.css">
     <script>
     (function() {
         const tema = localStorage.getItem("tema_app") || "sistema";
@@ -293,6 +294,10 @@
             </section>
         </main>
 
+        <button id="BtnPublicarTCC" class="btn-flutuante-publicar" aria-label="Publicar TCC">
+            <span class="icon-mask icon-upload"></span>
+        </button>
+
         <nav id="BottomNav">
             <a href="/dashboard?perfil=<%= perfil %>" class="nav-btn <%= (currentPage === 'inicio' || currentPage === 'dashboard' || currentPage === '/dashboard' || !currentPage) ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-home"></span>
@@ -322,6 +327,6 @@
     </div>
 
     <script src="/js/acervo.js"></script>
-
+    <script src="/js/PublicarTCC.js"></script>
 </body>
 </html>
