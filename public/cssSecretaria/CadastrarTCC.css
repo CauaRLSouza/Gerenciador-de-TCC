@@ -556,9 +556,9 @@ textarea:focus {
     background-color: var(--text-1); 
 }
 
-.icon-tcc {
-    -webkit-mask-image: url('../Icones/description_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
-    mask-image: url('../Icones/description_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
+.icon-file {
+    -webkit-mask-image: url('../Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
+    mask-image: url('../Icones/files_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
 }
 
 .icon-search {

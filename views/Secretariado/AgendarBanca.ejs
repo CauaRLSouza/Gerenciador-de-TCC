@@ -1,0 +1,549 @@
+<%
+const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+%>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendar Banca</title>
+    <link rel="stylesheet" href="/cssSecretaria/AgendarBanca.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (
+                tema === "escuro" ||
+                (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+            ) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+<div id="TelaAgendarBanca">
+
+    <header id="Header">
+        <button type="button" class="icon-btn" id="btnVoltar" aria-label="Voltar">
+            <span class="icon-mask icon-arrow-left"></span>
+        </button>
+
+        <h1 id="TituloPagina">Agendar Banca</h1>
+
+        <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
+            <span class="icon-mask icon-notification"></span>
+        </a>
+    </header>
+
+    <main id="CorpoScroll">
+
+        <div class="card-header bg-purple-light">
+            <div class="d-flex align-items-center">
+                <div class="icone-secao">
+                    <span class="icon-mask icon-calendar"></span>
+                </div>
+
+                <div>
+                    <h5 class="mb-1 text-purple fw-bold">Agendamento de Banca</h5>
+                    <p class="mb-0 text-muted small">
+                        Selecione o TCC, defina os dados da banca e agende a apresentação.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <form id="formAgendarBanca" action="/agendar-banca" method="POST">
+
+            <div class="campo-grupo">
+                <label for="inputBuscaTcc">TCC <span class="obrigatorio">*</span></label>
+
+                <div class="custom-dropdown-container">
+                    <div class="wrapper-input-icone">
+                        <input 
+                            type="text" 
+                            id="inputBuscaTcc" 
+                            class="form-control" 
+                            placeholder="Buscar TCC por título ou aluno..." 
+                            autocomplete="off"
+                            onclick="toggleDropdownTCC()"
+                            oninput="filtrarTCCs(this.value)"
+                        >
+                        <span class="icon-mask icon-chevron-down" onclick="toggleDropdownTCC()"></span>
+                    </div>
+
+                    <input type="hidden" id="tccSelectHidden" name="tccId" required>
+
+                    <div id="dropdownTccLista" class="custom-dropdown-menu d-none">
+                        <div class="dropdown-item-header" onclick="fecharDropdownTCC()">
+                            <span>Buscar TCC por título ou aluno...</span>
+                        </div>
+
+                        <div id="listaOpcoesTcc">
+                            <% tccs.forEach(tcc => { %>
+                                <div 
+                                    class="dropdown-item-option"
+                                    data-id="<%= tcc.id %>"
+                                    data-titulo="<%= tcc.titulo %>"
+                                    data-aluno="<%= tcc.alunoNome %>"
+                                    data-curso="<%= tcc.curso %>"
+                                    data-orientador="<%= tcc.orientadorNome %>"
+                                    data-orientador-id="<%= tcc.orientadorId %>"
+                                    data-coorientador="<%= tcc.coorientadorNome || '' %>"
+                                    onclick="selecionarTCCCustom(this)"
+                                >
+                                    <strong><%= tcc.titulo %></strong> - <span class="text-aluno-autor"><%= tcc.alunoNome %></span>
+                                </div>
+                            <% }) %>
+                        </div>
+                        <div id="semResultadosTcc" class="p-3 text-muted text-center d-none">Nenhum TCC encontrado</div>
+                    </div>
+                </div>
+            </div>
+
+            <div id="cardTccSelecionado" class="card bg-purple-light d-none">
+
+                <div class="card-body position-relative">
+
+                    <button 
+                        type="button" 
+                        class="btn-close" 
+                        onclick="deselecionarTCC()" 
+                        aria-label="Remover TCC selecionado">
+                    </button>
+
+                    <h6 id="cardTitulo"></h6>
+
+                    <div class="text-secondary">
+
+                        <p class="mb-1">
+                            <span class="icon-mask icon-person"></span>
+                            <span id="cardAluno"></span>
+                            <span>•</span>
+                            <span id="cardCurso"></span>
+                        </p>
+
+                        <p class="mb-1">
+                            <span class="icon-mask icon-bookmark"></span>
+                            <span>Orientador(a):</span>
+                            <span id="cardOrientador"></span>
+                        </p>
+
+                        <p id="containerCoorientador" class="mb-0 d-none">
+                            <span class="icon-mask icon-people"></span>
+                            <span>Coorientador(a):</span>
+                            <span id="cardCoorientador"></span>
+                        </p>
+
+                    </div>
+                </div>
+            </div>
+
+            <h6>Data, horário e local</h6>
+
+            <div class="row">
+                <div class="col-6 campo-grupo">
+                    <label for="campoData">
+                        Data <span class="obrigatorio">*</span>
+                    </label>
+
+                    <div class="wrapper-input-icone">
+                        <input 
+                            type="date" 
+                            id="campoData" 
+                            name="data" 
+                            required
+                        >
+                        <span class="icon-mask icon-calendar"></span>
+                    </div>
+                </div>
+
+                <div class="col-6 campo-grupo">
+                    <label for="campoHorario">
+                        Horário <span class="obrigatorio">*</span>
+                    </label>
+
+                    <div class="wrapper-input-icone">
+                        <input 
+                            type="time" 
+                            id="campoHorario" 
+                            name="horario" 
+                            required
+                        >
+                        <span class="icon-mask icon-clock"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="campo-grupo">
+                <label for="campoLocal">
+                    Local <span class="obrigatorio">*</span>
+                </label>
+
+                <div class="wrapper-select">
+                    <select id="campoLocal" name="local" required>
+                        <option value="" disabled selected>Selecione a sala ou ambiente</option>
+                        <option value="Sala 12 - Bloco A">Sala 12 - Bloco A</option>
+                        <option value="Auditório Principal">Auditório Principal</option>
+                        <option value="Virtual (Google Meet)">Virtual (Google Meet)</option>
+                    </select>
+
+                    <span class="icon-mask icon-chevron-down"></span>
+                </div>
+            </div>
+
+            <div class="d-flex align-items-center justify-content-between">
+                <h6>Composição da banca</h6>
+                <span class="badge bg-light text-muted fw-normal">
+                    Mínimo de 3 membros
+                </span>
+            </div>
+
+            <div id="listaBanca"></div>
+
+            <button 
+                type="button" 
+                id="btnAdicionarMembro" 
+                class="btn btn-outline-purple" 
+                onclick="abrirModalMembro()" 
+                disabled
+            >
+                <span class="icon-mask icon-plus"></span>
+                <span>Adicionar membro da banca</span>
+            </button>
+
+            <button 
+                type="submit" 
+                id="btnAgendar" 
+                class="btn btn-purple" 
+                disabled
+            >
+                <span class="icon-mask icon-calendar"></span>
+                <span>Agendar banca</span>
+            </button>
+
+        </form>
+
+    </main>
+
+</div>
+
+<div class="modal" id="modalAddMembro" tabindex="-1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h5 class="modal-title">
+                    Adicionar Membro à Banca
+                </h5>
+
+                <button 
+                    type="button" 
+                    class="btn-close" 
+                    onclick="fecharModalMembro()" 
+                    aria-label="Fechar">
+                </button>
+
+            </div>
+
+            <div class="modal-body">
+
+                <div class="campo-grupo">
+
+                    <label for="selectNovoMembro">
+                        Selecione o Professor
+                    </label>
+
+                    <div class="wrapper-select">
+
+                        <select id="selectNovoMembro">
+                            <option value="" disabled selected>
+                                Escolha um professor...
+                            </option>
+
+                            <% professores.forEach(prof => { %>
+                                <option 
+                                    value="<%= prof.id %>" 
+                                    data-nome="<%= prof.nome %>"
+                                >
+                                    <%= prof.rotulo %>
+                                </option>
+                            <% }) %>
+
+                        </select>
+
+                        <span class="icon-mask icon-chevron-down"></span>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="modal-footer">
+
+                <button 
+                    type="button" 
+                    class="btn-secondary" 
+                    onclick="fecharModalMembro()">
+                    Cancelar
+                </button>
+
+                <button 
+                    type="button" 
+                    class="btn btn-purple" 
+                    onclick="confirmarAdicionarMembro()">
+                    Adicionar
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+    document.getElementById('btnVoltar')?.addEventListener('click', function() {
+        if (window.history.length > 1) {
+            window.history.back();
+        } else {
+            window.location.href = '/bancas?perfil=<%= perfilAtual %>';
+        }
+    });
+
+    let membrosBanca = [];
+    const MIN_MEMBROS = 3;
+    const MAX_MEMBROS = 4;
+
+    function toggleDropdownTCC() {
+        const lista = document.getElementById('dropdownTccLista');
+        lista.classList.toggle('d-none');
+    }
+
+    function fecharDropdownTCC() {
+        document.getElementById('dropdownTccLista').classList.add('d-none');
+    }
+
+    function filtrarTCCs(termo) {
+        const dropdown = document.getElementById('dropdownTccLista');
+        dropdown.classList.remove('d-none');
+
+        const busca = termo.toLowerCase().trim();
+        const opcoes = document.querySelectorAll('.dropdown-item-option');
+        let encontrados = 0;
+
+        opcoes.forEach(opt => {
+            const titulo = opt.getAttribute('data-titulo').toLowerCase();
+            const aluno = opt.getAttribute('data-aluno').toLowerCase();
+
+            if (titulo.includes(busca) || aluno.includes(busca)) {
+                opt.style.display = 'block';
+                encontrados++;
+            } else {
+                opt.style.display = 'none';
+            }
+        });
+
+        const msgSemResultados = document.getElementById('semResultadosTcc');
+        if (encontrados === 0) {
+            msgSemResultados.classList.remove('d-none');
+        } else {
+            msgSemResultados.classList.add('d-none');
+        }
+    }
+
+    function selecionarTCCCustom(elemento) {
+        const id = elemento.getAttribute('data-id');
+        const titulo = elemento.getAttribute('data-titulo');
+        const aluno = elemento.getAttribute('data-aluno');
+        const curso = elemento.getAttribute('data-curso');
+        const orientador = elemento.getAttribute('data-orientador');
+        const orientadorId = elemento.getAttribute('data-orientador-id');
+        const coorientador = elemento.getAttribute('data-coorientador');
+
+        document.getElementById('inputBuscaTcc').value = `${titulo} - ${aluno}`;
+        document.getElementById('tccSelectHidden').value = id;
+
+        document.getElementById('cardTitulo').innerText = titulo;
+        document.getElementById('cardAluno').innerText = aluno;
+        document.getElementById('cardCurso').innerText = curso;
+        document.getElementById('cardOrientador').innerText = orientador;
+
+        const containerCoorientador = document.getElementById('containerCoorientador');
+        if (coorientador) {
+            document.getElementById('cardCoorientador').innerText = coorientador;
+            containerCoorientador.classList.remove('d-none');
+        } else {
+            containerCoorientador.classList.add('d-none');
+        }
+
+        document.getElementById('cardTccSelecionado').classList.remove('d-none');
+
+        membrosBanca = [{
+            id: orientadorId,
+            nome: orientador,
+            funcao: 'Orientadora',
+            obrigatorio: true
+        }];
+
+        document.getElementById('btnAdicionarMembro').disabled = false;
+        fecharDropdownTCC();
+        renderizarBanca();
+    }
+
+    function deselecionarTCC() {
+        document.getElementById('inputBuscaTcc').value = '';
+        document.getElementById('tccSelectHidden').value = '';
+        document.getElementById('cardTccSelecionado').classList.add('d-none');
+
+        membrosBanca = [];
+        document.getElementById('btnAdicionarMembro').disabled = true;
+        renderizarBanca();
+    }
+
+    document.addEventListener('click', function(e) {
+        const container = document.querySelector('.custom-dropdown-container');
+        if (container && !container.contains(e.target)) {
+            fecharDropdownTCC();
+        }
+    });
+
+    function gerarIniciais(nome) {
+        if (!nome) return '';
+
+        const partes = nome.trim().split(' ');
+
+        if (partes.length >= 2) {
+            return (
+                partes[0][0] +
+                partes[partes.length - 1][0]
+            ).toUpperCase();
+        }
+
+        return partes[0].substring(0, 2).toUpperCase();
+    }
+
+    function renderizarBanca() {
+        const container = document.getElementById('listaBanca');
+
+        container.innerHTML = '';
+
+        membrosBanca.forEach((membro, index) => {
+
+            const item = document.createElement('div');
+
+            item.innerHTML = `
+                <div>
+                    <div class="avatar-circle">
+                        ${gerarIniciais(membro.nome)}
+                    </div>
+
+                    <div>
+                        <span class="fw-bold">
+                            ${membro.nome}
+                        </span>
+                    </div>
+
+                    <span class="badge ${
+                        membro.obrigatorio
+                            ? 'bg-warning-light text-warning-dark'
+                            : 'bg-info-light text-info-dark'
+                    }">
+                        ${membro.funcao}
+                    </span>
+                </div>
+
+                <div>
+                    ${
+                        membro.obrigatorio
+                            ? '<span class="icon-mask icon-lock"></span>'
+                            : `
+                                <button 
+                                    type="button" 
+                                    class="text-danger" 
+                                    onclick="removerMembro(${index})" 
+                                    aria-label="Remover membro">
+                                    <span class="icon-mask icon-close"></span>
+                                </button>
+                            `
+                    }
+                </div>
+
+                <input 
+                    type="hidden" 
+                    name="bancaMembros[]" 
+                    value="${membro.id}"
+                >
+            `;
+
+            container.appendChild(item);
+        });
+
+        const btnAdicionar = document.getElementById('btnAdicionarMembro');
+        btnAdicionar.disabled = membrosBanca.length >= MAX_MEMBROS || membrosBanca.length === 0;
+
+        const btnAgendar = document.getElementById('btnAgendar');
+        btnAgendar.disabled = membrosBanca.length < MIN_MEMBROS;
+    }
+
+    function abrirModalMembro() {
+        if (membrosBanca.length >= MAX_MEMBROS) return;
+
+        const modal = document.getElementById('modalAddMembro');
+        modal.style.display = 'flex';
+        modal.classList.add('show');
+    }
+
+    function fecharModalMembro() {
+        const modal = document.getElementById('modalAddMembro');
+        modal.style.display = 'none';
+        modal.classList.remove('show');
+    }
+
+    function confirmarAdicionarMembro() {
+        const select = document.getElementById('selectNovoMembro');
+        const id = select.value;
+
+        if (!id) return;
+
+        const option = select.options[select.selectedIndex];
+        const nome = option.getAttribute('data-nome');
+
+        if (membrosBanca.some(m => m.id === id)) {
+            alert('Este professor já faz parte da banca.');
+            return;
+        }
+
+        membrosBanca.push({
+            id: id,
+            nome: nome,
+            funcao: 'Avaliador(a)',
+            obrigatorio: false
+        });
+
+        select.value = '';
+        fecharModalMembro();
+        renderizarBanca();
+    }
+
+    function removerMembro(index) {
+        if (membrosBanca[index].obrigatorio) return;
+
+        membrosBanca.splice(index, 1);
+        renderizarBanca();
+    }
+
+    document.getElementById('modalAddMembro')?.addEventListener('click', function(event) {
+        if (event.target === this) {
+            fecharModalMembro();
+        }
+    });
+</script>
+
+</body>
+</html>
