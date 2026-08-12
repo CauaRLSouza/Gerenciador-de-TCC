@@ -48,32 +48,32 @@ const todosAlunosMock = [
 ];
 
 const todosTccsMock = [
-    { id: '1', titulo: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web', alunoNome: 'João da Silva', alunoId: '1', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Pedro Felipe', orientadorId: '1', coorientadorNome: 'Profª. Renata Rocha', coorientadorId: '2' },
-    { id: '2', titulo: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos', alunoNome: 'Maria Santos', alunoId: '2', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Pedro Felipe', orientadorId: '1', coorientadorNome: '', coorientadorId: '' },
-    { id: '3', titulo: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias', alunoNome: 'Carlos Correia', alunoId: '3', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Pedro Felipe', orientadorId: '1', coorientadorNome: 'Prof. Sérgio Lima', coorientadorId: '3' },
-    { id: '4', titulo: 'Manejo Sustentável de Solos e Técnicas de Irrigação de Precisão', alunoNome: 'Ana Beatriz Souza', alunoId: '4', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Prof. Pedro Felipe', orientadorId: '1', coorientadorNome: '', coorientadorId: '' },
-    { id: '5', titulo: 'Análise Espectroscópica de Compostos Orgânicos na Indústria Química', alunoNome: 'Bruno Ferreira', alunoId: '5', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Renata Rocha', orientadorId: '2', coorientadorNome: 'Prof. Pedro Felipe', coorientadorId: '1' },
-    { id: '6', titulo: 'Gestão Estratégica de Pessoas e Cultura Organizacional em Startups', alunoNome: 'Camila Oliveira', alunoId: '6', curso: 'Bacharel em Administração', orientadorNome: 'Profª. Renata Rocha', orientadorId: '2', coorientadorNome: '', coorientadorId: '' },
-    { id: '7', titulo: 'Segurança da Informação e Criptografia em Redes Sem Fio', alunoNome: 'Daniel Costa', alunoId: '7', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Profª. Renata Rocha', orientadorId: '2', coorientadorNome: 'Prof. Maurício Ferreira', coorientadorId: '8' },
-    { id: '8', titulo: 'Impacto do Clima Semiárido na Produção Agrícola Regional', alunoNome: 'Eduarda Lima', alunoId: '8', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Renata Rocha', orientadorId: '2', coorientadorNome: '', coorientadorId: '' },
-    { id: '9', titulo: 'Síntese de Polímeros Biodegradáveis para Embalagens Sustentáveis', alunoNome: 'Felipe Rocha', alunoId: '9', curso: 'Licenciatura em Química', orientadorNome: 'Prof. Sérgio Lima', orientadorId: '3', coorientadorNome: 'Profª. Helena Oliveira', coorientadorId: '4' },
-    { id: '10', titulo: 'Análise Financeira e Governança Corporativa em Microempresas', alunoNome: 'Gabriela Alves', alunoId: '10', curso: 'Bacharel em Administração', orientadorNome: 'Prof. Sérgio Lima', orientadorId: '3', coorientadorNome: '', coorientadorId: '' },
-    { id: '11', titulo: 'Sistemas Recomendadores Baseados em Filtragem Colaborativa', alunoNome: 'Gabriel Santos', alunoId: '11', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Sérgio Lima', orientadorId: '3', coorientadorNome: '', coorientadorId: '' },
-    { id: '12', titulo: 'Uso de Drones no Mapeamento do Uso do Solo no Semiárido', alunoNome: 'Heitor Martins', alunoId: '12', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Helena Oliveira', orientadorId: '4', coorientadorNome: 'Profª. Tatiane Costa', coorientadorId: '7' },
-    { id: '13', titulo: 'Purificação de Águas Residuais com Materiais de Baixo Custo', alunoNome: 'Isabela Ribeiro', alunoId: '13', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Helena Oliveira', orientadorId: '4', coorientadorNome: '', coorientadorId: '' },
-    { id: '14', titulo: 'Estratégias de Marketing Digital no Setor Acadêmico', alunoNome: 'Lucas Mendes', alunoId: '14', curso: 'Bacharel em Administração', orientadorNome: 'Profª. Helena Oliveira', orientadorId: '4', coorientadorNome: '', coorientadorId: '' },
-    { id: '15', titulo: 'Desenvolvimento de Jogos Educativos Acessíveis para Web', alunoNome: 'Mariana Barbosa', alunoId: '15', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Profª. Vanessa Mendes', orientadorId: '5', coorientadorNome: 'Prof. Rodrigo Alves', coorientadorId: '6' },
-    { id: '16', titulo: 'Qualidade do Solo e Rotação de Culturas em Pequenas Propriedades', alunoNome: 'Matheus Fernandes', alunoId: '16', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Vanessa Mendes', orientadorId: '5', coorientadorNome: '', coorientadorId: '' },
-    { id: '17', titulo: 'Estudo da Reatividade de Compostos de Coordenação', alunoNome: 'Nathalia Carvalho', alunoId: '17', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Vanessa Mendes', orientadorId: '5', coorientadorNome: '', coorientadorId: '' },
-    { id: '18', titulo: 'Logística de Suprimentos na Cadeia de Alimentos Orgânicos', alunoNome: 'Otávio Teixeira', alunoId: '18', curso: 'Bacharel em Administração', orientadorNome: 'Prof. Rodrigo Alves', orientadorId: '6', coorientadorNome: 'Profª. Adriana Peixoto', coorientadorId: '9' },
-    { id: '19', titulo: 'Processamento de Linguagem Natural Aplicado a Fóruns Educacionais', alunoNome: 'Patricia Gomes', alunoId: '19', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Rodrigo Alves', orientadorId: '6', coorientadorNome: '', coorientadorId: '' },
-    { id: '20', titulo: 'Tecnologias Bioecológicas para Controle de Pragas na Caatinga', alunoNome: 'Rafael Cardoso', alunoId: '20', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Tatiane Costa', orientadorId: '7', coorientadorNome: '', coorientadorId: '' },
-    { id: '21', titulo: 'Metodologias Ativas no Ensino de Química Orgânica', alunoNome: 'Sophia Monteiro', alunoId: '21', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Tatiane Costa', orientadorId: '7', coorientadorNome: '', coorientadorId: '' },
-    { id: '22', titulo: 'Plano de Negócios para Empreendimentos de Economia Solidária', alunoNome: 'Thiago Nunes', alunoId: '22', curso: 'Bacharel em Administração', orientadorNome: 'Prof. Maurício Ferreira', orientadorId: '8', coorientadorNome: '', coorientadorId: '' },
-    { id: '23', titulo: 'Computação em Nuvem e Escalabilidade de Banco de Dados', alunoNome: 'Vinícius Moreira', alunoId: '23', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Maurício Ferreira', orientadorId: '8', coorientadorNome: '', coorientadorId: '' },
-    { id: '24', titulo: 'Sistemas Agroflorestais Adaptados ao Semiárido Baiano', alunoNome: 'Yasmin Vieira', alunoId: '24', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Adriana Peixoto', orientadorId: '9', coorientadorNome: '', coorientadorId: '' },
-    { id: '25', titulo: 'Avaliação da Qualidade do Ar em Zonas Urbanas e Industriais', alunoNome: 'Igor Cavalcante', alunoId: '25', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Adriana Peixoto', orientadorId: '9', coorientadorNome: '', coorientadorId: '' },
-    { id: '26', titulo: 'Inovação e Empreendedorismo Acadêmico no Âmbito Universitário', alunoNome: 'Letícia Freitas', alunoId: '26', curso: 'Bacharel em Administração', orientadorNome: 'Prof. Cláudio Nogueira', orientadorId: '10', coorientadorNome: '', coorientadorId: '' }
+    { id: '1', titulo: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web', alunoNome: 'João da Silva', alunoId: '1', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Pedro Felipe', orientadorId: '1', coorientadorNome: 'Profª. Renata Rocha', coorientadorId: '2', linhaPesquisa: 'Computação', defesa: 'TCC II' },
+    { id: '2', titulo: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos', alunoNome: 'Maria Santos', alunoId: '2', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Pedro Felipe', orientadorId: '1', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Computação', defesa: 'TCC II' },
+    { id: '3', titulo: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias', alunoNome: 'Carlos Correia', alunoId: '3', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Pedro Felipe', orientadorId: '1', coorientadorNome: 'Prof. Sérgio Lima', coorientadorId: '3', linhaPesquisa: 'Computação', defesa: 'TCC I' },
+    { id: '4', titulo: 'Manejo Sustentável de Solos e Técnicas de Irrigação de Precisão', alunoNome: 'Ana Beatriz Souza', alunoId: '4', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Prof. Pedro Felipe', orientadorId: '1', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Agronomia e Solos', defesa: 'TCC II' },
+    { id: '5', titulo: 'Análise Espectroscópica de Compostos Orgânicos na Indústria Química', alunoNome: 'Bruno Ferreira', alunoId: '5', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Renata Rocha', orientadorId: '2', coorientadorNome: 'Prof. Pedro Felipe', coorientadorId: '1', linhaPesquisa: 'Quimica Organica e Analitica', defesa: 'TCC I' },
+    { id: '6', titulo: 'Gestão Estratégica de Pessoas e Cultura Organizacional em Startups', alunoNome: 'Camila Oliveira', alunoId: '6', curso: 'Bacharel em Administração', orientadorNome: 'Profª. Renata Rocha', orientadorId: '2', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Gestao e Finanças', defesa: 'TCC I' },
+    { id: '7', titulo: 'Segurança da Informação e Criptografia em Redes Sem Fio', alunoNome: 'Daniel Costa', alunoId: '7', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Profª. Renata Rocha', orientadorId: '2', coorientadorNome: 'Prof. Maurício Ferreira', coorientadorId: '8', linhaPesquisa: 'Computação', defesa: 'TCC I' },
+    { id: '8', titulo: 'Impacto do Clima Semiárido na Produção Agrícola Regional', alunoNome: 'Eduarda Lima', alunoId: '8', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Renata Rocha', orientadorId: '2', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Agronomia e Solos', defesa: 'TCC II' },
+    { id: '9', titulo: 'Síntese de Polímeros Biodegradáveis para Embalagens Sustentáveis', alunoNome: 'Felipe Rocha', alunoId: '9', curso: 'Licenciatura em Química', orientadorNome: 'Prof. Sérgio Lima', orientadorId: '3', coorientadorNome: 'Profª. Helena Oliveira', coorientadorId: '4', linhaPesquisa: 'Quimica Organica e Analitica', defesa: 'TCC II' },
+    { id: '10', titulo: 'Análise Financeira e Governança Corporativa em Microempresas', alunoNome: 'Gabriela Alves', alunoId: '10', curso: 'Bacharel em Administração', orientadorNome: 'Prof. Sérgio Lima', orientadorId: '3', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Gestao e Finanças', defesa: 'TCC I' },
+    { id: '11', titulo: 'Sistemas Recomendadores Baseados em Filtragem Colaborativa', alunoNome: 'Gabriel Santos', alunoId: '11', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Sérgio Lima', orientadorId: '3', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Computação', defesa: 'TCC I' },
+    { id: '12', titulo: 'Uso de Drones no Mapeamento do Uso do Solo no Semiárido', alunoNome: 'Heitor Martins', alunoId: '12', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Helena Oliveira', orientadorId: '4', coorientadorNome: 'Profª. Tatiane Costa', coorientadorId: '7', linhaPesquisa: 'Agronomia e Solos', defesa: 'TCC I' },
+    { id: '13', titulo: 'Purificação de Águas Residuais com Materiais de Baixo Custo', alunoNome: 'Isabela Ribeiro', alunoId: '13', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Helena Oliveira', orientadorId: '4', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Quimica Organica e Analitica', defesa: 'TCC II' },
+    { id: '14', titulo: 'Estratégias de Marketing Digital no Setor Acadêmico', alunoNome: 'Lucas Mendes', alunoId: '14', curso: 'Bacharel em Administração', orientadorNome: 'Profª. Helena Oliveira', orientadorId: '4', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Gestao e Finanças', defesa: 'TCC II' },
+    { id: '15', titulo: 'Desenvolvimento de Jogos Educativos Acessíveis para Web', alunoNome: 'Mariana Barbosa', alunoId: '15', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Profª. Vanessa Mendes', orientadorId: '5', coorientadorNome: 'Prof. Rodrigo Alves', coorientadorId: '6', linhaPesquisa: 'Educação e Didatica', defesa: 'TCC II' },
+    { id: '16', titulo: 'Qualidade do Solo e Rotação de Culturas em Pequenas Propriedades', alunoNome: 'Matheus Fernandes', alunoId: '16', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Vanessa Mendes', orientadorId: '5', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Agronomia e Solos', defesa: 'TCC I' },
+    { id: '17', titulo: 'Estudo da Reatividade de Compostos de Coordenação', alunoNome: 'Nathalia Carvalho', alunoId: '17', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Vanessa Mendes', orientadorId: '5', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Quimica Organica e Analitica', defesa: 'TCC I' },
+    { id: '18', titulo: 'Logística de Suprimentos na Cadeia de Alimentos Orgânicos', alunoNome: 'Otávio Teixeira', alunoId: '18', curso: 'Bacharel em Administração', orientadorNome: 'Prof. Rodrigo Alves', orientadorId: '6', coorientadorNome: 'Profª. Adriana Peixoto', coorientadorId: '9', linhaPesquisa: 'Gestao e Finanças', defesa: 'TCC II' },
+    { id: '19', titulo: 'Processamento de Linguagem Natural Aplicado a Fóruns Educacionais', alunoNome: 'Patricia Gomes', alunoId: '19', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Rodrigo Alves', orientadorId: '6', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Educação e Didatica', defesa: 'TCC II' },
+    { id: '20', titulo: 'Tecnologias Bioecológicas para Controle de Pragas na Caatinga', alunoNome: 'Rafael Cardoso', alunoId: '20', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Tatiane Costa', orientadorId: '7', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Agronomia e Solos', defesa: 'TCC I' },
+    { id: '21', titulo: 'Metodologias Ativas no Ensino de Química Orgânica', alunoNome: 'Sophia Monteiro', alunoId: '21', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Tatiane Costa', orientadorId: '7', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Educação e Didatica', defesa: 'TCC II' },
+    { id: '22', titulo: 'Plano de Negócios para Empreendimentos de Economia Solidária', alunoNome: 'Thiago Nunes', alunoId: '22', curso: 'Bacharel em Administração', orientadorNome: 'Prof. Maurício Ferreira', orientadorId: '8', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Gestao e Finanças', defesa: 'TCC I' },
+    { id: '23', titulo: 'Computação em Nuvem e Escalabilidade de Banco de Dados', alunoNome: 'Vinícius Moreira', alunoId: '23', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Maurício Ferreira', orientadorId: '8', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Computação', defesa: 'TCC II' },
+    { id: '24', titulo: 'Sistemas Agroflorestais Adaptados ao Semiárido Baiano', alunoNome: 'Yasmin Vieira', alunoId: '24', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Adriana Peixoto', orientadorId: '9', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Agronomia e Solos', defesa: 'TCC II' },
+    { id: '25', titulo: 'Avaliação da Qualidade do Ar em Zonas Urbanas e Industriais', alunoNome: 'Igor Cavalcante', alunoId: '25', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Adriana Peixoto', orientadorId: '9', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Quimica Organica e Analitica', defesa: 'TCC I' },
+    { id: '26', titulo: 'Inovação e Empreendedorismo Acadêmico no Âmbito Universitário', alunoNome: 'Letícia Freitas', alunoId: '26', curso: 'Bacharel em Administração', orientadorNome: 'Prof. Cláudio Nogueira', orientadorId: '10', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Gestao e Finanças', defesa: 'TCC I' }
 ];
 
 const bancasAgendadasMock = [
@@ -81,31 +81,43 @@ const bancasAgendadasMock = [
         id: '1',
         alunoNome: 'João da Silva',
         tccTitulo: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web',
+        dataIso: '2026-10-20T14:00:00',
         dataDia: '20',
         dataMes: 'Out',
         dataExtenso: '20 de Outubro',
         horario: '14:00',
-        local: 'Sala 203 - Bloco A'
+        local: 'Sala 01',
+        curso: 'Licenciatura em Ciências da Computação',
+        linhaPesquisa: 'Computação',
+        defesa: 'TCC II'
     },
     {
         id: '2',
         alunoNome: 'Ana Beatriz Souza',
         tccTitulo: 'Manejo Sustentável de Solos e Técnicas de Irrigação de Precisão',
+        dataIso: '2026-11-09T19:45:00',
         dataDia: '09',
         dataMes: 'Nov',
         dataExtenso: '09 de Novembro',
         horario: '19:45',
-        local: 'Sala 104 - Bloco C'
+        local: 'Virtual',
+        curso: 'Licenciatura em Ciências Agrárias',
+        linhaPesquisa: 'Agronomia e Solos',
+        defesa: 'TCC II'
     },
     {
         id: '3',
         alunoNome: 'Bruno Ferreira',
         tccTitulo: 'Análise Espectroscópica de Compostos Orgânicos na Indústria Química',
+        dataIso: '2026-11-10T20:00:00',
         dataDia: '10',
-        dataMes: 'Novembro',
+        dataMes: 'Nov',
         dataExtenso: '10 de Novembro',
         horario: '20:00',
-        local: 'Auditório Principal'
+        local: 'Auditório',
+        curso: 'Licenciatura em Química',
+        linhaPesquisa: 'Química Orgânica e Analítica',
+        defesa: 'TCC I'
     }
 ];
 

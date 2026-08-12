@@ -45,7 +45,6 @@ body {
     min-height: 100vh; 
 }
 
-/* Container Principal Móvel */
 .container-tela { 
     width: 100%; 
     max-width: 480px; 
@@ -61,7 +60,6 @@ body {
     border-right: 1px solid var(--border);
 }
 
-/* Header */
 #Header { 
     height: 60px; 
     flex-shrink: 0; 
@@ -95,7 +93,6 @@ body {
     text-decoration: none; 
 }
 
-/* Corpo e Conteúdo */
 #CorpoScroll {
     flex: 1;
     overflow-y: auto;
@@ -111,7 +108,6 @@ body {
     display: none;
 }
 
-/* Busca e Filtro */
 .wrapper-busca {
     display: flex;
     gap: 8px;
@@ -157,12 +153,11 @@ body {
 }
 
 .btn-filtro .icon-mask {
-    background-color: #ffffff;
+    background-color: var(--text-1);
     width: 20px;
     height: 20px;
 }
 
-/* Informações de Meta / Ordenação */
 .info-meta {
     display: flex;
     justify-content: space-between;
@@ -175,7 +170,6 @@ body {
     color: var(--primary);
 }
 
-/* Lista de Bancas e Cards */
 .grupo-data {
     display: flex;
     flex-direction: column;
@@ -277,7 +271,6 @@ body {
     height: 18px;
 }
 
-/* Botão Flutuante (FAB) */
 .btn-fab {
     position: absolute;
     bottom: 76px;
@@ -304,7 +297,6 @@ body {
     background-color: var(--blue);
 }
 
-/* NAVEGAÇÃO INFERIOR */
 #BottomNav {
     height: 60px;
     flex-shrink: 0;
@@ -347,7 +339,57 @@ body {
     background-color: var(--primary);
 }
 
-/* MENU OVERLAY & BOTTOM SHEET */
+.select-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.select-filtro,
+.select-filtro-ordem {
+    width: 100%;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: var(--card-bg);
+    color: var(--text-1);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 12px 40px 12px 14px;
+    font-size: 0.9rem;
+    outline: none;
+    cursor: pointer;
+}
+
+.select-filtro option,
+.select-filtro-ordem option {
+    background-color: var(--card-bg);
+    color: var(--text-1);
+}
+
+.select-icone {
+    position: absolute;
+    right: 14px;
+    pointer-events: none;
+    background-color: var(--text-2);
+    width: 20px;
+    height: 20px;
+}
+
+.campo-filtro {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.campo-filtro label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--text-2);
+}
+
 .menu-overlay {
     position: fixed;
     top: 0;
@@ -479,7 +521,6 @@ body {
     line-height: 1.2;
 }
 
-/* MÁSCARAS DE ÍCONES (SVG) */
 .icon-mask { 
     display: inline-block; 
     width: 24px;
@@ -552,10 +593,10 @@ body {
     height: 20px;
 }
 
-.icon-chevron-down {
+.icon-chevron-down, .icon-seta-baixo {
     -webkit-mask-image: url('../Icones/keyboard_arrow_down_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
     mask-image: url('../Icones/keyboard_arrow_down_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
-    background-color: #ffffff;
+    background-color: var(--text-2);
     width: 18px;
     height: 18px;
 }
@@ -569,7 +610,7 @@ body {
 .icon-filter {
     -webkit-mask-image: url('../Icones/filter_alt_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
     mask-image: url('../Icones/filter_alt_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
-    background-color: #ffffff;
+    background-color: var(--text-1);
 }
 
 .icon-plus {

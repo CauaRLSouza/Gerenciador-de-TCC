@@ -46,22 +46,101 @@ const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secret
                     type="text" 
                     id="inputBusca" 
                     placeholder="Buscar banca por aluno, título ou data..." 
-                    oninput="filtrarBancas(this.value)"
                 >
             </div>
+            
             <button type="button" class="btn-filtro" id="btnAbrirFiltro" aria-label="Filtrar">
                 <span class="icon-mask icon-filter"></span>
             </button>
         </div>
 
+        <!-- Painel de Filtros (oculto por padrão via inline style) -->
+        <div id="painelFiltros" class="painel-filtros-inatos" style="display: none; margin-top: 12px; margin-bottom: 12px;">
+            <div class="campo-filtro">
+                <div class="select-container">
+                    <select id="filtroLocal" class="select-filtro">
+                        <option value="">Todos os Locais</option>
+                        <option value="Auditório">Auditório</option>
+                        <option value="Sala 01">Sala 01</option>
+                        <option value="Virtual">Virtual</option>
+                    </select>
+                    <span class="icon-mask icon-seta-baixo select-icone"></span>
+                </div>
+            </div>
+
+            <div class="campo-filtro">
+                <div class="select-container">
+                    <select id="filtroLinha" class="select-filtro">
+                        <option value="">Todas as Linhas</option>
+                        <option value="Computação">Computação</option>
+                        <option value="Agronomia e Solos">Agronomia e Solos</option>
+                        <option value="Química Orgânica e Analítica">Química Orgânica e Analítica</option>
+                        <option value="Educação e Didática">Educação e Didática</option>
+                        <option value="Gestão e Finanças">Gestão e Finanças</option>
+                    </select>
+                    <span class="icon-mask icon-seta-baixo select-icone"></span>
+                </div>
+            </div>
+
+            <div class="campo-filtro">
+                <div class="select-container">
+                    <select id="filtroCurso" class="select-filtro">
+                        <option value="">Todos os Cursos</option>
+                        <option value="Licenciatura em Ciências da Computação">Licenciatura em Ciências da Computação</option>
+                        <option value="Licenciatura em Ciências Agrárias">Licenciatura em Ciências Agrárias</option>
+                        <option value="Licenciatura em Química">Licenciatura em Química</option>
+                        <option value="Bacharel em Adiministração">Bacharel em Adiministração</option>
+                    </select>
+                    <span class="icon-mask icon-seta-baixo select-icone"></span>
+                </div>
+            </div>
+
+            <div class="campo-filtro">
+                <div class="select-container">
+                    <select id="filtroDefesa" class="select-filtro">
+                        <option value="">Todas as Defesas</option>
+                        <option value="TCC I">TCC I</option>
+                        <option value="TCC II">TCC II</option>
+                    </select>
+                    <span class="icon-mask icon-seta-baixo select-icone"></span>
+                </div>
+            </div>
+        </div>
+
+        <div id="painelOrdenacao" class="painel-filtros-inatos" style="display: none; margin-top: 12px; margin-bottom: 12px;">
+            <div class="campo-filtro">
+                <div class="select-container select-ordenacao">
+                    <select id="selectOrdenacao" class="select-filtro-ordem">
+                        <option value="data-proxima">Data (Mais próximas)</option>
+                        <option value="data-distante">Data (Mais distantes)</option>
+                        <option value="nome-asc">Aluno (A-Z)</option>
+                        <option value="nome-desc">Aluno (Z-A)</option>
+                        <option value="titulo-asc">Título TCC (A-Z)</option>
+                        <option value="titulo-desc">Título TCC (Z-A)</option>
+                    </select>
+                    <span class="icon-mask icon-seta-baixo select-icone"></span>
+                </div>
+            </div>
+        </div>
+
         <div class="info-meta">
             <span id="totalBancas">Total: <%= bancas.length %> Bancas Agendadas</span>
-            <span class="ordenar-text" id="btnAbrirOrdenacao">Ordenar: Data (Mais próximas)</span>
+            <span class="ordenar-text" id="btnAbrirOrdenacao" style="cursor: pointer; color: var(--purple, #a855f7); font-weight: 600;">
+                Ordenar: Data (Mais próximas) ▾
+            </span>
         </div>
 
         <div id="listaBancasContainer">
             <% bancas.forEach(banca => { %>
-                <div class="grupo-data" data-aluno="<%= banca.alunoNome ? banca.alunoNome.toLowerCase() : '' %>" data-titulo="<%= banca.tccTitulo ? banca.tccTitulo.toLowerCase() : '' %>">
+                <div class="grupo-data" 
+                     data-aluno="<%= banca.alunoNome ? banca.alunoNome.toLowerCase() : '' %>" 
+                     data-titulo="<%= banca.tccTitulo ? banca.tccTitulo.toLowerCase() : (banca.tituloTcc ? banca.tituloTcc.toLowerCase() : '') %>"
+                     data-local="<%= banca.local || '' %>"
+                     data-linha="<%= banca.linhaPesquisa || '' %>"
+                     data-curso="<%= banca.curso || '' %>"
+                     data-defesa="<%= banca.defesa || '' %>"
+                     data-iso="<%= banca.dataIso || '' %>">
+
                     <span class="data-grupo-titulo"><%= banca.dataExtenso || banca.data %></span>
 
                     <a href="/bancas/<%= banca.id %>?perfil=<%= perfilAtual %>" class="card-banca">
@@ -83,6 +162,11 @@ const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secret
                     </a>
                 </div>
             <% }) %>
+        </div>
+
+        <div id="mensagemVazia" style="display: none; text-align: center; padding: 40px 16px; color: var(--text-2);">
+            <p style="font-weight: 700; margin-bottom: 4px; color: var(--text-1);">Nenhuma banca encontrada</p>
+            <p style="font-size: 0.8rem;">Tente alterar os termos de busca ou filtros aplicados.</p>
         </div>
 
     </main>
@@ -119,28 +203,6 @@ const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secret
     </nav>
 
 </div>
-
-<script>
-    function filtrarBancas(termo) {
-        const busca = termo.toLowerCase().trim();
-        const grupos = document.querySelectorAll('.grupo-data');
-        let contadorVisiveis = 0;
-
-        grupos.forEach(grupo => {
-            const aluno = grupo.getAttribute('data-aluno') || '';
-            const titulo = grupo.getAttribute('data-titulo') || '';
-
-            if (aluno.includes(busca) || titulo.includes(busca)) {
-                grupo.style.display = 'block';
-                contadorVisiveis++;
-            } else {
-                grupo.style.display = 'none';
-            }
-        });
-
-        document.getElementById('totalBancas').innerText = `Total: ${contadorVisiveis} Bancas Agendadas`;
-    }
-</script>
 
 <script src="/js/BottomSheet.js"></script>
 <script src="/js/BancasFiltros.js"></script>
