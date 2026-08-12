@@ -1,0 +1,149 @@
+<%
+const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+%>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bancas Agendadas</title>
+    <link rel="stylesheet" href="/cssSecretaria/Bancas.css">
+    <link rel="stylesheet" href="/cssSecretaria/BottomSheet.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (
+                tema === "escuro" ||
+                (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+            ) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+<div id="TelaBancas" class="container-tela">
+
+    <header id="Header">
+        <button type="button" class="icon-btn" id="btnConfig" aria-label="Configurações">
+            <span class="icon-mask icon-settings"></span>
+        </button>
+
+        <h1 id="TituloPagina">Bancas</h1>
+
+        <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
+            <span class="icon-mask icon-notification"></span>
+        </a>
+    </header>
+
+    <main id="CorpoScroll">
+
+        <div class="wrapper-busca">
+            <div class="input-busca-container">
+                <span class="icon-mask icon-search"></span>
+                <input 
+                    type="text" 
+                    id="inputBusca" 
+                    placeholder="Buscar banca por aluno, título ou data..." 
+                    oninput="filtrarBancas(this.value)"
+                >
+            </div>
+            <button type="button" class="btn-filtro" id="btnAbrirFiltro" aria-label="Filtrar">
+                <span class="icon-mask icon-filter"></span>
+            </button>
+        </div>
+
+        <div class="info-meta">
+            <span id="totalBancas">Total: <%= bancas.length %> Bancas Agendadas</span>
+            <span class="ordenar-text" id="btnAbrirOrdenacao">Ordenar: Data (Mais próximas)</span>
+        </div>
+
+        <div id="listaBancasContainer">
+            <% bancas.forEach(banca => { %>
+                <div class="grupo-data" data-aluno="<%= banca.alunoNome ? banca.alunoNome.toLowerCase() : '' %>" data-titulo="<%= banca.tccTitulo ? banca.tccTitulo.toLowerCase() : '' %>">
+                    <span class="data-grupo-titulo"><%= banca.dataExtenso || banca.data %></span>
+
+                    <a href="/bancas/<%= banca.id %>?perfil=<%= perfilAtual %>" class="card-banca">
+                        <div class="banca-data-box">
+                            <span class="dia"><%= banca.dataDia || '20' %></span>
+                            <span class="mes"><%= banca.dataMes || 'AGO' %></span>
+                            <span class="horario"><%= banca.horario %></span>
+                        </div>
+
+                        <div class="banca-detalhes">
+                            <h2 class="aluno-nome"><%= banca.alunoNome %></h2>
+                            <p class="tcc-titulo"><%= banca.tccTitulo || banca.tituloTcc %></p>
+                            <span class="banca-local"><%= banca.local %></span>
+                        </div>
+
+                        <div class="banca-acao">
+                            <span class="icon-mask icon-chevron-right"></span>
+                        </div>
+                    </a>
+                </div>
+            <% }) %>
+        </div>
+
+    </main>
+
+    <a href="/agendar-banca?perfil=<%= perfilAtual %>" class="btn-fab" aria-label="Agendar nova banca">
+        <span class="icon-mask icon-plus"></span>
+    </a>
+
+    <nav id="BottomNav">
+        <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-item">
+            <span class="icon-mask icon-home"></span>
+            <span>Início</span>
+        </a>
+
+        <a href="/alunos?perfil=<%= perfilAtual %>" class="nav-item">
+            <span class="icon-mask icon-studant"></span>
+            <span>Alunos</span>
+        </a>
+
+        <a href="/professores?perfil=<%= perfilAtual %>" class="nav-item">
+            <span class="icon-mask icon-professor"></span>
+            <span>Professores</span>
+        </a>
+
+        <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-item">
+            <span class="icon-mask icon-acervo"></span>
+            <span>Acervo</span>
+        </a>
+
+        <button id="btnAbrirMais" type="button" class="nav-item nav-btn">
+            <span class="icon-mask icon-more"></span>
+            <span>Mais</span>
+        </button>
+    </nav>
+
+</div>
+
+<script>
+    function filtrarBancas(termo) {
+        const busca = termo.toLowerCase().trim();
+        const grupos = document.querySelectorAll('.grupo-data');
+        let contadorVisiveis = 0;
+
+        grupos.forEach(grupo => {
+            const aluno = grupo.getAttribute('data-aluno') || '';
+            const titulo = grupo.getAttribute('data-titulo') || '';
+
+            if (aluno.includes(busca) || titulo.includes(busca)) {
+                grupo.style.display = 'block';
+                contadorVisiveis++;
+            } else {
+                grupo.style.display = 'none';
+            }
+        });
+
+        document.getElementById('totalBancas').innerText = `Total: ${contadorVisiveis} Bancas Agendadas`;
+    }
+</script>
+
+<script src="/js/BottomSheet.js"></script>
+<script src="/js/BancasFiltros.js"></script>
+
+</body>
+</html>

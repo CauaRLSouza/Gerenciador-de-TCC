@@ -1,6 +1,15 @@
 const express = require('express');
 const path = require('path');
 
+const {
+    usuariosMock,
+    todosProfessoresMock,
+    todosAlunosMock,
+    todosTccsMock,
+    bancasAgendadasMock,
+    gerarIniciais
+} = require('./mocks');
+
 const app = express();
 const PORT = 3000;
 
@@ -11,346 +20,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-const usuariosMock = [
-    { email: 'aluno@teste.com', perfil: 'Aluno' },
-    { email: 'prof@teste.com', perfil: 'Professor' },
-    { email: 'sec@teste.com', perfil: 'Secretariado' }
-];
-
-const todosProfessoresMock = [
-    { id: '1', nome: 'Pedro Felipe', email: 'PFASA@campus.edu.br', matricula: '1928371', telefone: '(74) 99911-1001', titulacao: 'Doutorado', qtdOrientandos: 4, status: 'Ativo' },
-    { id: '2', nome: 'Renata Rocha', email: 'renata.rocha@campus.edu.br', matricula: '1928372', telefone: '(74) 99911-1002', titulacao: 'Mestrado', qtdOrientandos: 4, status: 'Ativo' },
-    { id: '3', nome: 'Sérgio Lima', email: 'sergio.lima@campus.edu.br', matricula: '1928373', telefone: '(74) 99911-1003', titulacao: 'Mestrado', qtdOrientandos: 3, status: 'Ativo' },
-    { id: '4', nome: 'Helena Oliveira', email: 'helena.oliveira@campus.edu.br', matricula: '1928374', telefone: '(74) 99911-1004', titulacao: 'Mestrado', qtdOrientandos: 3, status: 'Ativo' },
-    { id: '5', nome: 'Vanessa Mendes', email: 'vanessa.mendes@campus.edu.br', matricula: '1928375', telefone: '(74) 99911-1005', titulacao: 'Mestrado', qtdOrientandos: 3, status: 'Ativo' },
-    { id: '6', nome: 'Rodrigo Alves', email: 'rodrigo.alves@campus.edu.br', matricula: '1928376', telefone: '(74) 99911-1006', titulacao: 'Especialização', qtdOrientandos: 2, status: 'Ativo' },
-    { id: '7', nome: 'Tatiane Costa', email: 'tatiane.costa@campus.edu.br', matricula: '1928377', telefone: '(74) 99911-1007', titulacao: 'Especialização', qtdOrientandos: 2, status: 'Ativo' },
-    { id: '8', nome: 'Maurício Ferreira', email: 'mauricio.ferreira@campus.edu.br', matricula: '1928378', telefone: '(74) 99911-1008', titulacao: 'Especialização', qtdOrientandos: 2, status: 'Ativo' },
-    { id: '9', nome: 'Adriana Peixoto', email: 'adriana.peixoto@campus.edu.br', matricula: '1928379', telefone: '(74) 99911-1009', titulacao: 'Especialização', qtdOrientandos: 2, status: 'Ativo' },
-    { id: '10', nome: 'Cláudio Nogueira', email: 'claudio.nogueira@campus.edu.br', matricula: '1928380', telefone: '(74) 99911-1010', titulacao: 'Graduação', qtdOrientandos: 1, status: 'Ativo' },
-    { id: '11', nome: 'Juliana Barreto', email: 'juliana.barreto@campus.edu.br', matricula: '1928381', telefone: '(74) 99911-1011', titulacao: 'Graduação', qtdOrientandos: 0, status: 'Ativo' }
-];
-
-const todosAlunosMock = [
-    { id: '1', nome: 'João da Silva', matricula: '202410101', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-10', dataNascimento: '15/03/2002', telefone: '(74) 99911-2233', email: 'joao.silva@aluno.edu.br', tituloTCC: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web', dataInicio: '10/03/2025', previsaoConclusao: '15/12/2025', linhaPesquisa: 'Engenharia de Software', status: 'Aguardando revisão', statusCor: 'yellow' },
-    { id: '2', nome: 'Maria Santos', matricula: '202310102', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.1', dataIngresso: '2023-02-15', dataNascimento: '22/08/2001', telefone: '(74) 99822-3344', email: 'maria.santos@aluno.edu.br', tituloTCC: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos', dataInicio: '15/02/2025', previsaoConclusao: '10/12/2025', linhaPesquisa: 'Sistemas Distribuídos', status: 'Revisada', statusCor: 'green' },
-    { id: '3', nome: 'Carlos Correia', matricula: '202510103', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.1', dataIngresso: '2025-02-15', dataNascimento: '10/11/2003', telefone: '(74) 99733-4455', email: 'carlos.correia@aluno.edu.br', tituloTCC: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias', dataInicio: '01/04/2025', previsaoConclusao: '20/12/2025', linhaPesquisa: 'Inteligência Artificial', status: 'Revisada', statusCor: 'green' },
-    { id: '4', nome: 'Ana Beatriz Souza', matricula: '202210104', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.1', dataIngresso: '2022-02-20', dataNascimento: '05/01/2000', telefone: '(74) 99644-5566', email: 'ana.souza@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '5', nome: 'Bruno Ferreira', matricula: '202310105', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-15', dataNascimento: '18/04/2002', telefone: '(74) 99555-6677', email: 'bruno.ferreira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '6', nome: 'Camila Oliveira', matricula: '202410106', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-28', dataNascimento: '30/09/2001', telefone: '(74) 99466-7788', email: 'camila.oliveira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '7', nome: 'Daniel Costa', matricula: '202510107', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.2', dataIngresso: '2025-07-10', dataNascimento: '12/06/2004', telefone: '(74) 99377-8899', email: 'daniel.costa@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '8', nome: 'Eduarda Lima', matricula: '202110108', curso: 'Licenciatura em Ciências Agrárias', semestre: '2021.2', dataIngresso: '2021-07-18', dataNascimento: '25/12/1999', telefone: '(74) 99288-9900', email: 'eduarda.lima@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '9', nome: 'Felipe Rocha', matricula: '202210109', curso: 'Licenciatura em Química', semestre: '2022.2', dataIngresso: '2022-07-22', dataNascimento: '14/02/2001', telefone: '(74) 99199-0011', email: 'felipe.rocha@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '10', nome: 'Gabriela Alves', matricula: '202310110', curso: 'Bacharel em Administração', semestre: '2023.1', dataIngresso: '2023-02-10', dataNascimento: '08/07/2002', telefone: '(74) 99000-1122', email: 'gabriela.alves@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '11', nome: 'Gabriel Santos', matricula: '202410111', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-30', dataNascimento: '19/05/2003', telefone: '(74) 98811-2233', email: 'gabriel.santos@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '12', nome: 'Heitor Martins', matricula: '202510112', curso: 'Licenciatura em Ciências Agrárias', semestre: '2025.1', dataIngresso: '2025-02-15', dataNascimento: '03/03/2004', telefone: '(74) 98722-3344', email: 'heitor.martins@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '13', nome: 'Isabela Ribeiro', matricula: '202110113', curso: 'Licenciatura em Química', semestre: '2021.1', dataIngresso: '2021-02-10', dataNascimento: '27/10/2000', telefone: '(74) 98633-4455', email: 'isabela.ribeiro@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '14', nome: 'Lucas Mendes', matricula: '202210114', curso: 'Bacharel em Administração', semestre: '2022.2', dataIngresso: '2022-07-15', dataNascimento: '11/01/2001', telefone: '(74) 98544-5566', email: 'lucas.mendes@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '15', nome: 'Mariana Barbosa', matricula: '202310115', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.2', dataIngresso: '2023-07-20', dataNascimento: '02/08/2002', telefone: '(74) 98455-6677', email: 'mariana.barbosa@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '16', nome: 'Matheus Fernandes', matricula: '202410116', curso: 'Licenciatura em Ciências Agrárias', semestre: '2024.1', dataIngresso: '2024-02-10', dataNascimento: '17/04/2003', telefone: '(74) 98366-7788', email: 'matheus.fernandes@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '17', nome: 'Nathalia Carvalho', matricula: '202510117', curso: 'Licenciatura em Química', semestre: '2025.2', dataIngresso: '2025-07-18', dataNascimento: '09/09/2004', telefone: '(74) 98277-8899', email: 'nathalia.carvalho@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '18', nome: 'Otávio Teixeira', matricula: '202110118', curso: 'Bacharel em Administração', semestre: '2021.2', dataIngresso: '2021-07-05', dataNascimento: '21/12/1999', telefone: '(74) 98188-9900', email: 'otavio.teixeira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '19', nome: 'Patricia Gomes', matricula: '202210119', curso: 'Licenciatura em Ciências da Computação', semestre: '2022.1', dataIngresso: '2022-02-15', dataNascimento: '06/06/2001', telefone: '(74) 98099-0011', email: 'patricia.gomes@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '20', nome: 'Rafael Cardoso', matricula: '202310120', curso: 'Licenciatura em Ciências Agrárias', semestre: '2023.1', dataIngresso: '2023-02-28', dataNascimento: '13/02/2002', telefone: '(74) 97900-1122', email: 'rafael.cardoso@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '21', nome: 'Sophia Monteiro', matricula: '202410121', curso: 'Licenciatura em Química', semestre: '2024.2', dataIngresso: '2024-07-12', dataNascimento: '28/03/2003', telefone: '(74) 97811-2233', email: 'sophia.monteiro@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '22', nome: 'Thiago Nunes', matricula: '202510122', curso: 'Bacharel em Administração', semestre: '2025.1', dataIngresso: '2025-02-20', dataNascimento: '04/10/2004', telefone: '(74) 97722-3344', email: 'thiago.nunes@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '23', nome: 'Vinícius Moreira', matricula: '202110123', curso: 'Licenciatura em Ciências da Computação', semestre: '2021.1', dataIngresso: '2021-02-25', dataNascimento: '16/07/2000', telefone: '(74) 97633-4455', email: 'vinicius.moreira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '24', nome: 'Yasmin Vieira', matricula: '202210124', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.2', dataIngresso: '2022-07-10', dataNascimento: '23/01/2001', telefone: '(74) 97544-5566', email: 'yasmin.vieira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '25', nome: 'Igor Cavalcante', matricula: '202310125', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-05', dataNascimento: '07/11/2002', telefone: '(74) 97455-6677', email: 'igor.cavalcante@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
-    { id: '26', nome: 'Letícia Freitas', matricula: '202410126', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-18', dataNascimento: '31/08/2003', telefone: '(74) 97366-7788', email: 'leticia.freitas@aluno.edu.br', status: 'Ativo', statusCor: 'green' }
-];
-
-const todosTccsMock = [
-    {
-        id: '1',
-        titulo: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web',
-        alunoNome: 'João da Silva',
-        alunoId: '1',
-        curso: 'Licenciatura em Ciências da Computação',
-        orientadorNome: 'Prof. Pedro Felipe',
-        orientadorId: '1',
-        coorientadorNome: 'Profª. Renata Rocha',
-        coorientadorId: '2'
-    },
-    {
-        id: '2',
-        titulo: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos',
-        alunoNome: 'Maria Santos',
-        alunoId: '2',
-        curso: 'Licenciatura em Ciências da Computação',
-        orientadorNome: 'Prof. Pedro Felipe',
-        orientadorId: '1',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '3',
-        titulo: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias',
-        alunoNome: 'Carlos Correia',
-        alunoId: '3',
-        curso: 'Licenciatura em Ciências da Computação',
-        orientadorNome: 'Prof. Pedro Felipe',
-        orientadorId: '1',
-        coorientadorNome: 'Prof. Sérgio Lima',
-        coorientadorId: '3'
-    },
-    {
-        id: '4',
-        titulo: 'Manejo Sustentável de Solos e Técnicas de Irrigação de Precisão',
-        alunoNome: 'Ana Beatriz Souza',
-        alunoId: '4',
-        curso: 'Licenciatura em Ciências Agrárias',
-        orientadorNome: 'Prof. Pedro Felipe',
-        orientadorId: '1',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '5',
-        titulo: 'Análise Espectroscópica de Compostos Orgânicos na Indústria Química',
-        alunoNome: 'Bruno Ferreira',
-        alunoId: '5',
-        curso: 'Licenciatura em Química',
-        orientadorNome: 'Profª. Renata Rocha',
-        orientadorId: '2',
-        coorientadorNome: 'Prof. Pedro Felipe',
-        coorientadorId: '1'
-    },
-    {
-        id: '6',
-        titulo: 'Gestão Estratégica de Pessoas e Cultura Organizacional em Startups',
-        alunoNome: 'Camila Oliveira',
-        alunoId: '6',
-        curso: 'Bacharel em Administração',
-        orientadorNome: 'Profª. Renata Rocha',
-        orientadorId: '2',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '7',
-        titulo: 'Segurança da Informação e Criptografia em Redes Sem Fio',
-        alunoNome: 'Daniel Costa',
-        alunoId: '7',
-        curso: 'Licenciatura em Ciências da Computação',
-        orientadorNome: 'Profª. Renata Rocha',
-        orientadorId: '2',
-        coorientadorNome: 'Prof. Maurício Ferreira',
-        coorientadorId: '8'
-    },
-    {
-        id: '8',
-        titulo: 'Impacto do Clima Semiárido na Produção Agrícola Regional',
-        alunoNome: 'Eduarda Lima',
-        alunoId: '8',
-        curso: 'Licenciatura em Ciências Agrárias',
-        orientadorNome: 'Profª. Renata Rocha',
-        orientadorId: '2',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '9',
-        titulo: 'Síntese de Polímeros Biodegradáveis para Embalagens Sustentáveis',
-        alunoNome: 'Felipe Rocha',
-        alunoId: '9',
-        curso: 'Licenciatura em Química',
-        orientadorNome: 'Prof. Sérgio Lima',
-        orientadorId: '3',
-        coorientadorNome: 'Profª. Helena Oliveira',
-        coorientadorId: '4'
-    },
-    {
-        id: '10',
-        titulo: 'Análise Financeira e Governança Corporativa em Microempresas',
-        alunoNome: 'Gabriela Alves',
-        alunoId: '10',
-        curso: 'Bacharel em Administração',
-        orientadorNome: 'Prof. Sérgio Lima',
-        orientadorId: '3',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '11',
-        titulo: 'Sistemas Recomendadores Baseados em Filtragem Colaborativa',
-        alunoNome: 'Gabriel Santos',
-        alunoId: '11',
-        curso: 'Licenciatura em Ciências da Computação',
-        orientadorNome: 'Prof. Sérgio Lima',
-        orientadorId: '3',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '12',
-        titulo: 'Uso de Drones no Mapeamento do Uso do Solo no Semiárido',
-        alunoNome: 'Heitor Martins',
-        alunoId: '12',
-        curso: 'Licenciatura em Ciências Agrárias',
-        orientadorNome: 'Profª. Helena Oliveira',
-        orientadorId: '4',
-        coorientadorNome: 'Profª. Tatiane Costa',
-        coorientadorId: '7'
-    },
-    {
-        id: '13',
-        titulo: 'Purificação de Águas Residuais com Materiais de Baixo Custo',
-        alunoNome: 'Isabela Ribeiro',
-        alunoId: '13',
-        curso: 'Licenciatura em Química',
-        orientadorNome: 'Profª. Helena Oliveira',
-        orientadorId: '4',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '14',
-        titulo: 'Estratégias de Marketing Digital no Setor Acadêmico',
-        alunoNome: 'Lucas Mendes',
-        alunoId: '14',
-        curso: 'Bacharel em Administração',
-        orientadorNome: 'Profª. Helena Oliveira',
-        orientadorId: '4',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '15',
-        titulo: 'Desenvolvimento de Jogos Educativos Acessíveis para Web',
-        alunoNome: 'Mariana Barbosa',
-        alunoId: '15',
-        curso: 'Licenciatura em Ciências da Computação',
-        orientadorNome: 'Profª. Vanessa Mendes',
-        orientadorId: '5',
-        coorientadorNome: 'Prof. Rodrigo Alves',
-        coorientadorId: '6'
-    },
-    {
-        id: '16',
-        titulo: 'Qualidade do Solo e Rotação de Culturas em Pequenas Propriedades',
-        alunoNome: 'Matheus Fernandes',
-        alunoId: '16',
-        curso: 'Licenciatura em Ciências Agrárias',
-        orientadorNome: 'Profª. Vanessa Mendes',
-        orientadorId: '5',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '17',
-        titulo: 'Estudo da Reatividade de Compostos de Coordenação',
-        alunoNome: 'Nathalia Carvalho',
-        alunoId: '17',
-        curso: 'Licenciatura em Química',
-        orientadorNome: 'Profª. Vanessa Mendes',
-        orientadorId: '5',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '18',
-        titulo: 'Logística de Suprimentos na Cadeia de Alimentos Orgânicos',
-        alunoNome: 'Otávio Teixeira',
-        alunoId: '18',
-        curso: 'Bacharel em Administração',
-        orientadorNome: 'Prof. Rodrigo Alves',
-        orientadorId: '6',
-        coorientadorNome: 'Profª. Adriana Peixoto',
-        coorientadorId: '9'
-    },
-    {
-        id: '19',
-        titulo: 'Processamento de Linguagem Natural Aplicado a Fóruns Educacionais',
-        alunoNome: 'Patricia Gomes',
-        alunoId: '19',
-        curso: 'Licenciatura em Ciências da Computação',
-        orientadorNome: 'Prof. Rodrigo Alves',
-        orientadorId: '6',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '20',
-        titulo: 'Tecnologias Bioecológicas para Controle de Pragas na Caatinga',
-        alunoNome: 'Rafael Cardoso',
-        alunoId: '20',
-        curso: 'Licenciatura em Ciências Agrárias',
-        orientadorNome: 'Profª. Tatiane Costa',
-        orientadorId: '7',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '21',
-        titulo: 'Metodologias Ativas no Ensino de Química Orgânica',
-        alunoNome: 'Sophia Monteiro',
-        alunoId: '21',
-        curso: 'Licenciatura em Química',
-        orientadorNome: 'Profª. Tatiane Costa',
-        orientadorId: '7',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '22',
-        titulo: 'Plano de Negócios para Empreendimentos de Economia Solidária',
-        alunoNome: 'Thiago Nunes',
-        alunoId: '22',
-        curso: 'Bacharel em Administração',
-        orientadorNome: 'Prof. Maurício Ferreira',
-        orientadorId: '8',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '23',
-        titulo: 'Computação em Nuvem e Escalabilidade de Banco de Dados',
-        alunoNome: 'Vinícius Moreira',
-        alunoId: '23',
-        curso: 'Licenciatura em Ciências da Computação',
-        orientadorNome: 'Prof. Maurício Ferreira',
-        orientadorId: '8',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '24',
-        titulo: 'Sistemas Agroflorestais Adaptados ao Semiárido Baiano',
-        alunoNome: 'Yasmin Vieira',
-        alunoId: '24',
-        curso: 'Licenciatura em Ciências Agrárias',
-        orientadorNome: 'Profª. Adriana Peixoto',
-        orientadorId: '9',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '25',
-        titulo: 'Avaliação da Qualidade do Ar em Zonas Urbanas e Industriais',
-        alunoNome: 'Igor Cavalcante',
-        alunoId: '25',
-        curso: 'Licenciatura em Química',
-        orientadorNome: 'Profª. Adriana Peixoto',
-        orientadorId: '9',
-        coorientadorNome: '',
-        coorientadorId: ''
-    },
-    {
-        id: '26',
-        titulo: 'Inovação e Empreendedorismo Acadêmico no Âmbito Universitário',
-        alunoNome: 'Letícia Freitas',
-        alunoId: '26',
-        curso: 'Bacharel em Administração',
-        orientadorNome: 'Prof. Cláudio Nogueira',
-        orientadorId: '10',
-        coorientadorNome: '',
-        coorientadorId: ''
-    }
-];
-
-const bancasAgendadasMock = [];
-
 function proibirAcessoDireto(req, res, next) {
     const referer = req.headers.referer;
 
@@ -359,15 +28,6 @@ function proibirAcessoDireto(req, res, next) {
     }
 
     next();
-}
-
-function gerarIniciais(nome) {
-    if (!nome) return '';
-    const partes = nome.replace(/^(Prof\.|Profa\.)\s+/i, '').trim().split(' ');
-    if (partes.length >= 2) {
-        return (partes[0][0] + partes[partes.length - 1][0]).toUpperCase();
-    }
-    return partes[0].substring(0, 2).toUpperCase();
 }
 
 app.get('/', (req, res) => {
@@ -479,8 +139,8 @@ app.get('/naolidos', proibirAcessoDireto, (req, res) => {
 });
 
 app.get('/bancas', proibirAcessoDireto, (req, res) => {
-    const perfil = req.query.perfil || 'Aluno';
-    res.render(`${perfil}/bancas`, { currentPage: 'bancas', perfil });
+    const perfil = req.query.perfil || 'Secretariado';
+    res.render(`${perfil}/Bancas`, { currentPage: 'bancas', perfil, bancas: bancasAgendadasMock });
 });
 
 app.get('/alunos', proibirAcessoDireto, (req, res) => {
@@ -578,7 +238,7 @@ app.post('/agendar-banca', proibirAcessoDireto, (req, res) => {
 
     bancasAgendadasMock.push(novaBanca);
 
-    res.redirect(`/bancas?perfil=${perfil}`);
+    res.redirect(`/Bancas?perfil=${perfil}`);
 });
 
 app.get(['/DetalharAluno/:id', '/detalhar-aluno/:id'], proibirAcessoDireto, (req, res) => {
