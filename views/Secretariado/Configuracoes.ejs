@@ -1,0 +1,272 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'professores';
+    const listaProfessores = (typeof professores !== 'undefined') ? professores : [];
+%>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configurações - Secretaria</title>
+    <link rel="stylesheet" href="/cssSecretaria/Configuracoes.css">
+    <link rel="stylesheet" href="/cssSecretaria/BottomSheet.css">
+</head>
+<body>
+
+    <div id="TelaConfiguracoes">
+
+        <header id="Header">
+            <a href="/secretaria/configuracoes" id="BtnConfiguracoes" class="icon-btn active">
+                <span class="icon-mask icon-engrenagem"></span>
+            </a>
+            <h1 id="TituloConfig">Configurações</h1>
+            <a href="/secretaria/notificacoes" id="BtnNotificacoes" class="icon-btn">
+                <span class="icon-mask icon-sino"></span>
+            </a>
+        </header>
+
+        <div id="ScrollView">
+            <div id="Configuracoes">
+
+                <main id="Conteudo">
+
+                    <section class="grupo-secao">
+                        <h2 class="titulo-secao">Aparência</h2>
+                        <div class="card card-opcoes">
+                            <div class="item-opcao">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-lua"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Tema</h3>
+                                    <p class="opcao-subtitulo">Escolha entre o tema claro, escuro ou do sistema.</p>
+                                </div>
+                            </div>
+                            
+                            <div class="seletor-tema">
+                                <button type="button" class="btn-tema" data-tema="claro">Claro</button>
+                                <button type="button" class="btn-tema" data-tema="escuro">Escuro</button>
+                                <button type="button" class="btn-tema" data-tema="sistema">Sistema</button>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="grupo-secao">
+                        <h2 class="titulo-secao">Preferências de Notificação</h2>
+                        <div class="card card-opcoes">
+                            <div class="item-opcao">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-sino-pref"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Notificações do Sistema</h3>
+                                    <p class="opcao-subtitulo">Avisos de envios de TCC, bancas agendadas e novos cadastros.</p>
+                                </div>
+                                <label class="switch-toggle">
+                                    <input type="checkbox" checked>
+                                    <span class="slider-toggle"></span>
+                                </label>
+                            </div>
+
+                            <div class="divisor-item"></div>
+
+                            <div class="item-opcao">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-vibracao"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Vibração</h3>
+                                    <p class="opcao-subtitulo">Vibrar ao receber alertas prioritários do sistema.</p>
+                                </div>
+                                <label class="switch-toggle">
+                                    <input type="checkbox">
+                                    <span class="slider-toggle"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="grupo-secao">
+                        <h2 class="titulo-secao">Administração da Secretaria</h2>
+                        <div class="card card-opcoes">
+                            <a href="/secretaria/gestao-usuarios" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-perfil"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Gestão de Usuários</h3>
+                                    <p class="opcao-subtitulo">Gerenciar cadastros de alunos, orientadores e bancas.</p>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+
+                            <div class="divisor-item"></div>
+
+                            <a href="/secretaria/calendario-academico" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-calendar"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Calendário Acadêmico</h3>
+                                    <p class="opcao-subtitulo">Configurar prazos de entrega e períodos de defesa de TCC.</p>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="grupo-secao">
+                        <h2 class="titulo-secao">Aplicativo</h2>
+                        <div class="card card-opcoes">
+                            <div class="item-opcao">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-info"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Sobre o Orienta TCC</h3>
+                                    <p class="opcao-subtitulo">Versão 1.0.0 (Módulo Secretaria)</p>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </div>
+
+                            <div class="divisor-item"></div>
+
+                            <a href="/privacidade" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-escudo"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Política de Privacidade</h3>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+
+                            <div class="divisor-item"></div>
+
+                            <a href="/termos" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-documento"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Termos de Uso</h3>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+                        </div>
+                    </section>
+
+                    <section class="grupo-secao">
+                        <h2 class="titulo-secao">Suporte</h2>
+                        <div class="card card-opcoes">
+                            <a href="/secretaria/faq" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-ajuda"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Central de Ajuda</h3>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+
+                            <div class="divisor-item"></div>
+
+                            <a href="mailto:suporte@orientatcc.edu.br" class="item-opcao item-clicavel">
+                                <div class="opcao-icone">
+                                    <span class="icon-mask icon-email"></span>
+                                </div>
+                                <div class="opcao-info">
+                                    <h3 class="opcao-titulo">Suporte TI / Sistema</h3>
+                                </div>
+                                <span class="icon-mask icon-seta"></span>
+                            </a>
+                        </div>
+                    </section>
+
+                    <div class="area-btn-sair">
+                        <a href="/login" id="BtnSair" class="btn-sair">
+                            <span class="icon-mask icon-sair"></span>
+                            <span>Sair da conta</span>
+                        </a>
+                    </div>
+
+                </main>
+
+            </div>
+        </div>
+
+        <nav id="BottomNav">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'dashboard' ? 'active' : '' %>">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+
+            <a href="/alunos?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'alunos' ? 'active' : '' %>">
+                <span class="icon-mask icon-studant"></span>
+                <span class="Texto">Alunos</span>
+            </a>
+
+            <a href="/professores?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'professores' ? 'active' : '' %>">
+                <span class="icon-mask icon-professor"></span>
+                <span class="Texto">Professores</span>
+            </a>
+
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'acervo' ? 'active' : '' %>">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+
+            <button id="btnAbrirMais" type="button" class="nav-btn">
+                <span class="icon-mask icon-more"></span>
+                <span class="Texto">Mais</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const botoesTema = document.querySelectorAll(".btn-tema");
+
+            function aplicarTema(tema) {
+                if (tema === "escuro") {
+                    document.body.setAttribute("data-tema", "escuro");
+                } else if (tema === "claro") {
+                    document.body.setAttribute("data-tema", "claro");
+                } else {
+                    const prefereEscuro = window.matchMedia("(prefers-color-scheme: dark)").matches;
+                    if (prefereEscuro) {
+                        document.body.setAttribute("data-tema", "escuro");
+                    } else {
+                        document.body.setAttribute("data-tema", "claro");
+                    }
+                }
+            }
+
+            const temaSalvo = localStorage.getItem("tema_app") || "sistema";
+            aplicarTema(temaSalvo);
+
+            botoesTema.forEach(btn => {
+                if (btn.dataset.tema === temaSalvo) {
+                    btn.classList.add("active");
+                } else {
+                    btn.classList.remove("active");
+                }
+
+                btn.addEventListener("click", () => {
+                    const novoTema = btn.dataset.tema;
+                    
+                    botoesTema.forEach(b => b.classList.remove("active"));
+                    btn.classList.add("active");
+
+                    localStorage.setItem("tema_app", novoTema);
+                    aplicarTema(novoTema);
+                });
+            });
+        });
+    </script>
+    <script src="/JS/BottomSheet.js"></script>
+
+</body>
+</html>

@@ -27,9 +27,9 @@ const listaTccs = (typeof tccs !== 'undefined' && tccs) ? tccs : [];
 <div id="TelaTccs" class="container-tela">
 
     <header id="Header">
-        <button type="button" class="icon-btn" id="btnConfig" aria-label="Configurações">
-            <span class="icon-mask icon-settings"></span>
-        </button>
+        <a href="/configuracoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Configurações">
+                <span class="icon-mask icon-settings"></span>
+        </a>
 
         <h1 id="TituloPagina">TCCs</h1>
 
