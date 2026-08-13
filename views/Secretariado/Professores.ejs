@@ -11,6 +11,21 @@
     <title>Professores</title>
     <link rel="stylesheet" href="/cssSecretaria/Professores.css">
     <link rel="stylesheet" href="/cssSecretaria/BottomSheet.css">
+    <style>
+        .painel-filtros-oculto {
+            display: none;
+        }
+        .painel-filtros-oculto.ativo,
+        .painel-filtros-oculto.active {
+            display: flex !important;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .btn-filtro-icon .icon-mask {
+            pointer-events: none;
+        }
+    </style>
     <script>
         (function() {
             const tema = localStorage.getItem("tema_app") || "sistema";
@@ -37,7 +52,7 @@
             <div class="busca-filter-container">
                 <div class="input-busca-wrapper">
                     <span class="icon-mask icon-search"></span>
-                    <input type="text" placeholder="Buscar aluno..." id="inputBusca">
+                    <input type="text" placeholder="Buscar professor..." id="inputBusca">
                 </div>
                 <button type="button" class="btn-filtro-icon" id="btnToggleFiltros" aria-label="Filtros e Ordenação">
                     <span class="icon-mask icon-filter"></span>
@@ -124,8 +139,26 @@
     </div>
 
     <script>
-        document.getElementById('btnToggleFiltros')?.addEventListener('click', function() {
-            document.getElementById('painelFiltros')?.classList.toggle('ativo');
+        document.addEventListener("DOMContentLoaded", () => {
+            const btnFiltro = document.getElementById('btnToggleFiltros');
+            const painelFiltros = document.getElementById('painelFiltros');
+
+            if (btnFiltro && painelFiltros) {
+                btnFiltro.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    
+                    const estaAberto = painelFiltros.classList.contains('ativo') || painelFiltros.classList.contains('active');
+                    
+                    if (estaAberto) {
+                        painelFiltros.classList.remove('ativo', 'active');
+                        btnFiltro.classList.remove('active');
+                    } else {
+                        painelFiltros.classList.add('ativo', 'active');
+                        btnFiltro.classList.add('active');
+                    }
+                });
+            }
         });
     </script>
     <script src="/JS/ControlarProfessores.js"></script>
