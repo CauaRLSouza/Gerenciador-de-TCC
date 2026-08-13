@@ -46,7 +46,7 @@
                 <span class="icon-mask icon-settings"></span>
             </a>
             <h1 id="TituloPagina">Avisos</h1>
-            <a href="/secretaria/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
+            <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn ativo-topo" aria-label="Notificações">
                 <span class="icon-mask icon-notification"></span>
             </a>
         </header>
@@ -85,19 +85,19 @@
         </main>
 
         <nav id="BottomNav">
-            <a href="/secretaria/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'dashboard' || paginaAtual === 'inicio') ? 'ativo active' : '' %>">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'dashboard' || paginaAtual === 'inicio') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-home"></span>
                 <span class="Texto">Início</span>
             </a>
-            <a href="/secretaria/alunos?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'alunos') ? 'ativo active' : '' %>">
+            <a href="/alunos?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'alunos') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-studant"></span>
                 <span class="Texto">Alunos</span>
             </a>
-            <a href="/secretaria/professores?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'professores') ? 'ativo active' : '' %>">
+            <a href="/professores?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'professores') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-professor"></span>
                 <span class="Texto">Professores</span>
             </a>
-            <a href="/secretaria/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'acervo') ? 'ativo active' : '' %>">
+            <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'acervo') ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-acervo"></span>
                 <span class="Texto">Acervo</span>
             </a>

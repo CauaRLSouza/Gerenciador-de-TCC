@@ -125,6 +125,14 @@ body {
     background: rgba(0,0,0,0.05); 
 }
 
+.icon-btn.ativo-topo {
+    background: var(--primary-bg) !important;
+}
+
+.icon-btn.ativo-topo .icon-mask {
+    background-color: var(--primary) !important;
+}
+
 #ScrollView {
     flex: 1;
     overflow-y: auto;

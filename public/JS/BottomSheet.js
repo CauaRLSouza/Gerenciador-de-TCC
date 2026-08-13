@@ -1,12 +1,15 @@
 document.addEventListener("DOMContentLoaded", () => {
     const BottomSheet = (function () {
+        const urlParams = new URLSearchParams(window.location.search);
+        const perfilAtual = urlParams.get('perfil') || 'Secretariado';
+
         const bottomSheetHtml = `
             <div id="MenuMaisOverlay" class="menu-overlay hidden">
                 <div class="menu-sheet">
                     <div class="sheet-drag-handle"></div>
                     <h3 class="sheet-titulo">Mais</h3>
                     <div class="sheet-opcoes">
-                        <a href="/bancas" class="opcao-item">
+                        <a href="/bancas?perfil=${perfilAtual}" class="opcao-item">
                             <div class="opcao-icone roxo">
                                 <span class="icon-mask icon-calendar"></span>
                             </div>
@@ -16,7 +19,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                             <span class="icon-mask icon-seta-direita"></span>
                         </a>
-                        <a href="/tcc" class="opcao-item">
+                        <a href="/tcc?perfil=${perfilAtual}" class="opcao-item">
                             <div class="opcao-icone azul">
                                 <span class="icon-mask icon-files"></span>
                             </div>
@@ -26,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                             <span class="icon-mask icon-seta-direita"></span>
                         </a>
-                        <a href="/perfil" class="opcao-item">
+                        <a href="/perfil?perfil=${perfilAtual}" class="opcao-item">
                             <div class="opcao-icone cinza">
                                 <span class="icon-mask icon-perfil"></span>
                             </div>
