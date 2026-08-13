@@ -103,6 +103,27 @@ app.get(['/meutcc', '/meu-tcc'], proibirAcessoDireto, (req, res) => {
     res.render(`${perfil}/MeuTCC`, { currentPage: 'meutcc', perfil });
 });
 
+app.get(['/tccs', '/tcc', '/TCC', '/TCCs'], proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Secretariado';
+
+    const tccsMapeados = todosTccsMock.map(tcc => {
+        const orientador = todosProfessoresMock.find(p => String(p.id) === String(tcc.orientadorId)) || { nome: tcc.orientador || 'Não informado' };
+        const coorientador = todosProfessoresMock.find(p => String(p.id) === String(tcc.coorientadorId)) || (tcc.coorientador ? { nome: tcc.coorientador } : null);
+
+        return {
+            ...tcc,
+            orientadorNome: orientador.nome,
+            coorientadorNome: coorientador ? coorientador.nome : null
+        };
+    });
+
+    res.render(`${perfil}/TCC`, { 
+        currentPage: 'tcc', 
+        perfil, 
+        tccs: tccsMapeados 
+    });
+});
+
 app.get('/notificacoes', proibirAcessoDireto, (req, res) => {
     const perfil = req.query.perfil || 'Aluno';
     res.render(`${perfil}/Notificacoes`, { currentPage: 'notificacoes', perfil });

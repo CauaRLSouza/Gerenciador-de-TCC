@@ -1,0 +1,199 @@
+<%
+const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+const listaTccs = (typeof tccs !== 'undefined' && tccs) ? tccs : [];
+%>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCCs</title>
+    <link rel="stylesheet" href="/cssSecretaria/TCC.css">
+    <link rel="stylesheet" href="/cssSecretaria/BottomSheet.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (
+                tema === "escuro" ||
+                (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)
+            ) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+<div id="TelaTccs" class="container-tela">
+
+    <header id="Header">
+        <button type="button" class="icon-btn" id="btnConfig" aria-label="Configurações">
+            <span class="icon-mask icon-settings"></span>
+        </button>
+
+        <h1 id="TituloPagina">TCCs</h1>
+
+        <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
+            <span class="icon-mask icon-notification"></span>
+        </a>
+    </header>
+
+    <main id="CorpoScroll">
+
+        <div class="wrapper-busca">
+            <div class="input-busca-container">
+                <span class="icon-mask icon-search"></span>
+                <input 
+                    type="text" 
+                    id="inputBuscaTcc" 
+                    placeholder="Buscar TCC por título ou aluno..." 
+                >
+            </div>
+            
+            <button type="button" class="btn-filtro" id="btnAbrirFiltroTcc" aria-label="Filtrar TCCs">
+                <span class="icon-mask icon-filter"></span>
+            </button>
+        </div>
+
+        <div id="painelFiltrosTcc" class="painel-expansivel" style="display: none;">
+            <div class="campo-filtro">
+                <div class="select-container">
+                    <select id="filtroCursoTcc" class="select-filtro">
+                        <option value="">Todos os Cursos</option>
+                        <option value="Licenciatura em Ciências da Computação">Licenciatura em Ciências da Computação</option>
+                        <option value="Licenciatura em Ciências Agrárias">Licenciatura em Ciências Agrárias</option>
+                        <option value="Licenciatura em Química">Licenciatura em Química</option>
+                        <option value="Bacharel em Administração">Bacharel em Administração</option>
+                    </select>
+                    <span class="icon-mask icon-seta-baixo select-icone"></span>
+                </div>
+            </div>
+
+            <div class="campo-filtro">
+                <div class="select-container">
+                    <select id="filtroLinhaTcc" class="select-filtro">
+                        <option value="">Todas as Linhas de Pesquisa</option>
+                        <option value="Computação">Computação</option>
+                        <option value="Agronomia e Solos">Agronomia e Solos</option>
+                        <option value="Química Orgânica e Analítica">Química Orgânica e Analítica</option>
+                        <option value="Educação e Didática">Educação e Didática</option>
+                        <option value="Gestão e Finanças">Gestão e Finanças</option>
+                    </select>
+                    <span class="icon-mask icon-seta-baixo select-icone"></span>
+                </div>
+            </div>
+
+            <div class="campo-filtro">
+                <div class="select-container">
+                    <select id="filtroDefesaTcc" class="select-filtro">
+                        <option value="">Todas as Defesas</option>
+                        <option value="TCC I">TCC I</option>
+                        <option value="TCC II">TCC II</option>
+                    </select>
+                    <span class="icon-mask icon-seta-baixo select-icone"></span>
+                </div>
+            </div>
+        </div>
+
+        <div class="info-meta">
+            <span id="totalTccs">Total: <%= listaTccs.length %> TCCs</span>
+            
+            <div class="wrapper-select-ordenar">
+                <label for="selectOrdenacaoTcc" class="label-ordenar">
+                    Ordenar: <strong id="textoOrdemAtual">Título (A-Z)</strong> ▾
+                </label>
+                <select id="selectOrdenacaoTcc" class="select-ordenar-invisivel">
+                    <option value="titulo-asc">Título (A-Z)</option>
+                    <option value="titulo-desc">Título (Z-A)</option>
+                </select>
+            </div>
+        </div>
+
+        <div id="listaTccsContainer">
+            <% if (listaTccs.length > 0) { %>
+                <% listaTccs.forEach(tcc => { 
+                    let statusClass = 'status-default';
+                    const st = (tcc.status || '').toLowerCase();
+                    if (st.includes('andamento')) statusClass = 'status-andamento';
+                    else if (st.includes('revisão') || st.includes('revisao')) statusClass = 'status-revisao';
+                    else if (st.includes('aprovado')) statusClass = 'status-aprovado';
+                    else if (st.includes('submetido')) statusClass = 'status-submetido';
+                    else if (st.includes('rascunho')) statusClass = 'status-rascunho';
+
+                    const nomeAluno = tcc.alunoNome || tcc.aluno || 'Não informado';
+                    const nomeOrientador = tcc.orientadorNome || tcc.orientador || 'Não informado';
+                    const nomeCoorientador = tcc.coorientadorNome || tcc.coorientador || null;
+                %>
+                    <a href="/tccs/<%= tcc.id %>?perfil=<%= perfilAtual %>" 
+                       class="card-tcc"
+                       data-titulo="<%= tcc.titulo || '' %>"
+                       data-aluno="<%= nomeAluno %>"
+                       data-curso="<%= tcc.curso || '' %>"
+                       data-linha="<%= tcc.linhaPesquisa || tcc.linha || '' %>"
+                       data-defesa="<%= tcc.defesa || tcc.tipo || '' %>">
+
+                        <div class="tcc-icone-box">
+                            <span class="icon-mask icon-document"></span>
+                        </div>
+
+                        <div class="tcc-conteudo">
+                            <h2 class="tcc-titulo"><%= tcc.titulo %></h2>
+                            <p class="tcc-info"><strong>Aluno:</strong> <%= nomeAluno %></p>
+                            <p class="tcc-info"><strong>Orientador:</strong> <%= nomeOrientador %></p>
+                            <% if (nomeCoorientador) { %>
+                                <p class="tcc-info"><strong>Coorientador:</strong> <%= nomeCoorientador %></p>
+                            <% } %>
+                        </div>
+
+                        <div class="tcc-badge-wrapper">
+                            <% if (tcc.status) { %>
+                                <span class="badge-status <%= statusClass %>"><%= tcc.status %></span>
+                            <% } %>
+                            <span class="icon-mask icon-chevron-right"></span>
+                        </div>
+                    </a>
+                <% }) %>
+            <% } %>
+        </div>
+
+        <div id="mensagemVaziaTcc" style="display: none; text-align: center; padding: 40px 16px; color: var(--text-2);">
+            <p style="font-weight: 700; margin-bottom: 4px; color: var(--text-1);">Nenhum TCC encontrado</p>
+            <p style="font-size: 0.8rem;">Tente ajustar os filtros ou a busca.</p>
+        </div>
+
+    </main>
+
+    <a href="/cadastrar-tcc?perfil=<%= perfilAtual %>" class="btn-fab" aria-label="Cadastrar novo TCC">
+        <span class="icon-mask icon-plus"></span>
+    </a>
+
+    <nav id="BottomNav">
+        <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-item">
+            <span class="icon-mask icon-home"></span>
+            <span>Início</span>
+        </a>
+        <a href="/alunos?perfil=<%= perfilAtual %>" class="nav-item">
+            <span class="icon-mask icon-studant"></span>
+            <span>Alunos</span>
+        </a>
+        <a href="/professores?perfil=<%= perfilAtual %>" class="nav-item">
+            <span class="icon-mask icon-professor"></span>
+            <span>Professores</span>
+        </a>
+        <a href="/acervo?perfil=<%= perfilAtual %>" class="nav-item">
+            <span class="icon-mask icon-acervo"></span>
+            <span>Acervo</span>
+        </a>
+        <button id="btnAbrirMais" type="button" class="nav-item nav-btn">
+            <span class="icon-mask icon-more"></span>
+            <span>Mais</span>
+        </button>
+    </nav>
+
+</div>
+
+<script src="/js/BottomSheet.js"></script>
+<script src="/js/TCCsFiltros.js"></script>
+
+</body>
+</html>

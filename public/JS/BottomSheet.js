@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
                             </div>
                             <span class="icon-mask icon-seta-direita"></span>
                         </a>
-                        <a href="/tccs" class="opcao-item">
+                        <a href="/tcc" class="opcao-item">
                             <div class="opcao-icone azul">
                                 <span class="icon-mask icon-files"></span>
                             </div>
