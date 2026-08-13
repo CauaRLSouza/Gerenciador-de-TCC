@@ -170,7 +170,8 @@ body {
 #CorpoScroll {
     flex: 1;
     overflow-y: auto;
-    padding: 16px 16px 140px 16px;
+    -webkit-overflow-scrolling: touch;
+    padding: 16px 16px 180px 16px;
     scrollbar-width: none;
     display: flex;
     flex-direction: column;

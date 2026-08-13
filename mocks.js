@@ -19,10 +19,88 @@ const todosProfessoresMock = [
 ];
 
 const todosAlunosMock = [
-    { id: '1', nome: 'João da Silva', matricula: '202410101', curso: 'Licenciatura em Ciências da Computação', semestre: '2024.2', dataIngresso: '2024-07-10', dataNascimento: '15/03/2002', telefone: '(74) 99911-2233', email: 'joao.silva@aluno.edu.br', tituloTCC: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web', dataInicio: '10/03/2025', previsaoConclusao: '15/12/2025', linhaPesquisa: 'Engenharia de Software', status: 'Aguardando revisão', statusCor: 'yellow' },
-    { id: '2', nome: 'Maria Santos', matricula: '202310102', curso: 'Licenciatura em Ciências da Computação', semestre: '2023.1', dataIngresso: '2023-02-15', dataNascimento: '22/08/2001', telefone: '(74) 99822-3344', email: 'maria.santos@aluno.edu.br', tituloTCC: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos', dataInicio: '15/02/2025', previsaoConclusao: '10/12/2025', linhaPesquisa: 'Sistemas Distribuídos', status: 'Revisada', statusCor: 'green' },
-    { id: '3', nome: 'Carlos Correia', matricula: '202510103', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.1', dataIngresso: '2025-02-15', dataNascimento: '10/11/2003', telefone: '(74) 99733-4455', email: 'carlos.correia@aluno.edu.br', tituloTCC: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias', dataInicio: '01/04/2025', previsaoConclusao: '20/12/2025', linhaPesquisa: 'Inteligência Artificial', status: 'Revisada', statusCor: 'green' },
-    { id: '4', nome: 'Ana Beatriz Souza', matricula: '202210104', curso: 'Licenciatura em Ciências Agrárias', semestre: '2022.1', dataIngresso: '2022-02-20', dataNascimento: '05/01/2000', telefone: '(74) 99644-5566', email: 'ana.souza@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
+    { 
+        id: '1', 
+        nome: 'João da Silva', 
+        matricula: '202410101', 
+        curso: 'Licenciatura em Ciências da Computação', 
+        semestre: '2024.2', 
+        dataIngresso: '2024-07-10', 
+        dataNascimento: '15/03/2002', 
+        telefone: '(74) 99911-2233', 
+        email: 'joao.silva@aluno.edu.br', 
+        tituloTCC: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web', 
+        dataInicio: '10/03/2025', 
+        previsaoConclusao: '15/12/2025', 
+        linhaPesquisa: 'Engenharia de Software', 
+        status: 'Aguardando revisão', 
+        statusCor: 'yellow',
+        versoes: [
+            { id: 1, titulo: 'Versão Inicial TCC - Introdução e Objetivos', data: '10/03/2025' },
+            { id: 2, titulo: 'Segunda Versão - Referencial Teórico', data: '15/05/2025' },
+            { id: 3, titulo: 'Terceira Versão - Metodologia Aplicada', data: '20/07/2025' },
+            { id: 4, titulo: 'Quarta Versão - Resultados e Discussões', data: '10/10/2025' },
+            { id: 5, titulo: 'Versão Final - TCC Concluído e Formatado', data: '05/12/2025' }
+        ]
+    },
+    { 
+        id: '2', 
+        nome: 'Maria Santos', 
+        matricula: '202310102', 
+        curso: 'Licenciatura em Ciências da Computação', 
+        semestre: '2023.1', 
+        dataIngresso: '2023-02-15', 
+        dataNascimento: '22/08/2001', 
+        telefone: '(74) 99822-3344', 
+        email: 'maria.santos@aluno.edu.br', 
+        tituloTCC: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos', 
+        dataInicio: '15/02/2025', 
+        previsaoConclusao: '10/12/2025', 
+        linhaPesquisa: 'Sistemas Distribuídos', 
+        status: 'Revisada', 
+        statusCor: 'green',
+        versoes: [
+            { id: 1, titulo: 'Versão Inicial TCC - Introdução e Objetivos', data: '15/08/2025' }
+        ]
+    },
+    { 
+        id: '3', 
+        nome: 'Carlos Correia', 
+        matricula: '202510103', 
+        curso: 'Licenciatura em Ciências da Computação', 
+        semestre: '2025.1', 
+        dataIngresso: '2025-02-15', 
+        dataNascimento: '10/11/2003', 
+        telefone: '(74) 99733-4455', 
+        email: 'carlos.correia@aluno.edu.br', 
+        tituloTCC: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias', 
+        dataInicio: '01/04/2025', 
+        previsaoConclusao: '20/12/2025', 
+        linhaPesquisa: 'Inteligência Artificial', 
+        status: 'Revisada', 
+        statusCor: 'green',
+        versoes: [
+            { id: 1, titulo: 'Versão Inicial TCC - Introdução e Objetivos', data: '15/08/2025' },
+            { id: 2, titulo: 'Segunda Versão - Metodologia e Parcial', data: '10/09/2025' }
+        ]
+    },
+    { 
+        id: '4', 
+        nome: 'Ana Beatriz Souza', 
+        matricula: '202210104', 
+        curso: 'Licenciatura em Ciências Agrárias', 
+        semestre: '2022.1', 
+        dataIngresso: '2022-02-20', 
+        dataNascimento: '05/01/2000', 
+        telefone: '(74) 99644-5566', 
+        email: 'ana.souza@aluno.edu.br', 
+        status: 'Ativo', 
+        statusCor: 'green',
+        versoes: [
+            { id: 1, titulo: 'Versão Inicial TCC - Introdução e Objetivos', data: '15/08/2025' },
+            { id: 2, titulo: 'Segunda Versão - Metodologia e Parcial', data: '10/09/2025' }
+        ]
+    },
     { id: '5', nome: 'Bruno Ferreira', matricula: '202310105', curso: 'Licenciatura em Química', semestre: '2023.2', dataIngresso: '2023-07-15', dataNascimento: '18/04/2002', telefone: '(74) 99555-6677', email: 'bruno.ferreira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
     { id: '6', nome: 'Camila Oliveira', matricula: '202410106', curso: 'Bacharel em Administração', semestre: '2024.1', dataIngresso: '2024-02-28', dataNascimento: '30/09/2001', telefone: '(74) 99466-7788', email: 'camila.oliveira@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
     { id: '7', nome: 'Daniel Costa', matricula: '202510107', curso: 'Licenciatura em Ciências da Computação', semestre: '2025.2', dataIngresso: '2025-07-10', dataNascimento: '12/06/2004', telefone: '(74) 99377-8899', email: 'daniel.costa@aluno.edu.br', status: 'Ativo', statusCor: 'green' },
@@ -72,7 +150,7 @@ const todosTccsMock = [
     { id: '22', titulo: 'Plano de Negócios para Empreendimentos de Economia Solidária', alunoNome: 'Thiago Nunes', alunoId: '22', curso: 'Bacharel em Administração', orientadorNome: 'Prof. Maurício Ferreira', orientadorId: '8', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Gestao e Finanças', defesa: 'TCC I' },
     { id: '23', titulo: 'Computação em Nuvem e Escalabilidade de Banco de Dados', alunoNome: 'Vinícius Moreira', alunoId: '23', curso: 'Licenciatura em Ciências da Computação', orientadorNome: 'Prof. Maurício Ferreira', orientadorId: '8', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Computação', defesa: 'TCC II' },
     { id: '24', titulo: 'Sistemas Agroflorestais Adaptados ao Semiárido Baiano', alunoNome: 'Yasmin Vieira', alunoId: '24', curso: 'Licenciatura em Ciências Agrárias', orientadorNome: 'Profª. Adriana Peixoto', orientadorId: '9', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Agronomia e Solos', defesa: 'TCC II' },
-    { id: '25', titulo: 'Avaliação da Qualidade do Ar em Zonas Urbanas e Industriais', alunoNome: 'Igor Cavalcante', alunoId: '25', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Adriana Peixoto', orientadorId: '9', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Quimica Organica e Analitica', defesa: 'TCC I' },
+    { id: '25', titulo: 'Avaliação da Qualidade do Air em Zonas Urbanas e Industriais', alunoNome: 'Igor Cavalcante', alunoId: '25', curso: 'Licenciatura em Química', orientadorNome: 'Profª. Adriana Peixoto', orientadorId: '9', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Quimica Organica e Analitica', defesa: 'TCC I' },
     { id: '26', titulo: 'Inovação e Empreendedorismo Acadêmico no Âmbito Universitário', alunoNome: 'Letícia Freitas', alunoId: '26', curso: 'Bacharel em Administração', orientadorNome: 'Prof. Cláudio Nogueira', orientadorId: '10', coorientadorNome: '', coorientadorId: '', linhaPesquisa: 'Gestao e Finanças', defesa: 'TCC I' }
 ];
 

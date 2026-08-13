@@ -193,7 +193,13 @@ body {
     gap: 12px;
     text-decoration: none;
     color: inherit;
-    transition: transform 0.1s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card-banca:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary-light);
+    box-shadow: 0 0 15px rgba(104, 0, 183, 0.4), 0 0 30px rgba(167, 139, 250, 0.3);
 }
 
 .card-banca:active {
@@ -285,6 +291,13 @@ body {
     box-shadow: 0 4px 12px rgba(104, 0, 183, 0.3);
     text-decoration: none;
     z-index: 20;
+    transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-fab:hover {
+    transform: scale(1.08);
+    box-shadow: 0 0 16px var(--primary);
+    filter: drop-shadow(0 0 8px var(--primary));
 }
 
 .btn-fab .icon-mask {

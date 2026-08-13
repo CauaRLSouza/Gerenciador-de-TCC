@@ -1,6 +1,6 @@
-
 :root {
     --primary: #6800b7; 
+    --primary-light: #e1cdff;
     --primary-bg: #ede6ff;
     --bg-main: #f8fafc; 
     --card-bg: #ffffff;
@@ -24,6 +24,7 @@ body[data-tema="escuro"] {
     --text-3: #71717a;  
     --border: #27272a;  
     --primary: #9d4edd; 
+    --primary-light: #e0aaff;
     --primary-bg: rgba(157, 78, 221, 0.15); 
 }
 
@@ -264,10 +265,16 @@ body {
     display: flex;
     align-items: center;
     gap: 12px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     border: 1px solid var(--border);
     cursor: pointer;
-    transition: transform 0.1s ease;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.card-tcc:hover {
+    transform: translateY(-2px);
+    border-color: var(--primary-light, #e1cdff);
+    box-shadow: 0 0 15px rgba(104, 0, 183, 0.4), 0 0 30px rgba(225, 205, 255, 0.3);
 }
 
 .card-tcc:active {

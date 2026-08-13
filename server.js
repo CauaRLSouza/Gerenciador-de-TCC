@@ -20,6 +20,55 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
+function obterVersoesPadrao(alunoNome) {
+    const nomeLower = alunoNome.toLowerCase();
+    
+    if (nomeLower.includes('beatriz') || nomeLower.includes('carlos')) {
+        return [
+            { id: 1, titulo: 'Versão Inicial TCC - Introdução e Objetivos', data: '15/08/2025' },
+            { id: 2, titulo: 'Segunda Versão - Metodologia e Parcial', data: '10/09/2025' }
+        ];
+    }
+    
+    if (nomeLower.includes('maria')) {
+        return [
+            { id: 1, titulo: 'Versão Inicial TCC - Introdução e Objetivos', data: '15/08/2025' }
+        ];
+    }
+    
+    if (nomeLower.includes('joao')) {
+        return [
+            { id: 1, titulo: 'Versão Inicial TCC - Introdução e Objetivos', data: '10/03/2025' },
+            { id: 2, titulo: 'Segunda Versão - Referencial Teórico', data: '15/05/2025' },
+            { id: 3, titulo: 'Terceira Versão - Metodologia Aplicada', data: '20/07/2025' },
+            { id: 4, titulo: 'Quarta Versão - Resultados e Discussões', data: '10/10/2025' },
+            { id: 5, titulo: 'Versão Final - TCC Concluído e Formatado', data: '05/12/2025' }
+        ];
+    }
+
+    return [{ id: 1, titulo: 'Versão Inicial TCC - Introdução e Objetivos', data: '15/08/2025' }];
+}
+
+function processarVersoesAluno(aluno) {
+    const nomeLower = aluno.nome.toLowerCase();
+    
+    if (nomeLower.includes('joao') || nomeLower.includes('beatriz') || nomeLower.includes('carlos') || nomeLower.includes('maria')) {
+        return obterVersoesPadrao(aluno.nome);
+    }
+    
+    const tcc = todosTccsMock.find(t => String(t.alunoId) === String(aluno.id));
+    
+    if (Array.isArray(aluno.versoes) && aluno.versoes.length > 0) {
+        return aluno.versoes;
+    }
+    
+    if (tcc && Array.isArray(tcc.versoes) && tcc.versoes.length > 0) {
+        return tcc.versoes;
+    }
+    
+    return obterVersoesPadrao(aluno.nome);
+}
+
 function proibirAcessoDireto(req, res, next) {
     const referer = req.headers.referer;
 
@@ -73,10 +122,47 @@ app.get('/dashboard', proibirAcessoDireto, (req, res) => {
 
 app.get('/orientandos', proibirAcessoDireto, (req, res) => {
     const perfil = req.query.perfil || 'Professor';
+    
+    const professorPedro = todosProfessoresMock.find(p => p.nome.includes('Pedro Felipe')) || todosProfessoresMock[0];
+    
+    let orientandosDoProfessor = [];
+    
+    if (professorPedro) {
+        const tccsDoProfessor = todosTccsMock.filter(t => String(t.orientadorId) === String(professorPedro.id));
+        const idsAlunos = tccsDoProfessor.map(t => String(t.alunoId));
+        
+        orientandosDoProfessor = todosAlunosMock.filter(aluno => 
+            idsAlunos.includes(String(aluno.id)) || String(aluno.orientadorId) === String(professorPedro.id)
+        );
+    }
+
+    if (orientandosDoProfessor.length === 0) {
+        orientandosDoProfessor = todosAlunosMock.slice(0, 4);
+    }
+
+    const orientandosFormatados = orientandosDoProfessor.map(aluno => {
+        const tcc = todosTccsMock.find(t => String(t.alunoId) === String(aluno.id));
+        const versoesTratadas = processarVersoesAluno(aluno);
+        const ultimaVersaoObj = versoesTratadas[versoesTratadas.length - 1];
+        const dataVersao = aluno.ultimaVersao || aluno.versaoAtual || ultimaVersaoObj.data;
+
+        return {
+            ...aluno,
+            iniciais: gerarIniciais(aluno.nome),
+            tituloTCC: tcc ? tcc.titulo : (aluno.tituloTCC || 'Não informado'),
+            linhaPesquisa: tcc ? tcc.linhaPesquisa : (aluno.linhaPesquisa || 'Não informada'),
+            dataInicio: aluno.dataInicio || '10/03/2025',
+            previsaoConclusao: aluno.previsaoConclusao || '15/12/2025',
+            versaoAtual: ultimaVersaoObj.titulo,
+            ultimaVersao: dataVersao,
+            versoes: versoesTratadas
+        };
+    });
+
     res.render(`${perfil}/Orientandos`, { 
         currentPage: 'orientandos', 
         perfil,
-        orientandos: todosAlunosMock.slice(0, 3)
+        orientandos: orientandosFormatados
     });
 });
 
@@ -90,11 +176,25 @@ app.get('/orientando/:id', proibirAcessoDireto, (req, res) => {
         return res.status(404).send('<h1>Orientando não encontrado</h1>');
     }
 
+    const tcc = todosTccsMock.find(t => String(t.alunoId) === String(alunoId));
+    const versoesTratadas = processarVersoesAluno(orientandoEncontrado);
+
+    const alunoTratado = {
+        ...orientandoEncontrado,
+        iniciais: gerarIniciais(orientandoEncontrado.nome),
+        tituloTCC: tcc ? tcc.titulo : (orientandoEncontrado.tituloTCC || 'Não informado'),
+        linhaPesquisa: tcc ? tcc.linhaPesquisa : (orientandoEncontrado.linhaPesquisa || 'Não informada'),
+        dataInicio: orientandoEncontrado.dataInicio || '10/03/2025',
+        previsaoConclusao: orientandoEncontrado.previsaoConclusao || '15/12/2025',
+        versoes: versoesTratadas
+    };
+
     res.render(`${perfil}/OrientandoDetalhes`, { 
         currentPage: 'orientandos', 
         perfil, 
-        orientando: orientandoEncontrado,
-        orientandoId: orientandoEncontrado.id
+        aluno: alunoTratado,
+        orientando: alunoTratado,
+        orientandoId: alunoTratado.id
     });
 });
 
@@ -166,10 +266,26 @@ app.get('/bancas', proibirAcessoDireto, (req, res) => {
 
 app.get('/alunos', proibirAcessoDireto, (req, res) => {
     const perfil = req.query.perfil || 'Secretariado';
+    
+    const alunosFormatados = todosAlunosMock.map(aluno => {
+        const tcc = todosTccsMock.find(t => String(t.alunoId) === String(aluno.id));
+        const versoesTratadas = processarVersoesAluno(aluno);
+
+        return {
+            ...aluno,
+            iniciais: gerarIniciais(aluno.nome),
+            tituloTCC: tcc ? tcc.titulo : (aluno.tituloTCC || 'Não informado'),
+            linhaPesquisa: tcc ? tcc.linhaPesquisa : (aluno.linhaPesquisa || 'Não informada'),
+            dataInicio: aluno.dataInicio || '10/03/2025',
+            previsaoConclusao: aluno.previsaoConclusao || '15/12/2025',
+            versoes: versoesTratadas
+        };
+    });
+
     res.render(`${perfil}/alunos`, { 
         currentPage: 'alunos', 
         perfil,
-        orientandos: todosAlunosMock
+        orientandos: alunosFormatados
     });
 });
 
@@ -272,14 +388,25 @@ app.get(['/DetalharAluno/:id', '/detalhar-aluno/:id'], proibirAcessoDireto, (req
         return res.status(404).send('<h1>Aluno não encontrado</h1>');
     }
 
-    alunoEncontrado.iniciais = gerarIniciais(alunoEncontrado.nome);
+    const tcc = todosTccsMock.find(t => String(t.alunoId) === String(alunoId));
+    const versoesTratadas = processarVersoesAluno(alunoEncontrado);
+
+    const alunoTratado = {
+        ...alunoEncontrado,
+        iniciais: gerarIniciais(alunoEncontrado.nome),
+        tituloTCC: tcc ? tcc.titulo : (alunoEncontrado.tituloTCC || 'Não informado'),
+        linhaPesquisa: tcc ? tcc.linhaPesquisa : (alunoEncontrado.linhaPesquisa || 'Não informada'),
+        dataInicio: alunoEncontrado.dataInicio || '10/03/2025',
+        previsaoConclusao: alunoEncontrado.previsaoConclusao || '15/12/2025',
+        versoes: versoesTratadas
+    };
 
     res.render(`${perfil}/DetalhesAluno`, { 
         currentPage: 'alunos', 
         perfil, 
-        aluno: alunoEncontrado,
-        orientando: alunoEncontrado,
-        alunoId: alunoEncontrado.id
+        aluno: alunoTratado,
+        orientando: alunoTratado,
+        alunoId: alunoTratado.id
     });
 });
 

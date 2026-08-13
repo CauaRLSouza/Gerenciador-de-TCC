@@ -1,104 +1,53 @@
 <%
     const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'professor';
-    const paginaAtual = 'orientandos';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'orientandos';
 
-    const orientandosMap = {
-        1: {
-            id: 1,
-            nome: 'João da Silva',
-            iniciais: 'JS',
-            email: 'joao.silva@aluno.edu.br',
-            curso: 'Sistemas de Informação',
-            tituloTCC: 'Desenvolvimento de um sistema de gerenciamento acadêmico utilizando tecnologias web',
-            dataInicio: '10/03/2025',
-            previsaoConclusao: '15/12/2025',
-            linhaPesquisa: 'Engenharia de Software',
-            status: 'Aguardando revisão',
-            statusCor: 'yellow',
-            versaoAtual: 'Versão 3 enviada em 15/08/2025',
-            versoes: [
-                { id: 3, titulo: 'Versão 3 (Final)', data: '15/08/2025', status: 'Aguardando revisão' },
-                { id: 2, titulo: 'Versão 2 (Parcial)', data: '01/08/2025', status: 'Revisada' },
-                { id: 1, titulo: 'Versão 1 (Pré-projeto)', data: '10/03/2025', status: 'Aprovado' }
-            ],
-            reunioes: [
-                { id: 101, data: '18/08/2025', hora: '14:00', pauta: 'Revisão do Capítulo 3' },
-                { id: 102, data: '02/08/2025', hora: '10:00', pauta: 'Alinhamento dos Requisitos' }
-            ],
-            comentarios: [
-                { id: 201, autor: 'Você', data: '02/08/2025', texto: 'Ajustar a metodologia no capítulo 2.' },
-                { id: 202, autor: 'João da Silva', data: '03/08/2025', texto: 'Ajustes realizados conforme solicitado.' }
-            ]
-        },
-        2: {
-            id: 2,
-            nome: 'Maria Santos',
-            iniciais: 'MS',
-            email: 'maria.santos@aluno.edu.br',
-            curso: 'Ciência da Computação',
-            tituloTCC: 'Arquiteturas de Microserviços e Resiliência em Sistemas Distribuídos',
-            dataInicio: '15/02/2025',
-            previsaoConclusao: '10/12/2025',
-            linhaPesquisa: 'Sistemas Distribuídos',
-            status: 'Revisada',
-            statusCor: 'green',
-            versaoAtual: 'Versão 1 enviada em 12/08/2025',
-            versoes: [
-                { id: 1, titulo: 'Versão 1 (Capítulos 1 e 2)', data: '12/08/2025', status: 'Revisada' }
-            ],
-            reunioes: [
-                { id: 105, data: '14/08/2025', hora: '09:00', pauta: 'Discussão sobre carga de testes' }
-            ],
-            comentarios: [
-                { id: 205, autor: 'Você', data: '13/08/2025', texto: 'Capítulo 1 muito bem estruturado.' }
-            ]
-        },
-        3: {
-            id: 3,
-            nome: 'Carlos Correia',
-            iniciais: 'CC',
-            email: 'carlos.correia@aluno.edu.br',
-            curso: 'Engenharia de Software',
-            tituloTCC: 'Análise de Desempenho e Algoritmos de Machine Learning na Detecção de Anomalias',
-            dataInicio: '01/04/2025',
-            previsaoConclusao: '20/12/2025',
-            linhaPesquisa: 'Inteligência Artificial',
-            status: 'Revisada',
-            statusCor: 'green',
-            versaoAtual: 'Versão 2 enviada em 10/08/2025',
-            versoes: [
-                { id: 2, titulo: 'Versão 2 (Capítulos 1 ao 4)', data: '10/08/2025', status: 'Revisada' },
-                { id: 1, titulo: 'Versão 1 (Introdução e Metodologia)', data: '15/05/2025', status: 'Aprovado' }
-            ],
-            reunioes: [
-                { id: 103, data: '12/08/2025', hora: '16:00', pauta: 'Validação dos Experimentos Práticos' },
-                { id: 104, data: '20/06/2025', hora: '11:00', pauta: 'Definição da Métrica de Avaliação' }
-            ],
-            comentarios: [
-                { id: 203, autor: 'Você', data: '11/08/2025', texto: 'Os resultados do gráfico 4 precisam de detalhamento nas conclusões.' },
-                { id: 204, autor: 'Carlos Correia', data: '12/08/2025', texto: 'Certo, inclusão das discussões adicionadas para a próxima entrega.' }
-            ]
-        }
+    const rawAluno = (typeof aluno !== 'undefined' && aluno) ? aluno : ((typeof orientando !== 'undefined' && orientando) ? orientando : {});
+
+    const alunoFinal = {
+        id: rawAluno.id || 1,
+        nome: rawAluno.nome || 'Nome não informado',
+        iniciais: rawAluno.iniciais || 'NN',
+        email: rawAluno.email || 'Não informado',
+        curso: rawAluno.curso || 'Não informado',
+        tituloTCC: rawAluno.tituloTCC || rawAluno.titulo || 'Não informado',
+        dataInicio: rawAluno.dataInicio || 'Não informada',
+        previsaoConclusao: rawAluno.previsaoConclusao || 'Não informada',
+        linhaPesquisa: rawAluno.linhaPesquisa || 'Não informada',
+        status: rawAluno.status || 'Pendente',
+        statusCor: rawAluno.statusCor || 'yellow',
+        versaoAtual: rawAluno.versaoAtual || 'Nenhuma versão',
+        versoes: Array.isArray(rawAluno.versoes) ? rawAluno.versoes : [],
+        reunioes: Array.isArray(rawAluno.reunioes) ? rawAluno.reunioes : [],
+        comentarios: Array.isArray(rawAluno.comentarios) ? rawAluno.comentarios : []
     };
-
-    let aluno = (typeof orientando !== 'undefined' && orientando) ? orientando : null;
-
-    if (!aluno && typeof orientandoId !== 'undefined' && orientandosMap[orientandoId]) {
-        aluno = orientandosMap[orientandoId];
-    }
-
-    if (!aluno) {
-        aluno = orientandosMap[1];
-    }
 %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%= aluno.nome %></title>
+    <title><%= alunoFinal.nome %></title>
     <link rel="stylesheet" href="/cssProfessor/OrientandoDetalhes.css">
     <link rel="stylesheet" href="/cssProfessor/BoxComentario.css">
+
+    <style>
+        /* Ajuste rápido incorporado para garantir o funcionamento do Scroll caso o CSS externo não tenha */
+        #CorpoScroll {
+            overflow-y: auto;
+            -webkit-overflow-scrolling: touch;
+            flex: 1;
+        }
+        
+        /* Garante que a tela utilize o modelo flexbox para fixar header e footer se necessário */
+        #TelaDetalhesOrientando {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            max-height: 100vh;
+            overflow: hidden;
+        }
+    </style>
 
     <script>
         (function() {
@@ -117,18 +66,18 @@
             <a href="/configuracoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Configurações">
                 <span class="icon-mask icon-settings"></span>
             </a>
-            <h1 id="TituloPagina"><%= aluno.nome %></h1>
+            <h1 id="TituloPagina"><%= alunoFinal.nome %></h1>
             <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
                 <span class="icon-mask icon-sino"></span>
             </a>
         </header>
 
         <section id="PerfilHeader">
-            <div class="avatar-aluno"><%= aluno.iniciais %></div>
+            <div class="avatar-aluno"><%= alunoFinal.iniciais %></div>
             <div class="info-aluno">
-                <h2 class="nome-aluno"><%= aluno.nome %></h2>
-                <span class="email-aluno"><%= aluno.email %></span>
-                <span class="curso-aluno"><%= aluno.curso %></span>
+                <h2 class="nome-aluno"><%= alunoFinal.nome %></h2>
+                <span class="email-aluno"><%= alunoFinal.email %></span>
+                <span class="curso-aluno"><%= alunoFinal.curso %></span>
             </div>
         </section>
 
@@ -146,22 +95,22 @@
                     
                     <div class="campo-info">
                         <label>Título do trabalho</label>
-                        <p><%= aluno.tituloTCC %></p>
+                        <p><%= alunoFinal.tituloTCC %></p>
                     </div>
 
                     <div class="campo-info">
                         <label>Data de início</label>
-                        <p><%= aluno.dataInicio %></p>
+                        <p><%= alunoFinal.dataInicio %></p>
                     </div>
 
                     <div class="campo-info">
                         <label>Previsão de conclusão</label>
-                        <p><%= aluno.previsaoConclusao %></p>
+                        <p><%= alunoFinal.previsaoConclusao %></p>
                     </div>
 
                     <div class="campo-info">
                         <label>Linha de pesquisa</label>
-                        <p><%= aluno.linhaPesquisa %></p>
+                        <p><%= alunoFinal.linhaPesquisa %></p>
                     </div>
                 </div>
 
@@ -170,8 +119,8 @@
                     <div class="status-box">
                         <span class="icon-mask icon-files icon-status"></span>
                         <div class="status-textos">
-                            <span class="badge-status <%= aluno.statusCor %>"><%= aluno.status %></span>
-                            <span class="subtexto-status"><%= aluno.versaoAtual %></span>
+                            <span class="badge-status <%= alunoFinal.statusCor %>"><%= alunoFinal.status %></span>
+                            <span class="subtexto-status"><%= alunoFinal.versaoAtual %></span>
                         </div>
                     </div>
                 </div>
@@ -179,7 +128,7 @@
 
             <div id="aba-versoes" class="conteudo-aba">
                 <div class="lista-cards">
-                    <% aluno.versoes.forEach(v => { %>
+                    <% alunoFinal.versoes.forEach(v => { %>
                         <div class="card-info flex-row">
                             <div>
                                 <h4 class="card-titulo-item"><%= v.titulo %></h4>
@@ -193,7 +142,7 @@
 
             <div id="aba-reunioes" class="conteudo-aba">
                 <div class="lista-cards">
-                    <% aluno.reunioes.forEach(r => { %>
+                    <% alunoFinal.reunioes.forEach(r => { %>
                         <div class="card-info">
                             <h4 class="card-titulo-item">Reunião - <%= r.data %> às <%= r.hora %></h4>
                             <p class="subtexto-status">Pauta: <%= r.pauta %></p>
@@ -204,7 +153,7 @@
 
             <div id="aba-comentarios" class="conteudo-aba">
                 <div class="lista-cards">
-                    <% aluno.comentarios.forEach(c => { %>
+                    <% alunoFinal.comentarios.forEach(c => { %>
                         <div class="card-info">
                             <div class="flex-row">
                                 <strong><%= c.autor %></strong>
@@ -252,19 +201,19 @@
             <div class="modal-header">
                 <div>
                     <h2>Adicionar comentário</h2>
-                    <p>Envie um feedback sobre a versão do TCC de <strong><%= aluno.nome %></strong>.</p>
+                    <p>Envie um feedback sobre a versão do TCC de <strong><%= alunoFinal.nome %></strong>.</p>
                 </div>
                 <button type="button" class="btn-close" onclick="fecharModalComentario()">&times;</button>
             </div>
 
             <form id="formAdicionarComentario" action="/adicionar-comentario" method="POST" enctype="multipart/form-data">
                 <input type="hidden" name="perfil" value="<%= perfilAtual %>">
-                <input type="hidden" name="orientandoId" value="<%= aluno.id %>">
+                <input type="hidden" name="orientandoId" value="<%= alunoFinal.id %>">
 
                 <div class="form-group">
                     <label for="versaoTcc">Versão do TCC</label>
                     <select id="versaoTcc" name="versaoId" required>
-                        <% aluno.versoes.forEach(v => { %>
+                        <% alunoFinal.versoes.forEach(v => { %>
                             <option value="<%= v.id %>"><%= v.titulo %> (<%= v.data %>)</option>
                         <% }); %>
                     </select>
