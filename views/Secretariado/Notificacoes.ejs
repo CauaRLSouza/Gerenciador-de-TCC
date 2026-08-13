@@ -1,0 +1,114 @@
+<%
+    const perfilAtual = 'Secretariado';
+    const paginaAtual = 'notificacoes';
+
+    const notificacoesBanco = [
+        {
+            secao: 'Hoje',
+            itens: [
+                { id: 1, titulo: 'Nova Submissão', hora: '14:30', texto: 'Um novo TCC foi submetido para validação.', lida: false, bgIcone: 'bg-verde', icone: 'icon-files' },
+                { id: 2, titulo: 'Edital de Bancas', hora: '10:15', texto: 'O prazo de agendamento de bancas encerra em 48h.', lida: false, bgIcone: 'bg-azul', icone: 'icon-calendar' },
+                { id: 3, titulo: 'Documento Assinado', hora: '08:45', texto: 'O documento X foi assinado eletronicamente.', lida: true, bgIcone: 'bg-roxo', icone: 'icon-documento' }
+            ]
+        },
+        {
+            secao: 'Ontem',
+            itens: [
+                { id: 4, titulo: 'Atualização de Sistema', hora: '16:00', texto: 'O sistema passará por manutenção às 00:00.', lida: true, bgIcone: 'bg-roxo-suave', icone: 'icon-settings' },
+                { id: 5, titulo: 'Solicitação Pendente', hora: '09:00', texto: 'Há uma nova solicitação de alteração de dados.', lida: true, bgIcone: 'bg-roxo-suave', icone: 'icon-info' }
+            ]
+        }
+    ];
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificações - Secretariado</title>
+    <link rel="stylesheet" href="/cssSecretaria/Notificacoes.css">
+    <link rel="stylesheet" href="/cssSecretaria/BottomSheet.css">
+    <script>
+        (function() {
+            const tema = localStorage.getItem("tema_app") || "sistema";
+            if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                document.documentElement.setAttribute("data-tema", "escuro");
+            }
+        })();
+    </script>
+</head>
+<body>
+
+    <div id="TelaNotificacoes">
+
+        <header id="HeaderNotificacoes">
+            <a href="/configuracoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Configurações">
+                <span class="icon-mask icon-settings"></span>
+            </a>
+            <h1 id="TituloPagina">Avisos</h1>
+            <a href="/secretaria/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
+                <span class="icon-mask icon-notification"></span>
+            </a>
+        </header>
+
+        <main id="ScrollView">
+            <div id="ContainerNotificacoes">
+                <div id="AcaoMarcarTodas">
+                    <button id="BtnMarcarLidas" type="button">Marcar todas como lidas</button>
+                </div>
+
+                <% notificacoesBanco.forEach(grupo => { %>
+                    <section class="secao-notificacoes">
+                        <h2 class="secao-titulo"><%= grupo.secao %></h2>
+                        <div class="lista-itens">
+                            <% grupo.itens.forEach(item => { %>
+                                <article class="card-notificacao <%= item.lida ? 'lida' : 'nao-lida' %>">
+                                    <div class="notificacao-icone <%= item.bgIcone %>">
+                                        <span class="icon-mask <%= item.icone %>"></span>
+                                    </div>
+                                    <div class="notificacao-conteudo">
+                                        <div class="notificacao-top">
+                                            <h3 class="notificacao-titulo"><%= item.titulo %></h3>
+                                            <span class="notificacao-hora"><%= item.hora %></span>
+                                        </div>
+                                        <div class="notificacao-bottom">
+                                            <p class="notificacao-texto"><%= item.texto %></p>
+                                            <span class="status-dot"></span>
+                                        </div>
+                                    </div>
+                                </article>
+                            <% }); %>
+                        </div>
+                    </section>
+                <% }); %>
+            </div>
+        </main>
+
+        <nav id="BottomNav">
+            <a href="/secretaria/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'dashboard' || paginaAtual === 'inicio') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-home"></span>
+                <span class="Texto">Início</span>
+            </a>
+            <a href="/secretaria/alunos?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'alunos') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-studant"></span>
+                <span class="Texto">Alunos</span>
+            </a>
+            <a href="/secretaria/professores?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'professores') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-professor"></span>
+                <span class="Texto">Professores</span>
+            </a>
+            <a href="/secretaria/acervo?perfil=<%= perfilAtual %>" class="nav-btn <%= (paginaAtual === 'acervo') ? 'ativo active' : '' %>">
+                <span class="icon-mask icon-acervo"></span>
+                <span class="Texto">Acervo</span>
+            </a>
+            <button id="btnAbrirMais" type="button" class="nav-btn">
+                <i class="icon-mask icon-more"></i>
+                <span class="Texto">Mais</span>
+            </button>
+        </nav>
+
+    </div>
+
+    <script src="/JS/BottomSheet.js"></script>
+</body>
+</html>
