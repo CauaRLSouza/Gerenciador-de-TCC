@@ -376,21 +376,15 @@ body {
     text-decoration: underline;
 }
 
-.card-pendencias {
-    background-color: var(--card-bg);
-    border-radius: 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    border: 1px solid var(--border);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.02);
+.card-atalho.desativado,
+.card-atalho[style*="pointer-events: none"] {
+    pointer-events: auto !important;
+    cursor: not-allowed !important;
 }
 
-.pendencia-item {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+.card-atalho.desativado *,
+.card-atalho[style*="pointer-events: none"] * {
+    pointer-events: none;
 }
 
 .badge-numero {

@@ -2,6 +2,12 @@
     const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
     const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'inicio';
     const periodoSelecionado = (typeof periodo !== 'undefined' && periodo) ? periodo : '2026.1';
+
+    const [anoStr, semestreStr] = periodoSelecionado.split('.');
+    const anoPeriodo = parseInt(anoStr, 10);
+    const semestrePeriodo = parseInt(semestreStr, 10);
+
+    const isFechado = (anoPeriodo < 2026) || (anoPeriodo === 2026 && semestrePeriodo < 1);
 %>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -46,11 +52,11 @@
                 <div class="resumo-topo">
                     <div class="resumo-titulo-container">
                         <span class="resumo-titulo">Resumo geral</span>
-                        <span id="badgeStatusPeriodo" class="badge-status-periodo oculto">Período letivo fechado</span>
+                        <span id="badgeStatusPeriodo" class="badge-status-periodo <%= isFechado ? '' : 'oculto' %>">Período letivo fechado</span>
                     </div>
                     <div class="select-periodo-wrapper">
                         <label for="periodoLetivo" class="sr-only">Período letivo</label>
-                        <select id="periodoLetivo" class="select-periodo" onchange="atualizarPeriodo(this.value)">
+                        <select id="periodoLetivo" class="select-periodo" onchange="atualizarEstadoInterface(this.value)">
                             <option value="2026.1" <%= periodoSelecionado === '2026.1' ? 'selected' : '' %>>Período letivo: 2026.1</option>
                             <option value="2025.2" <%= periodoSelecionado === '2025.2' ? 'selected' : '' %>>Período letivo: 2025.2</option>
                             <option value="2025.1" <%= periodoSelecionado === '2025.1' ? 'selected' : '' %>>Período letivo: 2025.1</option>
@@ -88,7 +94,7 @@
                     </div>
                 </div>
 
-                <button class="btn-relatorio" onclick="verRelatorioCompleto()">
+                <button id="btnAcaoRelatorio" class="btn-relatorio" onclick="verRelatorioCompleto()">
                     Ver relatório completo
                 </button>
             </div>
@@ -96,7 +102,7 @@
             <section class="secao-atalhos">
                 <h3 class="secao-titulo">Atalhos rápidos</h3>
                 <div class="atalhos-grid">
-                    <a href="/cadastrar-aluno?perfil=<%= perfilAtual %>" class="card-atalho verde">
+                    <div id="atalhoAluno" class="card-atalho verde" onclick="navegarAtalho('/cadastrar-aluno?perfil=<%= perfilAtual %>')">
                         <div class="atalho-icone-wrapper">
                             <span class="icon-mask icon-studant"></span>
                         </div>
@@ -104,9 +110,9 @@
                             <span class="atalho-nome">Cadastrar alunos</span>
                             <span id="valAtalhoAlunos" class="atalho-valor">26</span>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="/cadastrar-professor?perfil=<%= perfilAtual %>" class="card-atalho amarelo">
+                    <div id="atalhoProfessor" class="card-atalho amarelo" onclick="navegarAtalho('/cadastrar-professor?perfil=<%= perfilAtual %>')">
                         <div class="atalho-icone-wrapper">
                             <span class="icon-mask icon-professor"></span>
                         </div>
@@ -114,9 +120,9 @@
                             <span class="atalho-nome">Cadastrar professores</span>
                             <span id="valAtalhoProfessores" class="atalho-valor">11</span>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="/cadastrar-tcc?perfil=<%= perfilAtual %>" class="card-atalho azul">
+                    <div id="atalhoTcc" class="card-atalho azul" onclick="navegarAtalho('/cadastrar-tcc?perfil=<%= perfilAtual %>')">
                         <div class="atalho-icone-wrapper">
                             <span class="icon-mask icon-files"></span>
                         </div>
@@ -124,9 +130,9 @@
                             <span class="atalho-nome">Cadastrar TCC</span>
                             <span id="valAtalhoTccs" class="atalho-valor">26</span>
                         </div>
-                    </a>
+                    </div>
 
-                    <a href="/agendar-banca?perfil=<%= perfilAtual %>" class="card-atalho vermelho">
+                    <div id="atalhoBanca" class="card-atalho vermelho" onclick="navegarAtalho('/agendar-banca?perfil=<%= perfilAtual %>')">
                         <div class="atalho-icone-wrapper">
                             <span class="icon-mask icon-calendar"></span>
                         </div>
@@ -134,28 +140,6 @@
                             <span class="atalho-nome">Agendar bancas</span>
                             <span id="valAtalhoBancas" class="atalho-valor">3</span>
                         </div>
-                    </a>
-                </div>
-            </section>
-
-            <section class="secao-pendencias">
-                <div class="pendencias-header">
-                    <h3 class="secao-titulo">Pendências urgentes</h3>
-                    <a href="/pendencias?perfil=<%= perfilAtual %>" class="link-ver-todas">Ver todas</a>
-                </div>
-
-                <div class="card-pendencias">
-                    <div class="pendencia-item">
-                        <span id="valPendenciaBanca" class="badge-numero laranja">5</span>
-                        <span class="pendencia-texto">TCCs aguardando definição de banca</span>
-                    </div>
-                    <div class="pendencia-item">
-                        <span id="valPendenciaTermos" class="badge-numero laranja">3</span>
-                        <span class="pendencia-texto">Termos de aceite pendentes</span>
-                    </div>
-                    <div class="pendencia-item">
-                        <span id="valPendenciaRevisao" class="badge-numero laranja">7</span>
-                        <span class="pendencia-texto">Versões aguardando revisão do orientador</span>
                     </div>
                 </div>
             </section>
@@ -187,5 +171,58 @@
 
     <script src="/JS/Resumo.js"></script>
     <script src="/JS/BottomSheet.js"></script>
+    <script>
+        let periodoFechadoAtual = false;
+
+        function verificarSeFechado(val) {
+            if (!val) return false;
+            const partes = val.split('.');
+            const ano = parseInt(partes[0], 10);
+            const semestre = parseInt(partes[1], 10);
+            return (ano < 2026) || (ano === 2026 && semestre < 1);
+        }
+
+        function atualizarEstadoInterface(val) {
+            periodoFechadoAtual = verificarSeFechado(val);
+            
+            const badgeStatus = document.getElementById('badgeStatusPeriodo');
+            const atalhos = document.querySelectorAll('.card-atalho');
+
+            if (periodoFechadoAtual) {
+                if (badgeStatus) badgeStatus.classList.remove('oculto');
+
+                atalhos.forEach(el => {
+                    el.style.opacity = '0.5';
+                    el.style.cursor = 'not-allowed';
+                    el.style.pointerEvents = 'none';
+                });
+            } else {
+                if (badgeStatus) badgeStatus.classList.add('oculto');
+
+                atalhos.forEach(el => {
+                    el.style.opacity = '1';
+                    el.style.cursor = 'pointer';
+                    el.style.pointerEvents = 'auto';
+                });
+            }
+
+            if (typeof atualizarPeriodo === 'function') {
+                atualizarPeriodo(val);
+            }
+        }
+
+        function navegarAtalho(url) {
+            if (!periodoFechadoAtual) {
+                window.location.href = url;
+            }
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const select = document.getElementById('periodoLetivo');
+            if (select) {
+                atualizarEstadoInterface(select.value);
+            }
+        });
+    </script>
 </body>
 </html>
