@@ -1,43 +1,15 @@
 <%
     const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'professor';
-    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'dashboard';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'bancas';
     
-    const listaBancas = (typeof bancas !== 'undefined' && bancas) ? bancas : [
-        { 
-            id: 1, 
-            nome: 'João da Silva', 
-            iniciais: 'JS', 
-            tema: 'Sistema de Gerenciamento de TCC', 
-            statusVersao: 'Todas as versões aprovadas • Pendências resolvidas • Orientador aprovou', 
-            dataBanca: '15/09/2026',
-            statusTipo: 'apto' 
-        },
-        { 
-            id: 2, 
-            nome: 'Maria Santos', 
-            iniciais: 'MS', 
-            tema: 'Aplicativo Educacional', 
-            statusVersao: 'Em desenvolvimento • Versão final pendente', 
-            dataBanca: '18/09/2026',
-            statusTipo: 'pendente' 
-        },
-        { 
-            id: 3, 
-            nome: 'Carlos Correia', 
-            iniciais: 'CC', 
-            tema: 'Inteligência Artificial na Educação', 
-            statusVersao: 'Em desenvolvimento • Versão final pendente', 
-            dataBanca: '20/09/2026 às 14:00',
-            statusTipo: 'pendente' 
-        }
-    ];
+    const rawBancas = (typeof bancas !== 'undefined' && Array.isArray(bancas)) ? bancas : [];
 %>
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>bancas</title>
+    <title>Bancas</title>
     <link rel="stylesheet" href="/cssProfessor/bancas.css">
     <script>
         (function() {
@@ -67,49 +39,58 @@
             </div>
 
             <section class="lista-versoes">
-                <% listaBancas.forEach(item => { %>
-                    <div class="card-versao-item <%= item.statusTipo === 'apto' ? 'apto' : 'pendente' %>">
-                        <div class="card-versao-top">
-                            <div class="aluno-header">
-                                <div class="avatar-aluno">
-                                    <%= item.iniciais %>
-                                </div>
-                                <div class="info-aluno-header">
-                                    <span class="nome-aluno"><%= item.nome %></span>
-                                    <span class="titulo-tcc-aluno"><%= item.tema %></span>
-                                </div>
-                            </div>
-                            
-                            <div class="detalhes-status">
-                                <% if(item.statusTipo === 'apto') { %>
-                                    <div class="status-linha"><span class="icon-check">✓</span> Todas as versões aprovadas</div>
-                                    <div class="status-linha"><span class="icon-check">✓</span> Pendências resolvidas</div>
-                                    <div class="status-linha"><span class="icon-check">✓</span> Orientador aprovou</div>
-                                    <div class="data-banca-info">
+                <% if (rawBancas.length > 0) { %>
+                    <% rawBancas.forEach(rawItem => { 
+                        const item = {
+                            id: rawItem.id || 1,
+                            nome: rawItem.nome || rawItem.aluno || 'Aluno não informado',
+                            iniciais: rawItem.iniciais || (rawItem.nome ? rawItem.nome.substring(0,2).toUpperCase() : 'NN'),
+                            tema: rawItem.tema || rawItem.titulo || rawItem.tituloTCC || 'Título do TCC não informado',
+                            statusVersao: rawItem.statusVersao || 'Em desenvolvimento • Versão final pendente',
+                            statusTipo: rawItem.statusTipo || (rawItem.apto ? 'apto' : 'pendente')
+                        };
+                    %>
+                        <div class="card-versao-item <%= item.statusTipo === 'apto' ? 'apto' : 'pendente' %>">
+                            <div class="card-versao-top">
+                                <div class="aluno-header">
+                                    <div class="avatar-aluno">
+                                        <%= item.iniciais %>
                                     </div>
-                                    <button class="btn-liberar ativo-btn" onclick="liberarBanca('<%= item.nome %>')">
-                                        <span class="icon-mask icon-check-circle" style="width: 16px; height: 16px; background-color: #ffffff;"></span>
-                                        Liberar para banca
-                                    </button>
-                                <% } else { %>
-                                    <div class="status-linha cinza"><span class="icon-dot"></span> <%= item.statusVersao %></div>
-                                    <div class="data-banca-info">
-                                        <span class="icon-mask icon-calendar" style="width: 16px; height: 16px;"></span>
-                                        <span>Data prevista para banca: <%= item.dataBanca %></span>
+                                    <div class="info-aluno-header">
+                                        <span class="nome-aluno"><%= item.nome %></span>
+                                        <span class="titulo-tcc-aluno"><%= item.tema %></span>
                                     </div>
-                                    <button class="btn-liberar inativo-btn" disabled>
-                                        Liberar para banca
-                                    </button>
-                                <% } %>
+                                </div>
+                                
+                                <div class="detalhes-status">
+                                    <% if(item.statusTipo === 'apto') { %>
+                                        <div class="status-linha"><span class="icon-check">✓</span> Todas as versões aprovadas</div>
+                                        <div class="status-linha"><span class="icon-check">✓</span> Pendências resolvidas</div>
+                                        <div class="status-linha"><span class="icon-check">✓</span> Orientador aprovou</div>
+                                        <button class="btn-liberar ativo-btn" onclick="liberarBanca('<%= item.nome %>')">
+                                            <span class="icon-mask icon-check-circle" style="width: 16px; height: 16px; background-color: #ffffff;"></span>
+                                            Liberar para banca
+                                        </button>
+                                    <% } else { %>
+                                        <div class="status-linha cinza"><span class="icon-dot"></span> <%= item.statusVersao %></div>
+                                        <button class="btn-liberar inativo-btn" disabled>
+                                            Liberar para banca
+                                        </button>
+                                    <% } %>
+                                </div>
                             </div>
                         </div>
+                    <% }); %>
+                <% } else { %>
+                    <div class="card-versao-item">
+                        <p style="padding: 1rem; text-align: center;">Nenhum TCC encontrado para este professor.</p>
                     </div>
-                <% }); %>
+                <% } %>
             </section>
         </main>
 
         <nav id="BottomNav">
-            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn ativo active">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-btn <%= paginaAtual === 'inicio' ? 'ativo active' : '' %>">
                 <span class="icon-mask icon-home"></span>
                 <span>Início</span>
             </a>

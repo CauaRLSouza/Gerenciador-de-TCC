@@ -416,9 +416,7 @@ body[data-tema="escuro"] .status-realizada {
     color: #94a3b8; 
 }
 
-/* ==========================================================================
-   7. BOTÃO FLUTUANTE (FAB)
-   ========================================================================== */
+
 .fab-agendar {
     position: absolute;
     bottom: 76px;
@@ -437,13 +435,22 @@ body[data-tema="escuro"] .status-realizada {
     transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
-.fab-agendar:active {
-    transform: scale(0.92);
+.fab-agendar:hover {
+   transform: scale(1.08);
+    box-shadow: 0 0 16px var(--primary);
+    filter: drop-shadow(0 0 8px var(--primary));
 }
 
-/* ==========================================================================
-   8. MASK ICONS
-   ========================================================================== */
+.fab-agendar:active {
+    transform: scale(0.98);
+}
+
+.fab-agendar .icon-mask {
+    background-color: #ffffff;
+    width: 24px;
+    height: 24px;
+}
+
 .icon-mask { 
     display: inline-block; 
     width: 22px; 
@@ -470,9 +477,6 @@ body[data-tema="escuro"] .status-realizada {
 .icon-calendar { -webkit-mask-image: url('../Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/calendar_month_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 .icon-acervo { -webkit-mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); mask-image: url('../Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg'); }
 
-/* ==========================================================================
-   9. BOTTOM NAVIGATION
-   ========================================================================== */
 #BottomNav { 
     position: absolute; 
     bottom: 0; 

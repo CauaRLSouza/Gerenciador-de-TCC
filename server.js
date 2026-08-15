@@ -261,6 +261,38 @@ app.get('/naolidos', proibirAcessoDireto, (req, res) => {
 
 app.get('/bancas', proibirAcessoDireto, (req, res) => {
     const perfil = req.query.perfil || 'Secretariado';
+
+    if (perfil.toLowerCase() === 'professor') {
+        const professorPedro = todosProfessoresMock.find(p => p.nome.includes('Pedro Felipe')) || todosProfessoresMock[0];
+        
+        const tccsDoProfessor = todosTccsMock.filter(t => String(t.orientadorId) === String(professorPedro.id));
+
+        const bancasFormatadas = tccsDoProfessor.map(tcc => {
+            const aluno = todosAlunosMock.find(a => String(a.id) === String(tcc.alunoId));
+            const versoes = aluno ? processarVersoesAluno(aluno) : [];
+            
+            const totalVersoesEsperadas = aluno && aluno.totalVersoesEsperadas ? aluno.totalVersoesEsperadas : 5;
+            const estaApto = aluno ? (aluno.aptoParaBanca || versoes.length >= totalVersoesEsperadas) : false;
+
+            return {
+                id: tcc.id,
+                nome: tcc.alunoNome,
+                iniciais: gerarIniciais(tcc.alunoNome),
+                tema: tcc.titulo,
+                statusVersao: estaApto 
+                    ? 'Todas as versões aprovadas • Pendências resolvidas • Orientador aprovou' 
+                    : `Em desenvolvimento • Versão final pendente (${versoes.length} versão(ões) enviada(s))`,
+                statusTipo: estaApto ? 'apto' : 'pendente'
+            };
+        });
+
+        return res.render('Professor/Bancas', { 
+            currentPage: 'bancas', 
+            perfil, 
+            bancas: bancasFormatadas 
+        });
+    }
+
     res.render(`${perfil}/Bancas`, { currentPage: 'bancas', perfil, bancas: bancasAgendadasMock });
 });
 
