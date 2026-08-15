@@ -1,7 +1,9 @@
 <%
-    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Professor';
     const alunosLista = (typeof alunos !== 'undefined' && alunos) ? alunos : [];
     const professoresLista = (typeof professores !== 'undefined' && professores) ? professores : [];
+    // Professor logado (Orientador) vindo do Controller/Sessão
+    const orientadorLogado = (typeof orientador !== 'undefined' && orientador) ? orientador : { id: '', nome: '' };
 
     function getIniciais(nome) {
         if (!nome) return '--';
@@ -17,8 +19,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cadastrar TCC</title>
-    <link rel="stylesheet" href="/cssSecretaria/CadastrarTCC.css">
+    <title>Requisitar TCC</title>
+    <link rel="stylesheet" href="/cssProfessor/CadastrarTCC.css">
     <script>
         (function() {
             const tema = localStorage.getItem("tema_app") || "sistema";
@@ -47,12 +49,15 @@
                     <span class="icon-mask icon-file"></span>
                 </div>
                 <div class="banner-texto">
-                    <h2>Novo Trabalho de Conclusão de Curso</h2>
-                    <p>Cadastre as informações do TCC e vincule aluno, orientador e, se houver, coorientador.</p>
+                    <h2>Nova Solicitação de TCC</h2>
+                    <p>Cadastre as informações do TCC, vincule o aluno e, se houver, um coorientador para avaliação da secretaria.</p>
                 </div>
             </div>
 
-            <form id="formCadastrarTCC" action="/cadastrar-tcc?perfil=<%= perfilAtual %>" method="POST">
+            <form id="formCadastrarTCC" action="/solicitar-tcc?perfil=<%= perfilAtual %>" method="POST">
+                <!-- ID do Orientador (Professor Logado) enviado automaticamente -->
+                <input type="hidden" id="orientadorId" name="orientadorId" value="<%= orientadorLogado.id %>">
+
                 <section class="secao-form">
                     <h3 class="titulo-secao">Dados do TCC</h3>
 
@@ -64,6 +69,7 @@
                         <textarea id="tituloTCC" name="titulo" rows="3" maxlength="200" placeholder="Digite o título do TCC..." required></textarea>
                     </div>
 
+                    <!-- SELEÇÃO DE ALUNO -->
                     <div class="campo-grupo">
                         <label>Aluno <span class="obrigatorio">*</span></label>
                         
@@ -112,53 +118,6 @@
                     </div>
 
                     <div class="campo-grupo">
-                        <label>Orientador <span class="obrigatorio">*</span></label>
-                        
-                        <div class="select-custom-container" id="selectOrientadorContainer">
-                            <button type="button" class="btn-select-trigger" id="btnTriggerOrientador">
-                                <span class="icon-mask icon-professor"></span>
-                                <span class="trigger-text">Selecione o orientador...</span>
-                                <span class="icon-mask icon-chevron-down"></span>
-                            </button>
-
-                            <div class="dropdown-select-painel" id="dropdownOrientador">
-                                <div class="busca-dropdown-wrapper">
-                                    <input type="text" id="inputBuscaOrientador" placeholder="Pesquisar orientador...">
-                                </div>
-                                <ul class="lista-opcoes-select" id="listaOrientadoresOptions">
-                                    <% professoresLista.forEach(prof => { %>
-                                        <li class="opcao-item" 
-                                            data-id="<%= prof.id %>" 
-                                            data-nome="<%= prof.nome %>" 
-                                            data-titulacao="<%= prof.titulacao || prof.cargo || 'Sem titulação' %>" 
-                                            data-area="<%= prof.area || prof.areaAtuacao || 'Geral' %>"
-                                            data-iniciais="<%= getIniciais(prof.nome) %>">
-                                            <div class="avatar-mini avatar-prof"><%= getIniciais(prof.nome) %></div>
-                                            <div class="opcao-info">
-                                                <strong><%= prof.nome %></strong>
-                                                <small><%= prof.titulacao || prof.cargo || 'Sem titulação' %> • Área: <%= prof.area || prof.areaAtuacao || 'Geral' %></small>
-                                            </div>
-                                        </li>
-                                    <% }); %>
-                                </ul>
-                            </div>
-                        </div>
-
-                        <input type="hidden" id="orientadorId" name="orientadorId" required>
-
-                        <div class="card-selecionado card-professor" id="cardOrientadorSelecionado" style="display: none;">
-                            <div class="avatar-circulo avatar-prof" id="avatarOrientadorSel">--</div>
-                            <div class="info-selecionado">
-                                <strong id="nomeOrientadorSel">--</strong>
-                                <small id="detalheOrientadorSel">--</small>
-                            </div>
-                            <button type="button" class="btn-remover-selecao" id="btnRemoverOrientador" aria-label="Remover orientador">
-                                <span class="icon-mask icon-close"></span>
-                            </button>
-                        </div>
-                    </div>
-
-                    <div class="campo-grupo">
                         <label>Coorientador <span class="opcional">(opcional)</span></label>
                         
                         <div class="select-custom-container" id="selectCoorientadorContainer">
@@ -174,18 +133,21 @@
                                 </div>
                                 <ul class="lista-opcoes-select" id="listaCoorientadoresOptions">
                                     <% professoresLista.forEach(prof => { %>
-                                        <li class="opcao-item" 
-                                            data-id="<%= prof.id %>" 
-                                            data-nome="<%= prof.nome %>" 
-                                            data-titulacao="<%= prof.titulacao || prof.cargo || 'Sem titulação' %>" 
-                                            data-area="<%= prof.area || prof.areaAtuacao || 'Geral' %>"
-                                            data-iniciais="<%= getIniciais(prof.nome) %>">
-                                            <div class="avatar-mini avatar-prof"><%= getIniciais(prof.nome) %></div>
-                                            <div class="opcao-info">
-                                                <strong><%= prof.nome %></strong>
-                                                <small><%= prof.titulacao || prof.cargo || 'Sem titulação' %> • Área: <%= prof.area || prof.areaAtuacao || 'Geral' %></small>
-                                            </div>
-                                        </li>
+                                        <!-- Ignora o próprio orientador logado na lista de coorientadores -->
+                                        <% if (prof.id !== orientadorLogado.id) { %>
+                                            <li class="opcao-item" 
+                                                data-id="<%= prof.id %>" 
+                                                data-nome="<%= prof.nome %>" 
+                                                data-titulacao="<%= prof.titulacao || prof.cargo || 'Sem titulação' %>" 
+                                                data-area="<%= prof.area || prof.areaAtuacao || 'Geral' %>"
+                                                data-iniciais="<%= getIniciais(prof.nome) %>">
+                                                <div class="avatar-mini avatar-prof"><%= getIniciais(prof.nome) %></div>
+                                                <div class="opcao-info">
+                                                    <strong><%= prof.nome %></strong>
+                                                    <small><%= prof.titulacao || prof.cargo || 'Sem titulação' %> • Área: <%= prof.area || prof.areaAtuacao || 'Geral' %></small>
+                                                </div>
+                                            </li>
+                                        <% } %>
                                     <% }); %>
                                 </ul>
                             </div>
@@ -212,7 +174,7 @@
 
                     <button type="submit" class="btn-submit-primario">
                         <span class="icon-mask icon-add-document"></span>
-                        <span>Cadastrar TCC</span>
+                        <span>Enviar Solicitação de TCC</span>
                     </button>
                 </section>
             </form>
@@ -327,20 +289,6 @@
                 avatarSelId: 'avatarAlunoSel',
                 nomeSelId: 'nomeAlunoSel',
                 detalheSelId: 'detalheAlunoSel'
-            });
-
-            setupCustomSelect({
-                tipo: 'professor',
-                triggerId: 'btnTriggerOrientador',
-                dropdownId: 'dropdownOrientador',
-                inputBuscaId: 'inputBuscaOrientador',
-                listaId: 'listaOrientadoresOptions',
-                hiddenInputId: 'orientadorId',
-                cardId: 'cardOrientadorSelecionado',
-                btnRemoverId: 'btnRemoverOrientador',
-                avatarSelId: 'avatarOrientadorSel',
-                nomeSelId: 'nomeOrientadorSel',
-                detalheSelId: 'detalheOrientadorSel'
             });
 
             setupCustomSelect({

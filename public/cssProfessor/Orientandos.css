@@ -100,9 +100,7 @@ body {
     height: 0;
 }
 
-/* ==========================================================================
-   EFEITO DE HOVER NOS CARDS (Apenas transição, elevação e glow)
-   ========================================================================== */
+
 .card-orientando, .card-aluno, .card, .card-tcc {
     transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
 }
@@ -189,6 +187,45 @@ body {
 .icon-acervo {
     -webkit-mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
     mask-image: url('/Icones/collections_bookmark_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
+}
+
+.icon-plus {
+    -webkit-mask-image: url('../Icones/add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
+    mask-image: url('../Icones/add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
+    background-color: #ffffff;
+}
+
+.btn-fab {
+    position: absolute;
+    bottom: 76px;
+    right: 20px;
+    width: 52px;
+    height: 52px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(104, 0, 183, 0.3);
+    text-decoration: none;
+    z-index: 20;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.btn-fab:hover {
+   transform: scale(1.08);
+    box-shadow: 0 0 16px var(--primary);
+    filter: drop-shadow(0 0 8px var(--primary));
+}
+
+.btn-fab:active {
+    transform: scale(0.98);
+}
+
+.btn-fab .icon-mask {
+    background-color: #ffffff;
+    width: 24px;
+    height: 24px;
 }
 
 #BottomNav {

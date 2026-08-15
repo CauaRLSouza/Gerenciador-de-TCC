@@ -380,38 +380,7 @@ body {
 [data-tema="escuro"] .status-submetido { background-color: rgba(255, 159, 10, 0.15); color: #FF9F0A; }
 [data-tema="escuro"] .status-rascunho  { background-color: rgba(142, 142, 147, 0.15); color: var(--text-2); }
 
-.btn-fab {
-    position: absolute;
-    bottom: 76px;
-    right: 20px;
-    width: 52px;
-    height: 52px;
-    background-color: var(--primary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    box-shadow: 0 4px 12px rgba(104, 0, 183, 0.3);
-    text-decoration: none;
-    z-index: 20;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
 
-.btn-fab:hover {
-   transform: scale(1.08);
-    box-shadow: 0 0 16px var(--primary);
-    filter: drop-shadow(0 0 8px var(--primary));
-}
-
-.btn-fab:active {
-    transform: scale(0.98);
-}
-
-.btn-fab .icon-mask {
-    background-color: #ffffff;
-    width: 24px;
-    height: 24px;
-}
 
 #BottomNav {
     height: 60px;
@@ -537,12 +506,6 @@ body {
     -webkit-mask-image: url('../Icones/filter_alt_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
     mask-image: url('../Icones/filter_alt_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
     background-color: var(--text-1);
-}
-
-.icon-plus {
-    -webkit-mask-image: url('../Icones/add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
-    mask-image: url('../Icones/add_24dp_E3E3E3_FILL0_wght400_GRAD0_opsz24.svg');
-    background-color: #ffffff;
 }
 
 .icon-perfil {
