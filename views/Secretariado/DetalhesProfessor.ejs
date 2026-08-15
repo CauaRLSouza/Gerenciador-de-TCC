@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= typeof professor !== 'undefined' ? professor.nome : 'Detalhes do Professor' %></title>
+    
+    <script>
+        (function() {
+            function aplicarTema() {
+                const temaSalvo = localStorage.getItem("tema_app") || "sistema";
+                const escuroPeloSistema = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+                if (temaSalvo === "escuro" || (temaSalvo === "sistema" && escuroPeloSistema)) {
+                    document.documentElement.setAttribute("data-tema", "escuro");
+                } else {
+                    document.documentElement.removeAttribute("data-tema");
+                }
+            }
+
+            aplicarTema();
+
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+                const temaSalvo = localStorage.getItem("tema_app") || "sistema";
+                if (temaSalvo === "sistema") {
+                    aplicarTema();
+                }
+            });
+        })();
+    </script>
+
+    <link rel="stylesheet" href="/cssSecretaria/DetalhesProfessor.css">
+</head>
+<body>
+    <% if (typeof professor !== 'undefined' && professor) { %>
+    <% 
+        const tccsList = typeof tccsOrientados !== 'undefined' ? tccsOrientados : [];
+        const orientandosDiretos = tccsList.filter(t => String(t.orientadorId) === String(professor.id));
+        const coorientandos = tccsList.filter(t => String(t.orientadorId) !== String(professor.id));
+    %>
+    <div id="TelaDetalhesProfessor">
+        <header id="Header">
+            <a href="/professores?perfil=<%= typeof perfil !== 'undefined' ? perfil : '' %>" class="icon-btn" aria-label="Voltar">
+                <span class="icon-mask icon-arrow-back"></span>
+            </a>
+            <h1 id="TituloPagina"><%= professor.nome %></h1>
+            <button class="icon-btn" aria-label="Notificações">
+                <span class="icon-mask icon-notification"></span>
+                <% if (professor.notificacoesCount && professor.notificacoesCount > 0) { %>
+                    <span class="badge-notificacao"><%= professor.notificacoesCount %></span>
+                <% } %>
+            </button>
+        </header>
+
+        <main id="CorpoScroll">
+            <section class="card-perfil-header">
+                <div class="avatar-circulo-lg">
+                    <%= typeof gerarIniciais === 'function' ? gerarIniciais(professor.nome) : (professor.iniciais || 'PF') %>
+                </div>
+                <div class="perfil-header-info">
+                    <h2 class="perfil-nome"><%= professor.nome %></h2>
+                    <p class="perfil-departamento"><%= professor.departamento || professor.titulacao || 'Departamento não informado' %></p>
+                    <div class="badges-container">
+                        <span class="badge-matricula badge-orientandos">
+                            <%= orientandosDiretos.length %> orientando(s)
+                        </span>
+                        <span class="badge-matricula badge-coorientandos">
+                            <%= coorientandos.length %> coorientando(s)
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-secao">
+                <div class="secao-header">
+                    <h3 class="secao-titulo">Dados pessoais</h3>
+                    <a href="/professores/<%= professor.id %>/editar#dados-pessoais" class="btn-editar">
+                        <span class="icon-mask icon-edit"></span>
+                        Editar
+                    </a>
+                </div>
+                <div class="lista-detalhes">
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-person"></span>
+                            <span>Nome completo</span>
+                        </div>
+                        <span class="valor-detalhe"><%= professor.nome || '-' %></span>
+                    </div>
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-badge"></span>
+                            <span>SIAPE / Matrícula</span>
+                        </div>
+                        <span class="valor-detalhe"><%= professor.siape || professor.matricula || '-' %></span>
+                    </div>
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-phone"></span>
+                            <span>Telefone</span>
+                        </div>
+                        <span class="valor-detalhe"><%= professor.telefone || 'Não informado' %></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-secao">
+                <h3 class="secao-titulo">Dados acadêmicos e atuação</h3>
+                <div class="lista-detalhes">
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-school"></span>
+                            <span>Titulação / Departamento</span>
+                        </div>
+                        <span class="valor-detalhe"><%= professor.titulacao || professor.departamento || '-' %></span>
+                    </div>
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-book"></span>
+                            <span>Área de atuação</span>
+                        </div>
+                        <span class="valor-detalhe"><%= professor.areaAtuacao || 'Não informada' %></span>
+                    </div>
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-flag"></span>
+                            <span>Status de orientação</span>
+                        </div>
+                        <span class="valor-detalhe"><%= professor.disponivelOrientacao !== undefined ? (professor.disponivelOrientacao ? 'Disponível' : 'Indisponível') : (professor.status || 'Ativo') %></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-secao">
+                <h3 class="secao-titulo">Acesso ao sistema</h3>
+                <div class="lista-detalhes">
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-mail"></span>
+                            <span>E-mail institucional</span>
+                        </div>
+                        <span class="valor-detalhe"><%= professor.email || '-' %></span>
+                    </div>
+                    <div class="item-detalhe item-senha">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-lock"></span>
+                            <span>Senha</span>
+                        </div>
+                        <div class="senha-wrapper">
+                            <span class="valor-detalhe valor-senha">••••••••</span>
+                            <button type="button" class="btn-redefinir-senha">
+                                <span class="icon-mask icon-lock-reset"></span>
+                                Redefinir senha
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-secao">
+                <h3 class="secao-titulo">Alunos orientados (<%= orientandosDiretos.length %>)</h3>
+                <% if (orientandosDiretos.length > 0) { %>
+                    <div class="lista-orientandos">
+                        <% orientandosDiretos.forEach(function(tcc) { %>
+                            <a href="/DetalharAluno/<%= tcc.alunoId %>?perfil=<%= typeof perfil !== 'undefined' ? perfil : '' %>" class="item-orientando">
+                                <div class="orientando-info">
+                                    <span class="orientando-nome"><%= tcc.alunoNome %></span>
+                                    <span class="orientando-tcc"><%= tcc.titulo || 'Sem TCC vinculado' %></span>
+                                    <small class="papel-orientador">
+                                        Papel: Orientador
+                                    </small>
+                                </div>
+                                <span class="icon-mask icon-chevron-right"></span>
+                            </a>
+                        <% }); %>
+                    </div>
+                <% } else { %>
+                    <p class="mensagem-vazia">Nenhum orientando vinculado no momento.</p>
+                <% } %>
+            </section>
+
+            <section class="card-secao">
+                <h3 class="secao-titulo">Alunos coorientados (<%= coorientandos.length %>)</h3>
+                <% if (coorientandos.length > 0) { %>
+                    <div class="lista-orientandos">
+                        <% coorientandos.forEach(function(tcc) { %>
+                            <a href="/DetalharAluno/<%= tcc.alunoId %>?perfil=<%= typeof perfil !== 'undefined' ? perfil : '' %>" class="item-orientando">
+                                <div class="orientando-info">
+                                    <span class="orientando-nome"><%= tcc.alunoNome %></span>
+                                    <span class="orientando-tcc"><%= tcc.titulo || 'Sem TCC vinculado' %></span>
+                                    <small class="papel-coorientador">
+                                        Papel: Coorientador
+                                    </small>
+                                </div>
+                                <span class="icon-mask icon-chevron-right"></span>
+                            </a>
+                        <% }); %>
+                    </div>
+                <% } else { %>
+                    <p class="mensagem-vazia">Nenhum coorientando vinculado no momento.</p>
+                <% } %>
+            </section>
+        </main>
+    </div>
+    <% } else { %>
+        <p class="mensagem-nao-encontrado">Dados do professor não encontrados.</p>
+    <% } %>
+</body>
+</html>

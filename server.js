@@ -333,15 +333,57 @@ app.get('/alunos', proibirAcessoDireto, (req, res) => {
 
 app.get('/professores', proibirAcessoDireto, (req, res) => {
     const perfil = req.query.perfil || 'Secretariado';
-    const professoresComIniciais = todosProfessoresMock.map(prof => ({
-        ...prof,
-        iniciais: gerarIniciais(prof.nome)
-    }));
+    
+    const professoresFormatados = todosProfessoresMock.map(prof => {
+        const qtdOrientandos = todosTccsMock.filter(t => String(t.orientadorId) === String(prof.id)).length;
+        const qtdCoorientandos = todosTccsMock.filter(t => String(t.coorientadorId) === String(prof.id)).length;
+
+        return {
+            ...prof,
+            qtdOrientandos,
+            qtdCoorientandos,
+            iniciais: gerarIniciais(prof.nome)
+        };
+    });
 
     res.render(`${perfil}/Professores`, { 
         currentPage: 'professores', 
         perfil,
-        professores: professoresComIniciais
+        professores: professoresFormatados
+    });
+});
+
+app.get(['/detalhar-professor/:id', '/DetalharProfessor/:id'], proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Secretariado';
+    const profId = req.params.id;
+
+    const professorEncontrado = todosProfessoresMock.find(p => String(p.id) === String(profId));
+
+    if (!professorEncontrado) {
+        return res.status(404).send('<h1>Professor não encontrado</h1>');
+    }
+
+    const tccsOrientados = todosTccsMock
+        .filter(t => String(t.orientadorId) === String(profId) || String(t.coorientadorId) === String(profId))
+        .map(tcc => {
+            const aluno = todosAlunosMock.find(a => String(a.id) === String(tcc.alunoId));
+            return {
+                ...tcc,
+                alunoId: aluno ? aluno.id : tcc.alunoId,
+                alunoNome: aluno ? aluno.nome : (tcc.alunoNome || 'Aluno não informado')
+            };
+        });
+
+    const professorTratado = {
+        ...professorEncontrado,
+        iniciais: gerarIniciais(professorEncontrado.nome)
+    };
+
+    res.render(`${perfil}/DetalhesProfessor`, { 
+        currentPage: 'professores', 
+        perfil, 
+        professor: professorTratado,
+        tccsOrientados
     });
 });
 

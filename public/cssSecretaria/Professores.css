@@ -271,6 +271,13 @@ body {
     color: var(--text-1);
 }
 
+.badges-container {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+
 .badge-matricula {
     display: inline-block;
     align-self: flex-start;
@@ -281,6 +288,16 @@ body {
     padding: 3px 10px;
     border-radius: 8px;
     letter-spacing: 0.3px;
+}
+
+.badge-orientando {
+    color: var(--blue);
+    background-color: var(--blue-bg);
+}
+
+.badge-coorientando {
+    color: var(--green);
+    background-color: var(--green-bg);
 }
 
 .aluno-subtitulo-linha {
