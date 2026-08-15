@@ -234,6 +234,61 @@ app.get(['/tccs', '/tcc', '/TCC', '/TCCs'], proibirAcessoDireto, (req, res) => {
     });
 });
 
+app.get(['/detalhes-tcc/:id', '/detalhar-tcc/:id', '/DetalhesTCC/:id'], proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Secretariado';
+    const { id } = req.params;
+
+    const tcc = todosTccsMock.find(item => String(item.id) === String(id));
+
+    if (!tcc) {
+        return res.status(404).send('<h1>TCC não encontrado</h1>');
+    }
+
+    const alunoEncontrado = todosAlunosMock.find(a => String(a.id) === String(tcc.alunoId));
+    const orientador = todosProfessoresMock.find(p => String(p.id) === String(tcc.orientadorId)) || {
+        nome: tcc.orientadorNome || 'Não informado',
+        email: 'N/A',
+        titulacao: 'N/A'
+    };
+
+    let coorientador = null;
+    if (tcc.coorientadorId) {
+        coorientador = todosProfessoresMock.find(p => String(p.id) === String(tcc.coorientadorId)) || {
+            nome: tcc.coorientadorNome,
+            email: 'N/A',
+            titulacao: 'N/A'
+        };
+    }
+
+    const banca = bancasAgendadasMock.find(b => b.alunoNome === tcc.alunoNome || b.tccTitulo === tcc.titulo) || null;
+
+    const versoesTratadas = alunoEncontrado ? processarVersoesAluno(alunoEncontrado) : [];
+
+    const aluno = alunoEncontrado ? {
+        ...alunoEncontrado,
+        iniciais: gerarIniciais(alunoEncontrado.nome),
+        tituloTCC: tcc.titulo,
+        linhaPesquisa: tcc.linhaPesquisa,
+        versoes: versoesTratadas
+    } : {
+        nome: tcc.alunoNome,
+        email: 'Não informado',
+        matricula: 'N/A',
+        curso: tcc.curso,
+        versoes: []
+    };
+
+    res.render(`${perfil}/DetalhesTCC`, {
+        currentPage: 'tcc',
+        perfil,
+        tcc,
+        aluno,
+        orientador,
+        coorientador,
+        banca
+    });
+});
+
 app.get('/notificacoes', proibirAcessoDireto, (req, res) => {
     const perfil = req.query.perfil || 'Aluno';
     res.render(`${perfil}/Notificacoes`, { currentPage: 'notificacoes', perfil });

@@ -124,7 +124,7 @@ const listaTccs = (typeof tccs !== 'undefined' && tccs) ? tccs : [];
                     const nomeOrientador = tcc.orientadorNome || tcc.orientador || 'Não informado';
                     const nomeCoorientador = tcc.coorientadorNome || tcc.coorientador || null;
                 %>
-                    <a href="/tccs/<%= tcc.id %>?perfil=<%= perfilAtual %>" 
+                    <a href="/detalhes-tcc/<%= tcc.id %>?perfil=<%= perfilAtual %>" 
                        class="card-tcc"
                        data-titulo="<%= tcc.titulo || '' %>"
                        data-aluno="<%= nomeAluno %>"

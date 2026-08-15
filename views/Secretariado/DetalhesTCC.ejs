@@ -1,0 +1,158 @@
+<%
+const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+%>
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= tcc.titulo %></title>
+    
+    <script>
+        (function() {
+            function aplicarTema() {
+                const temaSalvo = localStorage.getItem("tema_app") || "sistema";
+                const escuroPeloSistema = window.matchMedia("(prefers-color-scheme: dark)").matches;
+
+                if (temaSalvo === "escuro" || (temaSalvo === "sistema" && escuroPeloSistema)) {
+                    document.documentElement.setAttribute("data-tema", "escuro");
+                } else {
+                    document.documentElement.removeAttribute("data-tema");
+                }
+            }
+
+            aplicarTema();
+
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", () => {
+                const temaSalvo = localStorage.getItem("tema_app") || "sistema";
+                if (temaSalvo === "sistema") {
+                    aplicarTema();
+                }
+            });
+        })();
+    </script>
+
+    <link rel="stylesheet" href="/cssSecretaria/DetalhesTCC.css">
+</head>
+<body>
+    <div id="TelaDetalhesTCC">
+        <header id="Header">
+            <a href="/tcc?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Voltar">
+                <span class="icon-mask icon-arrow-back"></span>
+            </a>
+            <h1 id="TituloPagina">Detalhes do TCC</h1>
+            <button class="icon-btn" aria-label="Notificações">
+                <span class="icon-mask icon-notification"></span>
+                <% if (typeof notificacoesCount !== 'undefined' && notificacoesCount > 0) { %>
+                    <span class="badge-notificacao"><%= notificacoesCount %></span>
+                <% } %>
+            </button>
+        </header>
+
+        <main id="CorpoScroll">
+            <section class="card-tcc-header">
+                <div class="tcc-header-info">
+                    <span class="badge-curso"><%= tcc.curso || 'Curso não informado' %></span>
+                    <h2 class="tcc-titulo-principal"><%= tcc.titulo %></h2>
+                </div>
+
+                <% if (tcc.arquivoUrl) { %>
+                    <div class="acoes-arquivo-grid">
+                        <a href="<%= tcc.arquivoUrl %>" target="_blank" class="btn-acao-pdf btn-primary">
+                            <span class="icon-mask icon-description"></span>
+                            <span>Visualizar PDF</span>
+                        </a>
+                        <a href="<%= tcc.arquivoUrl %>" download class="btn-acao-pdf btn-secondary">
+                            <span class="icon-mask icon-download"></span>
+                            <span>Baixar</span>
+                        </a>
+                    </div>
+                <% } %>
+            </section>
+
+            <section class="card-secao">
+                <div class="secao-header">
+                    <h3 class="secao-titulo">Autoria e Orientação</h3>
+                    <% if (typeof permissaoEditar !== 'undefined' && permissaoEditar) { %>
+                        <a href="/tcc/<%= tcc.id %>/editar" class="btn-editar">
+                            <span class="icon-mask icon-edit"></span>
+                            Editar
+                        </a>
+                    <% } %>
+                </div>
+                <div class="lista-detalhes">
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-person"></span>
+                            <span>Autor(a)</span>
+                        </div>
+                        <span class="valor-detalhe"><%= tcc.alunoNome || tcc.aluno || tcc.autor || '-' %></span>
+                    </div>
+
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-school"></span>
+                            <span>Orientador(a)</span>
+                        </div>
+                        <span class="valor-detalhe"><%= tcc.orientadorNome || tcc.orientador || '-' %></span>
+                    </div>
+
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-person"></span>
+                            <span>Coorientador(a)</span>
+                        </div>
+                        <span class="valor-detalhe"><%= tcc.coorientadorNome || tcc.coorientador || 'Não possui' %></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-secao">
+                <h3 class="secao-titulo">Informações Acadêmicas</h3>
+                <div class="lista-detalhes">
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-school"></span>
+                            <span>Curso</span>
+                        </div>
+                        <span class="valor-detalhe"><%= tcc.curso || '-' %></span>
+                    </div>
+
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-list"></span>
+                            <span>Linha de pesquisa</span>
+                        </div>
+                        <span class="valor-detalhe"><%= tcc.linhaPesquisa || '-' %></span>
+                    </div>
+
+                    <div class="item-detalhe">
+                        <div class="label-com-icone">
+                            <span class="icon-mask icon-calendar"></span>
+                            <span>Ano de publicação</span>
+                        </div>
+                        <span class="valor-detalhe"><%= tcc.ano || tcc.dataPublicacao || '2026' %></span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="card-secao">
+                <h3 class="secao-titulo">Resumo</h3>
+                <p class="texto-resumo"><%= tcc.resumo || 'Nenhum resumo cadastrado.' %></p>
+
+                <% if (tcc.palavrasChave && tcc.palavrasChave.length > 0) { %>
+                    <div class="container-tags">
+                        <span class="label-tags">Palavras-chave:</span>
+                        <div class="lista-tags">
+                            <% tcc.palavrasChave.forEach(tag => { %>
+                                <span class="tag-item"><%= tag %></span>
+                            <% }); %>
+                        </div>
+                    </div>
+                <% } %>
+            </section>
+        </main>
+    </div>
+</body>
+</html>
