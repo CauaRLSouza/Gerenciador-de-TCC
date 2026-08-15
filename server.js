@@ -204,7 +204,8 @@ app.get('/orientando/:id', proibirAcessoDireto, (req, res) => {
         perfil, 
         aluno: alunoTratado,
         orientando: alunoTratado,
-        orientandoId: alunoTratado.id
+        orientandoId: alunoTratado.id,
+        tccDoAluno: tcc || null
     });
 });
 
@@ -537,7 +538,8 @@ app.get(['/DetalharAluno/:id', '/detalhar-aluno/:id'], proibirAcessoDireto, (req
         linhaPesquisa: tcc ? tcc.linhaPesquisa : (alunoEncontrado.linhaPesquisa || 'Não informada'),
         dataInicio: alunoEncontrado.dataInicio || '10/03/2025',
         previsaoConclusao: alunoEncontrado.previsaoConclusao || '15/12/2025',
-        versoes: versoesTratadas
+        versoes: versoesTratadas,
+        tcc: tcc || null
     };
 
     res.render(`${perfil}/DetalhesAluno`, { 
@@ -545,7 +547,8 @@ app.get(['/DetalharAluno/:id', '/detalhar-aluno/:id'], proibirAcessoDireto, (req
         perfil, 
         aluno: alunoTratado,
         orientando: alunoTratado,
-        alunoId: alunoTratado.id
+        alunoId: alunoTratado.id,
+        tccDoAluno: tcc || null
     });
 });
 

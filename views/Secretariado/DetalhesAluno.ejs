@@ -1,3 +1,8 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'acervo';
+%>
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -38,8 +43,9 @@
                 <span class="icon-mask icon-arrow-back"></span>
             </a>
             <h1 id="TituloPagina"><%= aluno.nome %></h1>
-            <button class="icon-btn" aria-label="Notificações">
+            <a href="/notificacoes?perfil=<%= perfilAtual %>" class="icon-btn" aria-label="Notificações">
                 <span class="icon-mask icon-notification"></span>
+            </a>
                 <% if (aluno.notificacoesCount && aluno.notificacoesCount > 0) { %>
                     <span class="badge-notificacao"><%= aluno.notificacoesCount %></span>
                 <% } %>
@@ -158,7 +164,8 @@
                 </div>
             </section>
 
-            <% if (aluno.tcc) { %>
+            <% const tccInfo = (typeof tccDoAluno !== 'undefined' && tccDoAluno) ? tccDoAluno : aluno.tcc; %>
+            <% if (tccInfo) { %>
                 <section class="card-secao">
                     <h3 class="secao-titulo">Informações do TCC</h3>
                     <div class="lista-detalhes">
@@ -167,39 +174,48 @@
                                 <span class="icon-mask icon-description"></span>
                                 <span>Título do TCC</span>
                             </div>
-                            <span class="valor-detalhe valor-truncate"><%= aluno.tcc.titulo || '-' %></span>
+                            <span class="valor-detalhe valor-truncate"><%= tccInfo.titulo || '-' %></span>
                         </div>
                         <div class="item-detalhe">
                             <div class="label-com-icone">
                                 <span class="icon-mask icon-person"></span>
                                 <span>Orientador(a)</span>
                             </div>
-                            <span class="valor-detalhe"><%= aluno.tcc.orientador || '-' %></span>
+                            <span class="valor-detalhe"><%= tccInfo.orientadorNome || tccInfo.orientador || '-' %></span>
                         </div>
                         <div class="item-detalhe">
                             <div class="label-com-icone">
                                 <span class="icon-mask icon-list"></span>
                                 <span>Status do TCC</span>
                             </div>
-                            <span class="valor-detalhe"><%= aluno.tcc.status || '-' %></span>
+                            <% 
+                                let statusClass = 'em-andamento';
+                                const statusVal = (tccInfo.status || tccInfo.defesa || '').toLowerCase();
+                                if (statusVal.includes('conclu') || statusVal.includes('aprov')) statusClass = 'concluido';
+                                else if (statusVal.includes('pendent') || statusVal.includes('reprov')) statusClass = 'pendente';
+                            %>
+                            <span class="badge-status <%= statusClass %>"><%= tccInfo.status || tccInfo.defesa || 'Em andamento' %></span>
                         </div>
                         <div class="item-detalhe">
                             <div class="label-com-icone">
                                 <span class="icon-mask icon-flag"></span>
                                 <span>Etapa atual</span>
                             </div>
-                            <span class="valor-detalhe"><%= aluno.tcc.etapaAtual || '-' %></span>
+                            <span class="valor-detalhe"><%= tccInfo.etapaAtual || tccInfo.linhaPesquisa || '-' %></span>
                         </div>
                         <div class="item-detalhe">
                             <div class="label-com-icone">
                                 <span class="icon-mask icon-schedule"></span>
                                 <span>Última atualização</span>
                             </div>
-                            <span class="valor-detalhe"><%= aluno.tcc.ultimaAtualizacao || '-' %></span>
+                            <span class="valor-detalhe"><%= tccInfo.ultimaAtualizacao || tccInfo.ano || '-' %></span>
                         </div>
                     </div>
-                    <a href="/tcc/<%= aluno.tcc.id %>" class="btn-tcc-detalhes">
-                        <span>Ver detalhes do TCC</span>
+
+                    <a href="/detalhes-tcc/<%= tccInfo.id %><% if (typeof perfil !== 'undefined' && perfil) { %>?perfil=<%= perfil %><% } %>" class="btn-tcc-detalhes">
+                        <div class="btn-conteudo">
+                            <span>Ver detalhes do TCC</span>
+                        </div>
                         <span class="icon-mask icon-chevron-right"></span>
                     </a>
                 </section>
