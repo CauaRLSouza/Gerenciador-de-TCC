@@ -1,0 +1,258 @@
+<%
+    const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secretariado';
+    const paginaAtual = (typeof currentPage !== 'undefined' && currentPage) ? currentPage : 'resumoGeral';
+%>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resumo Geral - Sistema TCC</title>
+    <link rel="stylesheet" href="/cssSecretaria/Resumo.css">
+    <script>
+        (function() {
+            function aplicarTema() {
+                const tema = localStorage.getItem("tema_app") || "sistema";
+                if (tema === "escuro" || (tema === "sistema" && window.matchMedia("(prefers-color-scheme: dark)").matches)) {
+                    document.documentElement.setAttribute("data-tema", "escuro");
+                    document.documentElement.classList.add("dark-theme");
+                } else {
+                    document.documentElement.removeAttribute("data-tema");
+                    document.documentElement.classList.remove("dark-theme");
+                }
+            }
+            aplicarTema();
+            window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", aplicarTema);
+        })();
+    </script>
+</head>
+<body>
+    <div class="app-container">
+        <header class="page-header">
+            <a href="/dashboard?perfil=<%= perfilAtual %>" class="btn-back" title="Voltar ao Dashboard">
+                <span class="icon-mask icon-arrow-left"></span>
+            </a>
+            <h1 class="page-title">Resumo Geral</h1>
+            <div class="header-action">
+                <a href="/notificacoes?perfil=<%= perfilAtual %>" class="btn-icon" title="Notificações">
+                    <span class="icon-mask icon-notification"></span>
+                </a>
+            </div>
+        </header>
+
+        <main class="content-body">
+            <section class="period-selector-card">
+                <label for="periodoSelect" class="label-periodo">Período letivo</label>
+                <div class="select-wrapper">
+                    <span class="icon-mask icon-calendar"></span>
+                    <select id="periodoSelect" class="select-input">
+                        <option value="2026.1" selected>2026.1</option>
+                        <option value="2025.2">2025.2</option>
+                        <option value="2025.1">2025.1</option>
+                    </select>
+                    <span class="icon-mask icon-chevron-down"></span>
+                </div>
+                <p class="period-description">Visão geral da situação dos TCCs no período selecionado.</p>
+            </section>
+
+            <section class="kpi-grid">
+                <div class="kpi-card">
+                    <div class="kpi-icon icon-purple">
+                        <span class="icon-mask icon-chart"></span>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">26</span>
+                        <span class="kpi-label">TCCs em andamento</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon icon-purple">
+                        <span class="icon-mask icon-teacher"></span>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">8</span>
+                        <span class="kpi-label">Aptos para banca</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon icon-purple">
+                        <span class="icon-mask icon-calendar"></span>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">3</span>
+                        <span class="kpi-label">Bancas agendadas</span>
+                    </div>
+                </div>
+
+                <div class="kpi-card">
+                    <div class="kpi-icon icon-purple">
+                        <span class="icon-mask icon-check"></span>
+                    </div>
+                    <div class="kpi-info">
+                        <span class="kpi-value">15</span>
+                        <span class="kpi-label">Concluídos</span>
+                    </div>
+                </div>
+            </section>
+
+            <section class="dashboard-grid">
+                <div class="dashboard-card">
+                    <h2 class="card-title">Situação dos TCCs</h2>
+                    <div class="stat-list">
+                        <div class="stat-item">
+                            <div class="stat-header">
+                                <span class="stat-name">Em andamento</span>
+                                <span class="stat-count">26</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 100%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-header">
+                                <span class="stat-name">Aptos para banca</span>
+                                <span class="stat-count">8</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 30.7%;"></div>
+                            </div>
+                        </div>
+
+                        <div class="stat-item">
+                            <div class="stat-header">
+                                <span class="stat-name">Concluídos</span>
+                                <span class="stat-count">15</span>
+                            </div>
+                            <div class="progress-bar-bg">
+                                <div class="progress-bar-fill" style="width: 57.6%;"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-footer">
+                        <span>Total de TCCs: 26</span>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header-flex">
+                        <h2 class="card-title">
+                            <span class="icon-mask icon-calendar color-purple"></span> Próxima banca
+                        </h2>
+                        <a href="/bancas?perfil=<%= perfilAtual %>" class="link-action">Ver todas</a>
+                    </div>
+                    <% if (typeof bancasAgendadasMock !== 'undefined' && bancasAgendadasMock && bancasAgendadasMock.length > 0) { 
+                        const proxima = bancasAgendadasMock[0];
+                    %>
+                        <div class="banca-user-info">
+                            <div class="avatar-circle">
+                                <span class="icon-mask icon-user"></span>
+                            </div>
+                            <div class="user-details">
+                                <strong class="user-name"><%= proxima.alunoNome %></strong>
+                                <span class="user-sub"><%= proxima.tccTitulo %></span>
+                            </div>
+                        </div>
+                        <div class="banca-details-box">
+                            <div class="detail-row">
+                                <span class="icon-mask icon-calendar"></span>
+                                <span><%= proxima.dataDia %> <%= proxima.dataMes.toUpperCase() %> <%= proxima.dataIso ? proxima.dataIso.substring(0,4) : '' %></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="icon-mask icon-clock"></span>
+                                <span><%= proxima.horario %></span>
+                            </div>
+                            <div class="detail-row">
+                                <span class="icon-mask icon-location"></span>
+                                <span><%= proxima.local %></span>
+                            </div>
+                        </div>
+                    <% } else { %>
+                        <p class="empty-state">Nenhuma banca agendada.</p>
+                    <% } %>
+                    <div class="card-footer-action">
+                        <a href="/bancas?perfil=<%= perfilAtual %>" class="btn-link-full">
+                            Ver todas as bancas <span class="icon-mask icon-open-in-new"></span>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header-flex">
+                        <h2 class="card-title">TCCs por curso</h2>
+                        <a href="/tccs?perfil=<%= perfilAtual %>" class="link-action">Ver todos</a>
+                    </div>
+                    <div class="stat-list">
+                        <% 
+                            if (typeof todosTccsMock !== 'undefined' && todosTccsMock) {
+                                const cursosCount = {};
+                                todosTccsMock.forEach(tcc => {
+                                    cursosCount[tcc.curso] = (cursosCount[tcc.curso] || 0) + 1;
+                                });
+                                const maxCurso = Math.max(...Object.values(cursosCount), 1);
+                                Object.keys(cursosCount).forEach(curso => { 
+                                    const qtd = cursosCount[curso];
+                                    const pct = (qtd / maxCurso) * 100;
+                        %>
+                            <div class="stat-item">
+                                <div class="stat-header">
+                                    <span class="stat-name"><%= curso %></span>
+                                    <span class="stat-count"><%= qtd %></span>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill" style="--pct: <%= pct %>%; width: var(--pct);"></div>
+                                </div>
+                            </div>
+                        <% 
+                                });
+                            } 
+                        %>
+                    </div>
+                    <div class="card-footer">
+                        <span>Total: <%= (typeof todosTccsMock !== 'undefined' && todosTccsMock) ? todosTccsMock.length : 0 %></span>
+                    </div>
+                </div>
+
+                <div class="dashboard-card">
+                    <div class="card-header-flex">
+                        <h2 class="card-title">TCCs por linha de pesquisa</h2>
+                        <a href="/tccs?perfil=<%= perfilAtual %>" class="link-action">Ver todos</a>
+                    </div>
+                    <div class="stat-list">
+                        <% 
+                            if (typeof todosTccsMock !== 'undefined' && todosTccsMock) {
+                                const linhaCount = {};
+                                todosTccsMock.forEach(tcc => {
+                                    const lp = tcc.linhaPesquisa || 'Outros';
+                                    linhaCount[lp] = (linhaCount[lp] || 0) + 1;
+                                });
+                                const maxLinha = Math.max(...Object.values(linhaCount), 1);
+                                Object.keys(linhaCount).forEach(linha => { 
+                                    const qtd = linhaCount[linha];
+                                    const pct = (qtd / maxLinha) * 100;
+                        %>
+                            <div class="stat-item">
+                                <div class="stat-header">
+                                    <span class="stat-name"><%= linha %></span>
+                                    <span class="stat-count"><%= qtd %></span>
+                                </div>
+                                <div class="progress-bar-bg">
+                                    <div class="progress-bar-fill" style="--pct: <%= pct %>%; width: var(--pct);"></div>
+                                </div>
+                            </div>
+                        <% 
+                                });
+                            } 
+                        %>
+                    </div>
+                    <div class="card-footer">
+                        <span>Total: <%= (typeof todosTccsMock !== 'undefined' && todosTccsMock) ? todosTccsMock.length : 0 %></span>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

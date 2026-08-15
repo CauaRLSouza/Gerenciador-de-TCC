@@ -120,6 +120,16 @@ app.get('/dashboard', proibirAcessoDireto, (req, res) => {
     res.render(`${perfil}/Dashboard`, { currentPage: 'inicio', perfil });
 });
 
+app.get('/resumo', proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Secretariado';
+    res.render(`${perfil}/Resumo`, { 
+        currentPage: 'resumoGeral', 
+        perfil,
+        todosTccsMock,
+        bancasAgendadasMock
+    });
+});
+
 app.get('/orientandos', proibirAcessoDireto, (req, res) => {
     const perfil = req.query.perfil || 'Professor';
     
