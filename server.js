@@ -325,8 +325,8 @@ app.get('/naolidos', proibirAcessoDireto, (req, res) => {
     res.render(`${perfil}/NaoLidos`, { currentPage: 'NaoLidos', perfil });
 });
 
-app.get('/bancas', proibirAcessoDireto, (req, res) => {
-    const perfil = req.query.perfil || 'Secretariado';
+app.get('/listaBancas', proibirAcessoDireto, (req, res) => {
+    const perfil = req.query.perfil || 'Professor';
 
     if (perfil.toLowerCase() === 'professor') {
         const professorPedro = todosProfessoresMock.find(p => p.nome.includes('Pedro Felipe')) || todosProfessoresMock[0];
@@ -352,14 +352,14 @@ app.get('/bancas', proibirAcessoDireto, (req, res) => {
             };
         });
 
-        return res.render('Professor/Bancas', { 
-            currentPage: 'bancas', 
+        return res.render('Professor/listaBancas', { 
+            currentPage: 'listaBancas', 
             perfil, 
             bancas: bancasFormatadas 
         });
     }
 
-    res.render(`${perfil}/Bancas`, { currentPage: 'bancas', perfil, bancas: bancasAgendadasMock });
+    res.render(`${perfil}/listaBancas`, { currentPage: 'listaBancas', perfil, bancas: bancasAgendadasMock });
 });
 
 app.get('/alunos', proibirAcessoDireto, (req, res) => {
@@ -515,7 +515,7 @@ app.post('/agendar-banca', proibirAcessoDireto, (req, res) => {
 
     bancasAgendadasMock.push(novaBanca);
 
-    res.redirect(`/Bancas?perfil=${perfil}`);
+    res.redirect(`/listaBancas?perfil=${perfil}`);
 });
 
 app.get(['/DetalharAluno/:id', '/detalhar-aluno/:id'], proibirAcessoDireto, (req, res) => {

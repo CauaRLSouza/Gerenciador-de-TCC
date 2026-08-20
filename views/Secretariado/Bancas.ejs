@@ -8,7 +8,7 @@ const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secret
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bancas Agendadas</title>
-    <link rel="stylesheet" href="/cssSecretaria/Bancas.css">
+    <link rel="stylesheet" href="/cssProfessor/Bancas.css">
     <link rel="stylesheet" href="/cssSecretaria/BottomSheet.css">
     <script>
         (function() {
@@ -54,7 +54,6 @@ const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secret
             </button>
         </div>
 
-        <!-- Painel de Filtros (oculto por padrão via inline style) -->
         <div id="painelFiltros" class="painel-filtros-inatos" style="display: none; margin-top: 12px; margin-bottom: 12px;">
             <div class="campo-filtro">
                 <div class="select-container">
@@ -170,10 +169,6 @@ const perfilAtual = (typeof perfil !== 'undefined' && perfil) ? perfil : 'Secret
         </div>
 
     </main>
-
-    <a href="/agendar-banca?perfil=<%= perfilAtual %>" class="btn-fab" aria-label="Agendar nova banca">
-        <span class="icon-mask icon-plus"></span>
-    </a>
 
     <nav id="BottomNav">
         <a href="/dashboard?perfil=<%= perfilAtual %>" class="nav-item">
